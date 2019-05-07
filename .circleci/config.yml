@@ -10,7 +10,7 @@ aliases:
   - &save-deps-cache
     key: deps-cache-{{ checksum "package.json" }}
     paths:
-      - ~/schema-utils-js/node_modules
+      - ~/typings/node_modules
 
   # -------------------------
   #  ALIASES: Branch Filters
@@ -23,7 +23,7 @@ aliases:
       only:  /^(fix|feat|dependabot)\/.*$/
 
 defaults: &defaults
-  working_directory: ~/schema-utils-js
+  working_directory: ~/typings
 
 jobs:
   test:
