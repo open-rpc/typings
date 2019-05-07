@@ -20,7 +20,7 @@ aliases:
       only: master
   - &filter-only-semantic-pr
     branches:
-      only:  /^(fix|feat|dependabot)\/.*$/
+      only:  /^(pull|fix|feat|dependabot)\/.*$/
 
 defaults: &defaults
   working_directory: ~/typings
