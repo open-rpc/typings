@@ -33,7 +33,7 @@
     "fs-extra": "^7.0.1",
     "json-schema-to-typescript": "^6.1.3",
     "lodash": "^4.17.11",
-    "quicktype": "13.0.10",
+    "quicktype": "15.0.188",
     "quicktype-core": "^6.0.26"
   },
   "devDependencies": {
