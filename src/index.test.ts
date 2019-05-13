@@ -256,4 +256,66 @@ describe("MethodTypings", () => {
 
     });
   });
+
+  it("gracefully handles openrpc documents with duplicate names for content descriptors", async () => {
+    const dupesDocument = {
+      info: {
+        title: "jipperjobber",
+        version: "3.2.1",
+      },
+      methods: [
+        {
+          name: "jobber",
+          params: [],
+          result: {
+            name: "ripslip",
+            schema: {
+              oneOf: [
+                {
+                  format: "int64",
+                  type: "integer",
+                },
+                {
+                  items: {
+                    format: "int64",
+                    type: "integer",
+                  },
+                  type: "array",
+                },
+              ],
+            },
+          },
+        },
+        {
+          name: "jibber",
+          params: [],
+          result: {
+            name: "ripslip",
+            schema: {
+              format: "int64",
+              type: "integer",
+            },
+          },
+        },
+      ],
+      openrpc: "1.0.0",
+    } as OpenRPC;
+
+    const copytestOpenRPCDocument = cloneDeep(dupesDocument);
+
+    const methodTypings = new MethodTypings(copytestOpenRPCDocument);
+    await methodTypings.generateTypings();
+    expect(methodTypings.getAllUniqueTypings("rust"))
+      .toBe([
+        "pub type Ripslip = i64;",
+        "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
+        "#[cfg_attr(test, derive(Random))]",
+        "#[serde(untagged)]",
+        "pub enum Ripslip1 {",
+        "    Integer(i64),",
+        "",
+        "    IntegerArray(Vec<i64>),",
+        "}",
+      ].join("\n"));
+  });
 });
