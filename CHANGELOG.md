@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/open-rpc/typings/compare/1.0.0...1.0.1) (2019-05-13)
+
+
+### Bug Fixes
+
+* build doesnt have a src dir ([169da5c](https://github.com/open-rpc/typings/commit/169da5c))
+* flatten the globing ([faf89f9](https://github.com/open-rpc/typings/commit/faf89f9))
+
 # 1.0.0 (2019-05-13)
 
 
