@@ -266,7 +266,14 @@ describe("MethodTypings", () => {
       methods: [
         {
           name: "jobber",
-          params: [],
+          params: [
+            {
+              name: "ripslip",
+              schema: {
+                type: "string",
+              },
+            },
+          ],
           result: {
             name: "ripslip",
             schema: {
@@ -295,6 +302,17 @@ describe("MethodTypings", () => {
                 type: "string",
               },
             },
+            {
+              name: "ripslip",
+              schema: {
+                properties: {
+                  ripslip: {
+                    type: "boolean",
+                  },
+                },
+                type: "object",
+              },
+            },
           ],
           result: {
             name: "ripslip",
@@ -312,6 +330,7 @@ describe("MethodTypings", () => {
 
     const methodTypings = new MethodTypings(copytestOpenRPCDocument);
     await methodTypings.generateTypings();
+    console.log(methodTypings.getAllUniqueTypings("rust")); // tslint:disable-line
     expect(methodTypings.getAllUniqueTypings("rust"))
       .toBe([
         "pub type Ripslip2 = String;",

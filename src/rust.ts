@@ -84,12 +84,16 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
 
   const fixedDupesAllCD = _.map(allCD, (cd: ContentDescriptorObject, index, collection): ContentDescriptorObject => {
     let hits = 0;
+    const nameWithoutChange = cd.name;
+    const stringifiedCd = JSON.stringify(cd.schema);
 
     _.each(
       collection as ContentDescriptorObject[],
       (cdToCheck) => {
-        if (cdToCheck.name === cd.name) {
-          hits++;
+        if (cdToCheck.name === nameWithoutChange) {
+          if (JSON.stringify(cdToCheck.schema) !== stringifiedCd) {
+            hits += 1;
+          }
         }
       });
 
@@ -99,8 +103,9 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
 
     return cd;
   }) as ContentDescriptorObject[];
+  const dedupedContentDescriptors = _.uniqBy(fixedDupesAllCD, "name");
 
-  const typeLinesNested = await Promise.all(_.map(fixedDupesAllCD, handleEachContentDescriptor));
+  const typeLinesNested = await Promise.all(_.map(dedupedContentDescriptors, handleEachContentDescriptor));
   const typeLines = _.flatten(typeLinesNested);
   const typeRegexes = {
     alias: /pub type (.*) = (.*)\;/,
