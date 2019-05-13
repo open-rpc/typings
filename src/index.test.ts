@@ -288,7 +288,14 @@ describe("MethodTypings", () => {
         },
         {
           name: "jibber",
-          params: [],
+          params: [
+            {
+              name: "ripslip",
+              schema: {
+                type: "string",
+              },
+            },
+          ],
           result: {
             name: "ripslip",
             schema: {
@@ -307,6 +314,7 @@ describe("MethodTypings", () => {
     await methodTypings.generateTypings();
     expect(methodTypings.getAllUniqueTypings("rust"))
       .toBe([
+        "pub type Ripslip2 = String;",
         "pub type Ripslip = i64;",
         "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
         "#[cfg_attr(test, derive(Random))]",

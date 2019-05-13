@@ -90,11 +90,12 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
       (cdToCheck) => {
         if (cdToCheck.name === cd.name) {
           hits++;
-          if (hits > 1) {
-            cd.name = cd.name + (hits - 1);
-          }
         }
       });
+
+    if (hits > 1) {
+      cd.name = cd.name + (hits - 1);
+    }
 
     return cd;
   }) as ContentDescriptorObject[];
