@@ -12,7 +12,7 @@
     "resolveJsonModule": true
   },
   "typedocOptions": {
-    "name": "@open-rpc/schema-utils-js",
+    "name": "@open-rpc/typings",
     "mode": "file",
     "src": [ "./src/index.ts" ],
     "out": "docs",
@@ -25,23 +25,13 @@
     "readme": "./README.md",
     "exclude": [
       "node_modules",
-      "lib",
       "docs",
       "build",
       "jest.config.js",
       "src/**/*.test.ts"
     ],
     "toc": [
-      "parseOpenRPCDocument",
-      "generateMethodParamId",
-      "generateMethodResultId",
-      "validateOpenRPCDocument",
-      "MethodCallValidator",
-      "MethodTypings",
-      "ParameterValidationError",
-      "OpenRPCDocumentValidationError",
-      "OpenRPCDocumentDereferencingError",
-      "ContentDescriptorNotFoundInMethodError"
+      "MethodTypings"
     ]
   }
 }
