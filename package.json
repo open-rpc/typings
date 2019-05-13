@@ -15,7 +15,7 @@
   },
   "files": [
     "build",
-    "!build/**/*.test.*"
+    "!build/*.test.*"
   ],
   "repository": {
     "type": "git",
