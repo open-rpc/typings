@@ -29,7 +29,7 @@ $ open-rpc-typings
 import OpenRPCTypings from "@open-rpc/typings";
 
 
-const typings = new Typings(OpenRPCTypings);
+const typings = new OpenRPCTypings(OpenRPCDocument);
 
 await typings.generate()
 
