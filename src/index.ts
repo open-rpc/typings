@@ -92,7 +92,7 @@ export default class MethodTypings {
     const typings = _.chain(this.getTypingsForMethod(method, language))
       .values()
       .flatten()
-      .value();
+      .value() as IContentDescriptorTyping[];
 
     return this.typingsToString(typings);
   }
@@ -113,7 +113,7 @@ export default class MethodTypings {
     const typings = _.chain(this.typingMapByLanguage[language])
       .values()
       .uniqBy("typeName")
-      .value();
+      .value() as IContentDescriptorTyping[];
 
     return this.typingsToString(typings);
   }
@@ -138,10 +138,11 @@ export default class MethodTypings {
   }
 
   private typingsToString(typings: IContentDescriptorTyping[]): string {
-    return _.chain(typings)
+    const compacted = _.chain(typings)
       .map("typing")
       .compact()
-      .value()
-      .join("\n");
+      .value() as string[];
+
+    return compacted.join("\n");
   }
 }

@@ -55,7 +55,7 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
     const typingsForParams = await Promise.all(
       _.chain(mparams)
         .map((param) => getTypingForContentDescriptor(method, true, param))
-        .value(),
+        .value() as Array<Promise<IContentDescriptorTyping>>,
     );
 
     const typingsForResult = await getTypingForContentDescriptor(
@@ -67,11 +67,11 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
     return [...typingsForParams, typingsForResult];
   });
 
-  const methodTypings = await Promise.all(methodTypingsPromises);
+  const methodTypings: IContentDescriptorTyping[][] = await Promise.all(methodTypingsPromises);
 
   const finalTypings = _.chain(methodTypings)
     .flatten()
-    .map((typing, i) => {
+    .map((typing: IContentDescriptorTyping, i) => {
       typing.typing = typing.typing.replace(/extern crate serde_json;/g, "");
       return typing;
     })

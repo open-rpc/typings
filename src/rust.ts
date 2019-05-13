@@ -5,7 +5,6 @@ import {
   IContentDescriptorTyping,
   IMethodTypingsMap,
 } from "./generator-interface";
-import _ from "lodash";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
 import { quicktype, SchemaTypeSource, TypeSource } from "quicktype";
@@ -13,6 +12,7 @@ import { RegexLiteral } from "@babel/types";
 
 import { inspect } from "util"; // for debugging
 import { ContentDescriptorObject } from "@open-rpc/meta-schema";
+import _ from "lodash";
 
 const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
   return _.chain(contentDescriptor.name).camelCase().upperFirst().value();
@@ -25,71 +25,82 @@ const getQuickTypeSources = (contentDescriptors: ContentDescriptorObject[]): Sch
       name: getTypeName(contentDescriptor),
       schema: JSON.stringify(contentDescriptor.schema),
     } as SchemaTypeSource))
-    .uniqBy("name")
+    .value() as SchemaTypeSource[];
+};
+
+const deriveString = "#[derive(Serialize, Deserialize)]";
+const handyDeriveString = "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]";
+const cfgDeriveString = "#[cfg_attr(test, derive(Random))]";
+const untaggedString = "#[serde(untagged)]";
+
+const handleEachContentDescriptor = async (contentDescriptor: ContentDescriptorObject) => {
+  const sources = getQuickTypeSources([contentDescriptor]);
+  const result = await quicktype({
+    lang: "rust",
+    leadingComments: undefined,
+    rendererOptions: { "just-types": "true" },
+    sources,
+  });
+
+  return _.chain(result.lines)
+    .filter((line) => !_.startsWith(line, "//"))
+    .reduce((memoLines: any[], line) => {
+      const lastItem = _.last(memoLines);
+      const interfaceMatch = line.match(/pub (struct|enum) (.*) {/);
+
+      if (interfaceMatch) {
+        const toAdd = [handyDeriveString, cfgDeriveString];
+
+        if (interfaceMatch[1] === "enum") {
+          toAdd.push(untaggedString);
+        }
+
+        toAdd.push(line);
+
+        memoLines.push(toAdd);
+      } else if (_.isArray(lastItem)) {
+        lastItem.push(line);
+        if (line === "}") {
+          memoLines.push("");
+        }
+      } else {
+        memoLines.push(line);
+      }
+
+      return memoLines;
+    }, [])
+    .filter((line: string) => line !== untaggedString && line !== deriveString)
+    .compact()
     .value();
 };
 
 const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
   const { methods } = openrpcSchema;
 
-  const allContentDescriptors = [
-    ..._.chain(methods).map("params").flatten().value(),
+  const allCD = [
+    ..._.chain(methods).map("params").flatten().value() as ContentDescriptorObject[],
     ..._.map(methods, "result"),
   ] as ContentDescriptorObject[];
 
-  // console.log("allContentDescriptors", inspect(allContentDescriptors));
+  const fixedDupesAllCD = _.map(allCD, (cd: ContentDescriptorObject, index, collection): ContentDescriptorObject => {
+    let hits = 0;
 
-  const deriveString = "#[derive(Serialize, Deserialize)]";
-  const handyDeriveString = "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]";
-  const cfgDeriveString = "#[cfg_attr(test, derive(Random))]";
-  const untaggedString = "#[serde(untagged)]";
-  const typeLinesNested = await Promise.all(
-    _.map(
-      getQuickTypeSources(allContentDescriptors),
-      (source) => quicktype({
-        lang: "rust",
-        leadingComments: undefined,
-        rendererOptions: { "just-types": "true" },
-        sources: [source],
-      }).then(
-        (result) => _.chain(result.lines)
-          .filter((line) => !_.startsWith(line, "//"))
-          // .forEach(console.log) // Uncomment to print every line of types quicktype produces. Worst api ever...
-          .reduce((memoLines, line) => {
-            const lastItem = _.last(memoLines);
-            const interfaceMatch = line.match(/pub (struct|enum) (.*) {/);
+    _.each(
+      collection as ContentDescriptorObject[],
+      (cdToCheck) => {
+        if (cdToCheck.name === cd.name) {
+          hits++;
+          if (hits > 1) {
+            cd.name = cd.name + (hits - 1);
+          }
+        }
+      });
 
-            if (interfaceMatch) {
-              const toAdd = [handyDeriveString, cfgDeriveString];
+    return cd;
+  }) as ContentDescriptorObject[];
 
-              if (interfaceMatch[1] === "enum") {
-                toAdd.push(untaggedString);
-              }
-
-              toAdd.push(line);
-
-              memoLines.push(toAdd);
-            } else if (_.isArray(lastItem)) {
-              lastItem.push(line);
-              if (line === "}") {
-                memoLines.push("");
-              }
-            } else {
-              memoLines.push(line);
-            }
-
-            return memoLines;
-          }, [] as any)
-          .filter((line) => line !== untaggedString && line !== deriveString)
-          .compact()
-          .value(),
-      ),
-    ),
-  );
-
+  const typeLinesNested = await Promise.all(_.map(fixedDupesAllCD, handleEachContentDescriptor));
   const typeLines = _.flatten(typeLinesNested);
-  // console.log("typeLines", inspect(typeLines));
-
   const typeRegexes = {
     alias: /pub type (.*) = (.*)\;/,
     decleration: /use (.*)\;/,
@@ -98,27 +109,18 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
   };
 
   const simpleTypes = _.filter(typeLines, (line) => typeof line === "string");
-  // console.log("simpleTypes", inspect(simpleTypes));
   const complexTypes = _.difference(typeLines, simpleTypes);
-  // console.log("complexTypes", inspect(complexTypes));
 
   const useDeclerationTypes = _.filter(simpleTypes, (line) => typeRegexes.decleration.test(line.toString()));
   const aliasTypes = _.filter(simpleTypes, (line) => typeRegexes.alias.test(line.toString()));
   const structTypes = _.filter(complexTypes, (lines: string[]) => _.some(lines, (l) => typeRegexes.struct.test(l)));
   const enumTypes = _.filter(complexTypes, (lines: string[]) => _.some(lines, (l) => typeRegexes.enum.test(l)));
 
-  // console.log("useDeclerationTypes", inspect(useDeclerationTypes));
-  // console.log("aliasTypes", inspect(aliasTypes));
-  // console.log("structTypes", inspect(structTypes));
-  // console.log("enumTypes", inspect(enumTypes));
-
   const uniqueStructTypes = _.uniqBy(structTypes, (lines: any) => {
     const regex = /pub (struct|enum) (.*) {/;
     const lineMatch = _.find(lines, (l) => regex.test(l));
     return lineMatch.match(regex)[2]; // typeName
   });
-
-  // console.log("uniqueStructTypes", inspect(uniqueStructTypes));
 
   const allTypings = _.flatten([
     ...useDeclerationTypes,
@@ -150,8 +152,6 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
     .value();
 
   typings[Object.keys(typings)[0]].typing = allTypings;
-  // console.log(JSON.stringify(typings, undefined, "  "))
-  // throw new Error();
   return typings;
 };
 
