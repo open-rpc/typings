@@ -1,0 +1,1392 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Record | @open-rpc/schema-utils-js</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@open-rpc/schema-utils-js</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="record.html">Record</a>
+				</li>
+			</ul>
+			<h1>Module Record&lt;TProps&gt;</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A record is similar to a JS object, but enforces a specific set of allowed
+						string keys, and has default values.</p>
+					</div>
+					<p>The <code>Record()</code> function produces new Record Factories, which when called
+					create Record instances.</p>
+					<pre><code class="language-js"><span class="hljs-keyword">const</span> { Record } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'immutable'</span>)
+<span class="hljs-keyword">const</span> ABRecord = Record({ <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span> })
+<span class="hljs-keyword">const</span> myRecord = ABRecord({ <span class="hljs-attr">b</span>: <span class="hljs-number">3</span> })</code></pre>
+					<p>Records always have a value for the keys they define. <code>remove</code>ing a key
+					from a record simply resets it to the default value for that key.</p>
+					<pre><code class="language-js">myRecord.size <span class="hljs-comment">// 2</span>
+myRecord.get(<span class="hljs-string">'a'</span>) <span class="hljs-comment">// 1</span>
+myRecord.get(<span class="hljs-string">'b'</span>) <span class="hljs-comment">// 3</span>
+<span class="hljs-keyword">const</span> myRecordWithoutB = myRecord.remove(<span class="hljs-string">'b'</span>)
+myRecordWithoutB.get(<span class="hljs-string">'b'</span>) <span class="hljs-comment">// 2</span>
+myRecordWithoutB.size <span class="hljs-comment">// 2</span></code></pre>
+					<p>Values provided to the constructor not found in the Record type will
+						be ignored. For example, in this case, ABRecord is provided a key &quot;x&quot; even
+						though only &quot;a&quot; and &quot;b&quot; have been defined. The value for &quot;x&quot; will be
+					ignored for this record.</p>
+					<pre><code class="language-js"><span class="hljs-keyword">const</span> myRecord = ABRecord({ <span class="hljs-attr">b</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">x</span>: <span class="hljs-number">10</span> })
+myRecord.get(<span class="hljs-string">'x'</span>) <span class="hljs-comment">// undefined</span></code></pre>
+					<p>Because Records have a known set of string keys, property get access works
+					as expected, however property sets will throw an Error.</p>
+					<p>Note: IE8 does not support property access. Only use <code>get()</code> when
+					supporting IE8.</p>
+					<pre><code class="language-js">myRecord.b <span class="hljs-comment">// 3</span>
+myRecord.b = <span class="hljs-number">5</span> <span class="hljs-comment">// throws Error</span></code></pre>
+					<p>Record Types can be extended as well, allowing for custom methods on your
+						Record. This is not a common pattern in functional environments, but is in
+					many JS programs.</p>
+					<p>However Record Types are more restricted than typical JavaScript classes.
+						They do not use a class constructor, which also means they cannot use
+					class properties (since those are technically part of a constructor).</p>
+					<p>While Record Types can be syntactically created with the JavaScript <code>class</code>
+						form, the resulting Record function is actually a factory function, not a
+						class constructor. Even though Record Types are not classes, JavaScript
+						currently requires the use of <code>new</code> when creating new Record instances if
+					they are defined as a <code>class</code>.</p>
+					<pre><code><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ABRecord</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Record</span>(<span class="hljs-params">{ a: 1, b: 2 }</span>) </span>{
+  getAB() {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.a + <span class="hljs-keyword">this</span>.b;
+  }
+}
+
+<span class="hljs-keyword">var</span> myRecord = <span class="hljs-keyword">new</span> <span class="hljs-type">ABRecord</span>({b: <span class="hljs-number">3</span>})
+myRecord.getAB() <span class="hljs-comment">// 4</span></code></pre><p><strong>Flow Typing Records:</strong></p>
+					<p>Immutable.js exports two Flow types designed to make it easier to use
+					Records with flow typed code, <code>RecordOf&lt;TProps&gt;</code> and <code>RecordFactory&lt;TProps&gt;</code>.</p>
+					<p>When defining a new kind of Record factory function, use a flow type that
+						describes the values the record contains along with <code>RecordFactory&lt;TProps&gt;</code>.
+						To type instances of the Record (which the factory function returns),
+					use <code>RecordOf&lt;TProps&gt;</code>.</p>
+					<p>Typically, new Record definitions will export both the Record factory
+					function as well as the Record instance type for use in other code.</p>
+					<pre><code class="language-js"><span class="hljs-keyword">import</span> type { RecordFactory, RecordOf } <span class="hljs-keyword">from</span> <span class="hljs-string">'immutable'</span>;
+
+<span class="hljs-comment">// Use RecordFactory&lt;TProps&gt; for defining new Record factory functions.</span>
+type Point3DProps = { <span class="hljs-attr">x</span>: number, <span class="hljs-attr">y</span>: number, <span class="hljs-attr">z</span>: number };
+<span class="hljs-keyword">const</span> defaultValues: Point3DProps = { <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">0</span> };
+<span class="hljs-keyword">const</span> makePoint3D: RecordFactory&lt;Point3DProps&gt; = Record(defaultValues);
+<span class="hljs-keyword">export</span> makePoint3D;
+
+<span class="hljs-comment">// Use RecordOf&lt;T&gt; for defining new instances of that Record.</span>
+<span class="hljs-keyword">export</span> type Point3D = RecordOf&lt;Point3DProps&gt;;
+<span class="hljs-keyword">const</span> some3DPoint: Point3D = makePoint3D({ <span class="hljs-attr">x</span>: <span class="hljs-number">10</span>, <span class="hljs-attr">y</span>: <span class="hljs-number">20</span>, <span class="hljs-attr">z</span>: <span class="hljs-number">30</span> });</code></pre>
+					<p><strong>Flow Typing Record Subclasses:</strong></p>
+					<p>Records can be subclassed as a means to add additional methods to Record
+						instances. This is generally discouraged in favor of a more functional API,
+						since Subclasses have some minor overhead. However the ability to create
+					a rich API on Record types can be quite valuable.</p>
+					<p>When using Flow to type Subclasses, do not use <code>RecordFactory&lt;TProps&gt;</code>,
+					instead apply the props type when subclassing:</p>
+					<pre><code class="language-js">type PersonProps = {<span class="hljs-attr">name</span>: string, <span class="hljs-attr">age</span>: number};
+<span class="hljs-keyword">const</span> defaultValues: PersonProps = {<span class="hljs-attr">name</span>: <span class="hljs-string">'Aristotle'</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">2400</span>};
+<span class="hljs-keyword">const</span> PersonRecord = Record(defaultValues);
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PersonRecord</span>&lt;<span class="hljs-title">PersonProps</span>&gt; </span>{
+  getName(): string {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'name'</span>)
+  }
+
+  setName(name: string): <span class="hljs-keyword">this</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(<span class="hljs-string">'name'</span>, name);
+  }
+}</code></pre>
+					<p><strong>Choosing Records vs plain JavaScript objects</strong></p>
+					<p>Records offer a persistently immutable alternative to plain JavaScript
+						objects, however they&#39;re not required to be used within Immutable.js
+						collections. In fact, the deep-access and deep-updating functions
+					like <code>getIn()</code> and <code>setIn()</code> work with plain JavaScript Objects as well.</p>
+					<p>Deciding to use Records or Objects in your application should be informed
+					by the tradeoffs and relative benefits of each:</p>
+					<ul>
+						<li><p><em>Runtime immutability</em>: plain JS objects may be carefully treated as
+								immutable, however Record instances will <em>throw</em> if attempted to be
+								mutated directly. Records provide this additional guarantee, however at
+								some marginal runtime cost. While JS objects are mutable by nature, the
+								use of type-checking tools like <a href="https://medium.com/@gcanti/immutability-with-flow-faa050a1aef4">Flow</a>
+							can help gain confidence in code written to favor immutability.</p>
+						</li>
+						<li><p><em>Value equality</em>: Records use value equality when compared with <code>is()</code>
+								or <code>record.equals()</code>. That is, two Records with the same keys and values
+								are equal. Plain objects use <em>reference equality</em>. Two objects with the
+								same keys and values are not equal since they are different objects.
+								This is important to consider when using objects as keys in a <code>Map</code> or
+							values in a <code>Set</code>, which use equality when retrieving values.</p>
+						</li>
+						<li><p><em>API methods</em>: Records have a full featured API, with methods like
+								<code>.getIn()</code>, and <code>.equals()</code>. These can make working with these values
+							easier, but comes at the cost of not allowing keys with those names.</p>
+						</li>
+						<li><p><em>Default values</em>: Records provide default values for every key, which
+								can be useful when constructing Records with often unchanging values.
+							However default values can make using Flow and TypeScript more laborious.</p>
+						</li>
+						<li><p><em>Serialization</em>: Records use a custom internal representation to
+								efficiently store and update their values. Converting to and from this
+								form isn&#39;t free. If converting Records to plain objects is common,
+							consider sticking with plain objects to begin with.</p>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>TProps<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3 class="tsd-before-signature">Callable</h3>
+				<ul class="tsd-signatures tsd-kind-module tsd-has-type-parameter tsd-is-external">
+					<li class="tsd-signature tsd-kind-icon">Record&lt;TProps&gt;<span class="tsd-signature-symbol">(</span>defaultValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProps</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="record.factory.html" class="tsd-signature-type">Factory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2467</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Unlike other types in Immutable.js, the <code>Record()</code> function creates a new
+								Record Factory, which is a function that creates Record instances.</p>
+							</div>
+							<p>See above for examples of using <code>Record()</code>.</p>
+							<p>Note: <code>Record</code> is a factory function and not a class, and does not use the
+							<code>new</code> keyword during construction.</p>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>TProps</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>defaultValues: <span class="tsd-signature-type">TProps</span></h5>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="record.factory.html" class="tsd-signature-type">Factory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span></h4>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Modules</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-module tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="record.factory.html" class="tsd-kind-icon">Factory</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="record.html#getdescriptivename" class="tsd-kind-icon">get<wbr>Descriptive<wbr>Name</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-external"><a href="record.html#isrecord" class="tsd-kind-icon">is<wbr>Record</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#___iterator" class="tsd-kind-icon">__@iterator</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#asimmutable" class="tsd-kind-icon">as<wbr>Immutable</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#asmutable" class="tsd-kind-icon">as<wbr>Mutable</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#clear" class="tsd-kind-icon">clear</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="record.html#delete" class="tsd-kind-icon">delete</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#deletein" class="tsd-kind-icon">delete<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#equals" class="tsd-kind-icon">equals</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="record.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#getin" class="tsd-kind-icon">get<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#has" class="tsd-kind-icon">has</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#hasin" class="tsd-kind-icon">has<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#hashcode" class="tsd-kind-icon">hash<wbr>Code</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#merge" class="tsd-kind-icon">merge</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#mergedeep" class="tsd-kind-icon">merge<wbr>Deep</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#mergedeepin" class="tsd-kind-icon">merge<wbr>Deep<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#mergedeepwith" class="tsd-kind-icon">merge<wbr>Deep<wbr>With</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#mergein" class="tsd-kind-icon">merge<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#mergewith" class="tsd-kind-icon">merge<wbr>With</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="record.html#remove" class="tsd-kind-icon">remove</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#removein" class="tsd-kind-icon">remove<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="record.html#set" class="tsd-kind-icon">set</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#setin" class="tsd-kind-icon">set<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#tojs" class="tsd-kind-icon">toJS</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#tojson" class="tsd-kind-icon">toJSON</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#toobject" class="tsd-kind-icon">to<wbr>Object</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#toseq" class="tsd-kind-icon">to<wbr>Seq</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="record.html#update" class="tsd-kind-icon">update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#updatein" class="tsd-kind-icon">update<wbr>In</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#wasaltered" class="tsd-kind-icon">was<wbr>Altered</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-module tsd-is-external"><a href="record.html#withmutations" class="tsd-kind-icon">with<wbr>Mutations</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-external">
+					<a name="getdescriptivename" class="tsd-anchor"></a>
+					<h3>get<wbr>Descriptive<wbr>Name</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Descriptive<wbr>Name<span class="tsd-signature-symbol">(</span>record<span class="tsd-signature-symbol">: </span><a href="record.html" class="tsd-signature-type">Record</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2392</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Records allow passing a second parameter to supply a descriptive name
+										that appears when converting a Record to a string or in any error
+										messages. A descriptive name for any record can be accessed by using this
+									method. If one was not provided, the string &quot;Record&quot; is returned.</p>
+								</div>
+								<pre><code class="language-js"><span class="hljs-keyword">const</span> { Record } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'immutable'</span>)
+<span class="hljs-keyword">const</span> Person = Record({
+  <span class="hljs-attr">name</span>: <span class="hljs-literal">null</span>
+}, <span class="hljs-string">'Person'</span>)
+
+<span class="hljs-keyword">var</span> me = Person({ <span class="hljs-attr">name</span>: <span class="hljs-string">'My Name'</span> })
+me.toString() <span class="hljs-comment">// "Person { "name": "My Name" }"</span>
+Record.getDescriptiveName(me) <span class="hljs-comment">// "Person"</span></code></pre>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>record: <a href="record.html" class="tsd-signature-type">Record</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-external">
+					<a name="isrecord" class="tsd-anchor"></a>
+					<h3>is<wbr>Record</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Record<span class="tsd-signature-symbol">(</span>maybeRecord<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2373</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>True if <code>maybeRecord</code> is an instance of a Record.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>maybeRecord: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="___iterator" class="tsd-anchor"></a>
+					<h3>__@iterator</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">__@iterator<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">keyof TProps</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps[keyof TProps]</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2589</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">IterableIterator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">keyof TProps</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps[keyof TProps]</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="asimmutable" class="tsd-anchor"></a>
+					<h3>as<wbr>Immutable</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">as<wbr>Immutable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2583</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><code>Map#asImmutable</code></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="asmutable" class="tsd-anchor"></a>
+					<h3>as<wbr>Mutable</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">as<wbr>Mutable<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2573</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><code>Map#asMutable</code></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="clear" class="tsd-anchor"></a>
+					<h3>clear</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2525</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a new instance of this Record type with all values set
+									to their default values.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+					<a name="delete" class="tsd-anchor"></a>
+					<h3>delete</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">delete&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2518</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns a new instance of this Record type with the value for the
+									specific key set to its default value.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>alias</dt>
+									<dd><p>remove</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProps</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">K</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="deletein" class="tsd-anchor"></a>
+					<h3>delete<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">delete<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2537</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>alias</dt>
+									<dd><p>removeIn</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="equals" class="tsd-anchor"></a>
+					<h3>equals</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">equals<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2493</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>other: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+					<a name="get" class="tsd-anchor"></a>
+					<h3>get</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, notSetValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProps[K]</span></li>
+						<li class="tsd-signature tsd-kind-icon">get&lt;T&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, notSetValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2483</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Returns the value associated with the provided key, which may be the
+									default value defined when creating the Record factory function.</p>
+								</div>
+								<p>If the requested key is not defined by this Record type, then
+									notSetValue will be returned if provided. Note that this scenario would
+								produce an error when using Flow or TypeScript.</p>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProps</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> notSetValue: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TProps[K]</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2484</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>notSetValue: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="getin" class="tsd-anchor"></a>
+					<h3>get<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2489</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="has" class="tsd-anchor"></a>
+					<h3>has</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">has<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2473</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="hasin" class="tsd-anchor"></a>
+					<h3>has<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">has<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2488</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="hashcode" class="tsd-anchor"></a>
+					<h3>hash<wbr>Code</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">hash<wbr>Code<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2494</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="merge" class="tsd-anchor"></a>
+					<h3>merge</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">merge<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>collections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2500</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>collections: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="mergedeep" class="tsd-anchor"></a>
+					<h3>merge<wbr>Deep</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">merge<wbr>Deep<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>collections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2501</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>collections: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="mergedeepin" class="tsd-anchor"></a>
+					<h3>merge<wbr>Deep<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">merge<wbr>Deep<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, <span class="tsd-signature-symbol">...</span>collections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2532</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>collections: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="mergedeepwith" class="tsd-anchor"></a>
+					<h3>merge<wbr>Deep<wbr>With</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">merge<wbr>Deep<wbr>With<span class="tsd-signature-symbol">(</span>merger<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, <span class="tsd-signature-symbol">...</span>collections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2507</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>merger: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>oldVal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, newVal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>oldVal: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>newVal: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>key: <span class="tsd-signature-type">any</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>collections: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="mergein" class="tsd-anchor"></a>
+					<h3>merge<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">merge<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, <span class="tsd-signature-symbol">...</span>collections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2531</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>collections: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="mergewith" class="tsd-anchor"></a>
+					<h3>merge<wbr>With</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">merge<wbr>With<span class="tsd-signature-symbol">(</span>merger<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span>, <span class="tsd-signature-symbol">...</span>collections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2503</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>merger: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>oldVal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, newVal<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProps</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>oldVal: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>newVal: <span class="tsd-signature-type">any</span></h5>
+														</li>
+														<li>
+															<h5>key: <span class="tsd-signature-type">keyof TProps</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>collections: <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TProps</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+					<a name="remove" class="tsd-anchor"></a>
+					<h3>remove</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2519</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProps</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">K</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="removein" class="tsd-anchor"></a>
+					<h3>remove<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2538</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+					<a name="set" class="tsd-anchor"></a>
+					<h3>set</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProps[K]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2498</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProps</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">TProps[K]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="setin" class="tsd-anchor"></a>
+					<h3>set<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2529</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>value: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="tojs" class="tsd-anchor"></a>
+					<h3>toJS</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">toJS<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2548</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Deeply converts this Record to equivalent native JavaScript Object.</p>
+								</div>
+								<p>Note: This method may not be overridden. Objects with custom
+								serialization to plain JS may override toJSON() instead.</p>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">object</span></h4>
+							<ul class="tsd-parameters">
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="tojson" class="tsd-anchor"></a>
+					<h3>toJSON</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">toJSON<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProps</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2553</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Shallowly converts this Record to equivalent native JavaScript Object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TProps</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="toobject" class="tsd-anchor"></a>
+					<h3>to<wbr>Object</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Object<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProps</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2558</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Shallowly converts this Record to equivalent JavaScript Object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TProps</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="toseq" class="tsd-anchor"></a>
+					<h3>to<wbr>Seq</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Seq<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="" class="tsd-signature-type">Keyed</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">keyof TProps</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps[keyof TProps]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2587</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type">Keyed</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">keyof TProps</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">TProps[keyof TProps]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+					<a name="update" class="tsd-anchor"></a>
+					<h3>update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">update&lt;K&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, updater<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2499</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">keyof TProps</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5>updater: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProps[K]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TProps[K]</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>value: <span class="tsd-signature-type">TProps[K]</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TProps[K]</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="updatein" class="tsd-anchor"></a>
+					<h3>update<wbr>In</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>In<span class="tsd-signature-symbol">(</span>keyPath<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span>, updater<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2530</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPath: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>updater: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>value: <span class="tsd-signature-type">any</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="wasaltered" class="tsd-anchor"></a>
+					<h3>was<wbr>Altered</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">was<wbr>Altered<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2578</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><code>Map#wasAltered</code></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-module tsd-is-external">
+					<a name="withmutations" class="tsd-anchor"></a>
+					<h3>with<wbr>Mutations</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-module tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">with<wbr>Mutations<span class="tsd-signature-symbol">(</span>mutator<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/immutable/dist/immutable-nonambient.d.ts:2568</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Note: Not all methods can be used on a mutable collection or within
+									<code>withMutations</code>! Only <code>set</code> may be used mutatively.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><code>Map#withMutations</code></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>mutator: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>mutable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>mutable: <span class="tsd-signature-type">this</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="label tsd-is-external">
+						<span>Externals</span>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="collection.html">Collection</a>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="list.html">List</a>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="map.html">Map</a>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="orderedmap.html">Ordered<wbr>Map</a>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="orderedset.html">Ordered<wbr>Set</a>
+					</li>
+					<li class="current tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="record.html">Record</a>
+						<ul>
+							<li class=" tsd-kind-module tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
+								<a href="record.factory.html">Factory</a>
+							</li>
+						</ul>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="seq.html">Seq</a>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="set.html">Set</a>
+					</li>
+					<li class=" tsd-kind-module tsd-has-type-parameter tsd-is-external">
+						<a href="stack.html">Stack</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="doc.html">doc</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="getfileinfo.html">get<wbr>File<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="resolveconfig.html">resolve<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-module tsd-is-external">
+						<a href="util.html">util</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
