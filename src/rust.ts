@@ -144,8 +144,7 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
 
   // same as above, but now as a partial IContentDescriptorTyping
   const at = _.map(aliasTypes, (aliasType: string) => {
-    const matches = aliasType.match(typeRegexes.alias);
-    if (matches === null) { throw new Error("aliases: this should never happen"); }
+    const matches = aliasType.match(typeRegexes.alias) as RegExpMatchArray;
     const typeName = matches[1];
 
     return { typeName, typing: aliasType, typeId: "todo", order: "alias" };
@@ -153,10 +152,8 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
 
   // same as above, but now as a partial IContentDescriptorTyping
   const etst = _.map([...enumTypes, ...structTypes], (typing: string[]) => {
-    const lineMatch = _.find(typing, (l) => typeRegexes.complex.test(l));
-    if (lineMatch === undefined) { throw new Error("complex1: this should never happen"); }
-    const matches = lineMatch.match(typeRegexes.complex);
-    if (matches === null) { throw new Error("complex2: this should never happen"); }
+    const lineMatch = _.find(typing, (l) => typeRegexes.complex.test(l)) as string;
+    const matches = lineMatch.match(typeRegexes.complex) as RegExpMatchArray;
     const typeName = matches[2];
 
     return { typeName, typing: typing.join("\n"), typeId: "todo", order: "complex" };
