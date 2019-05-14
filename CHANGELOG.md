@@ -1,3 +1,11 @@
+## [1.0.4](https://github.com/open-rpc/typings/compare/1.0.3...1.0.4) (2019-05-14)
+
+
+### Bug Fixes
+
+* remove extra errors ([aafb764](https://github.com/open-rpc/typings/commit/aafb764))
+* wrangle the beast into submission ([ad3c77e](https://github.com/open-rpc/typings/commit/ad3c77e))
+
 ## [1.0.3](https://github.com/open-rpc/typings/compare/1.0.2...1.0.3) (2019-05-14)
 
 
