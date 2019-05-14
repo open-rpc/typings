@@ -74,6 +74,18 @@ const handleEachContentDescriptor = async (contentDescriptor: ContentDescriptorO
     .value();
 };
 
+interface ITypeRegexes {
+  [key: string]: RegExp;
+}
+
+const typeRegexes: ITypeRegexes = {
+  alias: /pub type (.*) = (.*)\;/,
+  complex: /pub (struct|enum) (.*) {/,
+  decleration: /use (.*)\;/,
+  enum: /pub enum (.*) {/,
+  struct: /pub struct (.*) {/,
+};
+
 const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
   const { methods } = openrpcSchema;
 
@@ -82,58 +94,93 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
     ..._.map(methods, "result"),
   ] as ContentDescriptorObject[];
 
-  const fixedDupesAllCD = _.map(allCD, (cd: ContentDescriptorObject, index, collection): ContentDescriptorObject => {
-    let hits = 0;
-    const nameWithoutChange = cd.name;
-    const stringifiedCd = JSON.stringify(cd.schema);
-
-    _.each(
-      collection as ContentDescriptorObject[],
-      (cdToCheck) => {
-        if (cdToCheck.name === nameWithoutChange) {
-          if (JSON.stringify(cdToCheck.schema) !== stringifiedCd) {
-            hits += 1;
-          }
-        }
-      });
-
-    if (hits > 1) {
-      cd.name = cd.name + (hits - 1);
+  const cdWithNullFix = _.map(allCD, (cd) => {
+    if (cd.schema.oneOf) { // this should be recursive
+      cd.schema.oneOf = _.filter(cd.schema.oneOf, (subschema: any) => subschema.type !== "null");
     }
-
     return cd;
-  }) as ContentDescriptorObject[];
+  });
+
+  const fixedDupesAllCD = _.map(
+    cdWithNullFix,
+    (cd: ContentDescriptorObject, index, collection): ContentDescriptorObject => {
+      let hits = 0;
+      const nameWithoutChange = cd.name;
+      const stringifiedCd = JSON.stringify(cd.schema);
+
+      _.each(
+        collection as ContentDescriptorObject[],
+        (cdToCheck) => {
+          if (cdToCheck.name === nameWithoutChange) {
+            if (JSON.stringify(cdToCheck.schema) !== stringifiedCd) {
+              hits += 1;
+            }
+          }
+        });
+
+      if (hits > 1) {
+        cd.name = cd.name + (hits - 1);
+      }
+
+      return cd;
+    }) as ContentDescriptorObject[];
   const dedupedContentDescriptors = _.uniqBy(fixedDupesAllCD, "name");
 
   const typeLinesNested = await Promise.all(_.map(dedupedContentDescriptors, handleEachContentDescriptor));
   const typeLines = _.flatten(typeLinesNested);
-  const typeRegexes = {
-    alias: /pub type (.*) = (.*)\;/,
-    decleration: /use (.*)\;/,
-    enum: /pub enum (.*) {/,
-    struct: /pub struct (.*) {/,
-  };
 
-  const simpleTypes = _.filter(typeLines, (line) => typeof line === "string");
+  const simpleTypes = _.filter(typeLines, (line) => typeof line === "string") as string[];
   const complexTypes = _.difference(typeLines, simpleTypes);
 
-  const useDeclerationTypes = _.filter(simpleTypes, (line) => typeRegexes.decleration.test(line.toString()));
-  const aliasTypes = _.filter(simpleTypes, (line) => typeRegexes.alias.test(line.toString()));
+  // ready to be prepended to the typings output.
+  const useDeclerationTypes = _.chain(simpleTypes)
+    .filter((line) => typeRegexes.decleration.test(line))
+    .uniq()
+    .value() as string[];
+
+  const aliasTypes = _.filter(simpleTypes, (line) => typeRegexes.alias.test(line));
   const structTypes = _.filter(complexTypes, (lines: string[]) => _.some(lines, (l) => typeRegexes.struct.test(l)));
   const enumTypes = _.filter(complexTypes, (lines: string[]) => _.some(lines, (l) => typeRegexes.enum.test(l)));
 
-  const uniqueStructTypes = _.uniqBy(structTypes, (lines: any) => {
-    const regex = /pub (struct|enum) (.*) {/;
-    const lineMatch = _.find(lines, (l) => regex.test(l));
-    return lineMatch.match(regex)[2]; // typeName
+  // same as above, but now as a partial IContentDescriptorTyping
+  const at = _.map(aliasTypes, (aliasType: string) => {
+    const matches = aliasType.match(typeRegexes.alias);
+    if (matches === null) { throw new Error("aliases: this should never happen"); }
+    const typeName = matches[1];
+
+    return { typeName, typing: aliasType, typeId: "todo", order: "alias" };
   });
 
-  const allTypings = _.flatten([
-    ...useDeclerationTypes,
-    ...aliasTypes,
-    ...enumTypes,
-    ...uniqueStructTypes,
-  ]).join("\n").trim();
+  // same as above, but now as a partial IContentDescriptorTyping
+  const etst = _.map([...enumTypes, ...structTypes], (typing: string[]) => {
+    const lineMatch = _.find(typing, (l) => typeRegexes.complex.test(l));
+    if (lineMatch === undefined) { throw new Error("complex1: this should never happen"); }
+    const matches = lineMatch.match(typeRegexes.complex);
+    if (matches === null) { throw new Error("complex2: this should never happen"); }
+    const typeName = matches[2];
+
+    return { typeName, typing: typing.join("\n"), typeId: "todo", order: "complex" };
+  });
+
+  const apt = _.chain([...at, ...etst])
+    .groupBy("typeName")
+    .values()
+    .map((typingsWithSameName) => {
+      const uniqued = _.uniqBy(typingsWithSameName, "typing");
+
+      return _.map(uniqued, (typing, i) => {
+        const newTypeName = `${typing.typeName}${i === 0 ? "" : 0}`;
+
+        return {
+          dupedTypeName: typing.typeName,
+          typeName: newTypeName,
+          typing: typing.typing.replace(typing.typeName, newTypeName),
+        };
+      });
+    })
+    .flatten()
+    .uniqBy("typeName")
+    .value() as [];
 
   const typings = _.chain(methods)
     .map((method) => {
@@ -157,7 +204,8 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
     .keyBy("typeId")
     .value();
 
-  typings[Object.keys(typings)[0]].typing = allTypings;
+  typings[Object.keys(typings)[0]].typing = useDeclerationTypes.join("\n")
+    .concat(_.map(apt, "typing").join("\n").trim());
   return typings;
 };
 
