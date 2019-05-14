@@ -330,18 +330,23 @@ describe("MethodTypings", () => {
 
     const methodTypings = new MethodTypings(copytestOpenRPCDocument);
     await methodTypings.generateTypings();
-    console.log(methodTypings.getAllUniqueTypings("rust")); // tslint:disable-line
+    const typings = methodTypings.getAllUniqueTypings("rust");
     expect(methodTypings.getAllUniqueTypings("rust"))
       .toBe([
         "pub type Ripslip2 = String;",
-        "pub type Ripslip = i64;",
         "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
         "#[cfg_attr(test, derive(Random))]",
         "#[serde(untagged)]",
-        "pub enum Ripslip1 {",
+        "pub enum Ripslip {",
         "    Integer(i64),",
         "",
         "    IntegerArray(Vec<i64>),",
+        "}",
+        "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
+        "#[cfg_attr(test, derive(Random))]",
+        "pub struct Ripslip1 {",
+        "    #[serde(rename = \"ripslip\")]",
+        "    ripslip: Option<bool>,",
         "}",
       ].join("\n"));
   });
