@@ -1,3 +1,11 @@
+## [1.0.3](https://github.com/open-rpc/typings/compare/1.0.2...1.0.3) (2019-05-14)
+
+
+### Bug Fixes
+
+* dedupe by equal schemas ([7ddbfea](https://github.com/open-rpc/typings/commit/7ddbfea))
+* remove console log ([ec6e033](https://github.com/open-rpc/typings/commit/ec6e033))
+
 ## [1.0.2](https://github.com/open-rpc/typings/compare/1.0.1...1.0.2) (2019-05-13)
 
 
