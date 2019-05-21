@@ -97,9 +97,27 @@ const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
   return `public ${method.name}(${params}) : ${result}`;
 };
 
+const getFunctionTypeAlias = (method, typeDefs) => {
+  const mResult = method.result as ContentDescriptorObject;
+  const result = `Promise<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
+
+  if (method.params.length === 0) {
+    return `export type ${method.name} = () : ${result}`;
+  }
+
+  const params = _.map(
+    method.params as ContentDescriptorObject[],
+    (param) => `${param.name}: ${typeDefs[generateMethodParamId(method, param)].typeName}`,
+  ).join(", ");
+
+  return `export type ${method.name} = (${params}) : ${result}`;
+};
+};
+
 const generator: IGenerator = {
   getFunctionSignature,
   getMethodTypingsMap,
+  getFunctionTypeAlias,
 };
 
 export default generator;

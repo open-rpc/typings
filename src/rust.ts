@@ -4,6 +4,7 @@ import {
   TGetFunctionSignature,
   IContentDescriptorTyping,
   IMethodTypingsMap,
+  TGetFunctionTypeAlias,
 } from "./generator-interface";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
@@ -222,9 +223,14 @@ const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
   return `pub fn ${method.name}(&mut self, ${params}) -> ${result};`;
 };
 
+const getFunctionTypeAlias: TGetFunctionTypeAlias = (method, typeDefs) => {
+  return getFunctionSignature(method, typeDefs);
+};
+
 const generator: IGenerator = {
   getFunctionSignature,
   getMethodTypingsMap,
+  getFunctionTypeAlias,
 };
 
 export default generator;

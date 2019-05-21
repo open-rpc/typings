@@ -137,6 +137,30 @@ export default class MethodTypings {
     return sig;
   }
 
+  /**
+   * A method that returns a type alias for a given method
+   *
+   * @param method The OpenRPC Method that you want a signature for.
+   * @param langeuage The langauge you want the signature to be in.
+   *
+   * @returns A string containing a type alias for a function signature of
+   * the same signature as the passed in method.
+   */
+  public getFunctionTypeAlias(method: MethodObject, language: TLanguages): string {
+    if (Object.keys(this.typingMapByLanguage).length === 0) {
+      throw new Error("typings have not yet been generated. Please run generateTypings first.");
+    }
+
+    if (language !== "typescript") {
+      throw new Error("method is not supported for languages other than: Typescript");
+    }
+
+    const sig = generators[language]
+      .getFunctionTypeAlias(method, this.typingMapByLanguage[language]);
+
+    return sig;
+  }
+
   private typingsToString(typings: IContentDescriptorTyping[]): string {
     const compacted = _.chain(typings)
       .map("typing")
