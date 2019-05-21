@@ -257,6 +257,47 @@ describe("MethodTypings", () => {
     });
   });
 
+  describe("getFunctionTypeAlias", () => {
+
+    it("throws if types not generated yet", async () => {
+      const methodTypings = new MethodTypings(testOpenRPCDocument);
+      expect(() => methodTypings.getFunctionTypeAlias(testOpenRPCDocument.methods[0], "typescript")).toThrow();
+    });
+
+    describe("typescript", () => {
+
+      it("returns the function signature for a method", async () => {
+        const methodTypings = new MethodTypings(testOpenRPCDocument);
+        await methodTypings.generateTypings();
+
+        expect(methodTypings.getFunctionTypeAlias(testOpenRPCDocument.methods[0], "typescript"))
+          .toBe("export type TJibber = (niptip: TNiptip): Promise<IRipslip>;");
+      });
+
+      it("works when there are no params", async () => {
+        const copytestOpenRPCDocument = cloneDeep(testOpenRPCDocument);
+        copytestOpenRPCDocument.methods[0].params = [];
+        const methodTypings = new MethodTypings(copytestOpenRPCDocument);
+        await methodTypings.generateTypings();
+
+        expect(methodTypings.getFunctionTypeAlias(copytestOpenRPCDocument.methods[0], "typescript"))
+          .toBe("export type TJibber = (): Promise<IRipslip>;");
+      });
+
+    });
+
+    describe("rust", () => {
+
+      it("does the same as getFunctionSignature", async () => {
+        const methodTypings = new MethodTypings(testOpenRPCDocument);
+        await methodTypings.generateTypings();
+
+        expect(methodTypings.getFunctionTypeAlias(testOpenRPCDocument.methods[0], "rust"))
+          .toBe(methodTypings.getFunctionSignature(testOpenRPCDocument.methods[0], "rust"));
+      });
+    });
+  });
+
   it("gracefully handles openrpc documents with duplicate names for content descriptors", async () => {
     const dupesDocument = {
       info: {

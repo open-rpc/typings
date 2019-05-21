@@ -151,10 +151,6 @@ export default class MethodTypings {
       throw new Error("typings have not yet been generated. Please run generateTypings first.");
     }
 
-    if (language !== "typescript") {
-      throw new Error("method is not supported for languages other than: Typescript");
-    }
-
     const sig = generators[language]
       .getFunctionTypeAlias(method, this.typingMapByLanguage[language]);
 
