@@ -1,10 +1,9 @@
 import {
   IGenerator,
   TGetMethodTypingsMap,
-  TGetFunctionSignature,
   IContentDescriptorTyping,
   IMethodTypingsMap,
-  TGetFunctionTypeAlias,
+  TGetMethodTypeAlias,
 } from "./generator-interface";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
@@ -207,7 +206,7 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
   return typings;
 };
 
-const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
+const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
   const mResult = method.result as ContentDescriptorObject;
   const result = `RpcRequest<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
 
@@ -223,13 +222,8 @@ const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
   return `pub fn ${method.name}(&mut self, ${params}) -> ${result};`;
 };
 
-const getFunctionTypeAlias: TGetFunctionTypeAlias = (method, typeDefs) => {
-  return getFunctionSignature(method, typeDefs);
-};
-
 const generator: IGenerator = {
-  getFunctionSignature,
-  getFunctionTypeAlias,
+  getMethodTypeAlias,
   getMethodTypingsMap,
 };
 

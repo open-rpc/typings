@@ -119,25 +119,6 @@ export default class MethodTypings {
   }
 
   /**
-   * A method that returns a function signature in the specified language
-   *
-   * @param method The OpenRPC Method that you want a signature for.
-   * @param langeuage The langauge you want the signature to be in.
-   *
-   * @returns A string containing a function signature.
-   */
-  public getFunctionSignature(method: MethodObject, language: TLanguages): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
-
-    const sig = generators[language]
-      .getFunctionSignature(method, this.typingMapByLanguage[language]);
-
-    return sig;
-  }
-
-  /**
    * A method that returns a type alias for a given method
    *
    * @param method The OpenRPC Method that you want a signature for.
@@ -146,13 +127,13 @@ export default class MethodTypings {
    * @returns A string containing a type alias for a function signature of
    * the same signature as the passed in method.
    */
-  public getFunctionTypeAlias(method: MethodObject, language: TLanguages): string {
+  public getMethodTypeAlias(method: MethodObject, language: TLanguages): string {
     if (Object.keys(this.typingMapByLanguage).length === 0) {
       throw new Error("typings have not yet been generated. Please run generateTypings first.");
     }
 
     const sig = generators[language]
-      .getFunctionTypeAlias(method, this.typingMapByLanguage[language]);
+      .getMethodTypeAlias(method, this.typingMapByLanguage[language]);
 
     return sig;
   }

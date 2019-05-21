@@ -1,9 +1,8 @@
 import {
   IGenerator,
   TGetMethodTypingsMap,
-  TGetFunctionSignature,
   IContentDescriptorTyping,
-  TGetFunctionTypeAlias,
+  TGetMethodTypeAlias,
 } from "./generator-interface";
 import _ from "lodash";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
@@ -85,43 +84,22 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
   return finalTypings;
 };
 
-const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
-  const mResult = method.result as ContentDescriptorObject;
-  const result = `Promise<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
-
-  if (method.params.length === 0) {
-    return `public ${method.name}() : ${result}`;
-  }
-
-  const params = _.map(
-    method.params as ContentDescriptorObject[],
-    (param) => `${param.name}: ${typeDefs[generateMethodParamId(method, param)].typeName}`,
-  ).join(", ");
-
-  return `public ${method.name}(${params}) : ${result}`;
-};
-
-const getFunctionTypeAlias: TGetFunctionTypeAlias = (method, typeDefs) => {
-  const mResult = method.result as ContentDescriptorObject;
-  const result = `Promise<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
+const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
+  const result = method.result as ContentDescriptorObject;
+  const resultTypeName = `Promise<${typeDefs[generateMethodResultId(method, result)].typeName}>`;
 
   const functionTypeName = getFunctionTypeName(method);
 
-  if (method.params.length === 0) {
-    return `export type ${functionTypeName} = (): ${result};`;
-  }
-
   const params = _.map(
     method.params as ContentDescriptorObject[],
     (param) => `${param.name}: ${typeDefs[generateMethodParamId(method, param)].typeName}`,
   ).join(", ");
 
-  return `export type ${functionTypeName} = (${params}): ${result};`;
+  return `export type ${functionTypeName} = (${params}): ${resultTypeName};`;
 };
 
 const generator: IGenerator = {
-  getFunctionSignature,
-  getFunctionTypeAlias,
+  getMethodTypeAlias,
   getMethodTypingsMap,
 };
 
