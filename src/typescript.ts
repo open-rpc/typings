@@ -3,6 +3,7 @@ import {
   TGetMethodTypingsMap,
   TGetFunctionSignature,
   IContentDescriptorTyping,
+  TGetFunctionTypeAlias,
 } from "./generator-interface";
 import _ from "lodash";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
@@ -97,7 +98,7 @@ const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
   return `public ${method.name}(${params}) : ${result}`;
 };
 
-const getFunctionTypeAlias = (method, typeDefs) => {
+const getFunctionTypeAlias: TGetFunctionTypeAlias = (method, typeDefs) => {
   const mResult = method.result as ContentDescriptorObject;
   const result = `Promise<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
 
@@ -112,12 +113,11 @@ const getFunctionTypeAlias = (method, typeDefs) => {
 
   return `export type ${method.name} = (${params}) : ${result}`;
 };
-};
 
 const generator: IGenerator = {
   getFunctionSignature,
-  getMethodTypingsMap,
   getFunctionTypeAlias,
+  getMethodTypingsMap,
 };
 
 export default generator;

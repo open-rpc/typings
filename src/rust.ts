@@ -229,8 +229,8 @@ const getFunctionTypeAlias: TGetFunctionTypeAlias = (method, typeDefs) => {
 
 const generator: IGenerator = {
   getFunctionSignature,
-  getMethodTypingsMap,
   getFunctionTypeAlias,
+  getMethodTypingsMap,
 };
 
 export default generator;
