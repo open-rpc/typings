@@ -34,11 +34,6 @@ export interface IToStringOptions {
   includeContentDescriptorTypings?: boolean;
 }
 
-const toStringOptionsDefaults = {
-  includeContentDescriptorTypings: true,
-  includeMethodAliasTypings: true,
-};
-
 /**
  * A class to handle all the tasks relating to types for the OpenRPC Document.
  */
