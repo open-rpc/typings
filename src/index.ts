@@ -73,9 +73,7 @@ export default class MethodTypings {
    *
    */
   public getAllContentDescriptorTypings(language: TLanguages): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
+    this.guard();
 
     return this.typingsToString(_.values(this.typingMapByLanguage[language]));
   }
@@ -89,9 +87,7 @@ export default class MethodTypings {
    *
    */
   public getAllMethodAliasTypings(language: TLanguages): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
+    this.guard();
 
     const generatorForLang = generators[language];
     const typingsMapForLang = this.typingMapByLanguage[language];
@@ -111,9 +107,7 @@ export default class MethodTypings {
    * @returns a multi-line string containing the types in the language specified.
    */
   public toString(language: TLanguages, options: IToStringOptions = this.toStringOptionsDefaults): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
+    this.guard();
 
     const typings = [];
     if (options.includeContentDescriptorTypings) {
@@ -148,9 +142,7 @@ export default class MethodTypings {
    *
    */
   public getMethodAliasTyping(method: MethodObject, language: TLanguages): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
+    this.guard();
 
     const sig = generators[language]
       .getMethodTypeAlias(method, this.typingMapByLanguage[language]);
@@ -168,9 +160,7 @@ export default class MethodTypings {
    *
    */
   public getMethodTypings(method: MethodObject, language: TLanguages): IMethodTypings {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
+    this.guard();
 
     const typingsMap = this.typingMapByLanguage[language];
 
@@ -196,6 +186,12 @@ export default class MethodTypings {
       .value() as string[];
 
     return compacted.join("\n");
+  }
+
+  private guard() {
+    if (Object.keys(this.typingMapByLanguage).length === 0) {
+      throw new Error("typings have not yet been generated. Please run generateTypings first.");
+    }
   }
 
 }
