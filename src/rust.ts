@@ -11,12 +11,14 @@ import { quicktype, SchemaTypeSource, TypeSource } from "quicktype";
 import { RegexLiteral } from "@babel/types";
 
 import { inspect } from "util"; // for debugging
-import { ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
 import _ from "lodash";
 
 const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
   return _.chain(contentDescriptor.name).camelCase().upperFirst().value();
 };
+
+const getMethodAliasName = (method: MethodObject): string => getTypeName({ name: method.name, schema: {} });
 
 const getQuickTypeSources = (contentDescriptors: ContentDescriptorObject[]): SchemaTypeSource[] => {
   return _.chain(contentDescriptors)
@@ -223,6 +225,7 @@ const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
 };
 
 const generator: IGenerator = {
+  getMethodAliasName,
   getMethodTypeAlias,
   getMethodTypingsMap,
 };

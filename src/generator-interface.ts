@@ -12,8 +12,10 @@ export interface IMethodTypingsMap {
 
 export type TGetMethodTypingsMap = (openrpcSchema: OpenRPC) => Promise<IMethodTypingsMap>;
 export type TGetMethodTypeAlias = (method: MethodObject, typeDefs: IMethodTypingsMap) => string;
+export type TGetMethodAliasName = (method: MethodObject) => string;
 
 export interface IGenerator {
   getMethodTypingsMap: TGetMethodTypingsMap;
   getMethodTypeAlias: TGetMethodTypeAlias;
+  getMethodAliasName: TGetMethodAliasName;
 }

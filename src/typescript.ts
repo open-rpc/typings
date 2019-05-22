@@ -9,9 +9,10 @@ import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-
 import { compile } from "json-schema-to-typescript";
 import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
 
-const getFunctionTypeName = ({ name }: MethodObject): string => {
+const getMethodAliasName = ({ name }: MethodObject): string => {
   return getTypeName({ name, schema: { type: "function" } });
 };
+
 const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
   const { schema } = contentDescriptor;
 
@@ -88,7 +89,7 @@ const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
   const result = method.result as ContentDescriptorObject;
   const resultTypeName = `Promise<${typeDefs[generateMethodResultId(method, result)].typeName}>`;
 
-  const functionTypeName = getFunctionTypeName(method);
+  const functionTypeName = getMethodAliasName(method);
 
   const params = _.map(
     method.params as ContentDescriptorObject[],
@@ -99,6 +100,7 @@ const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
 };
 
 const generator: IGenerator = {
+  getMethodAliasName,
   getMethodTypeAlias,
   getMethodTypingsMap,
 };

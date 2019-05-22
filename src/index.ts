@@ -23,6 +23,7 @@ interface ITypingMapByLanguage {
 }
 
 export interface IMethodTypings {
+  methodAliasName: string;
   params: IContentDescriptorTyping[];
   result: IContentDescriptorTyping;
 }
@@ -51,10 +52,10 @@ export default class MethodTypings {
   /**
    * Gives you all the [[IMethodTypings]] for a given method.
    *
-   * @param method The method you need the types for.
+   * @param method The method you need typing for.
    * @param langeuage The langauge you want the signature to be in.
    *
-   * @returns A string containing all the typings
+   * @returns the typings for the method.
    *
    */
   public getTypingsForMethod(method: MethodObject, language: TLanguages): IMethodTypings {
@@ -70,6 +71,7 @@ export default class MethodTypings {
     const methodTypings = zipObject(["result", "params"], paramsAndResult);
 
     return {
+      methodAliasName: generators[language].getMethodAliasName(method),
       params: methodTypings.params,
       result: methodTypings.result[0],
     };
@@ -126,6 +128,18 @@ export default class MethodTypings {
    *
    * @returns A string containing a type alias for a function signature of
    * the same signature as the passed in method.
+   *
+   * @example
+   * ```typescript
+   *
+   * const openrpcTypings = new OpenRPCTypings(examples.simpleMath);
+   * const additionMethod = examples.simpleMath.examples
+   *   .find((method) => method.name === "addition");
+   * const additionFunctionTypeAlias = openrpcTypings.getMethodTypeAlias(additionMethod, "typescript");
+   * fs.writeFileSync("./simpleMathAddition.ts", additionFunctionTypeAlias);
+   * const { TAddition } = require("./simpleMathAddition");
+   * ```
+   *
    */
   public getMethodTypeAlias(method: MethodObject, language: TLanguages): string {
     if (Object.keys(this.typingMapByLanguage).length === 0) {
@@ -146,4 +160,5 @@ export default class MethodTypings {
 
     return compacted.join("\n");
   }
+
 }

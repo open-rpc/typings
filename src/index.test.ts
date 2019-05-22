@@ -131,6 +131,7 @@ describe("MethodTypings", () => {
         await methodTypings.generateTypings();
 
         expect(methodTypings.getTypingsForMethod(testOpenRPCDocument.methods[0], "typescript")).toEqual({
+          methodAliasName: "TJibber",
           params: [
             {
               typeId: "jibber/0",
@@ -155,6 +156,7 @@ describe("MethodTypings", () => {
         await methodTypings.generateTypings();
 
         expect(methodTypings.getTypingsForMethod(testOpenRPCDocument.methods[0], "rust")).toEqual({
+          methodAliasName: "Jibber",
           params: [
             {
               typeId: "jibber/0",
