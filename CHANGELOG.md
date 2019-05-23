@@ -1,3 +1,21 @@
+# [1.1.0](https://github.com/open-rpc/typings/compare/1.0.4...1.1.0) (2019-05-23)
+
+
+### Bug Fixes
+
+* add tests for getFunctionTypeAlias ([e7319a2](https://github.com/open-rpc/typings/commit/e7319a2))
+* dry and improve coverage ([641a2c6](https://github.com/open-rpc/typings/commit/641a2c6))
+* lint fixups ([f1e1501](https://github.com/open-rpc/typings/commit/f1e1501))
+* refactor typings interface ([7846704](https://github.com/open-rpc/typings/commit/7846704))
+* remove extra junk ([69dfb37](https://github.com/open-rpc/typings/commit/69dfb37))
+
+
+### Features
+
+* add method type alias name interface ([e9b1291](https://github.com/open-rpc/typings/commit/e9b1291))
+* add type alias function ([9f30213](https://github.com/open-rpc/typings/commit/9f30213))
+* remove deprecated method ([a859c39](https://github.com/open-rpc/typings/commit/a859c39))
+
 ## [1.0.4](https://github.com/open-rpc/typings/compare/1.0.3...1.0.4) (2019-05-14)
 
 
