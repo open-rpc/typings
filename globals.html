@@ -83,7 +83,7 @@
 								<li class="tsd-kind-module tsd-is-external"><a href="modules/util.html" class="tsd-kind-icon">util</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-external">
+						<section class="tsd-index-section ">
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/annotationdata.html" class="tsd-kind-icon">Annotation<wbr>Data</a></li>
@@ -115,7 +115,7 @@
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/maptype.html" class="tsd-kind-icon">Map<wbr>Type</a></li>
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/methodcallparametervalidationerror.html" class="tsd-kind-icon">Method<wbr>Call<wbr>Parameter<wbr>Validation<wbr>Error</a></li>
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/methodcallvalidator.html" class="tsd-kind-icon">Method<wbr>Call<wbr>Validator</a></li>
-								<li class="tsd-kind-class tsd-is-external"><a href="classes/methodtypings.html" class="tsd-kind-icon">Method<wbr>Typings</a></li>
+								<li class="tsd-kind-class"><a href="classes/methodtypings.html" class="tsd-kind-icon">Method<wbr>Typings</a></li>
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/name.html" class="tsd-kind-icon">Name</a></li>
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/namer.html" class="tsd-kind-icon">Namer</a></li>
 								<li class="tsd-kind-class tsd-is-external"><a href="classes/namespace.html" class="tsd-kind-icon">Namespace</a></li>
@@ -275,8 +275,10 @@
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/htmloptions.html" class="tsd-kind-icon">Html<wbr>Options</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/icontentdescriptortyping.html" class="tsd-kind-icon">IContent<wbr>Descriptor<wbr>Typing</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/igenerator.html" class="tsd-kind-icon">IGenerator</a></li>
-								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/imethodtypings.html" class="tsd-kind-icon">IMethod<wbr>Typings</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/imethodtypings.html" class="tsd-kind-icon">IMethod<wbr>Typings</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/imethodtypingsmap.html" class="tsd-kind-icon">IMethod<wbr>Typings<wbr>Map</a></li>
+								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/iparseopenrpcdocumentoptions.html" class="tsd-kind-icon">IParse<wbr>OpenRPCDocument<wbr>Options</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/itostringoptions.html" class="tsd-kind-icon">ITo<wbr>String<wbr>Options</a></li>
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/identifier.html" class="tsd-kind-icon">Identifier</a></li>
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/ifstatement.html" class="tsd-kind-icon">If<wbr>Statement</a></li>
 								<li class="tsd-kind-interface tsd-is-external"><a href="interfaces/import.html" class="tsd-kind-icon">Import</a></li>
@@ -636,7 +638,8 @@
 								<li class="tsd-kind-type-alias tsd-has-type-parameter tsd-is-external"><a href="globals.html#stringtypematchers" class="tsd-kind-icon">String<wbr>Type<wbr>Matchers</a></li>
 								<li class="tsd-kind-type-alias tsd-is-external"><a href="globals.html#supportoptionvalue" class="tsd-kind-icon">Support<wbr>Option<wbr>Value</a></li>
 								<li class="tsd-kind-type-alias tsd-is-external"><a href="globals.html#symlinktype" class="tsd-kind-icon">Symlink<wbr>Type</a></li>
-								<li class="tsd-kind-type-alias"><a href="globals.html#tgetfunctionsignature" class="tsd-kind-icon">TGet<wbr>Function<wbr>Signature</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#tgetmethodaliasname" class="tsd-kind-icon">TGet<wbr>Method<wbr>Alias<wbr>Name</a></li>
+								<li class="tsd-kind-type-alias"><a href="globals.html#tgetmethodtypealias" class="tsd-kind-icon">TGet<wbr>Method<wbr>Type<wbr>Alias</a></li>
 								<li class="tsd-kind-type-alias"><a href="globals.html#tgetmethodtypingsmap" class="tsd-kind-icon">TGet<wbr>Method<wbr>Typings<wbr>Map</a></li>
 								<li class="tsd-kind-type-alias tsd-is-external"><a href="globals.html#tsentityname" class="tsd-kind-icon">TSEntity<wbr>Name</a></li>
 								<li class="tsd-kind-type-alias tsd-is-external"><a href="globals.html#tstype" class="tsd-kind-icon">TSType</a></li>
@@ -3086,13 +3089,12 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias">
-					<a name="tgetfunctionsignature" class="tsd-anchor"></a>
-					<h3>TGet<wbr>Function<wbr>Signature</h3>
-					<div class="tsd-signature tsd-kind-icon">TGet<wbr>Function<wbr>Signature<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<a name="tgetmethodaliasname" class="tsd-anchor"></a>
+					<h3>TGet<wbr>Method<wbr>Alias<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">TGet<wbr>Method<wbr>Alias<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/open-rpc/typings/blob/73c5d90/src/generator-interface.ts#L14">src/generator-interface.ts:14</a></li>
-							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-typings/generator-interface.d.ts:11</li>
+							<li>Defined in <a href="https://github.com/open-rpc/typings/blob/21ca8ab/src/generator-interface.ts#L15">src/generator-interface.ts:15</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -3100,7 +3102,38 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><a href="interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a>, typeDefs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IMethodTypingsMap</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><a href="interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>method: <a href="interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias">
+					<a name="tgetmethodtypealias" class="tsd-anchor"></a>
+					<h3>TGet<wbr>Method<wbr>Type<wbr>Alias</h3>
+					<div class="tsd-signature tsd-kind-icon">TGet<wbr>Method<wbr>Type<wbr>Alias<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/open-rpc/typings/blob/21ca8ab/src/generator-interface.ts#L14">src/generator-interface.ts:14</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><a href="interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a>, typeDefs<span class="tsd-signature-symbol">: </span><a href="interfaces/imethodtypingsmap.html" class="tsd-signature-type">IMethodTypingsMap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -3110,7 +3143,7 @@
 												<h5>method: <a href="interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a></h5>
 											</li>
 											<li>
-												<h5>typeDefs: <span class="tsd-signature-type">IMethodTypingsMap</span></h5>
+												<h5>typeDefs: <a href="interfaces/imethodtypingsmap.html" class="tsd-signature-type">IMethodTypingsMap</a></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -3126,8 +3159,7 @@
 					<div class="tsd-signature tsd-kind-icon">TGet<wbr>Method<wbr>Typings<wbr>Map<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/open-rpc/typings/blob/73c5d90/src/generator-interface.ts#L13">src/generator-interface.ts:13</a></li>
-							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-typings/generator-interface.d.ts:10</li>
+							<li>Defined in <a href="https://github.com/open-rpc/typings/blob/21ca8ab/src/generator-interface.ts#L13">src/generator-interface.ts:13</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -3135,7 +3167,7 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-siganture">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>openrpcSchema<span class="tsd-signature-symbol">: </span><a href="interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">IMethodTypingsMap</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>openrpcSchema<span class="tsd-signature-symbol">: </span><a href="interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/imethodtypingsmap.html" class="tsd-signature-type">IMethodTypingsMap</a><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
@@ -3145,7 +3177,7 @@
 												<h5>openrpcSchema: <a href="interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a></h5>
 											</li>
 										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">IMethodTypingsMap</span><span class="tsd-signature-symbol">&gt;</span></h4>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/imethodtypingsmap.html" class="tsd-signature-type">IMethodTypingsMap</a><span class="tsd-signature-symbol">&gt;</span></h4>
 									</li>
 								</ul>
 							</li>
@@ -25088,13 +25120,13 @@ mergeWith(
 					<a name="parseopenrpcdocument" class="tsd-anchor"></a>
 					<h3>parse<wbr>OpenRPCDocument</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">parse<wbr>OpenRPCDocument<span class="tsd-signature-symbol">(</span>schema<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">parse<wbr>OpenRPCDocument<span class="tsd-signature-symbol">(</span>schema<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a>, options<span class="tsd-signature-symbol">?: </span><a href="interfaces/iparseopenrpcdocumentoptions.html" class="tsd-signature-type">IParseOpenRPCDocumentOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/parse-open-rpc-document.d.ts:50</li>
+									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/parse-open-rpc-document.d.ts:62</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -25138,6 +25170,12 @@ mergeWith(
 											<li>schema is a url that resolves to an OpenRPC document.</li>
 											<li>schema is a file path, where the file at the path contains an OpenRPC document.</li>
 										</ol>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="interfaces/iparseopenrpcdocumentoptions.html" class="tsd-signature-type">IParseOpenRPCDocumentOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Parser options. See <a href="interfaces/iparseopenrpcdocumentoptions.html">IParseOpenRPCDocumentOptions</a></p>
 									</div>
 								</li>
 							</ul>
@@ -34917,7 +34955,7 @@ updateIn(original, [<span class="hljs-string">'x'</span>, <span class="hljs-stri
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-is-external">
+					<li class=" tsd-kind-class">
 						<a href="classes/methodtypings.html" class="tsd-kind-icon">Method<wbr>Typings</a>
 					</li>
 				</ul>
