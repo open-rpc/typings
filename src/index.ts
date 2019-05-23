@@ -23,8 +23,15 @@ interface ITypingMapByLanguage {
 }
 
 export interface IMethodTypings {
+  methodAliasName: string;
+  methodTyping: string;
   params: IContentDescriptorTyping[];
   result: IContentDescriptorTyping;
+}
+
+export interface IToStringOptions {
+  includeMethodAliasTypings?: boolean;
+  includeContentDescriptorTypings?: boolean;
 }
 
 /**
@@ -32,6 +39,10 @@ export interface IMethodTypings {
  */
 export default class MethodTypings {
   private typingMapByLanguage: ITypingMapByLanguage = {};
+  private toStringOptionsDefaults: IToStringOptions = {
+    includeContentDescriptorTypings: true,
+    includeMethodAliasTypings: true,
+  };
 
   constructor(private openrpcDocument: OpenRPC) { }
 
@@ -49,18 +60,102 @@ export default class MethodTypings {
   }
 
   /**
-   * Gives you all the [[IMethodTypings]] for a given method.
+   * A method that returns all the method type aliases as a string, useful to directly inserting into code.
    *
-   * @param method The method you need the types for.
-   * @param langeuage The langauge you want the signature to be in.
+   * @param language The langauge you want the signature to be in.
    *
-   * @returns A string containing all the typings
+   * @returns A string containing all the typings.
    *
    */
-  public getTypingsForMethod(method: MethodObject, language: TLanguages): IMethodTypings {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
+  public getAllContentDescriptorTypings(language: TLanguages): string {
+    this.guard();
+
+    return this.typingsToString(_.values(this.typingMapByLanguage[language]));
+  }
+
+  /**
+   * A method that returns all the types as a string, useful to directly inserting into code.
+   *
+   * @param langeuage The langauge you want the signature to be in.
+   *
+   * @returns A string containing all the typings.
+   *
+   */
+  public getAllMethodAliasTypings(language: TLanguages): string {
+    this.guard();
+
+    const generatorForLang = generators[language];
+    const typingsMapForLang = this.typingMapByLanguage[language];
+
+    return _.chain(this.openrpcDocument.methods)
+      .map((method) => generatorForLang.getMethodTypeAlias(method, typingsMapForLang))
+      .join("\n")
+      .value();
+  }
+
+  /**
+   * A configurable way to output the typings into a string.
+   *
+   * @param language The language you want the typings to be
+   * @param options include or filter particular parts of the output.
+   *
+   * @returns a multi-line string containing the types in the language specified.
+   */
+  public toString(language: TLanguages, options: IToStringOptions = this.toStringOptionsDefaults): string {
+    this.guard();
+
+    const typings = [];
+    if (options.includeContentDescriptorTypings) {
+      typings.push(this.getAllContentDescriptorTypings(language));
     }
+
+    if (options.includeMethodAliasTypings) {
+      typings.push(this.getAllMethodAliasTypings(language));
+    }
+
+    return typings.join("\n");
+  }
+
+  /**
+   * A method that returns a type alias for a given method
+   *
+   * @param method The OpenRPC Method that you want a signature for.
+   * @param language The langauge you want the signature to be in.
+   *
+   * @returns A string containing a type alias for a function signature of
+   * the same signature as the passed in method.
+   *
+   * @example
+   * ```typescript
+   *
+   * const openrpcTypings = new OpenRPCTypings(examples.simpleMath);
+   * const additionMethod = examples.simpleMath.examples
+   *   .find((method) => method.name === "addition");
+   * const additionFunctionTypeAlias = openrpcTypings.getMethodTypeAlias(additionMethod, "typescript");
+   * // "export TAddition = (a: number, b: number) => number"
+   * ```
+   *
+   */
+  public getMethodAliasTyping(method: MethodObject, language: TLanguages): string {
+    this.guard();
+
+    const sig = generators[language]
+      .getMethodTypeAlias(method, this.typingMapByLanguage[language]);
+
+    return sig;
+  }
+
+  /**
+   * Gives you all the [[IMethodTypings]] for a given method.
+   *
+   * @param method The method you need typing for.
+   * @param language The langauge you want the signature to be in.
+   *
+   * @returns the typings for the method.
+   *
+   */
+  public getMethodTypings(method: MethodObject, language: TLanguages): IMethodTypings {
+    this.guard();
 
     const typingsMap = this.typingMapByLanguage[language];
 
@@ -69,72 +164,14 @@ export default class MethodTypings {
     const paramsAndResult = partition(typingsForMethod, ({ typeId }) => typeId.includes("result"));
     const methodTypings = zipObject(["result", "params"], paramsAndResult);
 
+    const generatorForLanguage = generators[language];
+
     return {
+      methodAliasName: generatorForLanguage.getMethodAliasName(method),
+      methodTyping: generatorForLanguage.getMethodTypeAlias(method, typingsMap),
       params: methodTypings.params,
       result: methodTypings.result[0],
     };
-  }
-
-  /**
-   * Gives you all the [[IContentDescriptorTyping.typings]] needed for a particular method.
-   *
-   * @param method The method you need the types for.
-   * @param langeuage The langauge you want the signature to be in.
-   *
-   * @returns A string containing all the typings joined together.
-   *
-   */
-  public getTypeDefinitionsForMethod(method: MethodObject, language: TLanguages): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
-
-    const typings = _.chain(this.getTypingsForMethod(method, language))
-      .values()
-      .flatten()
-      .value() as IContentDescriptorTyping[];
-
-    return this.typingsToString(typings);
-  }
-
-  /**
-   * A method that returns all the types as a string, useful to directly inserting into code.
-   *
-   * @param langeuage The langauge you want the signature to be in.
-   *
-   * @returns A string containing all the typings
-   *
-   */
-  public getAllUniqueTypings(language: TLanguages): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
-
-    const typings = _.chain(this.typingMapByLanguage[language])
-      .values()
-      .uniqBy("typeName")
-      .value() as IContentDescriptorTyping[];
-
-    return this.typingsToString(typings);
-  }
-
-  /**
-   * A method that returns a function signature in the specified language
-   *
-   * @param method The OpenRPC Method that you want a signature for.
-   * @param langeuage The langauge you want the signature to be in.
-   *
-   * @returns A string containing a function signature.
-   */
-  public getFunctionSignature(method: MethodObject, language: TLanguages): string {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
-      throw new Error("typings have not yet been generated. Please run generateTypings first.");
-    }
-
-    const sig = generators[language]
-      .getFunctionSignature(method, this.typingMapByLanguage[language]);
-
-    return sig;
   }
 
   private typingsToString(typings: IContentDescriptorTyping[]): string {
@@ -145,4 +182,11 @@ export default class MethodTypings {
 
     return compacted.join("\n");
   }
+
+  private guard() {
+    if (Object.keys(this.typingMapByLanguage).length === 0) {
+      throw new Error("typings have not yet been generated. Please run generateTypings first.");
+    }
+  }
+
 }

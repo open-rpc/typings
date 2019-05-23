@@ -1,9 +1,9 @@
 import {
   IGenerator,
   TGetMethodTypingsMap,
-  TGetFunctionSignature,
   IContentDescriptorTyping,
   IMethodTypingsMap,
+  TGetMethodTypeAlias,
 } from "./generator-interface";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
@@ -11,12 +11,14 @@ import { quicktype, SchemaTypeSource, TypeSource } from "quicktype";
 import { RegexLiteral } from "@babel/types";
 
 import { inspect } from "util"; // for debugging
-import { ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
 import _ from "lodash";
 
 const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
   return _.chain(contentDescriptor.name).camelCase().upperFirst().value();
 };
+
+const getMethodAliasName = (method: MethodObject): string => getTypeName({ name: method.name, schema: {} });
 
 const getQuickTypeSources = (contentDescriptors: ContentDescriptorObject[]): SchemaTypeSource[] => {
   return _.chain(contentDescriptors)
@@ -206,7 +208,7 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
   return typings;
 };
 
-const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
+const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
   const mResult = method.result as ContentDescriptorObject;
   const result = `RpcRequest<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
 
@@ -223,7 +225,8 @@ const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
 };
 
 const generator: IGenerator = {
-  getFunctionSignature,
+  getMethodAliasName,
+  getMethodTypeAlias,
   getMethodTypingsMap,
 };
 

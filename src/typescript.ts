@@ -1,13 +1,17 @@
 import {
   IGenerator,
   TGetMethodTypingsMap,
-  TGetFunctionSignature,
   IContentDescriptorTyping,
+  TGetMethodTypeAlias,
 } from "./generator-interface";
 import _ from "lodash";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
 import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
+
+const getMethodAliasName = ({ name }: MethodObject): string => {
+  return getTypeName({ name, schema: { type: "function" } });
+};
 
 const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
   const { schema } = contentDescriptor;
@@ -81,24 +85,23 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
   return finalTypings;
 };
 
-const getFunctionSignature: TGetFunctionSignature = (method, typeDefs) => {
-  const mResult = method.result as ContentDescriptorObject;
-  const result = `Promise<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
+const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
+  const result = method.result as ContentDescriptorObject;
+  const resultTypeName = `Promise<${typeDefs[generateMethodResultId(method, result)].typeName}>`;
 
-  if (method.params.length === 0) {
-    return `public ${method.name}() : ${result}`;
-  }
+  const functionTypeName = getMethodAliasName(method);
 
   const params = _.map(
     method.params as ContentDescriptorObject[],
     (param) => `${param.name}: ${typeDefs[generateMethodParamId(method, param)].typeName}`,
   ).join(", ");
 
-  return `public ${method.name}(${params}) : ${result}`;
+  return `export type ${functionTypeName} = (${params}): ${resultTypeName};`;
 };
 
 const generator: IGenerator = {
-  getFunctionSignature,
+  getMethodAliasName,
+  getMethodTypeAlias,
   getMethodTypingsMap,
 };
 
