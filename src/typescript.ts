@@ -79,6 +79,7 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
       typing.typing = typing.typing.replace(/extern crate serde_json;/g, "");
       return typing;
     })
+    .uniqBy("typeName")
     .keyBy("typeId")
     .value();
 
