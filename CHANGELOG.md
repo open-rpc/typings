@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/open-rpc/typings/compare/1.1.0...1.1.1) (2019-05-25)
+
+
+### Bug Fixes
+
+* typescript function alias incorrect ([6b30135](https://github.com/open-rpc/typings/commit/6b30135))
+
 # [1.1.0](https://github.com/open-rpc/typings/compare/1.0.4...1.1.0) (2019-05-23)
 
 
