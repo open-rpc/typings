@@ -96,7 +96,7 @@ const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
     (param) => `${param.name}: ${typeDefs[generateMethodParamId(method, param)].typeName}`,
   ).join(", ");
 
-  return `export type ${functionTypeName} = (${params}): ${resultTypeName};`;
+  return `export type ${functionTypeName} = (${params}) => ${resultTypeName};`;
 };
 
 const generator: IGenerator = {

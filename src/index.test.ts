@@ -38,7 +38,7 @@ const expectedRipSlipTypescript = [
   "  [k: string]: any;",
   "}",
 ].join("\n");
-const expectedJibberTypescript = "export type TJibber = (niptip: TNiptip): Promise<IRipslip>;";
+const expectedJibberTypescript = "export type TJibber = (niptip: TNiptip) => Promise<IRipslip>;";
 const expectedTypescript = [
   expectedNipTipTypescript,
   expectedRipSlipTypescript,
@@ -102,7 +102,7 @@ describe("MethodTypings", () => {
 
       expect(methodTypings.getMethodTypings(testOpenRPCDocument.methods[0], "typescript")).toEqual({
         methodAliasName: "TJibber",
-        methodTyping: "export type TJibber = (niptip: TNiptip): Promise<IRipslip>;",
+        methodTyping: "export type TJibber = (niptip: TNiptip) => Promise<IRipslip>;",
         params: [
           {
             typeId: "jibber/0",
@@ -164,7 +164,7 @@ describe("MethodTypings", () => {
       await methodTypings.generateTypings();
 
       expect(methodTypings.getMethodAliasTyping(testOpenRPCDocument.methods[0], "typescript"))
-        .toBe("export type TJibber = (niptip: TNiptip): Promise<IRipslip>;");
+        .toBe("export type TJibber = (niptip: TNiptip) => Promise<IRipslip>;");
 
       expect(methodTypings.getMethodAliasTyping(testOpenRPCDocument.methods[0], "rust"))
         .toBe("pub fn jibber(&mut self, niptip: Niptip) -> RpcRequest<Ripslip>;");
@@ -177,7 +177,7 @@ describe("MethodTypings", () => {
       await methodTypings.generateTypings();
 
       expect(methodTypings.getMethodAliasTyping(copytestOpenRPCDocument.methods[0], "typescript"))
-        .toBe("export type TJibber = (): Promise<IRipslip>;");
+        .toBe("export type TJibber = () => Promise<IRipslip>;");
 
       expect(methodTypings.getMethodAliasTyping(copytestOpenRPCDocument.methods[0], "rust"))
         .toBe("pub fn jibber(&mut self) -> RpcRequest<Ripslip>;");
