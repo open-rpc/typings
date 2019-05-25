@@ -33,14 +33,15 @@ const testOpenRPCDocument = {
 
 const expectedNipTipTypescript = "export type TNiptip = number;";
 const expectedRipSlipTypescript = [
+  "export type TNiptip = number;",
   "export interface IRipslip {",
   "  reepadoop?: number;",
   "  [k: string]: any;",
   "}",
+  "",
 ].join("\n");
 const expectedJibberTypescript = "export type TJibber = (niptip: TNiptip) => Promise<IRipslip>;";
 const expectedTypescript = [
-  expectedNipTipTypescript,
   expectedRipSlipTypescript,
   expectedJibberTypescript,
 ].join("\n");
@@ -107,7 +108,7 @@ describe("MethodTypings", () => {
           {
             typeId: "jibber/0",
             typeName: "TNiptip",
-            typing: expectedNipTipTypescript,
+            typing: "",
           },
         ],
         result: {
