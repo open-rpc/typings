@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/open-rpc/typings/compare/1.1.3...1.1.4) (2019-05-27)
+
+
+### Bug Fixes
+
+* support oneOf ([b4f014e](https://github.com/open-rpc/typings/commit/b4f014e))
+
 ## [1.1.3](https://github.com/open-rpc/typings/compare/1.1.2...1.1.3) (2019-05-27)
 
 
