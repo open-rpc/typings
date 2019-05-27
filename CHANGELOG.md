@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/open-rpc/typings/compare/1.1.1...1.1.2) (2019-05-27)
+
+
+### Bug Fixes
+
+* move around stuff from rust code ([dc31a10](https://github.com/open-rpc/typings/commit/dc31a10))
+* typescript needs unique typenames ([799ac3c](https://github.com/open-rpc/typings/commit/799ac3c))
+
 ## [1.1.1](https://github.com/open-rpc/typings/compare/1.1.0...1.1.1) (2019-05-25)
 
 
