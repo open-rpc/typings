@@ -18,7 +18,7 @@ const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
 
   const interfaceTypes = ["object", undefined];
   let prefix = "T";
-  if (interfaceTypes.includes(schema.type)) {
+  if (interfaceTypes.includes(schema.type) || schema.anyOf !== undefined) {
     prefix = "I";
   }
 
