@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/open-rpc/typings/compare/1.1.2...1.1.3) (2019-05-27)
+
+
+### Bug Fixes
+
+* enums are made as interfaces ([eeffa76](https://github.com/open-rpc/typings/commit/eeffa76))
+
 ## [1.1.2](https://github.com/open-rpc/typings/compare/1.1.1...1.1.2) (2019-05-27)
 
 
