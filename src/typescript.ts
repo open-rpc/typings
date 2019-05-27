@@ -27,62 +27,88 @@ const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
   return `${prefix}${contentDescriptorName}`;
 };
 
-const getTypingForContentDescriptor = async (
-  method: MethodObject,
-  isParam: boolean,
-  contentDescriptor: ContentDescriptorObject,
-): Promise<IContentDescriptorTyping> => {
-  const generateId = isParam ? generateMethodParamId : generateMethodResultId;
+const getTypingForContentDescriptor = (contentDescriptor: any): Promise<string> => {
+  const generateId = contentDescriptor.isParam ? generateMethodParamId : generateMethodResultId;
   let typeName;
   typeName = getTypeName(contentDescriptor);
 
-  const rawTyping = await compile(
+  return compile(
     contentDescriptor.schema,
     typeName,
     { bannerComment: "", declareExternallyReferenced: false },
   );
-
-  const typing = {
-    typeId: generateId(method, contentDescriptor),
-    typeName,
-    typing: rawTyping.trim(),
-  };
-
-  return typing;
 };
 
 const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
-  const methodTypingsPromises = _.map(openrpcSchema.methods, async (method) => {
-    const mparams = method.params as ContentDescriptorObject[];
-    const mresult = method.result;
+  const { methods } = openrpcSchema;
 
-    const typingsForParams = await Promise.all(
-      _.chain(mparams)
-        .map((param) => getTypingForContentDescriptor(method, true, param))
-        .value() as Array<Promise<IContentDescriptorTyping>>,
-    );
+  const allCD = [
+    ..._.chain(methods).map("params").flatten().map((cd) => ({ ...cd, isParam: true })).value() as [],
+    ..._.map(methods, "result"),
+  ];
 
-    const typingsForResult = await getTypingForContentDescriptor(
-      method,
-      false,
-      mresult as ContentDescriptorObject,
-    );
-
-    return [...typingsForParams, typingsForResult];
+  const cdWithNullFix = _.map(allCD, (cd: any) => {
+    if (cd.schema.oneOf) { // this should be recursive
+      cd.schema.oneOf = _.filter(cd.schema.oneOf, (subschema: any) => subschema.type !== "null");
+    }
+    return cd;
   });
 
-  const methodTypings: IContentDescriptorTyping[][] = await Promise.all(methodTypingsPromises);
+  const fixedDupesAllCD = _.map(
+    cdWithNullFix,
+    (cd: ContentDescriptorObject, index, collection): ContentDescriptorObject => {
+      let hits = 0;
+      const nameWithoutChange = cd.name;
+      const stringifiedCd = JSON.stringify(cd.schema);
 
-  const finalTypings = _.chain(methodTypings)
-    .flatten()
-    .map((typing: IContentDescriptorTyping, i) => {
-      typing.typing = typing.typing.replace(/extern crate serde_json;/g, "");
-      return typing;
+      _.each(
+        collection as ContentDescriptorObject[],
+        (cdToCheck) => {
+          if (cdToCheck.name === nameWithoutChange) {
+            if (JSON.stringify(cdToCheck.schema) !== stringifiedCd) {
+              hits += 1;
+            }
+          }
+        });
+
+      if (hits > 1) {
+        cd.name = cd.name + (hits - 1);
+      }
+
+      return cd;
+    });
+
+  const dedupedContentDescriptors = _.uniqBy(fixedDupesAllCD, "name");
+
+  const typingsForContentDescriptors = await Promise.all(
+    _.map(dedupedContentDescriptors, getTypingForContentDescriptor),
+  );
+
+  const typings = _.chain(methods)
+    .map((method) => {
+      const r = [];
+      const result = method.result as ContentDescriptorObject;
+      const params = method.params as ContentDescriptorObject[];
+      return [
+        {
+          typeId: generateMethodResultId(method, result),
+          typeName: getTypeName(result),
+          typing: "",
+        },
+        ..._.map(params, (param) => ({
+          typeId: generateMethodParamId(method, param),
+          typeName: getTypeName(param),
+          typing: "",
+        })),
+      ];
     })
+    .flatten()
     .keyBy("typeId")
     .value();
 
-  return finalTypings;
+  typings[Object.keys(typings)[0]].typing = typingsForContentDescriptors.join("");
+
+  return typings;
 };
 
 const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
