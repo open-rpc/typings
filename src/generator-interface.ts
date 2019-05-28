@@ -1,21 +1,13 @@
-import { OpenRPC, MethodObject } from "@open-rpc/meta-schema";
+import { OpenRPC, MethodObject, Schema } from "@open-rpc/meta-schema";
 
-export interface IContentDescriptorTyping {
-  typeId: string;
-  typeName: string;
-  typing: string;
-}
+export type GetSchemaTypings = (openrpcSchema: OpenRPC) => Promise<string>;
+export type GetMethodTypings = (openrpcSchema: OpenRPC) => string;
+export type GetMethodAliasName = (method: MethodObject) => string;
+export type GetSchemaTypeName = (schema: Schema) => string;
 
-export interface IMethodTypingsMap {
-  [k: string]: IContentDescriptorTyping;
-}
-
-export type TGetMethodTypingsMap = (openrpcSchema: OpenRPC) => Promise<IMethodTypingsMap>;
-export type TGetMethodTypeAlias = (method: MethodObject, typeDefs: IMethodTypingsMap) => string;
-export type TGetMethodAliasName = (method: MethodObject) => string;
-
-export interface IGenerator {
-  getMethodTypingsMap: TGetMethodTypingsMap;
-  getMethodTypeAlias: TGetMethodTypeAlias;
-  getMethodAliasName: TGetMethodAliasName;
+export interface Generator {
+  getSchemaTypings: GetSchemaTypings;
+  getMethodTypings: GetMethodTypings;
+  getMethodAliasName: GetMethodAliasName;
+  getSchemaTypeName: GetSchemaTypeName;
 }

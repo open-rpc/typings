@@ -1,96 +1,152 @@
 import typescript from "./typescript";
 import rust from "./rust";
-import { IGenerator, IContentDescriptorTyping, IMethodTypingsMap } from "./generator-interface";
-import { OpenRPC, MethodObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { Generator } from "./generator-interface";
+import { OpenRPC, MethodObject, ContentDescriptorObject, Schema } from "@open-rpc/meta-schema";
 import _, { values, filter, partition, zipObject } from "lodash";
+import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
+import { createHash } from "crypto";
 
-interface IGenerators {
-  typescript: IGenerator;
-  rust: IGenerator;
-  [key: string]: IGenerator;
+interface Generators {
+  typescript: Generator;
+  rust: Generator;
+  [key: string]: Generator;
 }
 
-type TLanguages = "typescript" | "rust";
-const languages: TLanguages[] = ["typescript", "rust"];
+export enum OpenRPCTypingsSupportedLanguages { "typescript", "rust" }
 
-const generators: IGenerators = {
+const generators: Generators = {
   rust,
   typescript,
 };
 
-interface ITypingMapByLanguage {
-  [language: string]: IMethodTypingsMap;
+interface OpenRPCTypings {
+  schemas: string;
+  methods: string;
 }
 
-export interface IMethodTypings {
-  methodAliasName: string;
-  methodTyping: string;
-  params: IContentDescriptorTyping[];
-  result: IContentDescriptorTyping;
+export interface OpenRPCTypingsByLanguage {
+  [language: string]: OpenRPCTypings;
 }
 
-export interface IToStringOptions {
+export interface OpenRPCMethodTypingNames {
+  method: string;
+  params: string[];
+  result: string;
+}
+
+export interface OpenRPCTypingsToStringOptions {
   includeMethodAliasTypings?: boolean;
-  includeContentDescriptorTypings?: boolean;
+  includeSchemaTypings?: boolean;
 }
+
+const getDefaultTitleForSchema = (schema: Schema): string => {
+  if (schema.title) { return schema.title; }
+  return createHash("sha1").update(JSON.stringify(schema)).digest("base64").slice(0, 8);
+};
+
+const ensureSchemaTitles = (s: Schema) => {
+  const newS: Schema = { ...s };
+
+  if (s.anyOf) { newS.anyOf = s.anyOf.map(ensureSchemaTitles); }
+  if (s.allOf) { newS.allOf = s.allOf.map(ensureSchemaTitles); }
+  if (s.oneOf) { newS.oneOf = s.oneOf.map(ensureSchemaTitles); }
+  if (s.items) { newS.items = s.items.map(ensureSchemaTitles); }
+  if (s.properties) { newS.properties = _.mapValues(s.properties, ensureSchemaTitles); }
+
+  if (s.title === undefined) {
+    newS.title = getDefaultTitleForSchema(s);
+  }
+
+  return newS;
+};
 
 /**
  * A class to handle all the tasks relating to types for the OpenRPC Document.
  */
 export default class MethodTypings {
-  private typingMapByLanguage: ITypingMapByLanguage = {};
-  private toStringOptionsDefaults: IToStringOptions = {
-    includeContentDescriptorTypings: true,
+  private typingsByLanguage: OpenRPCTypingsByLanguage = {};
+  private toStringOptionsDefaults: OpenRPCTypingsToStringOptions = {
     includeMethodAliasTypings: true,
+    includeSchemaTypings: true,
   };
+  private openrpcDocument: OpenRPC;
 
-  constructor(private openrpcDocument: OpenRPC) { }
+  constructor(openrpcDocument: OpenRPC) {
+    const methodsWithSchemaTitles = openrpcDocument.methods.map((method: any) => ({
+      ...method as MethodObject,
+      params: method.params.map((param: ContentDescriptorObject) => ({
+        ...param,
+        schema: ensureSchemaTitles(param.schema),
+      })),
+      result: {
+        ...method.result,
+        schema: ensureSchemaTitles(method.result.schema),
+      },
+    })) as MethodObject[];
+
+    this.openrpcDocument = {
+      ...openrpcDocument,
+      methods: methodsWithSchemaTitles,
+    };
+  }
 
   /**
    * A method to generate all the typings. This does most of the heavy lifting, and is quite slow.
    * You should call this method first.
    */
   public async generateTypings() {
-    await Promise.all(languages.map(async (language) => {
-      this.typingMapByLanguage[language] = await generators[language]
-        .getMethodTypingsMap(this.openrpcDocument);
+    await Promise.all(["rust", "typescript"].map(async (language) => {
+      const gen = generators[language];
+      const schemas = await gen.getSchemaTypings(this.openrpcDocument);
+      const methods = gen.getMethodTypings(this.openrpcDocument);
+      this.typingsByLanguage[language] = { schemas, methods };
     }));
 
     return true;
   }
 
+  public getTypingsByLanguage(language: OpenRPCTypingsSupportedLanguages) {
+    this.guard();
+    const lang = OpenRPCTypingsSupportedLanguages[language];
+    return this.typingsByLanguage[lang];
+  }
+
   /**
-   * A method that returns all the method type aliases as a string, useful to directly inserting into code.
+   * A method that returns all the typings for the schemas in an [[OpenRPC]] Document.
    *
    * @param language The langauge you want the signature to be in.
    *
    * @returns A string containing all the typings.
    *
    */
-  public getAllContentDescriptorTypings(language: TLanguages): string {
-    this.guard();
-
-    return this.typingsToString(_.values(this.typingMapByLanguage[language]));
+  public getSchemaTypings(language: OpenRPCTypingsSupportedLanguages): string {
+    return this.getTypingsByLanguage(language).schemas;
   }
 
   /**
-   * A method that returns all the types as a string, useful to directly inserting into code.
+   * A method that returns all the method signature type aliases, called Method Typings,
+   * for the [[@open-rpc/meta-schema#MethodObject]] in an [[@open-rpc/meta-schema#MethodObject]] Document.
    *
-   * @param langeuage The langauge you want the signature to be in.
+   * @param language The langauge you want the signature to be in.
    *
    * @returns A string containing all the typings.
    *
    */
-  public getAllMethodAliasTypings(language: TLanguages): string {
-    this.guard();
+  public getMethodTypings(language: OpenRPCTypingsSupportedLanguages): string {
+    return this.getTypingsByLanguage(language).methods;
+  }
 
-    const generatorForLang = generators[language];
-    const typingsMapForLang = this.typingMapByLanguage[language];
+  public getTypingNames(
+    language: OpenRPCTypingsSupportedLanguages,
+    method: MethodObject,
+  ): OpenRPCMethodTypingNames {
+    const gen = generators[language];
 
-    return _.chain(this.openrpcDocument.methods)
-      .map((method) => generatorForLang.getMethodTypeAlias(method, typingsMapForLang))
-      .join("\n")
-      .value();
+    return {
+      method: gen.getMethodAliasName(method),
+      params: method.params.map(gen.getSchemaTypeName),
+      result: gen.getSchemaTypeName(method.result),
+    };
   }
 
   /**
@@ -101,90 +157,31 @@ export default class MethodTypings {
    *
    * @returns a multi-line string containing the types in the language specified.
    */
-  public toString(language: TLanguages, options: IToStringOptions = this.toStringOptionsDefaults): string {
+  public toString(
+    language: OpenRPCTypingsSupportedLanguages,
+    options: OpenRPCTypingsToStringOptions = this.toStringOptionsDefaults,
+  ): string {
     this.guard();
 
     const typings = [];
-    if (options.includeContentDescriptorTypings) {
-      typings.push(this.getAllContentDescriptorTypings(language));
+    if (options.includeSchemaTypings) {
+      typings.push(this.getSchemaTypings(language));
     }
 
     if (options.includeMethodAliasTypings) {
-      typings.push(this.getAllMethodAliasTypings(language));
+      typings.push(this.getMethodTypings(language));
     }
 
     return typings.join("\n");
   }
 
-  /**
-   * A method that returns a type alias for a given method
-   *
-   * @param method The OpenRPC Method that you want a signature for.
-   * @param language The langauge you want the signature to be in.
-   *
-   * @returns A string containing a type alias for a function signature of
-   * the same signature as the passed in method.
-   *
-   * @example
-   * ```typescript
-   *
-   * const openrpcTypings = new OpenRPCTypings(examples.simpleMath);
-   * const additionMethod = examples.simpleMath.examples
-   *   .find((method) => method.name === "addition");
-   * const additionFunctionTypeAlias = openrpcTypings.getMethodTypeAlias(additionMethod, "typescript");
-   * // "export TAddition = (a: number, b: number) => number"
-   * ```
-   *
-   */
-  public getMethodAliasTyping(method: MethodObject, language: TLanguages): string {
-    this.guard();
-
-    const sig = generators[language]
-      .getMethodTypeAlias(method, this.typingMapByLanguage[language]);
-
-    return sig;
-  }
-
-  /**
-   * Gives you all the [[IMethodTypings]] for a given method.
-   *
-   * @param method The method you need typing for.
-   * @param language The langauge you want the signature to be in.
-   *
-   * @returns the typings for the method.
-   *
-   */
-  public getMethodTypings(method: MethodObject, language: TLanguages): IMethodTypings {
-    this.guard();
-
-    const typingsMap = this.typingMapByLanguage[language];
-
-    const typings = values(typingsMap);
-    const typingsForMethod = filter(typings, ({ typeId }) => _.startsWith(typeId, method.name));
-    const paramsAndResult = partition(typingsForMethod, ({ typeId }) => typeId.includes("result"));
-    const methodTypings = zipObject(["result", "params"], paramsAndResult);
-
-    const generatorForLanguage = generators[language];
-
-    return {
-      methodAliasName: generatorForLanguage.getMethodAliasName(method),
-      methodTyping: generatorForLanguage.getMethodTypeAlias(method, typingsMap),
-      params: methodTypings.params,
-      result: methodTypings.result[0],
-    };
-  }
-
-  private typingsToString(typings: IContentDescriptorTyping[]): string {
-    const compacted = _.chain(typings)
-      .map("typing")
-      .compact()
-      .value() as string[];
-
-    return compacted.join("\n");
+  private getDefaultTitle(schema: Schema) {
+    if (schema.title) { return schema.title; }
+    return createHash("sha1").update(JSON.stringify(schema)).digest("base64").slice(0, 8);
   }
 
   private guard() {
-    if (Object.keys(this.typingMapByLanguage).length === 0) {
+    if (Object.keys(this.typingsByLanguage).length === 0) {
       throw new Error("typings have not yet been generated. Please run generateTypings first.");
     }
   }
