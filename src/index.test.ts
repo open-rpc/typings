@@ -35,11 +35,11 @@ const testOpenRPCDocument = {
 const expectedAnyTypeTypescript = "export type AnyJipperjobberType = Niptip | Ripslip;";
 const expectedNipTipTypescript = "export type Niptip = number;";
 const expectedSkeepadeepTypescript = "export type Skeepadeep = number;";
-const expectedReepadoopTypescript = "export type Yqdpe1HS = number;";
+const expectedReepadoopTypescript = "export type OneOfyqdpe1HS = number;";
 const expectedRipSlipTypescript = [
   "",
   "export interface Ripslip {",
-  "  reepadoop?: Yqdpe1HS;",
+  "  reepadoop?: OneOfyqdpe1HS;",
   "  skeepadeep?: Skeepadeep;",
   "  [k: string]: any;",
   "}",
@@ -94,6 +94,18 @@ describe("MethodTypings", () => {
     expect(new MethodTypings(testOpenRPCDocument)).toBeInstanceOf(MethodTypings);
   });
 
+  it("defaults any schemas who is missing a title", () => {
+    const copy = cloneDeep(testOpenRPCDocument);
+    copy.methods[0].params.push({
+      name: "flooby",
+      schema: { type: "string" },
+    });
+    const typings = new MethodTypings(copy);
+    expect(
+      typings.getTypingNames(OpenRPCTypingsSupportedLanguages.typescript, copy.methods[0]).params[1],
+    ).toBe("OneOfWxzVcTo3");
+  });
+
   it("can generate typings map", async () => {
     const methodTypings = new MethodTypings(testOpenRPCDocument);
 
@@ -102,6 +114,36 @@ describe("MethodTypings", () => {
     expect(methodTypings).toBeInstanceOf(MethodTypings);
   });
 
+  describe("getTypingNames", () => {
+    it("returns method name, param names and result names", () => {
+      const methodTypings = new MethodTypings(testOpenRPCDocument);
+      expect(
+        methodTypings.getTypingNames(
+          OpenRPCTypingsSupportedLanguages.typescript,
+          testOpenRPCDocument.methods[0],
+        ),
+      ).toEqual({
+        method: "Jibber",
+        params: ["Niptip"],
+        result: "Ripslip",
+      });
+    });
+
+    it("prefixes names with 'unknown' when they aren't recognized json schemas", () => {
+      const copy = cloneDeep(testOpenRPCDocument);
+      copy.methods[0].params.push({
+        name: "flooby",
+        schema: {
+          scooby: "not real",
+        },
+      });
+      const typings = new MethodTypings(copy);
+      expect(
+        typings.getTypingNames(OpenRPCTypingsSupportedLanguages.typescript, copy.methods[0]).params[1],
+      ).toBe("Unknownfl42CSW8");
+    });
+
+  });
   describe("getMethodTypings", () => {
 
     it("throws if types not generated yet", () => {
@@ -128,7 +170,17 @@ describe("MethodTypings", () => {
       expect(() => methodTypings.toString(OpenRPCTypingsSupportedLanguages.typescript)).toThrow();
     });
 
-    it("returns a string of typings where the typeNames are unique", async () => {
+    it("can optionally receive only method typings", async () => {
+      const methodTypings = new MethodTypings(testOpenRPCDocument);
+      await methodTypings.generateTypings();
+
+      expect(methodTypings.toString(OpenRPCTypingsSupportedLanguages.typescript, {
+        includeMethodAliasTypings: true,
+        includeSchemaTypings: false,
+      })).toBe(expectedJibberTypescript);
+    });
+
+    it("returns a string of typings for all languages", async () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       await methodTypings.generateTypings();
 
@@ -261,5 +313,131 @@ describe("MethodTypings", () => {
       "    ripslip: Option<bool>,",
       "}",
     ].join("\n"));
+  });
+
+  it("handles schemas with anyOf, oneOf and allOf", async () => {
+    const doc = {
+      info: {
+        title: "abc",
+        version: "3.2.1",
+      },
+      methods: [
+        {
+          name: "jobber",
+          params: [
+            {
+              name: "ripslip",
+              schema: {
+                anyOf: [
+                  {
+                    title: "bee",
+                    type: "string",
+                  },
+                  {
+                    title: "a",
+                    type: "string",
+                  },
+                  {
+                    title: "ceee",
+                    type: "string",
+                  },
+                ],
+              },
+            },
+            {
+              name: "biperbopper",
+              schema: {
+                oneOf: [
+                  {
+                    title: "x",
+                    type: "string",
+                  },
+                  {
+                    title: "y",
+                    type: "string",
+                  },
+                  {
+                    title: "z",
+                    type: "string",
+                  },
+                ],
+              },
+            },
+            {
+              name: "slippyslopper",
+              schema: {
+                allOf: [
+                  {
+                    properties: { baz: { title: "baz", type: "number" } },
+                    title: "withBaz",
+                    type: "object",
+                  },
+                  {
+                    properties: { bar: { title: "bar", type: "number" } },
+                    title: "withBar",
+                    type: "object",
+                  },
+                  {
+                    properties: { foo: { title: "foo", type: "number" } },
+                    title: "withFoo",
+                    type: "object",
+                  },
+                ],
+              },
+            },
+          ],
+          result: {
+            name: "froppledocks",
+            schema: {
+              oneOf: [
+                {
+                  format: "int64",
+                  title: "ray",
+                  type: "integer",
+                },
+                {
+                  items: [{ title: "may", format: "int64", type: "integer" }],
+                  title: "jay",
+                  type: "array",
+                },
+              ],
+            },
+          },
+        },
+      ],
+      openrpc: "1.0.0",
+    } as OpenRPC;
+
+    const methodTypings = new MethodTypings(doc);
+    await methodTypings.generateTypings();
+    expect(methodTypings.toString(OpenRPCTypingsSupportedLanguages.typescript))
+      .toBe(`export type AnyAbcType = AnyOfZH8Kb7HB | OneOfUObjGdU | AllOfhguKC4QU | OneOf1RQN2JlD;
+export type AnyOfZH8Kb7HB = Bee;
+export type Bee = string;
+export type OneOfUObjGdU = X;
+export type X = string;
+export type AllOfhguKC4QU = WithBaz & WithBar & WithFoo;
+export type Baz = number;
+export type Bar = number;
+export type Foo = number;
+export type OneOf1RQN2JlD = Ray | Jay;
+export type Ray = number;
+export type Jay = [May];
+export type May = number;
+
+export interface WithBaz {
+  baz?: Baz;
+  [k: string]: any;
+}
+export interface WithBar {
+  bar?: Bar;
+  [k: string]: any;
+}
+export interface WithFoo {
+  foo?: Foo;
+  [k: string]: any;
+}
+
+export type Jobber = (ripslip: AnyOfZH8Kb7HB, biperbopper: OneOfUObjGdU, slippyslopper: AllOfhguKC4QU) => Promise<OneOf1RQN2JlD>;`); //tslint:disable-line
   });
 });

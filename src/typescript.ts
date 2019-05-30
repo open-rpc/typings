@@ -14,22 +14,6 @@ import { ContentDescriptorObject, MethodObject, OpenRPC, Schema } from "@open-rp
 /**
  * Helper methods
  */
-const createRefs = (schema: Schema): Schema => {
-  const reffedSchema = { ...schema };
-
-  ["anyOf", "oneOf", "allOf", "items"].forEach((replacable) => {
-    if (reffedSchema[replacable]) {
-      reffedSchema[replacable] = reffedSchema[replacable].map(schemaToRef);
-    }
-  });
-
-  if (reffedSchema.properties) {
-    reffedSchema.properties = _.mapValues(schemaToRef);
-  }
-
-  return reffedSchema;
-};
-
 const collectAndRefSchemas = (schema: Schema): Schema[] => {
   const newS: Schema = { ...schema };
   const subS = [];
@@ -81,14 +65,14 @@ const extendMegaSchema = (ms: Schema, s: Schema): Schema => {
   const schemas = collectAndRefSchemas(s);
 
   return {
-    anyOf: [
-      ...ms.anyOf,
-      schemaToRef(s),
-    ],
     definitions: {
       ...ms.definitions,
       ..._.keyBy(schemas, getSchemaTypeName),
     },
+    oneOf: [
+      ...ms.oneOf,
+      schemaToRef(s),
+    ],
   } as Schema;
 };
 
@@ -110,9 +94,8 @@ export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument: OpenRP
     .concat(_.map(methods, "result"))
     .map("schema")
     .uniqBy(JSON.stringify)
-    .reduce(extendMegaSchema, { definitions: {}, anyOf: [] } as Schema)
+    .reduce(extendMegaSchema, { definitions: {}, oneOf: [] } as Schema)
     .value();
-
   return await compile(
     megaSchema,
     `Any${getSchemaTypeName(openrpcDocument.info)}Type`,

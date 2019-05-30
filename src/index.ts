@@ -40,8 +40,10 @@ export interface OpenRPCTypingsToStringOptions {
 }
 
 const getDefaultTitleForSchema = (schema: Schema): string => {
-  if (schema.title) { return schema.title; }
-  return createHash("sha1").update(JSON.stringify(schema)).digest("base64").slice(0, 8);
+  const hash = createHash("sha1").update(JSON.stringify(schema)).digest("base64").slice(0, 8);
+  const { oneOf, anyOf, allOf } = schema;
+  const prefix = schema.type || oneOf ? "oneOf" : anyOf ? "anyOf" : allOf ? "allOf" : "unknown";
+  return `${prefix}${hash}`;
 };
 
 const ensureSchemaTitles = (s: Schema) => {
@@ -140,12 +142,17 @@ export default class MethodTypings {
     language: OpenRPCTypingsSupportedLanguages,
     method: MethodObject,
   ): OpenRPCMethodTypingNames {
-    const gen = generators[language];
+    const lang = OpenRPCTypingsSupportedLanguages[language];
+    const gen = generators[lang];
 
+    const defaultedMethod = _.find(this.openrpcDocument.methods, { name: method.name }) as MethodObject;
+
+    const methodResult = defaultedMethod.result as ContentDescriptorObject;
+    const methodParams = defaultedMethod.params as ContentDescriptorObject[];
     return {
-      method: gen.getMethodAliasName(method),
-      params: method.params.map(gen.getSchemaTypeName),
-      result: gen.getSchemaTypeName(method.result),
+      method: gen.getMethodAliasName(defaultedMethod),
+      params: methodParams.map(({ schema }) => gen.getSchemaTypeName(schema)),
+      result: gen.getSchemaTypeName(methodResult.schema),
     };
   }
 
@@ -173,11 +180,6 @@ export default class MethodTypings {
     }
 
     return typings.join("\n");
-  }
-
-  private getDefaultTitle(schema: Schema) {
-    if (schema.title) { return schema.title; }
-    return createHash("sha1").update(JSON.stringify(schema)).digest("base64").slice(0, 8);
   }
 
   private guard() {
