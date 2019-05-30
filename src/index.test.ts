@@ -32,22 +32,18 @@ const testOpenRPCDocument = {
   openrpc: "1.0.0",
 } as OpenRPC;
 
-const expectedAnyTypeTypescript = "export type AnyJipperjobberType = Niptip | Ripslip;";
 const expectedNipTipTypescript = "export type Niptip = number;";
 const expectedSkeepadeepTypescript = "export type Skeepadeep = number;";
-const expectedReepadoopTypescript = "export type OneOfyqdpe1HS = number;";
+const expectedReepadoopTypescript = "export type NumberYqdpe1HS = number;";
 const expectedRipSlipTypescript = [
-  "",
   "export interface Ripslip {",
-  "  reepadoop?: OneOfyqdpe1HS;",
+  "  reepadoop?: NumberYqdpe1HS;",
   "  skeepadeep?: Skeepadeep;",
   "  [k: string]: any;",
   "}",
-  "",
 ].join("\n");
 const expectedJibberTypescript = "export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;";
 const expectedTypescript = [
-  expectedAnyTypeTypescript,
   expectedNipTipTypescript,
   expectedReepadoopTypescript,
   expectedSkeepadeepTypescript,
@@ -102,8 +98,8 @@ describe("MethodTypings", () => {
     });
     const typings = new MethodTypings(copy);
     expect(
-      typings.getTypingNames(OpenRPCTypingsSupportedLanguages.typescript, copy.methods[0]).params[1],
-    ).toBe("OneOfWxzVcTo3");
+      typings.getTypingNames("typescript", copy.methods[0]).params[1],
+    ).toBe("StringWxzVcTo3");
   });
 
   it("can generate typings map", async () => {
@@ -119,7 +115,7 @@ describe("MethodTypings", () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       expect(
         methodTypings.getTypingNames(
-          OpenRPCTypingsSupportedLanguages.typescript,
+          "typescript",
           testOpenRPCDocument.methods[0],
         ),
       ).toEqual({
@@ -139,26 +135,27 @@ describe("MethodTypings", () => {
       });
       const typings = new MethodTypings(copy);
       expect(
-        typings.getTypingNames(OpenRPCTypingsSupportedLanguages.typescript, copy.methods[0]).params[1],
-      ).toBe("Unknownfl42CSW8");
+        typings.getTypingNames("typescript", copy.methods[0]).params[1],
+      ).toBe("UnknownFl42CSW8");
     });
 
   });
+
   describe("getMethodTypings", () => {
 
     it("throws if types not generated yet", () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
-      expect(() => methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.typescript)).toThrow();
+      expect(() => methodTypings.getMethodTypings("typescript")).toThrow();
     });
 
     it("returns a MethodTypings object for a method", async () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       await methodTypings.generateTypings();
 
-      expect(methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.typescript))
+      expect(methodTypings.getMethodTypings("typescript"))
         .toEqual("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
 
-      expect(methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.rust))
+      expect(methodTypings.getMethodTypings("rust"))
         .toEqual("pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;");
     });
   });
@@ -167,14 +164,14 @@ describe("MethodTypings", () => {
 
     it("throws if types not generated yet", () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
-      expect(() => methodTypings.toString(OpenRPCTypingsSupportedLanguages.typescript)).toThrow();
+      expect(() => methodTypings.toString("typescript")).toThrow();
     });
 
     it("can optionally receive only method typings", async () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       await methodTypings.generateTypings();
 
-      expect(methodTypings.toString(OpenRPCTypingsSupportedLanguages.typescript, {
+      expect(methodTypings.toString("typescript", {
         includeMethodAliasTypings: true,
         includeSchemaTypings: false,
       })).toBe(expectedJibberTypescript);
@@ -184,8 +181,8 @@ describe("MethodTypings", () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       await methodTypings.generateTypings();
 
-      expect(methodTypings.toString(OpenRPCTypingsSupportedLanguages.typescript)).toBe(expectedTypescript);
-      expect(methodTypings.toString(OpenRPCTypingsSupportedLanguages.rust)).toBe(expectedRust);
+      expect(methodTypings.toString("typescript")).toBe(expectedTypescript);
+      expect(methodTypings.toString("rust")).toBe(expectedRust);
     });
   });
 
@@ -193,17 +190,17 @@ describe("MethodTypings", () => {
 
     it("throws if types not generated yet", async () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
-      expect(() => methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.typescript)).toThrow();
+      expect(() => methodTypings.getMethodTypings("typescript")).toThrow();
     });
 
     it("returns the function signature for a method", async () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       await methodTypings.generateTypings();
 
-      expect(methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.typescript))
+      expect(methodTypings.getMethodTypings("typescript"))
         .toBe("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
 
-      expect(methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.rust))
+      expect(methodTypings.getMethodTypings("rust"))
         .toBe("pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;");
     });
 
@@ -213,10 +210,10 @@ describe("MethodTypings", () => {
       const methodTypings = new MethodTypings(copytestOpenRPCDocument);
       await methodTypings.generateTypings();
 
-      expect(methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.typescript))
+      expect(methodTypings.getMethodTypings("typescript"))
         .toBe("export type Jibber = () => Promise<Ripslip>;");
 
-      expect(methodTypings.getMethodTypings(OpenRPCTypingsSupportedLanguages.rust))
+      expect(methodTypings.getMethodTypings("rust"))
         .toBe("pub fn jibber(&mut self) -> RpcRequest<JibberRipslip>;");
     });
   });
@@ -243,8 +240,8 @@ describe("MethodTypings", () => {
             schema: {
               oneOf: [
                 {
-                  format: "int64",
-                  type: "integer",
+                  items: { type: "string" },
+                  type: "array",
                 },
                 {
                   items: [{ format: "int64", type: "integer" }],
@@ -293,18 +290,19 @@ describe("MethodTypings", () => {
     await methodTypings.generateTypings();
     expect(
       methodTypings.toString(
-        OpenRPCTypingsSupportedLanguages.rust,
+        "rust",
         { includeSchemaTypings: true, includeMethodAliasTypings: false },
       ),
     ).toBe([
       "pub type Ripslip2 = String;",
+      "pub type Ripslip = Vec<RipslipElement>;",
       "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
       "#[cfg_attr(test, derive(Random))]",
       "#[serde(untagged)]",
-      "pub enum Ripslip {",
+      "pub enum RipslipElement {",
       "    Integer(i64),",
       "",
-      "    IntegerArray(Vec<i64>),",
+      "    String(String),",
       "}",
       "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
       "#[cfg_attr(test, derive(Random))]",
@@ -326,12 +324,19 @@ describe("MethodTypings", () => {
           name: "jobber",
           params: [
             {
+              name: "ripper",
+              schema: {
+                type: "string",
+              },
+            },
+            {
               name: "ripslip",
               schema: {
                 anyOf: [
                   {
+                    description: "its a b.",
                     title: "bee",
-                    type: "string",
+                    type: "number",
                   },
                   {
                     title: "a",
@@ -339,7 +344,7 @@ describe("MethodTypings", () => {
                   },
                   {
                     title: "ceee",
-                    type: "string",
+                    type: "boolean",
                   },
                 ],
               },
@@ -350,7 +355,7 @@ describe("MethodTypings", () => {
                 oneOf: [
                   {
                     title: "x",
-                    type: "string",
+                    type: "number",
                   },
                   {
                     title: "y",
@@ -358,7 +363,7 @@ describe("MethodTypings", () => {
                   },
                   {
                     title: "z",
-                    type: "string",
+                    type: "boolean",
                   },
                 ],
               },
@@ -389,18 +394,7 @@ describe("MethodTypings", () => {
           result: {
             name: "froppledocks",
             schema: {
-              oneOf: [
-                {
-                  format: "int64",
-                  title: "ray",
-                  type: "integer",
-                },
-                {
-                  items: [{ title: "may", format: "int64", type: "integer" }],
-                  title: "jay",
-                  type: "array",
-                },
-              ],
+              type: "string",
             },
           },
         },
@@ -410,34 +404,35 @@ describe("MethodTypings", () => {
 
     const methodTypings = new MethodTypings(doc);
     await methodTypings.generateTypings();
-    expect(methodTypings.toString(OpenRPCTypingsSupportedLanguages.typescript))
-      .toBe(`export type AnyAbcType = AnyOfZH8Kb7HB | OneOfUObjGdU | AllOfhguKC4QU | OneOf1RQN2JlD;
-export type AnyOfZH8Kb7HB = Bee;
-export type Bee = string;
-export type OneOfUObjGdU = X;
-export type X = string;
-export type AllOfhguKC4QU = WithBaz & WithBar & WithFoo;
+    expect(methodTypings.toString("typescript"))
+      .toBe(`export type StringWxzVcTo3 = string;
+/**
+ * its a b.
+ */
+export type Bee = number;
+export type A = string;
+export type Ceee = boolean;
+export type AnyOfBWswD897 = Bee | A | Ceee;
+export type X = number;
+export type Y = string;
+export type Z = boolean;
+export type OneOfDgZSW92J = X | Y | Z;
 export type Baz = number;
-export type Bar = number;
-export type Foo = number;
-export type OneOf1RQN2JlD = Ray | Jay;
-export type Ray = number;
-export type Jay = [May];
-export type May = number;
-
 export interface WithBaz {
   baz?: Baz;
   [k: string]: any;
 }
+export type Bar = number;
 export interface WithBar {
   bar?: Bar;
   [k: string]: any;
 }
+export type Foo = number;
 export interface WithFoo {
   foo?: Foo;
   [k: string]: any;
 }
-
-export type Jobber = (ripslip: AnyOfZH8Kb7HB, biperbopper: OneOfUObjGdU, slippyslopper: AllOfhguKC4QU) => Promise<OneOf1RQN2JlD>;`); //tslint:disable-line
+export type AllOfHguKC4QU = WithBaz & WithBar & WithFoo;
+export type Jobber = (ripper: StringWxzVcTo3, ripslip: AnyOfBWswD897, biperbopper: OneOfDgZSW92J, slippyslopper: AllOfHguKC4QU) => Promise<StringWxzVcTo3>;`); //tslint:disable-line
   });
 });
