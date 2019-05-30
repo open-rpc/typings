@@ -1,9 +1,9 @@
 import {
-  IGenerator,
-  TGetMethodTypingsMap,
-  IContentDescriptorTyping,
-  IMethodTypingsMap,
-  TGetMethodTypeAlias,
+  Generator,
+  GetMethodTypings,
+  GetSchemaTypings,
+  GetMethodAliasName,
+  GetSchemaTypeName,
 } from "./generator-interface";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
@@ -11,20 +11,15 @@ import { quicktype, SchemaTypeSource, TypeSource } from "quicktype";
 import { RegexLiteral } from "@babel/types";
 
 import { inspect } from "util"; // for debugging
-import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject, OpenRPC } from "@open-rpc/meta-schema";
 import _ from "lodash";
-
-const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
-  return _.chain(contentDescriptor.name).camelCase().upperFirst().value();
-};
-
-const getMethodAliasName = (method: MethodObject): string => getTypeName({ name: method.name, schema: {} });
+import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 
 const getQuickTypeSources = (contentDescriptors: ContentDescriptorObject[]): SchemaTypeSource[] => {
   return _.chain(contentDescriptors)
     .map((contentDescriptor) => ({
       kind: "schema",
-      name: getTypeName(contentDescriptor),
+      name: getSchemaTypeName(contentDescriptor),
       schema: JSON.stringify(contentDescriptor.schema),
     } as SchemaTypeSource))
     .value() as SchemaTypeSource[];
@@ -76,11 +71,11 @@ const handleEachContentDescriptor = async (contentDescriptor: ContentDescriptorO
     .value();
 };
 
-interface ITypeRegexes {
+interface TypeRegexes {
   [key: string]: RegExp;
 }
 
-const typeRegexes: ITypeRegexes = {
+const typeRegexes: TypeRegexes = {
   alias: /pub type (.*) = (.*)\;/,
   complex: /pub (struct|enum) (.*) {/,
   decleration: /use (.*)\;/,
@@ -88,7 +83,7 @@ const typeRegexes: ITypeRegexes = {
   struct: /pub struct (.*) {/,
 };
 
-const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
+const getSchemaTypings: GetSchemaTypings = async (openrpcSchema) => {
   const { methods } = openrpcSchema;
 
   const allCD = [
@@ -161,7 +156,7 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
     return { typeName, typing: typing.join("\n"), typeId: "todo", order: "complex" };
   });
 
-  const apt = _.chain([...at, ...etst])
+  return _.chain([...at, ...etst])
     .groupBy("typeName")
     .values()
     .map((typingsWithSameName) => {
@@ -179,55 +174,49 @@ const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
     })
     .flatten()
     .uniqBy("typeName")
-    .value() as [];
-
-  const typings = _.chain(methods)
-    .map((method) => {
-      const r = [];
-      const result = method.result as ContentDescriptorObject;
-      const params = method.params as ContentDescriptorObject[];
-      return [
-        {
-          typeId: generateMethodResultId(method, result),
-          typeName: getTypeName(result),
-          typing: "",
-        },
-        ..._.map(params, (param) => ({
-          typeId: generateMethodParamId(method, param),
-          typeName: getTypeName(param),
-          typing: "",
-        })),
-      ];
-    })
-    .flatten()
-    .keyBy("typeId")
+    .map("typing")
+    .unshift(...useDeclerationTypes)
+    .join("\n")
+    .trim()
     .value();
-
-  typings[Object.keys(typings)[0]].typing = useDeclerationTypes.join("\n")
-    .concat(_.map(apt, "typing").join("\n").trim());
-  return typings;
 };
 
-const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
+const getMethodTyping = (method: MethodObject) => {
   const mResult = method.result as ContentDescriptorObject;
-  const result = `RpcRequest<${typeDefs[generateMethodResultId(method, mResult)].typeName}>`;
+  const result = `RpcRequest<${getSchemaTypeName(mResult)}>`;
 
-  if (method.params.length === 0) {
-    return `pub fn ${method.name}(&mut self) -> ${result};`;
-  }
+  const methodAliasName = getMethodAliasName(method);
 
   const params = _.map(
     method.params as ContentDescriptorObject[],
-    (param) => `${param.name}: ${typeDefs[generateMethodParamId(method, param)].typeName}`,
+    (param) => `${param.name}: ${getSchemaTypeName(param)}`,
   ).join(", ");
 
-  return `pub fn ${method.name}(&mut self, ${params}) -> ${result};`;
+  const paramString = (params.length > 0) ? `, ${params}` : "";
+
+  return `pub fn ${method.name}(&mut self${paramString}) -> ${result};`;
 };
 
-const generator: IGenerator = {
+export const getMethodTypings: GetMethodTypings = (openrpcDocument: OpenRPC) => {
+  return _.chain(openrpcDocument.methods)
+    .map((method) => getMethodTyping(method))
+    .join("\n")
+    .value();
+};
+
+export const getSchemaTypeName: GetSchemaTypeName = (schema) => {
+  return toSafeString(schema.name);
+};
+
+export const getMethodAliasName: GetMethodAliasName = (method) => {
+  return toSafeString(method.name);
+};
+
+const generator: Generator = {
   getMethodAliasName,
-  getMethodTypeAlias,
-  getMethodTypingsMap,
+  getMethodTypings,
+  getSchemaTypeName,
+  getSchemaTypings,
 };
 
 export default generator;

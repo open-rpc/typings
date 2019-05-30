@@ -1,134 +1,134 @@
 import {
-  IGenerator,
-  TGetMethodTypingsMap,
-  IContentDescriptorTyping,
-  TGetMethodTypeAlias,
+  Generator,
+  GetSchemaTypings,
+  GetMethodTypings,
+  GetMethodAliasName,
+  GetSchemaTypeName,
 } from "./generator-interface";
 import _ from "lodash";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
-import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
+import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
+import { ContentDescriptorObject, MethodObject, OpenRPC, Schema } from "@open-rpc/meta-schema";
 
-const getMethodAliasName = ({ name }: MethodObject): string => {
-  return getTypeName({ name, schema: { type: "function" } });
-};
+/**
+ * Helper methods
+ */
+const collectAndRefSchemas = (schema: Schema): Schema[] => {
+  const newS: Schema = { ...schema };
+  const subS = [];
 
-const getTypeName = (contentDescriptor: ContentDescriptorObject): string => {
-  const { schema } = contentDescriptor;
-
-  const interfaceTypes = ["object", undefined];
-  let prefix = "T";
-  if (interfaceTypes.includes(schema.type) || schema.anyOf !== undefined || schema.oneOf !== undefined) {
-    prefix = "I";
+  if (schema.anyOf) {
+    subS.push(schema.anyOf);
+    newS.anyOf = schema.anyOf.map(schemaToRef);
   }
 
-  const contentDescriptorName = _.startCase(contentDescriptor.name).replace(/\s/g, "");
+  if (schema.allOf) {
+    subS.push(schema.allOf);
+    newS.allOf = schema.allOf.map(schemaToRef);
+  }
 
-  return `${prefix}${contentDescriptorName}`;
-};
+  if (schema.oneOf) {
+    subS.push(schema.oneOf);
+    newS.oneOf = schema.oneOf.map(schemaToRef);
+  }
 
-const getTypingForContentDescriptor = (contentDescriptor: any): Promise<string> => {
-  const generateId = contentDescriptor.isParam ? generateMethodParamId : generateMethodResultId;
-  let typeName;
-  typeName = getTypeName(contentDescriptor);
+  if (schema.items) {
+    subS.push(schema.items);
+    newS.items = schema.items.map(schemaToRef);
+  }
 
-  return compile(
-    contentDescriptor.schema,
-    typeName,
-    { bannerComment: "", declareExternallyReferenced: false },
-  );
-};
+  if (schema.properties) {
+    subS.push(Object.values(schema.properties));
+    newS.properties = _.mapValues(schema.properties, schemaToRef);
+  }
 
-const getMethodTypingsMap: TGetMethodTypingsMap = async (openrpcSchema) => {
-  const { methods } = openrpcSchema;
-
-  const allCD = [
-    ..._.chain(methods).map("params").flatten().map((cd) => ({ ...cd, isParam: true })).value() as [],
-    ..._.map(methods, "result"),
-  ];
-
-  const cdWithNullFix = _.map(allCD, (cd: any) => {
-    if (cd.schema.oneOf) { // this should be recursive
-      cd.schema.oneOf = _.filter(cd.schema.oneOf, (subschema: any) => subschema.type !== "null");
-    }
-    return cd;
-  });
-
-  const fixedDupesAllCD = _.map(
-    cdWithNullFix,
-    (cd: ContentDescriptorObject, index, collection): ContentDescriptorObject => {
-      let hits = 0;
-      const nameWithoutChange = cd.name;
-      const stringifiedCd = JSON.stringify(cd.schema);
-
-      _.each(
-        collection as ContentDescriptorObject[],
-        (cdToCheck) => {
-          if (cdToCheck.name === nameWithoutChange) {
-            if (JSON.stringify(cdToCheck.schema) !== stringifiedCd) {
-              hits += 1;
-            }
-          }
-        });
-
-      if (hits > 1) {
-        cd.name = cd.name + (hits - 1);
-      }
-
-      return cd;
-    });
-
-  const dedupedContentDescriptors = _.uniqBy(fixedDupesAllCD, "name");
-
-  const typingsForContentDescriptors = await Promise.all(
-    _.map(dedupedContentDescriptors, getTypingForContentDescriptor),
-  );
-
-  const typings = _.chain(methods)
-    .map((method) => {
-      const r = [];
-      const result = method.result as ContentDescriptorObject;
-      const params = method.params as ContentDescriptorObject[];
-      return [
-        {
-          typeId: generateMethodResultId(method, result),
-          typeName: getTypeName(result),
-          typing: "",
-        },
-        ..._.map(params, (param) => ({
-          typeId: generateMethodParamId(method, param),
-          typeName: getTypeName(param),
-          typing: "",
-        })),
-      ];
-    })
+  const subSchemas = _.chain(subS)
     .flatten()
-    .keyBy("typeId")
+    .compact()
     .value();
 
-  typings[Object.keys(typings)[0]].typing = typingsForContentDescriptors.join("");
-
-  return typings;
+  return _.chain(subSchemas)
+    .map(collectAndRefSchemas)
+    .flattenDeep()
+    .concat([newS])
+    .uniqBy("title")
+    .value();
 };
 
-const getMethodTypeAlias: TGetMethodTypeAlias = (method, typeDefs) => {
-  const result = method.result as ContentDescriptorObject;
-  const resultTypeName = `Promise<${typeDefs[generateMethodResultId(method, result)].typeName}>`;
+const schemaToRef = (s: Schema) => ({ $ref: `#/definitions/${getSchemaTypeName(s)}` });
+const extendMegaSchema = (ms: Schema, s: Schema): Schema => {
+  const schemaTypeName = getSchemaTypeName(s);
 
-  const functionTypeName = getMethodAliasName(method);
+  if (ms.definitions[schemaTypeName]) { return ms; }
+
+  const schemas = collectAndRefSchemas(s);
+
+  return {
+    definitions: {
+      ...ms.definitions,
+      ..._.keyBy(schemas, getSchemaTypeName),
+    },
+    oneOf: [
+      ...ms.oneOf,
+      schemaToRef(s),
+    ],
+  } as Schema;
+};
+
+/**
+ * Exported Methods
+ */
+export const getMethodAliasName: GetMethodAliasName = ({ name }: MethodObject): string => {
+  return getSchemaTypeName({ title: name, type: "function" });
+};
+
+export const getSchemaTypeName: GetSchemaTypeName = (s: Schema): string => toSafeString(s.title);
+
+export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument: OpenRPC) => {
+  const { methods } = openrpcDocument;
+
+  const megaSchema = _.chain(methods)
+    .map("params")
+    .flatten()
+    .concat(_.map(methods, "result"))
+    .map("schema")
+    .uniqBy(JSON.stringify)
+    .reduce(extendMegaSchema, { definitions: {}, oneOf: [] } as Schema)
+    .value();
+  return await compile(
+    megaSchema,
+    `Any${getSchemaTypeName(openrpcDocument.info)}Type`,
+    { bannerComment: "", declareExternallyReferenced: true },
+  );
+};
+
+const getMethodTyping = (method: MethodObject) => {
+  const result = method.result as ContentDescriptorObject;
+  const resultTypeName = `Promise<${getSchemaTypeName(result.schema)}>`;
+
+  const methodAliasName = getMethodAliasName(method);
 
   const params = _.map(
     method.params as ContentDescriptorObject[],
-    (param) => `${param.name}: ${typeDefs[generateMethodParamId(method, param)].typeName}`,
+    (param) => `${param.name}: ${getSchemaTypeName(param.schema)}`,
   ).join(", ");
 
-  return `export type ${functionTypeName} = (${params}) => ${resultTypeName};`;
+  return `export type ${methodAliasName} = (${params}) => ${resultTypeName};`;
 };
 
-const generator: IGenerator = {
+export const getMethodTypings: GetMethodTypings = (openrpcDocument) => {
+  return _.chain(openrpcDocument.methods)
+    .map((method) => getMethodTyping(method))
+    .join("\n")
+    .value();
+};
+
+const generator: Generator = {
   getMethodAliasName,
-  getMethodTypeAlias,
-  getMethodTypingsMap,
+  getMethodTypings,
+  getSchemaTypeName,
+  getSchemaTypings,
 };
 
 export default generator;
