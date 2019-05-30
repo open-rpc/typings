@@ -93,10 +93,10 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#generatetypings" class="tsd-kind-icon">generate<wbr>Typings</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#getallcontentdescriptortypings" class="tsd-kind-icon">get<wbr>All<wbr>Content<wbr>Descriptor<wbr>Typings</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#getallmethodaliastypings" class="tsd-kind-icon">get<wbr>All<wbr>Method<wbr>Alias<wbr>Typings</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#getmethodaliastyping" class="tsd-kind-icon">get<wbr>Method<wbr>Alias<wbr>Typing</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#getmethodtypings" class="tsd-kind-icon">get<wbr>Method<wbr>Typings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#getschematypings" class="tsd-kind-icon">get<wbr>Schema<wbr>Typings</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#gettypingnames" class="tsd-kind-icon">get<wbr>Typing<wbr>Names</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#gettypingsbylanguage" class="tsd-kind-icon">get<wbr>Typings<wbr>ByLanguage</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="methodtypings.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
 							</ul>
 						</section>
@@ -115,7 +115,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/f8e1992/src/index.ts#L45">src/index.ts:45</a></li>
+									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/36eb8dd/src/index.ts#L74">src/index.ts:74</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -141,7 +141,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/f8e1992/src/index.ts#L53">src/index.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/36eb8dd/src/index.ts#L99">src/index.ts:99</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -155,150 +155,116 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getallcontentdescriptortypings" class="tsd-anchor"></a>
-					<h3>get<wbr>All<wbr>Content<wbr>Descriptor<wbr>Typings</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>All<wbr>Content<wbr>Descriptor<wbr>Typings<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TLanguages</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/f8e1992/src/index.ts#L70">src/index.ts:70</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A method that returns all the method type aliases as a string, useful to directly inserting into code.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>language: <span class="tsd-signature-type">TLanguages</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The langauge you want the signature to be in.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>A string containing all the typings.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getallmethodaliastypings" class="tsd-anchor"></a>
-					<h3>get<wbr>All<wbr>Method<wbr>Alias<wbr>Typings</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>All<wbr>Method<wbr>Alias<wbr>Typings<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TLanguages</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/f8e1992/src/index.ts#L84">src/index.ts:84</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A method that returns all the types as a string, useful to directly inserting into code.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>language: <span class="tsd-signature-type">TLanguages</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>A string containing all the typings.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getmethodaliastyping" class="tsd-anchor"></a>
-					<h3>get<wbr>Method<wbr>Alias<wbr>Typing</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Method<wbr>Alias<wbr>Typing<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><a href="../interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a>, language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TLanguages</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/f8e1992/src/index.ts#L139">src/index.ts:139</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>A method that returns a type alias for a given method</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>example</dt>
-									<dd><pre><code class="language-typescript">
-<span class="hljs-keyword">const</span> openrpcTypings = <span class="hljs-keyword">new</span> OpenRPCTypings(examples.simpleMath);
-<span class="hljs-keyword">const</span> additionMethod = examples.simpleMath.examples
-  .find(<span class="hljs-function">(<span class="hljs-params">method</span>) =&gt;</span> method.name === <span class="hljs-string">"addition"</span>);
-<span class="hljs-keyword">const</span> additionFunctionTypeAlias = openrpcTypings.getMethodTypeAlias(additionMethod, <span class="hljs-string">"typescript"</span>);
-<span class="hljs-comment">// "export TAddition = (a: number, b: number) =&gt; number"</span></code></pre>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>method: <a href="../interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The OpenRPC Method that you want a signature for.</p>
-									</div>
-								</li>
-								<li>
-									<h5>language: <span class="tsd-signature-type">TLanguages</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The langauge you want the signature to be in.</p>
-									</div>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<p>A string containing a type alias for a function signature of
-							the same signature as the passed in method.</p>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getmethodtypings" class="tsd-anchor"></a>
 					<h3>get<wbr>Method<wbr>Typings</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Method<wbr>Typings<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><a href="../interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a>, language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TLanguages</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/imethodtypings.html" class="tsd-signature-type">IMethodTypings</a></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Method<wbr>Typings<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/f8e1992/src/index.ts#L157">src/index.ts:157</a></li>
+									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/36eb8dd/src/index.ts#L137">src/index.ts:137</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Gives you all the <a href="../interfaces/imethodtypings.html">IMethodTypings</a> for a given method.</p>
+									<p>A method that returns all the method signature type aliases, called Method Typings,
+									for the [[@open-rpc/meta-schema#MethodObject]] in an [[@open-rpc/meta-schema#MethodObject]] Document.</p>
 								</div>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>method: <a href="../interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a></h5>
-									<div class="tsd-comment tsd-typography">
-										<p>The method you need typing for.</p>
-									</div>
-								</li>
-								<li>
-									<h5>language: <span class="tsd-signature-type">TLanguages</span></h5>
+									<h5>language: <a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The langauge you want the signature to be in.</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/imethodtypings.html" class="tsd-signature-type">IMethodTypings</a></h4>
-							<p>the typings for the method.</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>A string containing all the typings.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getschematypings" class="tsd-anchor"></a>
+					<h3>get<wbr>Schema<wbr>Typings</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Schema<wbr>Typings<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/36eb8dd/src/index.ts#L124">src/index.ts:124</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A method that returns all the typings for the schemas in an <a href="../interfaces/openrpc.html">OpenRPC</a> Document.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>language: <a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The langauge you want the signature to be in.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>A string containing all the typings.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettypingnames" class="tsd-anchor"></a>
+					<h3>get<wbr>Typing<wbr>Names</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Typing<wbr>Names<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a>, method<span class="tsd-signature-symbol">: </span><a href="../interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/openrpcmethodtypingnames.html" class="tsd-signature-type">OpenRPCMethodTypingNames</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/36eb8dd/src/index.ts#L141">src/index.ts:141</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>language: <a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a></h5>
+								</li>
+								<li>
+									<h5>method: <a href="../interfaces/methodobject.html" class="tsd-signature-type">MethodObject</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/openrpcmethodtypingnames.html" class="tsd-signature-type">OpenRPCMethodTypingNames</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettypingsbylanguage" class="tsd-anchor"></a>
+					<h3>get<wbr>Typings<wbr>ByLanguage</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Typings<wbr>ByLanguage<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OpenRPCTypings</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/36eb8dd/src/index.ts#L110">src/index.ts:110</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>language: <a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">OpenRPCTypings</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -306,13 +272,13 @@
 					<a name="tostring" class="tsd-anchor"></a>
 					<h3>to<wbr>String</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TLanguages</span>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/itostringoptions.html" class="tsd-signature-type">IToStringOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span>language<span class="tsd-signature-symbol">: </span><a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a>, options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/openrpctypingstostringoptions.html" class="tsd-signature-type">OpenRPCTypingsToStringOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/f8e1992/src/index.ts#L104">src/index.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/open-rpc/typings/blob/36eb8dd/src/index.ts#L167">src/index.ts:167</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -323,13 +289,13 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>language: <span class="tsd-signature-type">TLanguages</span></h5>
+									<h5>language: <a href="../enums/openrpctypingssupportedlanguages.html" class="tsd-signature-type">OpenRPCTypingsSupportedLanguages</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>The language you want the typings to be</p>
 									</div>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/itostringoptions.html" class="tsd-signature-type">IToStringOptions</a><span class="tsd-signature-symbol"> =&nbsp;this.toStringOptionsDefaults</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/openrpctypingstostringoptions.html" class="tsd-signature-type">OpenRPCTypingsToStringOptions</a><span class="tsd-signature-symbol"> =&nbsp;this.toStringOptionsDefaults</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>include or filter particular parts of the output.</p>
 									</div>
@@ -364,16 +330,16 @@
 								<a href="methodtypings.html#generatetypings" class="tsd-kind-icon">generate<wbr>Typings</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="methodtypings.html#getallcontentdescriptortypings" class="tsd-kind-icon">get<wbr>All<wbr>Content<wbr>Descriptor<wbr>Typings</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="methodtypings.html#getallmethodaliastypings" class="tsd-kind-icon">get<wbr>All<wbr>Method<wbr>Alias<wbr>Typings</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="methodtypings.html#getmethodaliastyping" class="tsd-kind-icon">get<wbr>Method<wbr>Alias<wbr>Typing</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="methodtypings.html#getmethodtypings" class="tsd-kind-icon">get<wbr>Method<wbr>Typings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="methodtypings.html#getschematypings" class="tsd-kind-icon">get<wbr>Schema<wbr>Typings</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="methodtypings.html#gettypingnames" class="tsd-kind-icon">get<wbr>Typing<wbr>Names</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="methodtypings.html#gettypingsbylanguage" class="tsd-kind-icon">get<wbr>Typings<wbr>ByLanguage</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="methodtypings.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
