@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/open-rpc/typings/compare/1.1.4...1.2.0) (2019-05-30)
+
+
+### Features
+
+* default name type prefix ([3975ee2](https://github.com/open-rpc/typings/commit/3975ee2))
+* use atomic naming of schemas ([5ea3e75](https://github.com/open-rpc/typings/commit/5ea3e75))
+
 ## [1.1.4](https://github.com/open-rpc/typings/compare/1.1.3...1.1.4) (2019-05-27)
 
 
