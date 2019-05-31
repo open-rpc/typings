@@ -16,7 +16,7 @@ import { ContentDescriptorObject, MethodObject, OpenRPC, Schema } from "@open-rp
  */
 const collectAndRefSchemas = (schema: Schema): Schema[] => {
   const newS: Schema = { ...schema };
-  const subS = [];
+  const subS: Schema[][] = [];
 
   if (schema.anyOf) {
     subS.push(schema.anyOf);
@@ -48,16 +48,19 @@ const collectAndRefSchemas = (schema: Schema): Schema[] => {
     newS.properties = _.mapValues(schema.properties, schemaToRef);
   }
 
-  const subSchemas = _.chain(subS)
+  const subSchemas: Schema[] = _.chain(subS)
     .flatten()
     .compact()
     .value();
 
-  return _.chain(subSchemas)
-    .map(collectAndRefSchemas)
-    .flattenDeep()
-    .concat([newS])
+  const collectedSubSchemas: Schema[] = _.map(subSchemas, collectAndRefSchemas);
+
+  return _.chain(collectedSubSchemas)
+    .push([newS])
+    .flatten()
     .value();
+
+  return collectedSubSchemas;
 };
 
 const schemaToRef = (s: Schema) => ({ $ref: `#/definitions/${getSchemaTypeName(s)}` });
@@ -117,12 +120,11 @@ const compileOpts = { bannerComment: "", declareExternallyReferenced: false };
 export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument: OpenRPC) => {
   const { methods } = openrpcDocument;
 
-  const megaSchema = _.chain(methods)
-    .map("params")
-    .flatten()
-    .concat(_.map(methods, "result"))
+  const params = _.map(methods, (method) => method.params as ContentDescriptorObject[]);
+  const result = _.map(methods, (method) => method.result as ContentDescriptorObject);
+
+  const megaSchema: Schema[] = _.chain([..._.flatten(params), ...result])
     .map("schema")
-    .uniqBy("title")
     .map(collectAndRefSchemas)
     .flatten()
     .uniqBy("title")
