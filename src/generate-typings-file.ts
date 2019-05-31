@@ -9,11 +9,6 @@ export interface TypingsOptions {
   lang: OpenRPCTypingsSupportedLanguages;
 }
 
-export const cleanBuildDir = async (destinationDirectoryName: string): Promise<any> => {
-  await ensureDir(destinationDirectoryName);
-  await emptyDir(destinationDirectoryName);
-};
-
 export function getExtension(lang: OpenRPCTypingsSupportedLanguages): string {
   const language: {[index: string]: string} = {
     rust: ".rs",
@@ -30,7 +25,6 @@ export async function generateTypingsFile(openrpcDocument: OpenRPC, options: Typ
   return await Promise.all(options.map(async (option: TypingsOptions) => {
     const typings = methodTypings.toString(option.lang);
     const typingsFileName = `${option.dirName}/${option.fileName}${getExtension(option.lang)}`;
-    await cleanBuildDir(option.dirName);
 
     return await writeFile(typingsFileName, typings, "utf8");
   }));
