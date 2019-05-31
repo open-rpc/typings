@@ -84,7 +84,7 @@ const typeRegexes: TypeRegexes = {
 };
 
 const getSchemaTypings: GetSchemaTypings = async (openrpcSchema) => {
-  const { methods } = openrpcSchema;
+  const methods = _.cloneDeep(openrpcSchema.methods);
 
   const allCD = [
     ..._.chain(methods).map("params").flatten().value() as ContentDescriptorObject[],
@@ -204,8 +204,8 @@ export const getMethodTypings: GetMethodTypings = (openrpcDocument: OpenRPC) => 
     .value();
 };
 
-export const getSchemaTypeName: GetSchemaTypeName = (schema) => {
-  return toSafeString(schema.name);
+export const getSchemaTypeName: GetSchemaTypeName = (contentDescriptor) => {
+  return _.chain(contentDescriptor.name).camelCase().upperFirst().value();
 };
 
 export const getMethodAliasName: GetMethodAliasName = (method) => {

@@ -5,6 +5,7 @@ import { OpenRPC, MethodObject, ContentDescriptorObject, Schema } from "@open-rp
 import _, { values, filter, partition, zipObject } from "lodash";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { createHash } from "crypto";
+import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 
 interface Generators {
   typescript: Generator;
@@ -12,12 +13,12 @@ interface Generators {
   [key: string]: Generator;
 }
 
-export enum OpenRPCTypingsSupportedLanguages { "typescript", "rust" }
-
 const generators: Generators = {
   rust,
   typescript,
 };
+
+export type OpenRPCTypingsSupportedLanguages = "rust" | "typescript";
 
 interface OpenRPCTypings {
   schemas: string;
@@ -40,9 +41,20 @@ export interface OpenRPCTypingsToStringOptions {
 }
 
 const getDefaultTitleForSchema = (schema: Schema): string => {
-  const hash = createHash("sha1").update(JSON.stringify(schema)).digest("base64").slice(0, 8);
+  const hash = toSafeString(createHash("sha1").update(JSON.stringify(schema)).digest("base64")).slice(0, 8);
   const { oneOf, anyOf, allOf } = schema;
-  const prefix = schema.type || oneOf ? "oneOf" : anyOf ? "anyOf" : allOf ? "allOf" : "unknown";
+  let prefix = schema.type;
+  if (!prefix) {
+    if (oneOf) {
+      prefix = "oneOf";
+    } else if (allOf) {
+      prefix = "allOf";
+    } else if (anyOf) {
+      prefix = "anyOf";
+    } else {
+      prefix = "unknown";
+    }
+  }
   return `${prefix}${hash}`;
 };
 
@@ -52,7 +64,13 @@ const ensureSchemaTitles = (s: Schema) => {
   if (s.anyOf) { newS.anyOf = s.anyOf.map(ensureSchemaTitles); }
   if (s.allOf) { newS.allOf = s.allOf.map(ensureSchemaTitles); }
   if (s.oneOf) { newS.oneOf = s.oneOf.map(ensureSchemaTitles); }
-  if (s.items) { newS.items = s.items.map(ensureSchemaTitles); }
+  if (s.items) {
+    if (s.items instanceof Array) {
+      newS.items = s.items.map(ensureSchemaTitles);
+    } else {
+      newS.items = ensureSchemaTitles(s.items);
+    }
+  }
   if (s.properties) { newS.properties = _.mapValues(s.properties, ensureSchemaTitles); }
 
   if (s.title === undefined) {
@@ -107,12 +125,6 @@ export default class MethodTypings {
     return true;
   }
 
-  public getTypingsByLanguage(language: OpenRPCTypingsSupportedLanguages) {
-    this.guard();
-    const lang = OpenRPCTypingsSupportedLanguages[language];
-    return this.typingsByLanguage[lang];
-  }
-
   /**
    * A method that returns all the typings for the schemas in an [[OpenRPC]] Document.
    *
@@ -122,7 +134,8 @@ export default class MethodTypings {
    *
    */
   public getSchemaTypings(language: OpenRPCTypingsSupportedLanguages): string {
-    return this.getTypingsByLanguage(language).schemas;
+    this.guard();
+    return this.typingsByLanguage[language].schemas;
   }
 
   /**
@@ -135,24 +148,25 @@ export default class MethodTypings {
    *
    */
   public getMethodTypings(language: OpenRPCTypingsSupportedLanguages): string {
-    return this.getTypingsByLanguage(language).methods;
+    this.guard();
+    return this.typingsByLanguage[language].methods;
   }
 
   public getTypingNames(
     language: OpenRPCTypingsSupportedLanguages,
     method: MethodObject,
   ): OpenRPCMethodTypingNames {
-    const lang = OpenRPCTypingsSupportedLanguages[language];
-    const gen = generators[lang];
+    const gen = generators[language];
 
     const defaultedMethod = _.find(this.openrpcDocument.methods, { name: method.name }) as MethodObject;
 
     const methodResult = defaultedMethod.result as ContentDescriptorObject;
     const methodParams = defaultedMethod.params as ContentDescriptorObject[];
+    //  HACK until rust uses schema titles as well, pass in contentDescriptor to rust
     return {
       method: gen.getMethodAliasName(defaultedMethod),
-      params: methodParams.map(({ schema }) => gen.getSchemaTypeName(schema)),
-      result: gen.getSchemaTypeName(methodResult.schema),
+      params: methodParams.map((cd) => gen.getSchemaTypeName(language === "typescript" ? cd.schema : cd)), //tslint:disable-line
+      result: gen.getSchemaTypeName(language === "typescript" ? methodResult.schema : methodResult), //tslint:disable-line
     };
   }
 

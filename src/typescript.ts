@@ -16,7 +16,7 @@ import { ContentDescriptorObject, MethodObject, OpenRPC, Schema } from "@open-rp
  */
 const collectAndRefSchemas = (schema: Schema): Schema[] => {
   const newS: Schema = { ...schema };
-  const subS = [];
+  const subS: Schema[][] = [];
 
   if (schema.anyOf) {
     subS.push(schema.anyOf);
@@ -35,7 +35,12 @@ const collectAndRefSchemas = (schema: Schema): Schema[] => {
 
   if (schema.items) {
     subS.push(schema.items);
-    newS.items = schema.items.map(schemaToRef);
+
+    if (schema.items instanceof Array) {
+      newS.items = schema.items.map(schemaToRef);
+    } else {
+      newS.items = schemaToRef(schema.items);
+    }
   }
 
   if (schema.properties) {
@@ -43,38 +48,22 @@ const collectAndRefSchemas = (schema: Schema): Schema[] => {
     newS.properties = _.mapValues(schema.properties, schemaToRef);
   }
 
-  const subSchemas = _.chain(subS)
+  const subSchemas: Schema[] = _.chain(subS)
     .flatten()
     .compact()
     .value();
 
-  return _.chain(subSchemas)
-    .map(collectAndRefSchemas)
-    .flattenDeep()
-    .concat([newS])
-    .uniqBy("title")
+  const collectedSubSchemas: Schema[] = _.map(subSchemas, collectAndRefSchemas);
+
+  return _.chain(collectedSubSchemas)
+    .push([newS])
+    .flatten()
     .value();
+
+  return collectedSubSchemas;
 };
 
 const schemaToRef = (s: Schema) => ({ $ref: `#/definitions/${getSchemaTypeName(s)}` });
-const extendMegaSchema = (ms: Schema, s: Schema): Schema => {
-  const schemaTypeName = getSchemaTypeName(s);
-
-  if (ms.definitions[schemaTypeName]) { return ms; }
-
-  const schemas = collectAndRefSchemas(s);
-
-  return {
-    definitions: {
-      ...ms.definitions,
-      ..._.keyBy(schemas, getSchemaTypeName),
-    },
-    oneOf: [
-      ...ms.oneOf,
-      schemaToRef(s),
-    ],
-  } as Schema;
-};
 
 /**
  * Exported Methods
@@ -84,23 +73,74 @@ export const getMethodAliasName: GetMethodAliasName = ({ name }: MethodObject): 
 };
 
 export const getSchemaTypeName: GetSchemaTypeName = (s: Schema): string => toSafeString(s.title);
+const isComment = (line: string) => {
+  const trimmed = line.trim();
+  return _.startsWith(trimmed, "/**") || _.startsWith(trimmed, "*") || _.startsWith(trimmed, "*/");
+};
+const getDefs = (lines: string) => {
+  let commentBuffer: string[] = [];
+  return _.chain(lines.split("\n"))
+    .reduce((memoLines: any[], line) => {
+      const lastItem = _.last(memoLines);
+      const singleLine = line.match(/export (.*);/);
 
+      if (isComment(line)) {
+        commentBuffer.push(line);
+      } else if (singleLine) {
+        memoLines.push([...commentBuffer, line]);
+        commentBuffer = [];
+      } else {
+        const interfaceMatch = line.match(/export (.*)/);
+        if (interfaceMatch) {
+          memoLines.push([...commentBuffer, line]);
+          commentBuffer = [];
+        } else if (_.isArray(lastItem)) {
+          lastItem.push(line);
+          if (line === "}") {
+            memoLines.push("");
+          }
+        }
+      }
+
+      return memoLines;
+    }, [])
+    .compact()
+    .uniqBy((exportLine) => {
+      const toTest = exportLine instanceof Array ?
+        _.reject(exportLine, isComment)[0] : exportLine;
+      const [all, exportType, name, rest] = toTest.match(/export\s(type|interface|enum)\s(\S*)/);
+      return name;
+    })
+    .flattenDeep()
+    .join("\n")
+    .value();
+};
+
+const compileOpts = { bannerComment: "", declareExternallyReferenced: false };
 export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument: OpenRPC) => {
   const { methods } = openrpcDocument;
 
-  const megaSchema = _.chain(methods)
-    .map("params")
-    .flatten()
-    .concat(_.map(methods, "result"))
+  const params = _.map(methods, (method) => method.params as ContentDescriptorObject[]);
+  const result = _.map(methods, (method) => method.result as ContentDescriptorObject);
+
+  const megaSchema: Schema[] = _.chain([..._.flatten(params), ...result])
     .map("schema")
-    .uniqBy(JSON.stringify)
-    .reduce(extendMegaSchema, { definitions: {}, oneOf: [] } as Schema)
+    .map(collectAndRefSchemas)
+    .flatten()
+    .uniqBy("title")
+    .map((s: Schema, i: number, collection: any) => {
+      return compile({
+        ...s,
+        definitions: _.keyBy(collection, getSchemaTypeName),
+      }, "", compileOpts);
+    })
     .value();
-  return await compile(
-    megaSchema,
-    `Any${getSchemaTypeName(openrpcDocument.info)}Type`,
-    { bannerComment: "", declareExternallyReferenced: true },
-  );
+
+  const types = await Promise.all(megaSchema);
+
+  const trimmedAndJoined = _.map(types, _.trim).join("\n").trim();
+  const defs = getDefs(trimmedAndJoined);
+  return defs;
 };
 
 const getMethodTyping = (method: MethodObject) => {
