@@ -1,3 +1,11 @@
+## [1.2.1](https://github.com/open-rpc/typings/compare/1.2.0...1.2.1) (2019-05-31)
+
+
+### Bug Fixes
+
+* items can be an array or an object ([c96be09](https://github.com/open-rpc/typings/commit/c96be09))
+* typedoc build ([607b968](https://github.com/open-rpc/typings/commit/607b968))
+
 # [1.2.0](https://github.com/open-rpc/typings/compare/1.1.4...1.2.0) (2019-05-30)
 
 
