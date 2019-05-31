@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/open-rpc/typings/compare/1.2.1...1.3.0) (2019-05-31)
+
+
+### Bug Fixes
+
+* prevents output directory from being removed ([8e30209](https://github.com/open-rpc/typings/commit/8e30209))
+
+
+### Features
+
+* cli to generate openrpc typings ([8d6f5cc](https://github.com/open-rpc/typings/commit/8d6f5cc))
+
 ## [1.2.1](https://github.com/open-rpc/typings/compare/1.2.0...1.2.1) (2019-05-31)
 
 
