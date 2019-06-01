@@ -136,25 +136,36 @@ const getSchemaTypings: GetSchemaTypings = async (openrpcSchema) => {
     .value() as string[];
 
   const aliasTypes = _.filter(simpleTypes, (line) => typeRegexes.alias.test(line));
-  const structTypes = _.filter(complexTypes, (lines: string[]) => _.some(lines, (l) => typeRegexes.struct.test(l)));
-  const enumTypes = _.filter(complexTypes, (lines: string[]) => _.some(lines, (l) => typeRegexes.enum.test(l)));
+  const structTypes: string[][] = _.filter(
+    complexTypes,
+    (lines: string[]) => _.some(lines, (l) => typeRegexes.struct.test(l)),
+  );
 
+  const enumTypes: string[][] = _.filter(
+    complexTypes,
+    (lines: string[]) => _.some(lines, (l) => typeRegexes.enum.test(l)),
+  );
+
+  interface PartialTyping {
+    typeName: string;
+    typing: string;
+  }
   // same as above, but now as a partial IContentDescriptorTyping
-  const at = _.map(aliasTypes, (aliasType: string) => {
+  const at: PartialTyping[] = _.map(aliasTypes, (aliasType: string) => {
     const matches = aliasType.match(typeRegexes.alias) as RegExpMatchArray;
     const typeName = matches[1];
 
-    return { typeName, typing: aliasType, typeId: "todo", order: "alias" };
+    return { typeName, typing: aliasType };
   });
 
   // same as above, but now as a partial IContentDescriptorTyping
-  const etst = _.map([...enumTypes, ...structTypes], (typing: string[]) => {
+  const etst: PartialTyping[] = _.map([...enumTypes, ...structTypes], (typing: string[]): PartialTyping => {
     const lineMatch = _.find(typing, (l) => typeRegexes.complex.test(l)) as string;
     const matches = lineMatch.match(typeRegexes.complex) as RegExpMatchArray;
     const typeName = matches[2];
 
-    return { typeName, typing: typing.join("\n"), typeId: "todo", order: "complex" };
-  });
+    return { typeName, typing: typing.join("\n") };
+  }) as PartialTyping[];
 
   return _.chain([...at, ...etst])
     .groupBy("typeName")
