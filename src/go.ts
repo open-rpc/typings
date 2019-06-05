@@ -11,7 +11,7 @@ import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName, getSchemas
 
 const isComment = (line: string): boolean => {
   const trimmed = line.trim();
-  return _.startsWith(trimmed, "/**") || _.startsWith(trimmed, "*") || _.startsWith(trimmed, "*/");
+  return _.startsWith(trimmed, "//");
 };
 
 const getDefs = (lines: string): string => {
