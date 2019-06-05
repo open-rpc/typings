@@ -26,8 +26,8 @@ const getDefs = (lines: string): string => {
         memoLines.push([...commentBuffer, line]);
         commentBuffer = [];
       } else {
-        const interfaceMatch = line.match(/export (.*)/);
-        if (interfaceMatch) {
+        const isStruct = line.match(/export (.*)/);
+        if (isStruct) {
           memoLines.push([...commentBuffer, line]);
           commentBuffer = [];
         } else if (_.isArray(lastItem)) {

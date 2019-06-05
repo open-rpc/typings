@@ -14,6 +14,7 @@ const testOpenRPCDocument = {
         {
           name: "jibberNiptip",
           schema: {
+            description: "a really cool niptip",
             title: "niptip",
             type: "number",
           },
@@ -36,7 +37,12 @@ const testOpenRPCDocument = {
   openrpc: "1.0.0",
 } as OpenRPC;
 
-const expectedNipTipTypescript = "export type Niptip = number;";
+const expectedNipTipTypescript = [
+  "/**",
+  " * a really cool niptip",
+  " */",
+  "export type Niptip = number;",
+].join("\n");
 const expectedSkeepadeepTypescript = "export type Skeepadeep = number;";
 const expectedReepadoopTypescript = "export type NumberYqdpe1HS = number;";
 const expectedRipSlipTypescript = [

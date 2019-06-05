@@ -9,18 +9,30 @@ import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-sc
 import { quicktype } from "quicktype";
 import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName, getSchemasForOpenRPCDocument } from "./utils";
 
+const isComment = (line: string): boolean => {
+  const trimmed = line.trim();
+  return _.startsWith(trimmed, "/**") || _.startsWith(trimmed, "*") || _.startsWith(trimmed, "*/");
+};
+
 const getDefs = (lines: string): string => {
+  let commentBuffer: string[] = [];
+
   return _.chain(lines.split("\n"))
     .reduce((memoLines: any[], line) => {
       const lastItem = _.last(memoLines);
       const singleline = line.match(/type (\S*) (?!struct)(.*)/);
 
-      if (singleline) {
-        memoLines.push(line);
+      if (isComment(line)) {
+        commentBuffer.push(line);
+      } else if (singleline) {
+        memoLines.push([...commentBuffer, line]);
+        commentBuffer = [];
       } else {
         const isStruct = line.match(/type (.*) struct(.*)/);
         if (isStruct) {
-          memoLines.push([line]);
+          // const docs = genDocs(line)
+          memoLines.push([...commentBuffer, line]);
+          commentBuffer = [];
         } else if (_.isArray(lastItem)) {
           lastItem.push(line);
           if (line === "}") {
@@ -33,7 +45,8 @@ const getDefs = (lines: string): string => {
     }, [])
     .compact()
     .uniqBy((exportLine) => {
-      const toTest = exportLine instanceof Array ? exportLine[0] : exportLine;
+      const toTest = exportLine instanceof Array ?
+        _.reject(exportLine, isComment)[0] : exportLine;
       const [all, name, rest] = toTest.match(/type (\S*)/);
       return name;
     })
