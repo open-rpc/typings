@@ -2,22 +2,18 @@ import {
   Generator,
   GetSchemaTypings,
   GetMethodTypings,
-  GetMethodAliasName,
-  GetSchemaTypeName,
 } from "./generator-interface";
 import _ from "lodash";
-import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
 import { compile } from "json-schema-to-typescript";
-import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
-import { ContentDescriptorObject, MethodObject, OpenRPC, Schema } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-schema";
 import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName } from "./utils";
 
-const isComment = (line: string) => {
+const isComment = (line: string): boolean => {
   const trimmed = line.trim();
   return _.startsWith(trimmed, "/**") || _.startsWith(trimmed, "*") || _.startsWith(trimmed, "*/");
 };
 
-const getDefs = (lines: string) => {
+const getDefs = (lines: string): string => {
   let commentBuffer: string[] = [];
   return _.chain(lines.split("\n"))
     .reduce((memoLines: any[], line) => {
@@ -57,7 +53,8 @@ const getDefs = (lines: string) => {
 };
 
 const compileOpts = { bannerComment: "", declareExternallyReferenced: false };
-export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument: OpenRPC) => {
+
+export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument) => {
   const { methods } = openrpcDocument;
 
   const params = _.map(methods, (method) => method.params as ContentDescriptorObject[]);
@@ -83,7 +80,7 @@ export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument: OpenRP
   return defs;
 };
 
-const getMethodTyping = (method: MethodObject) => {
+const getMethodTyping = (method: MethodObject): string => {
   const result = method.result as ContentDescriptorObject;
   const resultTypeName = `Promise<${getSchemaTypeName(result.schema)}>`;
 
