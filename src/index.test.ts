@@ -176,7 +176,7 @@ describe("MethodTypings", () => {
       expect(methodTypings.getMethodTypings("go"))
         .toEqual([
           "type Jipperjobber interface {",
-          "\tJibber(jibberNiptip Niptip) (error, Ripslip)",
+          "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
           "}",
         ].join("\n"));
     });
@@ -196,7 +196,7 @@ describe("MethodTypings", () => {
       expect(methodTypings.getMethodTypings("go"))
         .toEqual([
           "type Jipperjobber interface {",
-          "\tJibber() (error, Ripslip)",
+          "\tJibber() (Ripslip, error)",
           "}",
         ].join("\n"));
     });
