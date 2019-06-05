@@ -23,6 +23,10 @@ program
     "output dir of typescript typings",
   )
   .option(
+    "--output-go [directory]",
+    "output dir of go typings",
+  )
+  .option(
     "--name-rs [file]",
     "File name of rust typings",
     "./index",
@@ -30,6 +34,11 @@ program
   .option(
     "--name-ts [file]",
     "File name of typescript typings",
+    "./index",
+  )
+  .option(
+    "--name-go [file]",
+    "File name of go typings",
     "./index",
   )
   .action(async () => {
@@ -46,7 +55,7 @@ program
   .parse(process.argv);
 
 function parseTypingsOptions(programOpt: CommanderStatic): TypingsOptions[] {
-  if (!programOpt.outputRs && !programOpt.outputTs) {
+  if (!programOpt.outputRs && !programOpt.outputTs && !programOpt.outputGo) {
     throw Error("Please specify an output directory for typings.");
   }
 

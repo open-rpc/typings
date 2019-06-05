@@ -10,7 +10,8 @@ export interface TypingsOptions {
 }
 
 export function getExtension(lang: OpenRPCTypingsSupportedLanguages): string {
-  const language: {[index: string]: string} = {
+  const language: { [index: string]: string } = {
+    go: ".go",
     rust: ".rs",
     typescript: ".ts",
   };
@@ -23,6 +24,7 @@ export async function generateTypingsFile(openrpcDocument: OpenRPC, options: Typ
   await methodTypings.generateTypings();
 
   return await Promise.all(options.map(async (option: TypingsOptions) => {
+    await ensureDir(option.dirName);
     const typings = methodTypings.toString(option.lang);
     const typingsFileName = `${option.dirName}/${option.fileName}${getExtension(option.lang)}`;
 
