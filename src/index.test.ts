@@ -164,6 +164,33 @@ describe("MethodTypings", () => {
 
       expect(methodTypings.getMethodTypings("rust"))
         .toEqual("pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;");
+
+      expect(methodTypings.getMethodTypings("go"))
+        .toEqual([
+          "type Jipperjobber interface {",
+          "\tJibber(jibberNiptip Niptip) (error, Ripslip)",
+          "}",
+        ].join("\n"));
+    });
+
+    it("works when there are no params", async () => {
+      const copytestOpenRPCDocument = cloneDeep(testOpenRPCDocument);
+      copytestOpenRPCDocument.methods[0].params = [];
+      const methodTypings = new MethodTypings(copytestOpenRPCDocument);
+      await methodTypings.generateTypings();
+
+      expect(methodTypings.getMethodTypings("typescript"))
+        .toBe("export type Jibber = () => Promise<Ripslip>;");
+
+      expect(methodTypings.getMethodTypings("rust"))
+        .toBe("pub fn jibber(&mut self) -> RpcRequest<JibberRipslip>;");
+
+      expect(methodTypings.getMethodTypings("go"))
+        .toEqual([
+          "type Jipperjobber interface {",
+          "\tJibber() (error, Ripslip)",
+          "}",
+        ].join("\n"));
     });
   });
 
@@ -191,38 +218,6 @@ describe("MethodTypings", () => {
       expect(methodTypings.toString("typescript")).toBe(expectedTypescript);
       expect(methodTypings.toString("rust")).toBe(expectedRust);
       expect(methodTypings.toString("go")).toBe(expectedGo);
-    });
-  });
-
-  describe("getMethodTypings", () => {
-
-    it("throws if types not generated yet", async () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      expect(() => methodTypings.getMethodTypings("typescript")).toThrow();
-    });
-
-    it("returns the function signature for a method", async () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      await methodTypings.generateTypings();
-
-      expect(methodTypings.getMethodTypings("typescript"))
-        .toBe("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
-
-      expect(methodTypings.getMethodTypings("rust"))
-        .toBe("pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;");
-    });
-
-    it("works when there are no params", async () => {
-      const copytestOpenRPCDocument = cloneDeep(testOpenRPCDocument);
-      copytestOpenRPCDocument.methods[0].params = [];
-      const methodTypings = new MethodTypings(copytestOpenRPCDocument);
-      await methodTypings.generateTypings();
-
-      expect(methodTypings.getMethodTypings("typescript"))
-        .toBe("export type Jibber = () => Promise<Ripslip>;");
-
-      expect(methodTypings.getMethodTypings("rust"))
-        .toBe("pub fn jibber(&mut self) -> RpcRequest<JibberRipslip>;");
     });
   });
 
