@@ -167,7 +167,7 @@ describe("MethodTypings", () => {
     });
   });
 
-  describe.only("toString", () => {
+  describe("toString", () => {
 
     it("throws if types not generated yet", () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
@@ -184,7 +184,7 @@ describe("MethodTypings", () => {
       })).toBe(expectedJibberTypescript);
     });
 
-    it.only("returns a string of typings for all languages", async () => {
+    it("returns a string of typings for all languages", async () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       await methodTypings.generateTypings();
 
