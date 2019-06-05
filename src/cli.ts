@@ -60,6 +60,10 @@ function parseTypingsOptions(programOpt: CommanderStatic): TypingsOptions[] {
     options.push(makeOptions(programOpt.nameTs, programOpt.outputTs, "typescript"));
   }
 
+  if (programOpt.outputGo) {
+    options.push(makeOptions(programOpt.nameGo, programOpt.outputGo, "go"));
+  }
+
   return options;
 }
 
