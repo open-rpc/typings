@@ -59,8 +59,6 @@ const collectAndRefSchemas = (schema: Schema): Schema[] => {
     .push([newS])
     .flatten()
     .value();
-
-  return collectedSubSchemas;
 };
 
 const schemaToRef = (s: Schema) => ({ $ref: `#/definitions/${getSchemaTypeName(s)}` });

@@ -60,8 +60,6 @@ const collectAndRefSchemas = (schema: Schema): Schema[] => {
     .push([newS])
     .flatten()
     .value();
-
-  return collectedSubSchemas;
 };
 
 const schemaToRef = (s: Schema) => ({ $ref: `#/definitions/${getSchemaTypeName(s)}` });
@@ -74,20 +72,17 @@ export const getMethodAliasName: GetMethodAliasName = ({ name }: MethodObject): 
 };
 
 export const getSchemaTypeName: GetSchemaTypeName = (s: Schema): string => toSafeString(s.title);
-const isComment = (line: string) => {
-  const trimmed = line.trim();
-  return _.startsWith(trimmed, "//");
-};
+
 const getDefs = (lines: string) => {
   return _.chain(lines.split("\n"))
     .reduce((memoLines: any[], line) => {
       const lastItem = _.last(memoLines);
-      const singleline = line.match(/type (.*) (?!struct$)(.*)/);
+      const singleline = line.match(/type (\S*) (?!struct)(.*)/);
 
       if (singleline) {
-        memoLines.push([line]);
+        memoLines.push(line);
       } else {
-        const isStruct = line.match(/type (.*) struct {/);
+        const isStruct = line.match(/type (.*) struct(.*)/);
         if (isStruct) {
           memoLines.push([line]);
         } else if (_.isArray(lastItem)) {
