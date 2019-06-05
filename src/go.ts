@@ -79,22 +79,17 @@ const isComment = (line: string) => {
   return _.startsWith(trimmed, "//");
 };
 const getDefs = (lines: string) => {
-  let commentBuffer: string[] = [];
   return _.chain(lines.split("\n"))
     .reduce((memoLines: any[], line) => {
       const lastItem = _.last(memoLines);
       const singleline = line.match(/type (.*) (?!struct$)(.*)/);
 
-      if (isComment(line)) {
-        commentBuffer.push(line);
-      } else if (singleline) {
-        memoLines.push([...commentBuffer, line]);
-        commentBuffer = [];
+      if (singleline) {
+        memoLines.push([line]);
       } else {
         const isStruct = line.match(/type (.*) struct {/);
         if (isStruct) {
-          memoLines.push([...commentBuffer, line]);
-          commentBuffer = [];
+          memoLines.push([line]);
         } else if (_.isArray(lastItem)) {
           lastItem.push(line);
           if (line === "}") {

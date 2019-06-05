@@ -13,7 +13,10 @@ const testOpenRPCDocument = {
       params: [
         {
           name: "jibberNiptip",
-          schema: { title: "niptip", type: "number" },
+          schema: {
+            title: "niptip",
+            type: "number",
+          },
         },
       ],
       result: {
