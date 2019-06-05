@@ -7,72 +7,14 @@ import {
 } from "./generator-interface";
 import _ from "lodash";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
-import { compile } from "json-schema-to-typescript";
 import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 import { ContentDescriptorObject, MethodObject, OpenRPC, Schema } from "@open-rpc/meta-schema";
 import { quicktype, SchemaTypeSource, TypeSource } from "quicktype";
-
-/**
- * Helper methods
- */
-const collectAndRefSchemas = (schema: Schema): Schema[] => {
-  const newS: Schema = { ...schema };
-  const subS: Schema[][] = [];
-
-  if (schema.anyOf) {
-    subS.push(schema.anyOf);
-    newS.anyOf = schema.anyOf.map(schemaToRef);
-  }
-
-  if (schema.allOf) {
-    subS.push(schema.allOf);
-    newS.allOf = schema.allOf.map(schemaToRef);
-  }
-
-  if (schema.oneOf) {
-    subS.push(schema.oneOf);
-    newS.oneOf = schema.oneOf.map(schemaToRef);
-  }
-
-  if (schema.items) {
-    subS.push(schema.items);
-
-    if (schema.items instanceof Array) {
-      newS.items = schema.items.map(schemaToRef);
-    } else {
-      newS.items = schemaToRef(schema.items);
-    }
-  }
-
-  if (schema.properties) {
-    subS.push(Object.values(schema.properties));
-    newS.properties = _.mapValues(schema.properties, schemaToRef);
-  }
-
-  const subSchemas: Schema[] = _.chain(subS)
-    .flatten()
-    .compact()
-    .value();
-
-  const collectedSubSchemas: Schema[] = _.map(subSchemas, collectAndRefSchemas);
-
-  return _.chain(collectedSubSchemas)
-    .push([newS])
-    .flatten()
-    .value();
-};
-
-const schemaToRef = (s: Schema) => ({ $ref: `#/definitions/${getSchemaTypeName(s)}` });
+import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName } from "./utils";
 
 /**
  * Exported Methods
  */
-export const getMethodAliasName: GetMethodAliasName = ({ name }: MethodObject): string => {
-  return getSchemaTypeName({ title: name, type: "function" });
-};
-
-export const getSchemaTypeName: GetSchemaTypeName = (s: Schema): string => toSafeString(s.title);
-
 const getDefs = (lines: string) => {
   return _.chain(lines.split("\n"))
     .reduce((memoLines: any[], line) => {
@@ -106,7 +48,6 @@ const getDefs = (lines: string) => {
     .value();
 };
 
-const compileOpts = { bannerComment: "", declareExternallyReferenced: false };
 export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument: OpenRPC) => {
   const { methods } = openrpcDocument;
 
