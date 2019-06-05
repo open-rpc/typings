@@ -1,4 +1,4 @@
-import { Schema, MethodObject } from "@open-rpc/meta-schema";
+import { Schema, MethodObject, OpenRPC, ContentDescriptorObject } from "@open-rpc/meta-schema";
 import _ from "lodash";
 import { GetSchemaTypeName } from "./generator-interface";
 import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
@@ -55,5 +55,20 @@ export const collectAndRefSchemas = (schema: Schema): Schema[] => {
   return _.chain(collectedSubSchemas)
     .push([newS])
     .flatten()
+    .value();
+};
+
+export const getSchemasForOpenRPCDocument = (openrpcDocument: OpenRPC): Schema[] => {
+  const { methods } = openrpcDocument;
+
+  const params = _.flatMap(methods, (method) => method.params as ContentDescriptorObject[]);
+  const result = _.map(methods, (method) => method.result as ContentDescriptorObject);
+
+  return _.chain(params.concat(result))
+    .map("schema")
+    .map(collectAndRefSchemas)
+    .flatten()
+    .uniqBy("title")
+    .map((schema, i, collection) => ({ ...schema, definitions: _.keyBy(collection, getSchemaTypeName) }))
     .value();
 };

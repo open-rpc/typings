@@ -6,7 +6,7 @@ import {
 import _ from "lodash";
 import { compile } from "json-schema-to-typescript";
 import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-schema";
-import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName } from "./utils";
+import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName, getSchemasForOpenRPCDocument } from "./utils";
 
 const isComment = (line: string): boolean => {
   const trimmed = line.trim();
@@ -55,27 +55,11 @@ const getDefs = (lines: string): string => {
 const compileOpts = { bannerComment: "", declareExternallyReferenced: false };
 
 export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument) => {
-  const { methods } = openrpcDocument;
+  const schemas = getSchemasForOpenRPCDocument(openrpcDocument);
 
-  const params = _.map(methods, (method) => method.params as ContentDescriptorObject[]);
-  const result = _.map(methods, (method) => method.result as ContentDescriptorObject);
+  const rawTypes = await Promise.all(schemas.map((s: Schema) => compile(s, "", compileOpts)));
 
-  const megaSchema: Schema[] = _.chain([..._.flatten(params), ...result])
-    .map("schema")
-    .map(collectAndRefSchemas)
-    .flatten()
-    .uniqBy("title")
-    .map((s: Schema, i: number, collection: any) => {
-      return compile({
-        ...s,
-        definitions: _.keyBy(collection, getSchemaTypeName),
-      }, "", compileOpts);
-    })
-    .value();
-
-  const types = await Promise.all(megaSchema);
-
-  const trimmedAndJoined = _.map(types, _.trim).join("\n").trim();
+  const trimmedAndJoined = _.map(rawTypes, _.trim).join("\n").trim();
   const defs = getDefs(trimmedAndJoined);
   return defs;
 };

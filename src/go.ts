@@ -7,7 +7,7 @@ import _ from "lodash";
 import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-schema";
 import { quicktype } from "quicktype";
-import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName } from "./utils";
+import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName, getSchemasForOpenRPCDocument } from "./utils";
 
 const getDefs = (lines: string): string => {
   return _.chain(lines.split("\n"))
@@ -43,37 +43,24 @@ const getDefs = (lines: string): string => {
 };
 
 export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument) => {
-  const { methods } = openrpcDocument;
+  const schemas = getSchemasForOpenRPCDocument(openrpcDocument);
 
-  const params = _.map(methods, (method) => method.params as ContentDescriptorObject[]);
-  const result = _.map(methods, (method) => method.result as ContentDescriptorObject);
+  const rawTypes = await Promise.all(schemas.map(async (s: Schema) => {
+    const typingsForSchema = await quicktype({
+      lang: "go",
+      leadingComments: undefined,
+      rendererOptions: { "just-types": "true" },
+      sources: [{
+        kind: "schema",
+        name: getSchemaTypeName(s),
+        schema: JSON.stringify(s),
+      }],
+    });
 
-  const megaSchema: Schema[] = _.chain([..._.flatten(params), ...result])
-    .map("schema")
-    .map(collectAndRefSchemas)
-    .flatten()
-    .uniqBy("title")
-    .map(async (s: Schema, i: number, collection: any) => {
-      const schemaForQuicktype = {
-        ...s,
-        definitions: _.keyBy(collection, getSchemaTypeName),
-      };
-      const typingsForSchema = await quicktype({
-        lang: "go",
-        leadingComments: undefined,
-        rendererOptions: { "just-types": "true" },
-        sources: [{
-          kind: "schema",
-          name: getSchemaTypeName(s),
-          schema: JSON.stringify(schemaForQuicktype),
-        }],
-      });
+    return typingsForSchema.lines;
+  }));
 
-      return typingsForSchema.lines;
-    })
-    .value();
-
-  const types = _.chain(await Promise.all(megaSchema))
+  const types = _.chain(rawTypes)
     .flatten()
     .compact()
     .map(_.trimEnd)
