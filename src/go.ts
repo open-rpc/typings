@@ -95,7 +95,7 @@ const getMethodTyping = (method: MethodObject): string => {
     (param) => `${param.name} ${getSchemaTypeName(param.schema)}`,
   ).join(", ");
 
-  return `\t${methodAliasName}(${params}) (error, ${resultTypeName})`;
+  return `\t${methodAliasName}(${params}) (${resultTypeName}, error)`;
 };
 
 export const getMethodTypings: GetMethodTypings = (openrpcDocument) => {

@@ -30,7 +30,6 @@ const testOpenRPCDocument = {
           title: "ripslip",
           type: "object",
         },
-        type: "object",
       },
     },
   ],
@@ -89,7 +88,7 @@ const expectedRipSlipGo = [
 ].join("\n");
 const expectedJibberGo = [
   "type Jipperjobber interface {",
-  "\tJibber(jibberNiptip Niptip) (error, Ripslip)",
+  "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
   "}",
 ].join("\n");
 const expectedGo = [
