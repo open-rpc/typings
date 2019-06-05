@@ -24,6 +24,7 @@ const testOpenRPCDocument = {
             skeepadeep: { title: "skeepadeep", type: "integer" },
           },
           title: "ripslip",
+          type: "object",
         },
         type: "object",
       },
@@ -56,23 +57,7 @@ const expectedRipSlipRust = [
   "pub type JibberNiptip = f64;",
   "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
   "#[cfg_attr(test, derive(Random))]",
-  "#[serde(untagged)]",
-  "pub enum JibberRipslip {",
-  "    AnythingArray(Vec<Option<serde_json::Value>>),",
-  "",
-  "    Bool(bool),",
-  "",
-  "    Double(f64),",
-  "",
-  "    Integer(i64),",
-  "",
-  "    JibberRipslipClass(JibberRipslipClass),",
-  "",
-  "    String(String),",
-  "}",
-  "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
-  "#[cfg_attr(test, derive(Random))]",
-  "pub struct JibberRipslipClass {",
+  "pub struct JibberRipslip {",
   "    #[serde(rename = \"reepadoop\")]",
   "    reepadoop: Option<f64>,",
   "",
@@ -83,6 +68,28 @@ const expectedRipSlipRust = [
 
 const expectedJibberRust = "pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;";
 const expectedRust = [expectedRipSlipRust, expectedJibberRust].join("\n");
+
+const expectedNipTipGo = "type Niptip float64";
+const expectedSkeepadeepGo = "type Skeepadeep int64";
+const expectedReepadoopGo = "type NumberYqdpe1HS float64";
+const expectedRipSlipGo = [
+  "type Ripslip struct {",
+  "\tReepadoop  *float64 `json:\"reepadoop\"`",
+  "\tSkeepadeep *int64   `json:\"skeepadeep\"`",
+  "}",
+].join("\n");
+const expectedJibberGo = [
+  "type Jipperjobber interface {",
+  "\tJibber(jibberNiptip Niptip) (error, Ripslip)",
+  "}",
+].join("\n");
+const expectedGo = [
+  expectedNipTipGo,
+  expectedReepadoopGo,
+  expectedSkeepadeepGo,
+  expectedRipSlipGo,
+  expectedJibberGo,
+].join("\n");
 
 describe("MethodTypings", () => {
 
@@ -160,7 +167,7 @@ describe("MethodTypings", () => {
     });
   });
 
-  describe("toString", () => {
+  describe.only("toString", () => {
 
     it("throws if types not generated yet", () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
@@ -177,12 +184,13 @@ describe("MethodTypings", () => {
       })).toBe(expectedJibberTypescript);
     });
 
-    it("returns a string of typings for all languages", async () => {
+    it.only("returns a string of typings for all languages", async () => {
       const methodTypings = new MethodTypings(testOpenRPCDocument);
       await methodTypings.generateTypings();
 
       expect(methodTypings.toString("typescript")).toBe(expectedTypescript);
       expect(methodTypings.toString("rust")).toBe(expectedRust);
+      expect(methodTypings.toString("go")).toBe(expectedGo);
     });
   });
 

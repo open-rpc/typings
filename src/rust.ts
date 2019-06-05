@@ -6,11 +6,7 @@ import {
   GetSchemaTypeName,
 } from "./generator-interface";
 import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
-import { compile } from "json-schema-to-typescript";
 import { quicktype, SchemaTypeSource, TypeSource } from "quicktype";
-import { RegexLiteral } from "@babel/types";
-
-import { inspect } from "util"; // for debugging
 import { ContentDescriptorObject, MethodObject, OpenRPC } from "@open-rpc/meta-schema";
 import _ from "lodash";
 import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
