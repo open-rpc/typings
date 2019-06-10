@@ -4,30 +4,33 @@ import {
   GetMethodTypings,
 } from "./generator-interface";
 import _ from "lodash";
-import { compile } from "json-schema-to-typescript";
+import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-schema";
+import { quicktype } from "quicktype";
 import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName, getSchemasForOpenRPCDocument } from "./utils";
 
 const isComment = (line: string): boolean => {
   const trimmed = line.trim();
-  return _.startsWith(trimmed, "/**") || _.startsWith(trimmed, "*") || _.startsWith(trimmed, "*/");
+  return _.startsWith(trimmed, "//");
 };
 
 const getDefs = (lines: string): string => {
   let commentBuffer: string[] = [];
+
   return _.chain(lines.split("\n"))
     .reduce((memoLines: any[], line) => {
       const lastItem = _.last(memoLines);
-      const singleLine = line.match(/export (.*);/);
+      const singleline = line.match(/type (\S*) (?!struct)(.*)/);
 
       if (isComment(line)) {
         commentBuffer.push(line);
-      } else if (singleLine) {
+      } else if (singleline) {
         memoLines.push([...commentBuffer, line]);
         commentBuffer = [];
       } else {
-        const isStruct = line.match(/export (.*)/);
+        const isStruct = line.match(/type (.*) struct(.*)/);
         if (isStruct) {
+          // const docs = genDocs(line)
           memoLines.push([...commentBuffer, line]);
           commentBuffer = [];
         } else if (_.isArray(lastItem)) {
@@ -44,7 +47,7 @@ const getDefs = (lines: string): string => {
     .uniqBy((exportLine) => {
       const toTest = exportLine instanceof Array ?
         _.reject(exportLine, isComment)[0] : exportLine;
-      const [all, exportType, name, rest] = toTest.match(/export\s(type|interface|enum)\s(\S*)/);
+      const [all, name, rest] = toTest.match(/type (\S*)/);
       return name;
     })
     .flattenDeep()
@@ -52,37 +55,56 @@ const getDefs = (lines: string): string => {
     .value();
 };
 
-const compileOpts = { bannerComment: "", declareExternallyReferenced: false };
-
 export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument) => {
   const schemas = getSchemasForOpenRPCDocument(openrpcDocument);
 
-  const rawTypes = await Promise.all(schemas.map((s: Schema) => compile(s, "", compileOpts)));
+  const rawTypes = await Promise.all(schemas.map(async (s: Schema) => {
+    const typingsForSchema = await quicktype({
+      lang: "go",
+      leadingComments: undefined,
+      rendererOptions: { "just-types": "true" },
+      sources: [{
+        kind: "schema",
+        name: getSchemaTypeName(s),
+        schema: JSON.stringify(s),
+      }],
+    });
 
-  const trimmedAndJoined = _.map(rawTypes, _.trim).join("\n").trim();
-  const defs = getDefs(trimmedAndJoined);
-  return defs;
+    return typingsForSchema.lines;
+  }));
+
+  const types = _.chain(rawTypes)
+    .flatten()
+    .compact()
+    .map(_.trimEnd)
+    .join("\n")
+    .trim()
+    .value();
+
+  return getDefs(types);
 };
 
 const getMethodTyping = (method: MethodObject): string => {
   const result = method.result as ContentDescriptorObject;
-  const resultTypeName = `Promise<${getSchemaTypeName(result.schema)}>`;
+  const resultTypeName = getSchemaTypeName(result.schema);
 
   const methodAliasName = getMethodAliasName(method);
 
   const params = _.map(
     method.params as ContentDescriptorObject[],
-    (param) => `${param.name}: ${getSchemaTypeName(param.schema)}`,
+    (param) => `${param.name} ${getSchemaTypeName(param.schema)}`,
   ).join(", ");
 
-  return `export type ${methodAliasName} = (${params}) => ${resultTypeName};`;
+  return `\t${methodAliasName}(${params}) (${resultTypeName}, error)`;
 };
 
 export const getMethodTypings: GetMethodTypings = (openrpcDocument) => {
-  return _.chain(openrpcDocument.methods)
-    .map((method) => getMethodTyping(method))
-    .join("\n")
-    .value();
+  const fns = openrpcDocument.methods.map(getMethodTyping);
+  return [
+    `type ${toSafeString(openrpcDocument.info.title)} interface {`,
+    fns.join("\n"),
+    "}",
+  ].join("\n");
 };
 
 const generator: Generator = {

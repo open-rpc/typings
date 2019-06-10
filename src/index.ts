@@ -1,5 +1,6 @@
 import typescript from "./typescript";
 import rust from "./rust";
+import go from "./go";
 import { Generator } from "./generator-interface";
 import { OpenRPC, MethodObject, ContentDescriptorObject, Schema } from "@open-rpc/meta-schema";
 import _, { values, filter, partition, zipObject } from "lodash";
@@ -10,15 +11,17 @@ import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 interface Generators {
   typescript: Generator;
   rust: Generator;
+  go: Generator;
   [key: string]: Generator;
 }
 
 const generators: Generators = {
+  go,
   rust,
   typescript,
 };
 
-export type OpenRPCTypingsSupportedLanguages = "rust" | "typescript";
+export type OpenRPCTypingsSupportedLanguages = "rust" | "typescript" | "go";
 
 interface OpenRPCTypings {
   schemas: string;
@@ -115,7 +118,7 @@ export default class MethodTypings {
    * You should call this method first.
    */
   public async generateTypings() {
-    await Promise.all(["rust", "typescript"].map(async (language) => {
+    await Promise.all(Object.keys(generators).map(async (language) => {
       const gen = generators[language];
       const schemas = await gen.getSchemaTypings(this.openrpcDocument);
       const methods = gen.getMethodTypings(this.openrpcDocument);

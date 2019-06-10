@@ -13,7 +13,11 @@ const testOpenRPCDocument = {
       params: [
         {
           name: "jibberNiptip",
-          schema: { title: "niptip", type: "number" },
+          schema: {
+            description: "a really cool niptip",
+            title: "niptip",
+            type: "number",
+          },
         },
       ],
       result: {
@@ -24,15 +28,20 @@ const testOpenRPCDocument = {
             skeepadeep: { title: "skeepadeep", type: "integer" },
           },
           title: "ripslip",
+          type: "object",
         },
-        type: "object",
       },
     },
   ],
   openrpc: "1.0.0",
 } as OpenRPC;
 
-const expectedNipTipTypescript = "export type Niptip = number;";
+const expectedNipTipTypescript = [
+  "/**",
+  " * a really cool niptip",
+  " */",
+  "export type Niptip = number;",
+].join("\n");
 const expectedSkeepadeepTypescript = "export type Skeepadeep = number;";
 const expectedReepadoopTypescript = "export type NumberYqdpe1HS = number;";
 const expectedRipSlipTypescript = [
@@ -56,23 +65,7 @@ const expectedRipSlipRust = [
   "pub type JibberNiptip = f64;",
   "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
   "#[cfg_attr(test, derive(Random))]",
-  "#[serde(untagged)]",
-  "pub enum JibberRipslip {",
-  "    AnythingArray(Vec<Option<serde_json::Value>>),",
-  "",
-  "    Bool(bool),",
-  "",
-  "    Double(f64),",
-  "",
-  "    Integer(i64),",
-  "",
-  "    JibberRipslipClass(JibberRipslipClass),",
-  "",
-  "    String(String),",
-  "}",
-  "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
-  "#[cfg_attr(test, derive(Random))]",
-  "pub struct JibberRipslipClass {",
+  "pub struct JibberRipslip {",
   "    #[serde(rename = \"reepadoop\")]",
   "    reepadoop: Option<f64>,",
   "",
@@ -83,6 +76,28 @@ const expectedRipSlipRust = [
 
 const expectedJibberRust = "pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;";
 const expectedRust = [expectedRipSlipRust, expectedJibberRust].join("\n");
+
+const expectedNipTipGo = "type Niptip float64";
+const expectedSkeepadeepGo = "type Skeepadeep int64";
+const expectedReepadoopGo = "type NumberYqdpe1HS float64";
+const expectedRipSlipGo = [
+  "type Ripslip struct {",
+  "\tReepadoop  *float64 `json:\"reepadoop\"`",
+  "\tSkeepadeep *int64   `json:\"skeepadeep\"`",
+  "}",
+].join("\n");
+const expectedJibberGo = [
+  "type Jipperjobber interface {",
+  "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
+  "}",
+].join("\n");
+const expectedGo = [
+  expectedNipTipGo,
+  expectedReepadoopGo,
+  expectedSkeepadeepGo,
+  expectedRipSlipGo,
+  expectedJibberGo,
+].join("\n");
 
 describe("MethodTypings", () => {
 
@@ -157,6 +172,33 @@ describe("MethodTypings", () => {
 
       expect(methodTypings.getMethodTypings("rust"))
         .toEqual("pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;");
+
+      expect(methodTypings.getMethodTypings("go"))
+        .toEqual([
+          "type Jipperjobber interface {",
+          "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
+          "}",
+        ].join("\n"));
+    });
+
+    it("works when there are no params", async () => {
+      const copytestOpenRPCDocument = cloneDeep(testOpenRPCDocument);
+      copytestOpenRPCDocument.methods[0].params = [];
+      const methodTypings = new MethodTypings(copytestOpenRPCDocument);
+      await methodTypings.generateTypings();
+
+      expect(methodTypings.getMethodTypings("typescript"))
+        .toBe("export type Jibber = () => Promise<Ripslip>;");
+
+      expect(methodTypings.getMethodTypings("rust"))
+        .toBe("pub fn jibber(&mut self) -> RpcRequest<JibberRipslip>;");
+
+      expect(methodTypings.getMethodTypings("go"))
+        .toEqual([
+          "type Jipperjobber interface {",
+          "\tJibber() (Ripslip, error)",
+          "}",
+        ].join("\n"));
     });
   });
 
@@ -183,38 +225,7 @@ describe("MethodTypings", () => {
 
       expect(methodTypings.toString("typescript")).toBe(expectedTypescript);
       expect(methodTypings.toString("rust")).toBe(expectedRust);
-    });
-  });
-
-  describe("getMethodTypings", () => {
-
-    it("throws if types not generated yet", async () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      expect(() => methodTypings.getMethodTypings("typescript")).toThrow();
-    });
-
-    it("returns the function signature for a method", async () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      await methodTypings.generateTypings();
-
-      expect(methodTypings.getMethodTypings("typescript"))
-        .toBe("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
-
-      expect(methodTypings.getMethodTypings("rust"))
-        .toBe("pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;");
-    });
-
-    it("works when there are no params", async () => {
-      const copytestOpenRPCDocument = cloneDeep(testOpenRPCDocument);
-      copytestOpenRPCDocument.methods[0].params = [];
-      const methodTypings = new MethodTypings(copytestOpenRPCDocument);
-      await methodTypings.generateTypings();
-
-      expect(methodTypings.getMethodTypings("typescript"))
-        .toBe("export type Jibber = () => Promise<Ripslip>;");
-
-      expect(methodTypings.getMethodTypings("rust"))
-        .toBe("pub fn jibber(&mut self) -> RpcRequest<JibberRipslip>;");
+      expect(methodTypings.toString("go")).toBe(expectedGo);
     });
   });
 
