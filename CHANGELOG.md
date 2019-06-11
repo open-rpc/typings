@@ -1,3 +1,32 @@
+# [1.4.0](https://github.com/open-rpc/typings/compare/1.3.0...1.4.0) (2019-06-11)
+
+
+### Bug Fixes
+
+* add docs to go ([5abe3fb](https://github.com/open-rpc/typings/commit/5abe3fb))
+* add go to cli ([bd222e8](https://github.com/open-rpc/typings/commit/bd222e8))
+* add tests for go ([f083952](https://github.com/open-rpc/typings/commit/f083952))
+* cli working with go ([1c2a0f5](https://github.com/open-rpc/typings/commit/1c2a0f5))
+* docs were wrong ([7ef3058](https://github.com/open-rpc/typings/commit/7ef3058))
+* make a utils file ([af600d0](https://github.com/open-rpc/typings/commit/af600d0))
+* missing deps ([97fd616](https://github.com/open-rpc/typings/commit/97fd616))
+* more dryness ([142011f](https://github.com/open-rpc/typings/commit/142011f))
+* move vulns to only be in circle ([5bc7d65](https://github.com/open-rpc/typings/commit/5bc7d65))
+* remove generated go tpyings ([a791d81](https://github.com/open-rpc/typings/commit/a791d81))
+* remove more extras ([1103a7b](https://github.com/open-rpc/typings/commit/1103a7b))
+* remove output once again ([da9862c](https://github.com/open-rpc/typings/commit/da9862c))
+* remove unecessary code ([ccef33f](https://github.com/open-rpc/typings/commit/ccef33f))
+* simplify things ([517adc8](https://github.com/open-rpc/typings/commit/517adc8))
+* swap error and result ([e861765](https://github.com/open-rpc/typings/commit/e861765))
+* tests broken ([014a1d6](https://github.com/open-rpc/typings/commit/014a1d6))
+* uncomment other tests ([24cef35](https://github.com/open-rpc/typings/commit/24cef35))
+* update lodash typings ([faad27d](https://github.com/open-rpc/typings/commit/faad27d))
+
+
+### Features
+
+* add go support ([47d51d1](https://github.com/open-rpc/typings/commit/47d51d1))
+
 # [1.3.0](https://github.com/open-rpc/typings/compare/1.2.1...1.3.0) (2019-05-31)
 
 
