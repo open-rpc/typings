@@ -12,15 +12,27 @@
   </span>
 </center>
 
+## Installing
+
+`npm install @open-rpc/typings`
 
 ## CLI
 
-Example:
-
 ```bash
-$ open-rpc-typings
-    -d https://raw.githubusercontent.com/open-rpc/examples/master/service-descriptions/simple-math-openrpc.json
-    -o ./open-rpc-types
+$ open-rpc-typings --help
+Usage: cli [options]
+
+Options:
+  -v, --version                     output the version number
+  -d, --document [openrpcDocument]  JSON string or a Path/Url pointing to an open rpc schema (default: "./openrpc.json")
+  --output-rs [directory]           output dir of rust typings
+  --output-ts [directory]           output dir of typescript typings
+  --output-go [directory]           output dir of go typings
+  --name-rs [file]                  File name of rust typings (default: "./index")
+  --name-ts [file]                  File name of typescript typings (default: "./index")
+  --name-go [file]                  File name of go typings (default: "./index")
+  -h, --help                        output usage information
+
 ```
 
 ## JS/TS SDK
