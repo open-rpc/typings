@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>OneOfObject | @open-rpc/typings</title>
+	<title>LicenceObject | @open-rpc/typings</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="oneofobject.html">OneOfObject</a>
+					<a href="licenceobject.html">LicenceObject</a>
 				</li>
 			</ul>
-			<h1>Interface OneOfObject</h1>
+			<h1>Interface LicenceObject</h1>
 		</div>
 	</div>
 </header>
@@ -68,9 +68,19 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">OneOfObject</span>
+						<span class="target">LicenceObject</span>
 					</li>
 				</ul>
+			</section>
+			<section class="tsd-panel tsd-kind-interface tsd-is-external">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>k: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">any</span></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>This interface was referenced by <code>LicenceObject</code>&#39;s JSON-Schema definition
+						via the <code>patternProperty</code> &quot;^x-&quot;.</p>
+					</div>
+				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
@@ -79,7 +89,8 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="oneofobject.html#oneof" class="tsd-kind-icon">one<wbr>Of</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="licenceobject.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="licenceobject.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 					</div>
@@ -88,12 +99,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="oneof" class="tsd-anchor"></a>
-					<h3>one<wbr>Of</h3>
-					<div class="tsd-signature tsd-kind-icon">one<wbr>Of<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><a href="referenceobject.html" class="tsd-signature-type">ReferenceObject</a><span class="tsd-signature-symbol"> | </span><a href="contentdescriptorobject.html" class="tsd-signature-type">ContentDescriptorObject</a><span class="tsd-signature-symbol"> | </span><a href="oneofobject.html" class="tsd-signature-type">OneOfObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="name" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> name</h3>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <a href="../globals.html#licensename" class="tsd-signature-type">LicenseName</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@open-rpc/meta-schema/build/src/index.d.ts:187</li>
+							<li>Defined in node_modules/@open-rpc/meta-schema/build/src/index.d.ts:127</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+					<a name="url" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> url</h3>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <a href="../globals.html#licenseurl" class="tsd-signature-type">LicenseUrl</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@open-rpc/meta-schema/build/src/index.d.ts:128</li>
 						</ul>
 					</aside>
 				</section>
@@ -112,10 +133,13 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-is-external">
-						<a href="oneofobject.html" class="tsd-kind-icon">One<wbr>OfObject</a>
+						<a href="licenceobject.html" class="tsd-kind-icon">Licence<wbr>Object</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="oneofobject.html#oneof" class="tsd-kind-icon">one<wbr>Of</a>
+								<a href="licenceobject.html#name" class="tsd-kind-icon">name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
+								<a href="licenceobject.html#url" class="tsd-kind-icon">url</a>
 							</li>
 						</ul>
 					</li>
