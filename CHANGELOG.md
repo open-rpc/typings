@@ -1,3 +1,11 @@
+## [1.4.1](https://github.com/open-rpc/typings/compare/1.4.0...1.4.1) (2019-06-11)
+
+
+### Bug Fixes
+
+* update example ([e709f61](https://github.com/open-rpc/typings/commit/e709f61))
+* update readme ([01f7703](https://github.com/open-rpc/typings/commit/01f7703))
+
 # [1.4.0](https://github.com/open-rpc/typings/compare/1.3.0...1.4.0) (2019-06-11)
 
 
