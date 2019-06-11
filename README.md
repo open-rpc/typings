@@ -45,5 +45,5 @@ const typings = new OpenRPCTypings(OpenRPCDocument);
 
 await typings.generate()
 
-const rustTypings = typings.getAllUniqueTypings("rust");
+const rustTypings = typings.toString("rust");
 ```
