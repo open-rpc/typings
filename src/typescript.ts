@@ -72,7 +72,7 @@ const getMethodTyping = (method: MethodObject): string => {
 
   const params = _.map(
     method.params as ContentDescriptorObject[],
-    (param) => `${param.name}: ${getSchemaTypeName(param.schema)}`,
+    (param) => `${param.name}${param.required ? "" : "?"}: ${getSchemaTypeName(param.schema)}`,
   ).join(", ");
 
   return `export type ${methodAliasName} = (${params}) => ${resultTypeName};`;
