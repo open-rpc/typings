@@ -1,3 +1,13 @@
+## [1.4.2](https://github.com/open-rpc/typings/compare/1.4.1...1.4.2) (2019-06-13)
+
+
+### Bug Fixes
+
+* add optional param for typescript ([9c250b6](https://github.com/open-rpc/typings/commit/9c250b6)), closes [#48](https://github.com/open-rpc/typings/issues/48)
+* remove unused deps ([5bf3fef](https://github.com/open-rpc/typings/commit/5bf3fef))
+* tests pass with optional args ([b523020](https://github.com/open-rpc/typings/commit/b523020))
+* update packagelock ([f2af232](https://github.com/open-rpc/typings/commit/f2af232))
+
 ## [1.4.1](https://github.com/open-rpc/typings/compare/1.4.0...1.4.1) (2019-06-11)
 
 
