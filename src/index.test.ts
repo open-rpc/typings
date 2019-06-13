@@ -13,6 +13,7 @@ const testOpenRPCDocument = {
       params: [
         {
           name: "jibberNiptip",
+          required: true,
           schema: {
             description: "a really cool niptip",
             title: "niptip",
@@ -22,6 +23,7 @@ const testOpenRPCDocument = {
       ],
       result: {
         name: "jibberRipslip",
+        required: true,
         schema: {
           properties: {
             reepadoop: { type: "number" },
@@ -335,13 +337,8 @@ describe("MethodTypings", () => {
           name: "jobber",
           params: [
             {
-              name: "ripper",
-              schema: {
-                type: "string",
-              },
-            },
-            {
               name: "ripslip",
+              required: true,
               schema: {
                 anyOf: [
                   {
@@ -362,6 +359,7 @@ describe("MethodTypings", () => {
             },
             {
               name: "biperbopper",
+              required: true,
               schema: {
                 oneOf: [
                   {
@@ -381,6 +379,7 @@ describe("MethodTypings", () => {
             },
             {
               name: "slippyslopper",
+              required: true,
               schema: {
                 allOf: [
                   {
@@ -401,6 +400,12 @@ describe("MethodTypings", () => {
                 ],
               },
             },
+            {
+              name: "ripper",
+              schema: {
+                type: "string",
+              },
+            },
           ],
           result: {
             name: "froppledocks",
@@ -416,8 +421,7 @@ describe("MethodTypings", () => {
     const methodTypings = new MethodTypings(doc);
     await methodTypings.generateTypings();
     expect(methodTypings.toString("typescript"))
-      .toBe(`export type StringWxzVcTo3 = string;
-/**
+      .toBe(`/**
  * its a b.
  */
 export type Bee = number;
@@ -444,6 +448,7 @@ export interface WithFoo {
   [k: string]: any;
 }
 export type AllOfHguKC4QU = WithBaz & WithBar & WithFoo;
-export type Jobber = (ripper: StringWxzVcTo3, ripslip: AnyOfBWswD897, biperbopper: OneOfDgZSW92J, slippyslopper: AllOfHguKC4QU) => Promise<StringWxzVcTo3>;`); //tslint:disable-line
+export type StringWxzVcTo3 = string;
+export type Jobber = (ripslip: AnyOfBWswD897, biperbopper: OneOfDgZSW92J, slippyslopper: AllOfHguKC4QU, ripper?: StringWxzVcTo3) => Promise<StringWxzVcTo3>;`); //tslint:disable-line
   });
 });
