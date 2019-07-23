@@ -112,7 +112,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-call-validator.d.ts:10</li>
+									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-call-validator.d.ts:11</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -147,13 +147,13 @@
 					<a name="validate" class="tsd-anchor"></a>
 					<h3>validate</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>methodName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="methodcallparametervalidationerror.html" class="tsd-signature-type">MethodCallParameterValidationError</a><span class="tsd-signature-symbol">[]</span></li>
+						<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>methodName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MethodCallParameterValidationError</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MethodCallMethodNotFoundError</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-call-validator.d.ts:42</li>
+									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-call-validator.d.ts:44</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -185,8 +185,12 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="methodcallparametervalidationerror.html" class="tsd-signature-type">MethodCallParameterValidationError</a><span class="tsd-signature-symbol">[]</span></h4>
-							<p>an array of parameter validation errors, or if there are none, an empty array.</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MethodCallParameterValidationError</span><span class="tsd-signature-symbol">[]</span>
+								<span class="tsd-signature-symbol"> | </span>
+								<span class="tsd-signature-type">MethodCallMethodNotFoundError</span>
+							</h4>
+							<p>an array of parameter validation errors, or if there are none, an empty array.
+							if the method name is invalid, a [[MethodCallMethodNotFoundError]] is returned.</p>
 						</li>
 					</ul>
 				</section>

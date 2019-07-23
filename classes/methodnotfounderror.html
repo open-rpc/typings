@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>MethodCallParameterValidationError | @open-rpc/typings</title>
+	<title>MethodNotFoundError | @open-rpc/typings</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="methodcallparametervalidationerror.html">MethodCallParameterValidationError</a>
+					<a href="methodnotfounderror.html">MethodNotFoundError</a>
 				</li>
 			</ul>
-			<h1>Class MethodCallParameterValidationError</h1>
+			<h1>Class MethodNotFoundError</h1>
 		</div>
 	</div>
 </header>
@@ -67,7 +67,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Provides an error interface for handling when a function call has invalid parameters.</p>
+						<p>Provides an error interface for handling when a method is trying to be called but does not exist.</p>
 					</div>
 				</div>
 			</section>
@@ -75,7 +75,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">MethodCallParameterValidationError</span>
+						<span class="target">MethodNotFoundError</span>
 					</li>
 				</ul>
 			</section>
@@ -92,17 +92,17 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="methodcallparametervalidationerror.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="methodnotfounderror.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodcallparametervalidationerror.html#expectedschema" class="tsd-kind-icon">expected<wbr>Schema</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodcallparametervalidationerror.html#message" class="tsd-kind-icon">message</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodcallparametervalidationerror.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodcallparametervalidationerror.html#paramindex" class="tsd-kind-icon">param<wbr>Index</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodcallparametervalidationerror.html#receievedparam" class="tsd-kind-icon">receieved<wbr>Param</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodnotfounderror.html#message" class="tsd-kind-icon">message</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodnotfounderror.html#methodname" class="tsd-kind-icon">method<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodnotfounderror.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodnotfounderror.html#openrpcdocument" class="tsd-kind-icon">openrpc<wbr>Document</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="methodnotfounderror.html#receievedparams" class="tsd-kind-icon">receieved<wbr>Params</a></li>
 							</ul>
 						</section>
 					</div>
@@ -114,13 +114,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Method<wbr>Call<wbr>Parameter<wbr>Validation<wbr>Error<span class="tsd-signature-symbol">(</span>paramIndex<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, expectedSchema<span class="tsd-signature-symbol">: </span><a href="../interfaces/schema.html" class="tsd-signature-type">Schema</a>, receievedParam<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, errors<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ErrorObject</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="methodcallparametervalidationerror.html" class="tsd-signature-type">MethodCallParameterValidationError</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Method<wbr>Not<wbr>Found<wbr>Error<span class="tsd-signature-symbol">(</span>methodName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, openrpcDocument<span class="tsd-signature-symbol">: </span><a href="../interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a>, receievedParams<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="methodnotfounderror.html" class="tsd-signature-type">MethodNotFoundError</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/parameter-validation-error.d.ts:12</li>
+									<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-not-found-error.d.ts:10</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -128,40 +128,31 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>paramIndex: <span class="tsd-signature-type">number</span></h5>
+									<h5>methodName: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The index of the param that for this error (index
-											of the param in MethodObject.params).</p>
+											<p>The method name that was used.</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>expectedSchema: <a href="../interfaces/schema.html" class="tsd-signature-type">Schema</a></h5>
+									<h5>openrpcDocument: <a href="../interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The expected JSON Schema for the passed in value.</p>
+											<p>The OpenRPC document that the method was used against.</p>
 										</div>
 									</div>
 								</li>
 								<li>
-									<h5>receievedParam: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> receievedParams: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>The value of the param passed to the method call.</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<h5>errors: <span class="tsd-signature-type">ErrorObject</span><span class="tsd-signature-symbol">[]</span></h5>
-									<div class="tsd-comment tsd-typography">
-										<div class="lead">
-											<p>The errors recieved by ajv</p>
+											<p>The params, if any, that were used.</p>
 										</div>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="methodcallparametervalidationerror.html" class="tsd-signature-type">MethodCallParameterValidationError</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="methodnotfounderror.html" class="tsd-signature-type">MethodNotFoundError</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -169,22 +160,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="expectedschema" class="tsd-anchor"></a>
-					<h3>expected<wbr>Schema</h3>
-					<div class="tsd-signature tsd-kind-icon">expected<wbr>Schema<span class="tsd-signature-symbol">:</span> <a href="../interfaces/schema.html" class="tsd-signature-type">Schema</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/parameter-validation-error.d.ts:8</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="message" class="tsd-anchor"></a>
 					<h3>message</h3>
 					<div class="tsd-signature tsd-kind-icon">message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/parameter-validation-error.d.ts:12</li>
+							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-not-found-error.d.ts:10</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="methodname" class="tsd-anchor"></a>
+					<h3>method<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">method<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-not-found-error.d.ts:6</li>
 						</ul>
 					</aside>
 				</section>
@@ -194,27 +185,27 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/parameter-validation-error.d.ts:11</li>
+							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-not-found-error.d.ts:9</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="paramindex" class="tsd-anchor"></a>
-					<h3>param<wbr>Index</h3>
-					<div class="tsd-signature tsd-kind-icon">param<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="openrpcdocument" class="tsd-anchor"></a>
+					<h3>openrpc<wbr>Document</h3>
+					<div class="tsd-signature tsd-kind-icon">openrpc<wbr>Document<span class="tsd-signature-symbol">:</span> <a href="../interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/parameter-validation-error.d.ts:7</li>
+							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-not-found-error.d.ts:7</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="receievedparam" class="tsd-anchor"></a>
-					<h3>receieved<wbr>Param</h3>
-					<div class="tsd-signature tsd-kind-icon">receieved<wbr>Param<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="receievedparams" class="tsd-anchor"></a>
+					<h3>receieved<wbr>Params</h3>
+					<div class="tsd-signature tsd-kind-icon">receieved<wbr>Params<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/parameter-validation-error.d.ts:9</li>
+							<li>Defined in node_modules/@open-rpc/schema-utils-js/build/src/method-call-validator/method-not-found-error.d.ts:8</li>
 						</ul>
 					</aside>
 				</section>
@@ -233,25 +224,25 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-is-external">
-						<a href="methodcallparametervalidationerror.html" class="tsd-kind-icon">Method<wbr>Call<wbr>Parameter<wbr>Validation<wbr>Error</a>
+						<a href="methodnotfounderror.html" class="tsd-kind-icon">Method<wbr>Not<wbr>Found<wbr>Error</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-								<a href="methodcallparametervalidationerror.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="methodnotfounderror.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="methodcallparametervalidationerror.html#expectedschema" class="tsd-kind-icon">expected<wbr>Schema</a>
+								<a href="methodnotfounderror.html#message" class="tsd-kind-icon">message</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="methodcallparametervalidationerror.html#message" class="tsd-kind-icon">message</a>
+								<a href="methodnotfounderror.html#methodname" class="tsd-kind-icon">method<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="methodcallparametervalidationerror.html#name" class="tsd-kind-icon">name</a>
+								<a href="methodnotfounderror.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="methodcallparametervalidationerror.html#paramindex" class="tsd-kind-icon">param<wbr>Index</a>
+								<a href="methodnotfounderror.html#openrpcdocument" class="tsd-kind-icon">openrpc<wbr>Document</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="methodcallparametervalidationerror.html#receievedparam" class="tsd-kind-icon">receieved<wbr>Param</a>
+								<a href="methodnotfounderror.html#receievedparams" class="tsd-kind-icon">receieved<wbr>Params</a>
 							</li>
 						</ul>
 					</li>
