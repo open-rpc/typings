@@ -1,3 +1,14 @@
+## [1.4.3](https://github.com/open-rpc/typings/compare/1.4.2...1.4.3) (2019-07-23)
+
+
+### Bug Fixes
+
+* add git checkout ([ab2a057](https://github.com/open-rpc/typings/commit/ab2a057))
+* install semantic rel deps globally in ci ([42c3236](https://github.com/open-rpc/typings/commit/42c3236))
+* ordering ([b7cb1f9](https://github.com/open-rpc/typings/commit/b7cb1f9))
+* remove semantic release deps ([49ce6ac](https://github.com/open-rpc/typings/commit/49ce6ac))
+* update packagelock ([d8f65b4](https://github.com/open-rpc/typings/commit/d8f65b4))
+
 ## [1.4.2](https://github.com/open-rpc/typings/compare/1.4.1...1.4.2) (2019-06-13)
 
 
