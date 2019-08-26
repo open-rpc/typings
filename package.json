@@ -38,7 +38,7 @@
     "fs-extra": "^8.0.1",
     "json-schema-to-typescript": "^7.0.0",
     "lodash": "^4.17.11",
-    "quicktype": "13.0.10"
+    "quicktype": "15.0.200"
   },
   "devDependencies": {
     "typedoc": "^0.14.2",
