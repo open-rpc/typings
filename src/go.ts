@@ -6,8 +6,8 @@ import {
 import _ from "lodash";
 import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-schema";
-import { quicktype } from "quicktype";
-import { collectAndRefSchemas, getSchemaTypeName, getMethodAliasName, getSchemasForOpenRPCDocument } from "./utils";
+import { quicktype, InputData, JSONSchemaInput } from "quicktype-core";
+import { getSchemaTypeName, getMethodAliasName, getSchemasForOpenRPCDocument } from "./utils";
 
 const isComment = (line: string): boolean => {
   const trimmed = line.trim();
@@ -54,20 +54,23 @@ const getDefs = (lines: string): string => {
     .join("\n")
     .value();
 };
+const getInputData = (name: string, schema: string ): InputData => {
+    const inputData = new InputData();
+    const input = new JSONSchemaInput(undefined);
+    input.addSource({name, schema});
+    inputData.addInput(input);
+    return inputData;
+};
 
 export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument) => {
   const schemas = getSchemasForOpenRPCDocument(openrpcDocument);
 
   const rawTypes = await Promise.all(schemas.map(async (s: Schema) => {
     const typingsForSchema = await quicktype({
+      inputData: getInputData(getSchemaTypeName(s), JSON.stringify(s)),
       lang: "go",
       leadingComments: undefined,
       rendererOptions: { "just-types": "true" },
-      sources: [{
-        kind: "schema",
-        name: getSchemaTypeName(s),
-        schema: JSON.stringify(s),
-      }],
     });
 
     return typingsForSchema.lines;

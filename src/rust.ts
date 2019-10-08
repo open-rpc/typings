@@ -5,20 +5,24 @@ import {
   GetMethodAliasName,
   GetSchemaTypeName,
 } from "./generator-interface";
-import { generateMethodParamId, generateMethodResultId } from "@open-rpc/schema-utils-js";
-import { quicktype, SchemaTypeSource, TypeSource } from "quicktype";
+
+import { quicktype, InputData, JSONSchemaInput, JSONSchemaSourceData } from "quicktype-core";
 import { ContentDescriptorObject, MethodObject, OpenRPC } from "@open-rpc/meta-schema";
 import _ from "lodash";
 import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
-
-const getQuickTypeSources = (contentDescriptors: ContentDescriptorObject[]): SchemaTypeSource[] => {
-  return _.chain(contentDescriptors)
-    .map((contentDescriptor) => ({
-      kind: "schema",
+const getInputData = (contentDescriptors: ContentDescriptorObject[]): InputData => {
+  const inputData = new InputData();
+  contentDescriptors.forEach((contentDescriptor) => {
+    const input = new JSONSchemaInput(undefined);
+    const source = {
       name: getSchemaTypeName(contentDescriptor),
       schema: JSON.stringify(contentDescriptor.schema),
-    } as SchemaTypeSource))
-    .value() as SchemaTypeSource[];
+    };
+    input.addSource(source);
+    // tslint:disable-next-line:no-debugger
+    inputData.addInput(input);
+  });
+  return inputData;
 };
 
 const deriveString = "#[derive(Serialize, Deserialize)]";
@@ -27,12 +31,12 @@ const cfgDeriveString = "#[cfg_attr(test, derive(Random))]";
 const untaggedString = "#[serde(untagged)]";
 
 const handleEachContentDescriptor = async (contentDescriptor: ContentDescriptorObject) => {
-  const sources = getQuickTypeSources([contentDescriptor]);
+  const inputData = getInputData([contentDescriptor]);
   const result = await quicktype({
+    inputData,
     lang: "rust",
     leadingComments: undefined,
-    rendererOptions: { "just-types": "true" },
-    sources,
+    rendererOptions: { "just-types": "true", "visibility": "public" },
   });
 
   return _.chain(result.lines)

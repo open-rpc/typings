@@ -69,10 +69,10 @@ const expectedRipSlipRust = [
   "#[cfg_attr(test, derive(Random))]",
   "pub struct JibberRipslip {",
   "    #[serde(rename = \"reepadoop\")]",
-  "    reepadoop: Option<f64>,",
+  "    pub reepadoop: Option<f64>,",
   "",
   "    #[serde(rename = \"skeepadeep\")]",
-  "    skeepadeep: Option<i64>,",
+  "    pub skeepadeep: Option<i64>,",
   "}",
 ].join("\n");
 
@@ -84,8 +84,8 @@ const expectedSkeepadeepGo = "type Skeepadeep int64";
 const expectedReepadoopGo = "type NumberYqdpe1HS float64";
 const expectedRipSlipGo = [
   "type Ripslip struct {",
-  "\tReepadoop  *float64 `json:\"reepadoop\"`",
-  "\tSkeepadeep *int64   `json:\"skeepadeep\"`",
+  "\tReepadoop  *float64 `json:\"reepadoop,omitempty\"`",
+  "\tSkeepadeep *int64   `json:\"skeepadeep,omitempty\"`",
   "}",
 ].join("\n");
 const expectedJibberGo = [
@@ -321,7 +321,7 @@ describe("MethodTypings", () => {
       "#[cfg_attr(test, derive(Random))]",
       "pub struct Ripslip1 {",
       "    #[serde(rename = \"ripslip\")]",
-      "    ripslip: Option<bool>,",
+      "    pub ripslip: Option<bool>,",
       "}",
     ].join("\n"));
   });
