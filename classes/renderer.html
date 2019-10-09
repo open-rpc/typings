@@ -69,6 +69,11 @@
 				<ul class="tsd-hierarchy">
 					<li>
 						<span class="target">Renderer</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<a href="conveniencerenderer.html" class="tsd-signature-type">ConvenienceRenderer</a>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -91,14 +96,22 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#changeindent" class="tsd-kind-icon">change<wbr>Indent</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emitannotated" class="tsd-kind-icon">emit<wbr>Annotated</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emitgatheredsource" class="tsd-kind-icon">emit<wbr>Gathered<wbr>Source</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emitissue" class="tsd-kind-icon">emit<wbr>Issue</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emititem" class="tsd-kind-icon">emit<wbr>Item</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emititemonce" class="tsd-kind-icon">emit<wbr>Item<wbr>Once</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emitline" class="tsd-kind-icon">emit<wbr>Line</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emitlineonce" class="tsd-kind-icon">emit<wbr>Line<wbr>Once</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#emitmultiline" class="tsd-kind-icon">emit<wbr>Multiline</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#ensureblankline" class="tsd-kind-icon">ensure<wbr>Blank<wbr>Line</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="renderer.html#foreach" class="tsd-kind-icon">for<wbr>Each</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="renderer.html#foreachwithblanklines" class="tsd-kind-icon">for<wbr>Each<wbr>With<wbr>Blank<wbr>Lines</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#gathersource" class="tsd-kind-icon">gather<wbr>Source</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#indent" class="tsd-kind-icon">indent</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#processhandlebarstemplate" class="tsd-kind-icon">process<wbr>Handlebars<wbr>Template</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="renderer.html#iterableforeach" class="tsd-kind-icon">iterable<wbr>For<wbr>Each</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#preventblankline" class="tsd-kind-icon">prevent<wbr>Blank<wbr>Line</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="renderer.html#render" class="tsd-kind-icon">render</a></li>
 							</ul>
 						</section>
@@ -111,13 +124,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Renderer<span class="tsd-signature-symbol">(</span>targetLanguage<span class="tsd-signature-symbol">: </span><a href="targetlanguage.html" class="tsd-signature-type">TargetLanguage</a>, typeGraph<span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a>, leadingComments<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="renderer.html" class="tsd-signature-type">Renderer</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Renderer<span class="tsd-signature-symbol">(</span>targetLanguage<span class="tsd-signature-symbol">: </span><a href="targetlanguage.html" class="tsd-signature-type">TargetLanguage</a>, renderContext<span class="tsd-signature-symbol">: </span><a href="../globals.html#rendercontext" class="tsd-signature-type">RenderContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="renderer.html" class="tsd-signature-type">Renderer</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:23</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:24</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -126,10 +139,7 @@
 									<h5>targetLanguage: <a href="targetlanguage.html" class="tsd-signature-type">TargetLanguage</a></h5>
 								</li>
 								<li>
-									<h5>typeGraph: <a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></h5>
-								</li>
-								<li>
-									<h5>leadingComments: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<h5>renderContext: <a href="../globals.html#rendercontext" class="tsd-signature-type">RenderContext</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="renderer.html" class="tsd-signature-type">Renderer</a></h4>
@@ -142,16 +152,39 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="names" class="tsd-anchor"></a>
 					<h3>names</h3>
-					<div class="tsd-signature tsd-kind-icon">names<span class="tsd-signature-symbol">:</span> <a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:48</li>
+							<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:49</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="changeindent" class="tsd-anchor"></a>
+					<h3>change<wbr>Indent</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">change<wbr>Indent<span class="tsd-signature-symbol">(</span>offset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:38</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>offset: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="emitannotated" class="tsd-anchor"></a>
 					<h3>emit<wbr>Annotated</h3>
@@ -162,7 +195,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:33</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:35</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -191,6 +224,29 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="emitgatheredsource" class="tsd-anchor"></a>
+					<h3>emit<wbr>Gathered<wbr>Source</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">emit<wbr>Gathered<wbr>Source<span class="tsd-signature-symbol">(</span>items<span class="tsd-signature-symbol">: </span><a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:34</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>items: <a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="emitissue" class="tsd-anchor"></a>
 					<h3>emit<wbr>Issue</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
@@ -200,7 +256,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:34</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:36</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -229,6 +285,52 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="emititem" class="tsd-anchor"></a>
+					<h3>emit<wbr>Item</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">emit<wbr>Item<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:28</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>item: <a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="emititemonce" class="tsd-anchor"></a>
+					<h3>emit<wbr>Item<wbr>Once</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">emit<wbr>Item<wbr>Once<span class="tsd-signature-symbol">(</span>item<span class="tsd-signature-symbol">: </span><a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:29</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>item: <a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="emitline" class="tsd-anchor"></a>
 					<h3>emit<wbr>Line</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
@@ -238,7 +340,30 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:31</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:31</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>lineParts: <a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="emitlineonce" class="tsd-anchor"></a>
+					<h3>emit<wbr>Line<wbr>Once</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">emit<wbr>Line<wbr>Once<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>lineParts<span class="tsd-signature-symbol">: </span><a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:30</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -261,7 +386,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:32</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:32</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -274,62 +399,23 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
-					<a name="foreach" class="tsd-anchor"></a>
-					<h3>for<wbr>Each</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">for<wbr>Each&lt;K, V&gt;<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><a href="../modules/collection.html" class="tsd-signature-type">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span>, interposedBlankLines<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, leadingBlankLine<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="ensureblankline" class="tsd-anchor"></a>
+					<h3>ensure<wbr>Blank<wbr>Line</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">ensure<wbr>Blank<wbr>Line<span class="tsd-signature-symbol">(</span>numBlankLines<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:37</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:26</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-type-parameters-title">Type parameters</h4>
-							<ul class="tsd-type-parameters">
-								<li>
-									<h4>K</h4>
-								</li>
-								<li>
-									<h4>V</h4>
-								</li>
-							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>iterable: <a href="../modules/collection.html" class="tsd-signature-type">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-								<li>
-									<h5>interposedBlankLines: <span class="tsd-signature-type">boolean</span></h5>
-								</li>
-								<li>
-									<h5>leadingBlankLine: <span class="tsd-signature-type">boolean</span></h5>
-								</li>
-								<li>
-									<h5>emitter: <span class="tsd-signature-type">function</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-siganture">
-											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">V</span>, k<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>v: <span class="tsd-signature-type">V</span></h5>
-														</li>
-														<li>
-															<h5>k: <span class="tsd-signature-type">K</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> numBlankLines: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -337,16 +423,16 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
-					<a name="foreachwithblanklines" class="tsd-anchor"></a>
-					<h3>for<wbr>Each<wbr>With<wbr>Blank<wbr>Lines</h3>
+					<a name="foreach" class="tsd-anchor"></a>
+					<h3>for<wbr>Each</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">for<wbr>Each<wbr>With<wbr>Blank<wbr>Lines&lt;K, V&gt;<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><a href="../modules/collection.html" class="tsd-signature-type">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span>, blankLineLocations<span class="tsd-signature-symbol">: </span><a href="../globals.html#blanklinelocations" class="tsd-signature-type">BlankLineLocations</a>, emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">for<wbr>Each&lt;K, V&gt;<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span>, interposedBlankLines<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, leadingBlankLines<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:38</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:40</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -361,17 +447,20 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>iterable: <a href="../modules/collection.html" class="tsd-signature-type">Collection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>iterable: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>blankLineLocations: <a href="../globals.html#blanklinelocations" class="tsd-signature-type">BlankLineLocations</a></h5>
+									<h5>interposedBlankLines: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>leadingBlankLines: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
 									<h5>emitter: <span class="tsd-signature-type">function</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">V</span>, k<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">V</span>, k<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, position<span class="tsd-signature-symbol">: </span><a href="../globals.html#foreachposition" class="tsd-signature-type">ForEachPosition</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
@@ -383,6 +472,9 @@
 														<li>
 															<h5>k: <span class="tsd-signature-type">K</span></h5>
 														</li>
+														<li>
+															<h5>position: <a href="../globals.html#foreachposition" class="tsd-signature-type">ForEachPosition</a></h5>
+														</li>
 													</ul>
 													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 												</li>
@@ -391,7 +483,104 @@
 									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="foreachwithblanklines" class="tsd-anchor"></a>
+					<h3>for<wbr>Each<wbr>With<wbr>Blank<wbr>Lines</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">for<wbr>Each<wbr>With<wbr>Blank<wbr>Lines&lt;K, V&gt;<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span>, blankLineConfig<span class="tsd-signature-symbol">: </span><a href="../globals.html#blanklineconfig" class="tsd-signature-type">BlankLineConfig</a>, emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:41</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>K</h4>
+								</li>
+								<li>
+									<h4>V</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>iterable: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">V</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>blankLineConfig: <a href="../globals.html#blanklineconfig" class="tsd-signature-type">BlankLineConfig</a></h5>
+								</li>
+								<li>
+									<h5>emitter: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">V</span>, k<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, position<span class="tsd-signature-symbol">: </span><a href="../globals.html#foreachposition" class="tsd-signature-type">ForEachPosition</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>v: <span class="tsd-signature-type">V</span></h5>
+														</li>
+														<li>
+															<h5>k: <span class="tsd-signature-type">K</span></h5>
+														</li>
+														<li>
+															<h5>position: <a href="../globals.html#foreachposition" class="tsd-signature-type">ForEachPosition</a></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="gathersource" class="tsd-anchor"></a>
+					<h3>gather<wbr>Source</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">gather<wbr>Source<span class="tsd-signature-symbol">(</span>emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:33</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>emitter: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#sourcelike" class="tsd-signature-type">Sourcelike</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -405,7 +594,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:39</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:42</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -430,26 +619,73 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="processhandlebarstemplate" class="tsd-anchor"></a>
-					<h3>process<wbr>Handlebars<wbr>Template</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">process<wbr>Handlebars<wbr>Template<span class="tsd-signature-symbol">(</span>template<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+					<a name="iterableforeach" class="tsd-anchor"></a>
+					<h3>iterable<wbr>For<wbr>Each</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">iterable<wbr>For<wbr>Each&lt;T&gt;<span class="tsd-signature-symbol">(</span>iterable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, emitter<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:47</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:39</li>
 								</ul>
 							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>template: <span class="tsd-signature-type">string</span></h5>
+									<h5>iterable: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>emitter: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>v<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, position<span class="tsd-signature-symbol">: </span><a href="../globals.html#foreachposition" class="tsd-signature-type">ForEachPosition</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>v: <span class="tsd-signature-type">T</span></h5>
+														</li>
+														<li>
+															<h5>position: <a href="../globals.html#foreachposition" class="tsd-signature-type">ForEachPosition</a></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="preventblankline" class="tsd-anchor"></a>
+					<h3>prevent<wbr>Blank<wbr>Line</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">prevent<wbr>Blank<wbr>Line<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:27</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -463,7 +699,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Renderer.d.ts:45</li>
+									<li>Defined in node_modules/quicktype-core/dist/Renderer.d.ts:48</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -500,16 +736,34 @@
 								<a href="renderer.html#names" class="tsd-kind-icon">names</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="renderer.html#changeindent" class="tsd-kind-icon">change<wbr>Indent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="renderer.html#emitannotated" class="tsd-kind-icon">emit<wbr>Annotated</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="renderer.html#emitgatheredsource" class="tsd-kind-icon">emit<wbr>Gathered<wbr>Source</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="renderer.html#emitissue" class="tsd-kind-icon">emit<wbr>Issue</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="renderer.html#emititem" class="tsd-kind-icon">emit<wbr>Item</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="renderer.html#emititemonce" class="tsd-kind-icon">emit<wbr>Item<wbr>Once</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="renderer.html#emitline" class="tsd-kind-icon">emit<wbr>Line</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="renderer.html#emitlineonce" class="tsd-kind-icon">emit<wbr>Line<wbr>Once</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="renderer.html#emitmultiline" class="tsd-kind-icon">emit<wbr>Multiline</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="renderer.html#ensureblankline" class="tsd-kind-icon">ensure<wbr>Blank<wbr>Line</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
 								<a href="renderer.html#foreach" class="tsd-kind-icon">for<wbr>Each</a>
@@ -518,10 +772,16 @@
 								<a href="renderer.html#foreachwithblanklines" class="tsd-kind-icon">for<wbr>Each<wbr>With<wbr>Blank<wbr>Lines</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="renderer.html#indent" class="tsd-kind-icon">indent</a>
+								<a href="renderer.html#gathersource" class="tsd-kind-icon">gather<wbr>Source</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="renderer.html#processhandlebarstemplate" class="tsd-kind-icon">process<wbr>Handlebars<wbr>Template</a>
+								<a href="renderer.html#indent" class="tsd-kind-icon">indent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
+								<a href="renderer.html#iterableforeach" class="tsd-kind-icon">iterable<wbr>For<wbr>Each</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="renderer.html#preventblankline" class="tsd-kind-icon">prevent<wbr>Blank<wbr>Line</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="renderer.html#render" class="tsd-kind-icon">render</a>

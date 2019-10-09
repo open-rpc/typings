@@ -101,6 +101,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="setoperationtype.html#debugprintkind" class="tsd-kind-icon">debug<wbr>Print<wbr>Kind</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="setoperationtype.html#hasnames" class="tsd-kind-icon">has<wbr>Names</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="setoperationtype.html#identity" class="tsd-kind-icon">identity</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="setoperationtype.html#index" class="tsd-kind-icon">index</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="setoperationtype.html#isnullable" class="tsd-kind-icon">is<wbr>Nullable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="setoperationtype.html#kind" class="tsd-kind-icon">kind</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="setoperationtype.html#members" class="tsd-kind-icon">members</a></li>
@@ -135,26 +136,29 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Set<wbr>Operation<wbr>Type<span class="tsd-signature-symbol">(</span>typeRef<span class="tsd-signature-symbol">: </span><a href="typeref.html" class="tsd-signature-type">TypeRef</a>, kind<span class="tsd-signature-symbol">: </span><a href="../globals.html#typekind" class="tsd-signature-type">TypeKind</a>, _memberRefs<span class="tsd-signature-symbol">?: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="setoperationtype.html" class="tsd-signature-type">SetOperationType</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Set<wbr>Operation<wbr>Type<span class="tsd-signature-symbol">(</span>typeRef<span class="tsd-signature-symbol">: </span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a>, graph<span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a>, kind<span class="tsd-signature-symbol">: </span><a href="../globals.html#typekind" class="tsd-signature-type">TypeKind</a>, _memberRefs<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="setoperationtype.html" class="tsd-signature-type">SetOperationType</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="type.html">Type</a>.<a href="type.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:121</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:180</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>typeRef: <a href="typeref.html" class="tsd-signature-type">TypeRef</a></h5>
+									<h5>typeRef: <a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></h5>
+								</li>
+								<li>
+									<h5>graph: <a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></h5>
 								</li>
 								<li>
 									<h5>kind: <a href="../globals.html#typekind" class="tsd-signature-type">TypeKind</a></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> _memberRefs: <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> _memberRefs: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="setoperationtype.html" class="tsd-signature-type">SetOperationType</a></h4>
@@ -171,7 +175,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#debugprintkind">debugPrintKind</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:30</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:88</li>
 						</ul>
 					</aside>
 				</section>
@@ -182,18 +186,29 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#hasnames">hasNames</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:23</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:81</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 					<a name="identity" class="tsd-anchor"></a>
 					<h3>identity</h3>
-					<div class="tsd-signature tsd-kind-icon">identity<span class="tsd-signature-symbol">:</span> <a href="../globals.html#typeidentity" class="tsd-signature-type">TypeIdentity</a></div>
+					<div class="tsd-signature tsd-kind-icon">identity<span class="tsd-signature-symbol">:</span> <a href="../globals.html#maybetypeidentity" class="tsd-signature-type">MaybeTypeIdentity</a></div>
 					<aside class="tsd-sources">
 						<p>Overrides <a href="type.html">Type</a>.<a href="type.html#identity">identity</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:129</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:188</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="index" class="tsd-anchor"></a>
+					<h3>index</h3>
+					<div class="tsd-signature tsd-kind-icon">index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#index">index</a></p>
+						<ul>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:77</li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +219,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#isnullable">isNullable</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:26</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:84</li>
 						</ul>
 					</aside>
 				</section>
@@ -215,38 +230,38 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#kind">kind</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:18</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:75</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="members" class="tsd-anchor"></a>
 					<h3>members</h3>
-					<div class="tsd-signature tsd-kind-icon">members<span class="tsd-signature-symbol">:</span> <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">members<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:125</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:184</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="sortedmembers" class="tsd-anchor"></a>
 					<h3>sorted<wbr>Members</h3>
-					<div class="tsd-signature tsd-kind-icon">sorted<wbr>Members<span class="tsd-signature-symbol">:</span> <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">sorted<wbr>Members<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:126</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:185</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="typeref" class="tsd-anchor"></a>
 					<h3>type<wbr>Ref</h3>
-					<div class="tsd-signature tsd-kind-icon">type<wbr>Ref<span class="tsd-signature-symbol">:</span> <a href="typeref.html" class="tsd-signature-type">TypeRef</a></div>
+					<div class="tsd-signature tsd-kind-icon">type<wbr>Ref<span class="tsd-signature-symbol">:</span> <a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#typeref">typeRef</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:17</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:73</li>
 						</ul>
 					</aside>
 				</section>
@@ -264,7 +279,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#equals">equals</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:31</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:89</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -281,23 +296,23 @@
 					<a name="getancestorsnotinset" class="tsd-anchor"></a>
 					<h3>get<wbr>Ancestors<wbr>Not<wbr>InSet</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Ancestors<wbr>Not<wbr>InSet<span class="tsd-signature-symbol">(</span>set<span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Ancestors<wbr>Not<wbr>InSet<span class="tsd-signature-symbol">(</span>set<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#getancestorsnotinset">getAncestorsNotInSet</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:36</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:94</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>set: <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>set: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -312,7 +327,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#getattributes">getAttributes</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:22</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:80</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../globals.html#typeattributes" class="tsd-signature-type">TypeAttributes</a></h4>
@@ -323,17 +338,17 @@
 					<a name="getchildren" class="tsd-anchor"></a>
 					<h3>get<wbr>Children</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Children<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Children<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#getchildren">getChildren</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:21</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:79</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -348,7 +363,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#getcombinedname">getCombinedName</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:25</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:83</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -366,7 +381,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#getnames">getNames</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:24</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:82</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h4>
@@ -377,17 +392,17 @@
 					<a name="getnonattributechildren" class="tsd-anchor"></a>
 					<h3>get<wbr>Non<wbr>Attribute<wbr>Children</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Non<wbr>Attribute<wbr>Children<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Non<wbr>Attribute<wbr>Children<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="type.html">Type</a>.<a href="type.html#getnonattributechildren">getNonAttributeChildren</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:127</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:186</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -395,17 +410,17 @@
 					<a name="getparenttypes" class="tsd-anchor"></a>
 					<h3>get<wbr>Parent<wbr>Types</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Parent<wbr>Types<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Parent<wbr>Types<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#getparenttypes">getParentTypes</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:35</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:93</li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -420,7 +435,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#hashcode">hashCode</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:32</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:90</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -438,7 +453,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="type.html">Type</a>.<a href="type.html#isprimitive">isPrimitive</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:128</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:187</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -456,7 +471,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#reconstitute">reconstitute</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:29</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:87</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -482,19 +497,19 @@
 					<a name="setmembers" class="tsd-anchor"></a>
 					<h3>set<wbr>Members</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Members<span class="tsd-signature-symbol">(</span>memberRefs<span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Members<span class="tsd-signature-symbol">(</span>memberRefs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:123</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:182</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>memberRefs: <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>memberRefs: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -512,7 +527,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="type.html">Type</a>.<a href="type.html#structurallycompatible">structurallyCompatible</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:34</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:92</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -556,6 +571,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 								<a href="setoperationtype.html#identity" class="tsd-kind-icon">identity</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="setoperationtype.html#index" class="tsd-kind-icon">index</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="setoperationtype.html#isnullable" class="tsd-kind-icon">is<wbr>Nullable</a>

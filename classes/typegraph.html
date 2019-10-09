@@ -85,18 +85,18 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#allnamedtypes" class="tsd-kind-icon">all<wbr>Named<wbr>Types</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#allnamedtypesseparated" class="tsd-kind-icon">all<wbr>Named<wbr>Types<wbr>Separated</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#alltypesunordered" class="tsd-kind-icon">all<wbr>Types<wbr>Unordered</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#attributestore" class="tsd-kind-icon">attribute<wbr>Store</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#serial" class="tsd-kind-icon">serial</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#toplevels" class="tsd-kind-icon">top<wbr>Levels</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#allnamedtypes" class="tsd-kind-icon">all<wbr>Named<wbr>Types</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#allnamedtypesseparated" class="tsd-kind-icon">all<wbr>Named<wbr>Types<wbr>Separated</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#alltypesunordered" class="tsd-kind-icon">all<wbr>Types<wbr>Unordered</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#atindex" class="tsd-kind-icon">at<wbr>Index</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#filtertypes" class="tsd-kind-icon">filter<wbr>Types</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#freeze" class="tsd-kind-icon">freeze</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#garbagecollect" class="tsd-kind-icon">garbage<wbr>Collect</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#getparentsoftype" class="tsd-kind-icon">get<wbr>Parents<wbr>OfType</a></li>
@@ -104,7 +104,9 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#printgraph" class="tsd-kind-icon">print<wbr>Graph</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#remap" class="tsd-kind-icon">remap</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="typegraph.html#rewrite" class="tsd-kind-icon">rewrite</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#rewritefixedpoint" class="tsd-kind-icon">rewrite<wbr>Fixed<wbr>Point</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#setprintonrewrite" class="tsd-kind-icon">set<wbr>Print<wbr>OnRewrite</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="typegraph.html#typeatindex" class="tsd-kind-icon">type<wbr>AtIndex</a></li>
 							</ul>
 						</section>
 					</div>
@@ -116,19 +118,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Type<wbr>Graph<span class="tsd-signature-symbol">(</span>typeBuilder<span class="tsd-signature-symbol">: </span><a href="typebuilder.html" class="tsd-signature-type">TypeBuilder</a>, _haveProvenanceAttributes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Type<wbr>Graph<span class="tsd-signature-symbol">(</span>typeBuilder<span class="tsd-signature-symbol">: </span><a href="typebuilder.html" class="tsd-signature-type">TypeBuilder</a>, serial<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, _haveProvenanceAttributes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:41</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:49</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>typeBuilder: <a href="typebuilder.html" class="tsd-signature-type">TypeBuilder</a></h5>
+								</li>
+								<li>
+									<h5>serial: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
 									<h5>_haveProvenanceAttributes: <span class="tsd-signature-type">boolean</span></h5>
@@ -142,115 +147,89 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="allnamedtypes" class="tsd-anchor"></a>
-					<h3>all<wbr>Named<wbr>Types</h3>
-					<div class="tsd-signature tsd-kind-icon">all<wbr>Named<wbr>Types<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:49</li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>childrenOfType<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5><span class="tsd-flag ts-flagOptional">Optional</span> childrenOfType: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="allnamedtypesseparated" class="tsd-anchor"></a>
-					<h3>all<wbr>Named<wbr>Types<wbr>Separated</h3>
-					<div class="tsd-signature tsd-kind-icon">all<wbr>Named<wbr>Types<wbr>Separated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:50</li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>childrenOfType<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#separatednamedtypes" class="tsd-signature-type">SeparatedNamedTypes</a></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5><span class="tsd-flag ts-flagOptional">Optional</span> childrenOfType: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <a href="../globals.html#separatednamedtypes" class="tsd-signature-type">SeparatedNamedTypes</a></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
-					<a name="alltypesunordered" class="tsd-anchor"></a>
-					<h3>all<wbr>Types<wbr>Unordered</h3>
-					<div class="tsd-signature tsd-kind-icon">all<wbr>Types<wbr>Unordered<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:58</li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<h4 class="tsd-returns-title">Returns <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="attributestore" class="tsd-anchor"></a>
 					<h3>attribute<wbr>Store</h3>
 					<div class="tsd-signature tsd-kind-icon">attribute<wbr>Store<span class="tsd-signature-symbol">:</span> <a href="typeattributestore.html" class="tsd-signature-type">TypeAttributeStore</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:44</li>
+							<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:52</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="serial" class="tsd-anchor"></a>
+					<h3>serial</h3>
+					<div class="tsd-signature tsd-kind-icon">serial<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:42</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="toplevels" class="tsd-anchor"></a>
 					<h3>top<wbr>Levels</h3>
-					<div class="tsd-signature tsd-kind-icon">top<wbr>Levels<span class="tsd-signature-symbol">:</span> <a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">top<wbr>Levels<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:46</li>
+							<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:54</li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="allnamedtypes" class="tsd-anchor"></a>
+					<h3>all<wbr>Named<wbr>Types</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">all<wbr>Named<wbr>Types<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:58</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="allnamedtypesseparated" class="tsd-anchor"></a>
+					<h3>all<wbr>Named<wbr>Types<wbr>Separated</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">all<wbr>Named<wbr>Types<wbr>Separated<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#separatednamedtypes" class="tsd-signature-type">SeparatedNamedTypes</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:59</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../globals.html#separatednamedtypes" class="tsd-signature-type">SeparatedNamedTypes</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="alltypesunordered" class="tsd-anchor"></a>
+					<h3>all<wbr>Types<wbr>Unordered</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">all<wbr>Types<wbr>Unordered<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:68</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="atindex" class="tsd-anchor"></a>
 					<h3>at<wbr>Index</h3>
@@ -261,7 +240,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:47</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:56</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -275,57 +254,28 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="filtertypes" class="tsd-anchor"></a>
-					<h3>filter<wbr>Types</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">filter<wbr>Types<span class="tsd-signature-symbol">(</span>predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, childrenOfType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, topDown<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:48</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>predicate: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-								</li>
-								<li>
-									<h5>childrenOfType: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
-								</li>
-								<li>
-									<h5>topDown: <span class="tsd-signature-type">boolean</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
 					<a name="freeze" class="tsd-anchor"></a>
 					<h3>freeze</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">freeze<span class="tsd-signature-symbol">(</span>topLevels<span class="tsd-signature-symbol">: </span><a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span>, types<span class="tsd-signature-symbol">: </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">[]</span>, typeAttributes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><a href="typeattributekind.html" class="tsd-signature-type">TypeAttributeKind</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">freeze<span class="tsd-signature-symbol">(</span>topLevels<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span>, types<span class="tsd-signature-symbol">: </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">[]</span>, typeAttributes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><a href="typeattributekind.html" class="tsd-signature-type">TypeAttributeKind</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:45</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:53</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>topLevels: <a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>topLevels: <span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>types: <a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 								<li>
-									<h5>typeAttributes: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><a href="typeattributekind.html" class="tsd-signature-type">TypeAttributeKind</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>typeAttributes: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><a href="typeattributekind.html" class="tsd-signature-type">TypeAttributeKind</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -342,7 +292,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:57</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:66</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -362,13 +312,13 @@
 					<a name="getparentsoftype" class="tsd-anchor"></a>
 					<h3>get<wbr>Parents<wbr>OfType</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Parents<wbr>OfType<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Parents<wbr>OfType<span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:60</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:70</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -377,7 +327,7 @@
 									<h5>t: <a href="type.html" class="tsd-signature-type">Type</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -391,7 +341,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:59</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:69</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -404,7 +354,7 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>t<span class="tsd-signature-symbol">: </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
@@ -414,7 +364,7 @@
 															<h5>t: <a href="type.html" class="tsd-signature-type">Type</a></h5>
 														</li>
 													</ul>
-													<h4 class="tsd-returns-title">Returns <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h4>
 												</li>
 											</ul>
 										</li>
@@ -435,7 +385,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:61</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:71</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -446,13 +396,13 @@
 					<a name="remap" class="tsd-anchor"></a>
 					<h3>remap</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">remap<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, stringTypeMapping<span class="tsd-signature-symbol">: </span><a href="../globals.html#stringtypemapping" class="tsd-signature-type">StringTypeMapping</a>, alphabetizeProperties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, map<span class="tsd-signature-symbol">: </span><a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">, </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span>, debugPrintRemapping<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></li>
+						<li class="tsd-signature tsd-kind-icon">remap<span class="tsd-signature-symbol">(</span>title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, stringTypeMapping<span class="tsd-signature-symbol">: </span><a href="../globals.html#stringtypemapping" class="tsd-signature-type">StringTypeMapping</a>, alphabetizeProperties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, map<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">, </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span>, debugPrintRemapping<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, force<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:56</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:65</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -467,10 +417,13 @@
 									<h5>alphabetizeProperties: <span class="tsd-signature-type">boolean</span></h5>
 								</li>
 								<li>
-									<h5>map: <a href="../modules/map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">, </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>map: <span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">, </span><a href="type.html" class="tsd-signature-type">Type</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
 									<h5>debugPrintRemapping: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> force: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></h4>
@@ -487,7 +440,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:55</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:64</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -518,23 +471,23 @@
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
 											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>typesToReplace<span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, builder<span class="tsd-signature-symbol">: </span><a href="graphrewritebuilder.html" class="tsd-signature-type">GraphRewriteBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, forwardingRef<span class="tsd-signature-symbol">: </span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typeref.html" class="tsd-signature-type">TypeRef</a></li>
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>typesToReplace<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, builder<span class="tsd-signature-symbol">: </span><a href="graphrewritebuilder.html" class="tsd-signature-type">GraphRewriteBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, forwardingRef<span class="tsd-signature-symbol">: </span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></li>
 											</ul>
 											<ul class="tsd-descriptions">
 												<li class="tsd-description">
 													<h4 class="tsd-parameters-title">Parameters</h4>
 													<ul class="tsd-parameters">
 														<li>
-															<h5>typesToReplace: <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+															<h5>typesToReplace: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 														</li>
 														<li>
 															<h5>builder: <a href="graphrewritebuilder.html" class="tsd-signature-type">GraphRewriteBuilder</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 														</li>
 														<li>
-															<h5>forwardingRef: <a href="typeref.html" class="tsd-signature-type">TypeRef</a></h5>
+															<h5>forwardingRef: <a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></h5>
 														</li>
 													</ul>
-													<h4 class="tsd-returns-title">Returns <a href="typeref.html" class="tsd-signature-type">TypeRef</a></h4>
+													<h4 class="tsd-returns-title">Returns <a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></h4>
 												</li>
 											</ul>
 										</li>
@@ -542,6 +495,32 @@
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> force: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="rewritefixedpoint" class="tsd-anchor"></a>
+					<h3>rewrite<wbr>Fixed<wbr>Point</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">rewrite<wbr>Fixed<wbr>Point<span class="tsd-signature-symbol">(</span>alphabetizeProperties<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, debugPrintReconstitution<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:67</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>alphabetizeProperties: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5>debugPrintReconstitution: <span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></h4>
@@ -558,10 +537,33 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeGraph.d.ts:52</li>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:61</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
+					<a name="typeatindex" class="tsd-anchor"></a>
+					<h3>type<wbr>AtIndex</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">type<wbr>AtIndex<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="type.html" class="tsd-signature-type">Type</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/TypeGraph.d.ts:55</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="type.html" class="tsd-signature-type">Type</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -586,25 +588,25 @@
 								<a href="typegraph.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="typegraph.html#allnamedtypes" class="tsd-kind-icon">all<wbr>Named<wbr>Types</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="typegraph.html#allnamedtypesseparated" class="tsd-kind-icon">all<wbr>Named<wbr>Types<wbr>Separated</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
-								<a href="typegraph.html#alltypesunordered" class="tsd-kind-icon">all<wbr>Types<wbr>Unordered</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
 								<a href="typegraph.html#attributestore" class="tsd-kind-icon">attribute<wbr>Store</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="typegraph.html#serial" class="tsd-kind-icon">serial</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
 								<a href="typegraph.html#toplevels" class="tsd-kind-icon">top<wbr>Levels</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="typegraph.html#atindex" class="tsd-kind-icon">at<wbr>Index</a>
+								<a href="typegraph.html#allnamedtypes" class="tsd-kind-icon">all<wbr>Named<wbr>Types</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="typegraph.html#filtertypes" class="tsd-kind-icon">filter<wbr>Types</a>
+								<a href="typegraph.html#allnamedtypesseparated" class="tsd-kind-icon">all<wbr>Named<wbr>Types<wbr>Separated</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="typegraph.html#alltypesunordered" class="tsd-kind-icon">all<wbr>Types<wbr>Unordered</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="typegraph.html#atindex" class="tsd-kind-icon">at<wbr>Index</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="typegraph.html#freeze" class="tsd-kind-icon">freeze</a>
@@ -628,7 +630,13 @@
 								<a href="typegraph.html#rewrite" class="tsd-kind-icon">rewrite</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="typegraph.html#rewritefixedpoint" class="tsd-kind-icon">rewrite<wbr>Fixed<wbr>Point</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
 								<a href="typegraph.html#setprintonrewrite" class="tsd-kind-icon">set<wbr>Print<wbr>OnRewrite</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
+								<a href="typegraph.html#typeatindex" class="tsd-kind-icon">type<wbr>AtIndex</a>
 							</li>
 						</ul>
 					</li>

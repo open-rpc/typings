@@ -84,14 +84,15 @@
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="toomanytypenames.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="toomanytypenames.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="toomanytypenames.html#areinferred" class="tsd-kind-icon">are<wbr>Inferred</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="toomanytypenames.html#areinferred" class="tsd-kind-icon">are<wbr>Inferred</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="toomanytypenames.html#combinedname" class="tsd-kind-icon">combined<wbr>Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="toomanytypenames.html#distance" class="tsd-kind-icon">distance</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="toomanytypenames.html#names" class="tsd-kind-icon">names</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="toomanytypenames.html#proposednames" class="tsd-kind-icon">proposed<wbr>Names</a></li>
 							</ul>
@@ -105,6 +106,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="toomanytypenames.html#singularize" class="tsd-kind-icon">singularize</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external"><a href="toomanytypenames.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="toomanytypenames.html#make" class="tsd-kind-icon">make</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="toomanytypenames.html#makewithdistance" class="tsd-kind-icon">make<wbr>With<wbr>Distance</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,23 +114,27 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Too<wbr>Many<wbr>Type<wbr>Names<span class="tsd-signature-symbol">(</span>areInferred<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="toomanytypenames.html" class="tsd-signature-type">TooManyTypeNames</a></li>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Too<wbr>Many<wbr>Type<wbr>Names<span class="tsd-signature-symbol">(</span>distance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="toomanytypenames.html" class="tsd-signature-type">TooManyTypeNames</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:33</li>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:33</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>areInferred: <span class="tsd-signature-type">boolean</span></h5>
+									<h5>distance: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="toomanytypenames.html" class="tsd-signature-type">TooManyTypeNames</a></h4>
@@ -138,14 +144,14 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="areinferred" class="tsd-anchor"></a>
 					<h3>are<wbr>Inferred</h3>
 					<div class="tsd-signature tsd-kind-icon">are<wbr>Inferred<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#areinferred">areInferred</a></p>
+						<p>Inherited from <a href="typenames.html">TypeNames</a>.<a href="typenames.html#areinferred">areInferred</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:32</li>
+							<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:10</li>
 						</ul>
 					</aside>
 				</section>
@@ -156,29 +162,40 @@
 					<aside class="tsd-sources">
 						<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#combinedname">combinedName</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:35</li>
+							<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:35</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="distance" class="tsd-anchor"></a>
+					<h3>distance</h3>
+					<div class="tsd-signature tsd-kind-icon">distance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="typenames.html">TypeNames</a>.<a href="typenames.html#distance">distance</a></p>
+						<ul>
+							<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:6</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 					<a name="names" class="tsd-anchor"></a>
 					<h3>names</h3>
-					<div class="tsd-signature tsd-kind-icon">names<span class="tsd-signature-symbol">:</span> <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#names">names</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:33</li>
+							<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:33</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 					<a name="proposednames" class="tsd-anchor"></a>
 					<h3>proposed<wbr>Names</h3>
-					<div class="tsd-signature tsd-kind-icon">proposed<wbr>Names<span class="tsd-signature-symbol">:</span> <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">proposed<wbr>Names<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#proposednames">proposedNames</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:36</li>
+							<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:36</li>
 						</ul>
 					</aside>
 				</section>
@@ -189,20 +206,23 @@
 					<a name="add" class="tsd-anchor"></a>
 					<h3>add</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>_names<span class="tsd-signature-symbol">: </span><a href="typenames.html" class="tsd-signature-type">TypeNames</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typenames.html" class="tsd-signature-type">TypeNames</a></li>
+						<li class="tsd-signature tsd-kind-icon">add<span class="tsd-signature-symbol">(</span>namesArray<span class="tsd-signature-symbol">: </span><a href="typenames.html" class="tsd-signature-type">TypeNames</a><span class="tsd-signature-symbol">[]</span>, startIndex<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typenames.html" class="tsd-signature-type">TypeNames</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#add">add</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:37</li>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:37</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>_names: <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h5>
+									<h5>namesArray: <a href="typenames.html" class="tsd-signature-type">TypeNames</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> startIndex: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h4>
@@ -220,7 +240,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#clearinferred">clearInferred</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:38</li>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:38</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h4>
@@ -238,7 +258,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#makeinferred">makeInferred</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:39</li>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:39</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h4>
@@ -256,7 +276,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#singularize">singularize</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:40</li>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:40</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h4>
@@ -274,7 +294,7 @@
 							<aside class="tsd-sources">
 								<p>Overrides <a href="typenames.html">TypeNames</a>.<a href="typenames.html#tostring">toString</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:41</li>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:41</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -285,26 +305,56 @@
 					<a name="make" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> make</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">make<span class="tsd-signature-symbol">(</span>names<span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span>, alternativeNames<span class="tsd-signature-symbol">: </span><a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, areInferred<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typenames.html" class="tsd-signature-type">TypeNames</a></li>
+						<li class="tsd-signature tsd-kind-icon">make<span class="tsd-signature-symbol">(</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span>, alternativeNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, areInferred<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typenames.html" class="tsd-signature-type">TypeNames</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="typenames.html">TypeNames</a>.<a href="typenames.html#make">make</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/TypeNames.d.ts:7</li>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:8</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>names: <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>names: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>alternativeNames: <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+									<h5>alternativeNames: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 								<li>
 									<h5>areInferred: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+					<a name="makewithdistance" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> make<wbr>With<wbr>Distance</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">make<wbr>With<wbr>Distance<span class="tsd-signature-symbol">(</span>names<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span>, alternativeNames<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, distance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="typenames.html" class="tsd-signature-type">TypeNames</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from <a href="typenames.html">TypeNames</a>.<a href="typenames.html#makewithdistance">makeWithDistance</a></p>
+								<ul>
+									<li>Defined in node_modules/quicktype-core/dist/attributes/TypeNames.d.ts:7</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>names: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>alternativeNames: <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
+								</li>
+								<li>
+									<h5>distance: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="typenames.html" class="tsd-signature-type">TypeNames</a></h4>
@@ -328,14 +378,17 @@
 					<li class="current tsd-kind-class tsd-is-external">
 						<a href="toomanytypenames.html" class="tsd-kind-icon">Too<wbr>Many<wbr>Type<wbr>Names</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 								<a href="toomanytypenames.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="toomanytypenames.html#areinferred" class="tsd-kind-icon">are<wbr>Inferred</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 								<a href="toomanytypenames.html#combinedname" class="tsd-kind-icon">combined<wbr>Name</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="toomanytypenames.html#distance" class="tsd-kind-icon">distance</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
 								<a href="toomanytypenames.html#names" class="tsd-kind-icon">names</a>
@@ -360,6 +413,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
 								<a href="toomanytypenames.html#make" class="tsd-kind-icon">make</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+								<a href="toomanytypenames.html#makewithdistance" class="tsd-kind-icon">make<wbr>With<wbr>Distance</a>
 							</li>
 						</ul>
 					</li>

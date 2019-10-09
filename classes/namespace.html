@@ -96,8 +96,6 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external"><a href="namespace.html#add" class="tsd-kind-icon">add</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="namespace.html#equals" class="tsd-kind-icon">equals</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-external"><a href="namespace.html#hashcode" class="tsd-kind-icon">hash<wbr>Code</a></li>
 							</ul>
 						</section>
 					</div>
@@ -109,28 +107,28 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Namespace<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">: </span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, forbiddenNamespaces<span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span>, additionalForbidden<span class="tsd-signature-symbol">: </span><a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="namespace.html" class="tsd-signature-type">Namespace</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Namespace<span class="tsd-signature-symbol">(</span>_name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, parent<span class="tsd-signature-symbol">: </span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, forbiddenNamespaces<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span>, additionalForbidden<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="namespace.html" class="tsd-signature-type">Namespace</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Naming.d.ts:8</li>
+									<li>Defined in node_modules/quicktype-core/dist/Naming.d.ts:5</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>name: <span class="tsd-signature-type">string</span></h5>
+									<h5>_name: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5>parent: <a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h5>
 								</li>
 								<li>
-									<h5>forbiddenNamespaces: <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>forbiddenNamespaces: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 								<li>
-									<h5>additionalForbidden: <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>additionalForbidden: <span class="tsd-signature-type">Iterable</span><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="namespace.html" class="tsd-signature-type">Namespace</a></h4>
@@ -143,50 +141,50 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="additionalforbidden" class="tsd-anchor"></a>
 					<h3>additional<wbr>Forbidden</h3>
-					<div class="tsd-signature tsd-kind-icon">additional<wbr>Forbidden<span class="tsd-signature-symbol">:</span> <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">additional<wbr>Forbidden<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Naming.d.ts:7</li>
+							<li>Defined in node_modules/quicktype-core/dist/Naming.d.ts:3</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="children" class="tsd-anchor"></a>
 					<h3>children</h3>
-					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Naming.d.ts:11</li>
+							<li>Defined in node_modules/quicktype-core/dist/Naming.d.ts:8</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="forbiddennameds" class="tsd-anchor"></a>
 					<h3>forbidden<wbr>Nameds</h3>
-					<div class="tsd-signature tsd-kind-icon">forbidden<wbr>Nameds<span class="tsd-signature-symbol">:</span> <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">forbidden<wbr>Nameds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Naming.d.ts:13</li>
+							<li>Defined in node_modules/quicktype-core/dist/Naming.d.ts:10</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="forbiddennamespaces" class="tsd-anchor"></a>
 					<h3>forbidden<wbr>Namespaces</h3>
-					<div class="tsd-signature tsd-kind-icon">forbidden<wbr>Namespaces<span class="tsd-signature-symbol">:</span> <a href="../modules/set.html" class="tsd-signature-type">Set</a><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">forbidden<wbr>Namespaces<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="namespace.html" class="tsd-signature-type">Namespace</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Naming.d.ts:6</li>
+							<li>Defined in node_modules/quicktype-core/dist/Naming.d.ts:2</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="members" class="tsd-anchor"></a>
 					<h3>members</h3>
-					<div class="tsd-signature tsd-kind-icon">members<span class="tsd-signature-symbol">:</span> <a href="../modules/orderedset.html" class="tsd-signature-type">OrderedSet</a><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">members<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlySet</span><span class="tsd-signature-symbol">&lt;</span><a href="name.html" class="tsd-signature-type">Name</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Naming.d.ts:12</li>
+							<li>Defined in node_modules/quicktype-core/dist/Naming.d.ts:9</li>
 						</ul>
 					</aside>
 				</section>
@@ -203,7 +201,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Naming.d.ts:14</li>
+									<li>Defined in node_modules/quicktype-core/dist/Naming.d.ts:11</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -219,46 +217,6 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TName</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="equals" class="tsd-anchor"></a>
-					<h3>equals</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">equals<span class="tsd-signature-symbol">(</span>other<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/quicktype/dist/Naming.d.ts:15</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>other: <span class="tsd-signature-type">any</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-external">
-					<a name="hashcode" class="tsd-anchor"></a>
-					<h3>hash<wbr>Code</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">hash<wbr>Code<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in node_modules/quicktype/dist/Naming.d.ts:16</li>
-								</ul>
-							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -299,12 +257,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-external">
 								<a href="namespace.html#add" class="tsd-kind-icon">add</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="namespace.html#equals" class="tsd-kind-icon">equals</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-external">
-								<a href="namespace.html#hashcode" class="tsd-kind-icon">hash<wbr>Code</a>
 							</li>
 						</ul>
 					</li>

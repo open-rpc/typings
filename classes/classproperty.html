@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="genericclassproperty.html" class="tsd-signature-type">GenericClassProperty</a><span class="tsd-signature-symbol">&lt;</span><a href="typeref.html" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span>
+						<a href="genericclassproperty.html" class="tsd-signature-type">GenericClassProperty</a><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a><span class="tsd-signature-symbol">&gt;</span>
 					</li>
 					<li>
 						<span class="tsd-signature-type">BaseNode</span>
@@ -99,6 +99,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="classproperty.html#decorators" class="tsd-kind-icon">decorators</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="classproperty.html#definite" class="tsd-kind-icon">definite</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="classproperty.html#end" class="tsd-kind-icon">end</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="classproperty.html#graph" class="tsd-kind-icon">graph</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="classproperty.html#innercomments" class="tsd-kind-icon">inner<wbr>Comments</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="classproperty.html#isoptional" class="tsd-kind-icon">is<wbr>Optional</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="classproperty.html#key" class="tsd-kind-icon">key</a></li>
@@ -132,20 +133,23 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Class<wbr>Property<span class="tsd-signature-symbol">(</span>typeRef<span class="tsd-signature-symbol">: </span><a href="typeref.html" class="tsd-signature-type">TypeRef</a>, isOptional<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="classproperty.html" class="tsd-signature-type">ClassProperty</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Class<wbr>Property<span class="tsd-signature-symbol">(</span>typeRef<span class="tsd-signature-symbol">: </span><a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a>, graph<span class="tsd-signature-symbol">: </span><a href="typegraph.html" class="tsd-signature-type">TypeGraph</a>, isOptional<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="classproperty.html" class="tsd-signature-type">ClassProperty</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Overrides <a href="genericclassproperty.html">GenericClassProperty</a>.<a href="genericclassproperty.html#constructor">constructor</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:70</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:129</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>typeRef: <a href="typeref.html" class="tsd-signature-type">TypeRef</a></h5>
+									<h5>typeRef: <a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></h5>
+								</li>
+								<li>
+									<h5>graph: <a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></h5>
 								</li>
 								<li>
 									<h5>isOptional: <span class="tsd-signature-type">boolean</span></h5>
@@ -164,7 +168,7 @@
 					<div class="tsd-signature tsd-kind-icon">abstract<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:991</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:992</li>
 						</ul>
 					</aside>
 				</section>
@@ -174,7 +178,7 @@
 					<div class="tsd-signature tsd-kind-icon">accessibility<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"public"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"private"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"protected"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:992</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:993</li>
 						</ul>
 					</aside>
 				</section>
@@ -184,7 +188,7 @@
 					<div class="tsd-signature tsd-kind-icon">computed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:990</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:991</li>
 						</ul>
 					</aside>
 				</section>
@@ -194,7 +198,7 @@
 					<div class="tsd-signature tsd-kind-icon">decorators<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/decorator.html" class="tsd-signature-type">Decorator</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:989</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:990</li>
 						</ul>
 					</aside>
 				</section>
@@ -204,7 +208,7 @@
 					<div class="tsd-signature tsd-kind-icon">definite<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:993</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:994</li>
 						</ul>
 					</aside>
 				</section>
@@ -216,6 +220,16 @@
 						<p>Inherited from BaseNode.end</p>
 						<ul>
 							<li>Defined in node_modules/@babel/types/lib/index.d.ts:39</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="graph" class="tsd-anchor"></a>
+					<h3>graph</h3>
+					<div class="tsd-signature tsd-kind-icon">graph<span class="tsd-signature-symbol">:</span> <a href="typegraph.html" class="tsd-signature-type">TypeGraph</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:129</li>
 						</ul>
 					</aside>
 				</section>
@@ -237,7 +251,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="genericclassproperty.html">GenericClassProperty</a>.<a href="genericclassproperty.html#isoptional">isOptional</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:65</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:123</li>
 						</ul>
 					</aside>
 				</section>
@@ -247,7 +261,7 @@
 					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <a href="../interfaces/identifier.html" class="tsd-signature-type">Identifier</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/stringliteral.html" class="tsd-signature-type">StringLiteral</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/numericliteral.html" class="tsd-signature-type">NumericLiteral</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/aliases.html#expression" class="tsd-signature-type">Expression</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:986</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:987</li>
 						</ul>
 					</aside>
 				</section>
@@ -279,7 +293,7 @@
 					<div class="tsd-signature tsd-kind-icon">optional<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:994</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:995</li>
 						</ul>
 					</aside>
 				</section>
@@ -289,7 +303,7 @@
 					<div class="tsd-signature tsd-kind-icon">readonly<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:995</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:996</li>
 						</ul>
 					</aside>
 				</section>
@@ -310,7 +324,7 @@
 					<div class="tsd-signature tsd-kind-icon">static<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:996</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:997</li>
 						</ul>
 					</aside>
 				</section>
@@ -332,8 +346,8 @@
 					<aside class="tsd-sources">
 						<p>Overrides BaseNode.type</p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:73</li>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:985</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:132</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:986</li>
 						</ul>
 					</aside>
 				</section>
@@ -343,28 +357,28 @@
 					<div class="tsd-signature tsd-kind-icon">type<wbr>Annotation<span class="tsd-signature-symbol">:</span> <a href="../interfaces/typeannotation.html" class="tsd-signature-type">TypeAnnotation</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/tstypeannotation.html" class="tsd-signature-type">TSTypeAnnotation</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/noop.html" class="tsd-signature-type">Noop</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:988</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:989</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 					<a name="typedata" class="tsd-anchor"></a>
 					<h3>type<wbr>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">type<wbr>Data<span class="tsd-signature-symbol">:</span> <a href="typeref.html" class="tsd-signature-type">TypeRef</a></div>
+					<div class="tsd-signature tsd-kind-icon">type<wbr>Data<span class="tsd-signature-symbol">:</span> <a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="genericclassproperty.html">GenericClassProperty</a>.<a href="genericclassproperty.html#typedata">typeData</a></p>
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:64</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:122</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
 					<a name="typeref" class="tsd-anchor"></a>
 					<h3>type<wbr>Ref</h3>
-					<div class="tsd-signature tsd-kind-icon">type<wbr>Ref<span class="tsd-signature-symbol">:</span> <a href="typeref.html" class="tsd-signature-type">TypeRef</a></div>
+					<div class="tsd-signature tsd-kind-icon">type<wbr>Ref<span class="tsd-signature-symbol">:</span> <a href="../globals.html#typeref" class="tsd-signature-type">TypeRef</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/quicktype/dist/Type.d.ts:72</li>
+							<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:131</li>
 						</ul>
 					</aside>
 				</section>
@@ -374,7 +388,7 @@
 					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <a href="../interfaces/aliases.html#expression" class="tsd-signature-type">Expression</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@babel/types/lib/index.d.ts:987</li>
+							<li>Defined in node_modules/@babel/types/lib/index.d.ts:988</li>
 						</ul>
 					</aside>
 				</section>
@@ -392,7 +406,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="genericclassproperty.html">GenericClassProperty</a>.<a href="genericclassproperty.html#equals">equals</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:67</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:125</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -416,7 +430,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="genericclassproperty.html">GenericClassProperty</a>.<a href="genericclassproperty.html#hashcode">hashCode</a></p>
 								<ul>
-									<li>Defined in node_modules/quicktype/dist/Type.d.ts:68</li>
+									<li>Defined in node_modules/quicktype-core/dist/Type.d.ts:126</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -460,6 +474,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="classproperty.html#end" class="tsd-kind-icon">end</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="classproperty.html#graph" class="tsd-kind-icon">graph</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
 								<a href="classproperty.html#innercomments" class="tsd-kind-icon">inner<wbr>Comments</a>
