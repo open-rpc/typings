@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/open-rpc/typings/compare/1.4.3...1.5.0) (2019-10-09)
+
+
+### Features
+
+* add support for pub Rust struct fields ([3fb16bd](https://github.com/open-rpc/typings/commit/3fb16bd))
+
 ## [1.4.3](https://github.com/open-rpc/typings/compare/1.4.2...1.4.3) (2019-07-23)
 
 
