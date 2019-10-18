@@ -38,7 +38,7 @@
     "fs-extra": "^8.0.1",
     "json-schema-to-typescript": "^7.0.0",
     "lodash": "^4.17.11",
-    "quicktype": "15.0.2",
+    "quicktype": "15.0.203",
     "quicktype-core": "^6.0.47"
   },
   "devDependencies": {
