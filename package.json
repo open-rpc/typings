@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/open-rpc/typings#readme",
   "dependencies": {
+    "@etclabscore/json-schema-to-types": "^1.4.1",
     "@open-rpc/meta-schema": "^1.4.3",
     "@open-rpc/schema-utils-js": "^1.11.1",
     "commander": "^2.20.0",
@@ -42,14 +43,16 @@
     "quicktype-core": "^6.0.47"
   },
   "devDependencies": {
-    "typedoc": "^0.14.2",
     "@types/commander": "^2.12.2",
     "@types/fs-extra": "^7.0.0",
     "@types/jest": "^24.0.11",
     "@types/lodash": "^4.14.133",
+    "@types/lodash.deburr": "^4.1.6",
+    "@types/lodash.trim": "^4.5.6",
     "jest": "^24.0.0",
     "ts-jest": "^24.0.0",
     "tslint": "^5.13.1",
+    "typedoc": "^0.15.0",
     "typescript": "^3.5.1"
   }
 }

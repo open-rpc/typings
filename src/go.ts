@@ -1,91 +1,11 @@
 import {
   Generator,
-  GetSchemaTypings,
   GetMethodTypings,
 } from "./generator-interface";
 import _ from "lodash";
 import { toSafeString } from "json-schema-to-typescript/dist/src/utils";
 import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-schema";
-import { quicktype, InputData, JSONSchemaInput } from "quicktype-core";
 import { getSchemaTypeName, getMethodAliasName, getSchemasForOpenRPCDocument } from "./utils";
-
-const isComment = (line: string): boolean => {
-  const trimmed = line.trim();
-  return _.startsWith(trimmed, "//");
-};
-
-const getDefs = (lines: string): string => {
-  let commentBuffer: string[] = [];
-
-  return _.chain(lines.split("\n"))
-    .reduce((memoLines: any[], line) => {
-      const lastItem = _.last(memoLines);
-      const singleline = line.match(/type (\S*) (?!struct)(.*)/);
-
-      if (isComment(line)) {
-        commentBuffer.push(line);
-      } else if (singleline) {
-        memoLines.push([...commentBuffer, line]);
-        commentBuffer = [];
-      } else {
-        const isStruct = line.match(/type (.*) struct(.*)/);
-        if (isStruct) {
-          // const docs = genDocs(line)
-          memoLines.push([...commentBuffer, line]);
-          commentBuffer = [];
-        } else if (_.isArray(lastItem)) {
-          lastItem.push(line);
-          if (line === "}") {
-            memoLines.push("");
-          }
-        }
-      }
-
-      return memoLines;
-    }, [])
-    .compact()
-    .uniqBy((exportLine) => {
-      const toTest = exportLine instanceof Array ?
-        _.reject(exportLine, isComment)[0] : exportLine;
-      const [all, name, rest] = toTest.match(/type (\S*)/);
-      return name;
-    })
-    .flattenDeep()
-    .join("\n")
-    .value();
-};
-const getInputData = (name: string, schema: string ): InputData => {
-    const inputData = new InputData();
-    const input = new JSONSchemaInput(undefined);
-    input.addSource({name, schema});
-    inputData.addInput(input);
-    return inputData;
-};
-
-export const getSchemaTypings: GetSchemaTypings = async (openrpcDocument) => {
-  const schemas = getSchemasForOpenRPCDocument(openrpcDocument);
-
-  const rawTypes = await Promise.all(schemas.map(async (s: Schema) => {
-    const typingsForSchema = await quicktype({
-      inputData: getInputData(getSchemaTypeName(s), JSON.stringify(s)),
-      lang: "go",
-      leadingComments: undefined,
-      rendererOptions: { "just-types": "true" },
-    });
-
-    return typingsForSchema.lines;
-  }));
-
-  const types = _.chain(rawTypes)
-    .flatten()
-    .compact()
-    .map(_.trimEnd)
-    .join("\n")
-    .trim()
-    .value();
-
-  return getDefs(types);
-};
 
 const getMethodTyping = (method: MethodObject): string => {
   const result = method.result as ContentDescriptorObject;
@@ -114,7 +34,6 @@ const generator: Generator = {
   getMethodAliasName,
   getMethodTypings,
   getSchemaTypeName,
-  getSchemaTypings,
 };
 
 export default generator;
