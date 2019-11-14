@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/open-rpc/typings/compare/1.5.0...1.6.0) (2019-11-14)
+
+
+### Features
+
+* new typings lib ([d3d7377](https://github.com/open-rpc/typings/commit/d3d737728a1bf9fa69ba87205065a599139efa93))
+
 # [1.5.0](https://github.com/open-rpc/typings/compare/1.4.3...1.5.0) (2019-10-09)
 
 
