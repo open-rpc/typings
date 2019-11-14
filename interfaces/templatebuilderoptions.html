@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="tsd-signature-type">ParserOptions</span>
+						<a href="parseroptions.html" class="tsd-signature-type">ParserOptions</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">TemplateBuilderOptions</span>
@@ -88,6 +88,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="templatebuilderoptions.html#allowimportexporteverywhere" class="tsd-kind-icon">allow<wbr>Import<wbr>Export<wbr>Everywhere</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="templatebuilderoptions.html#allowreturnoutsidefunction" class="tsd-kind-icon">allow<wbr>Return<wbr>Outside<wbr>Function</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="templatebuilderoptions.html#allowsuperoutsidemethod" class="tsd-kind-icon">allow<wbr>Super<wbr>Outside<wbr>Method</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="templatebuilderoptions.html#allowundeclaredexports" class="tsd-kind-icon">allow<wbr>Undeclared<wbr>Exports</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="templatebuilderoptions.html#createparenthesizedexpressions" class="tsd-kind-icon">create<wbr>Parenthesized<wbr>Expressions</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="templatebuilderoptions.html#placeholderpattern" class="tsd-kind-icon">placeholder<wbr>Pattern</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="templatebuilderoptions.html#placeholderwhitelist" class="tsd-kind-icon">placeholder<wbr>Whitelist</a></li>
@@ -169,13 +170,30 @@
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="allowundeclaredexports" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> allow<wbr>Undeclared<wbr>Exports</h3>
+					<div class="tsd-signature tsd-kind-icon">allow<wbr>Undeclared<wbr>Exports<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#allowundeclaredexports">allowUndeclaredExports</a></p>
+						<ul>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:43</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>By default, exported identifiers must refer to a declared variable.
+							Set this to true to allow export statements to reference undeclared variables.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="createparenthesizedexpressions" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> create<wbr>Parenthesized<wbr>Expressions</h3>
 					<div class="tsd-signature tsd-kind-icon">create<wbr>Parenthesized<wbr>Expressions<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#createparenthesizedexpressions">createParenthesizedExpressions</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:88</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:94</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -223,9 +241,9 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> plugins</h3>
 					<div class="tsd-signature tsd-kind-icon">plugins<span class="tsd-signature-symbol">:</span> <a href="../globals.html#parserplugin" class="tsd-signature-type">ParserPlugin</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from ParserOptions.plugins</p>
+						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#plugins">plugins</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:64</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:70</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -256,7 +274,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#ranges">ranges</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:75</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:81</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -272,7 +290,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#sourcefilename">sourceFilename</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:52</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:58</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -289,7 +307,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#sourcetype">sourceType</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:46</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:52</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -309,7 +327,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#startline">startLine</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:59</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:65</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -327,7 +345,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#strictmode">strictMode</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:70</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:76</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -344,7 +362,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="parseroptions.html">ParserOptions</a>.<a href="parseroptions.html#tokens">tokens</a></p>
 						<ul>
-							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:80</li>
+							<li>Defined in node_modules/@babel/parser/typings/babel-parser.d.ts:86</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -381,6 +399,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="templatebuilderoptions.html#allowsuperoutsidemethod" class="tsd-kind-icon">allow<wbr>Super<wbr>Outside<wbr>Method</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="templatebuilderoptions.html#allowundeclaredexports" class="tsd-kind-icon">allow<wbr>Undeclared<wbr>Exports</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="templatebuilderoptions.html#createparenthesizedexpressions" class="tsd-kind-icon">create<wbr>Parenthesized<wbr>Expressions</a>
@@ -436,6 +457,7 @@
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
