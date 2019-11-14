@@ -21,7 +21,6 @@ export function getExtension(lang: OpenRPCTypingsSupportedLanguages): string {
 
 export async function generateTypingsFile(openrpcDocument: OpenRPC, options: TypingsOptions[]) {
   const methodTypings = new MethodTypings(openrpcDocument);
-  await methodTypings.generateTypings();
 
   return await Promise.all(options.map(async (option: TypingsOptions) => {
     await ensureDir(option.dirName);

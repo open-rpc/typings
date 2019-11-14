@@ -1,8 +1,7 @@
 import MethodTypings, { OpenRPCTypingsSupportedLanguages } from ".";
 import { OpenRPC } from "@open-rpc/meta-schema";
-import { cloneDeep } from "lodash";
 
-const testOpenRPCDocument = {
+const getTestOpenRPCDocument = () => ({
   info: {
     title: "jipperjobber",
     version: "3.2.1",
@@ -36,19 +35,21 @@ const testOpenRPCDocument = {
     },
   ],
   openrpc: "1.0.0",
-} as OpenRPC;
+} as OpenRPC);
 
 const expectedNipTipTypescript = [
   "/**",
+  " *",
   " * a really cool niptip",
+  " *",
   " */",
   "export type Niptip = number;",
 ].join("\n");
 const expectedSkeepadeepTypescript = "export type Skeepadeep = number;";
-const expectedReepadoopTypescript = "export type NumberYqdpe1HS = number;";
+const expectedReepadoopTypescript = "export type NumberHo1ClIqD = number;";
 const expectedRipSlipTypescript = [
   "export interface Ripslip {",
-  "  reepadoop?: NumberYqdpe1HS;",
+  "  reepadoop?: NumberHo1ClIqD;",
   "  skeepadeep?: Skeepadeep;",
   "  [k: string]: any;",
   "}",
@@ -64,28 +65,32 @@ const expectedTypescript = [
 
 const expectedNipTipRust = "";
 const expectedRipSlipRust = [
-  "pub type JibberNiptip = f64;",
-  "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
-  "#[cfg_attr(test, derive(Random))]",
-  "pub struct JibberRipslip {",
-  "    #[serde(rename = \"reepadoop\")]",
-  "    pub reepadoop: Option<f64>,",
+  "extern crate serde_json;",
   "",
-  "    #[serde(rename = \"skeepadeep\")]",
-  "    pub skeepadeep: Option<i64>,",
+  "/// Niptip",
+  "///",
+  "/// a really cool niptip",
+  "///",
+  "pub type Niptip = f64;",
+  "pub type NumberHo1ClIqD = f64;",
+  "pub type Skeepadeep = i64;",
+  "#[derive(Serialize, Deserialize)]",
+  "pub struct Ripslip {",
+  "    pub(crate) reepadoop: Option<NumberHo1ClIqD>,",
+  "    pub(crate) skeepadeep: Option<Skeepadeep>,",
   "}",
 ].join("\n");
 
-const expectedJibberRust = "pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;";
+const expectedJibberRust = "pub fn jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;";
 const expectedRust = [expectedRipSlipRust, expectedJibberRust].join("\n");
 
-const expectedNipTipGo = "type Niptip float64";
+const expectedNipTipGo = ["// a really cool niptip", "type Niptip float64"].join("\n");
 const expectedSkeepadeepGo = "type Skeepadeep int64";
-const expectedReepadoopGo = "type NumberYqdpe1HS float64";
+const expectedReepadoopGo = "type NumberHo1ClIqD float64";
 const expectedRipSlipGo = [
   "type Ripslip struct {",
-  "\tReepadoop  *float64 `json:\"reepadoop,omitempty\"`",
-  "\tSkeepadeep *int64   `json:\"skeepadeep,omitempty\"`",
+  "\tReepadoop *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
+  "\tSkeepadeep *Skeepadeep `json:\"skeepadeep,omitempty\"`",
   "}",
 ].join("\n");
 const expectedJibberGo = [
@@ -104,11 +109,11 @@ const expectedGo = [
 describe("MethodTypings", () => {
 
   it("can be constructed", () => {
-    expect(new MethodTypings(testOpenRPCDocument)).toBeInstanceOf(MethodTypings);
+    expect(new MethodTypings(getTestOpenRPCDocument())).toBeInstanceOf(MethodTypings);
   });
 
   it("defaults any schemas who is missing a title", () => {
-    const copy = cloneDeep(testOpenRPCDocument);
+    const copy = getTestOpenRPCDocument();
     copy.methods[0].params.push({
       name: "flooby",
       schema: { type: "string" },
@@ -116,24 +121,22 @@ describe("MethodTypings", () => {
     const typings = new MethodTypings(copy);
     expect(
       typings.getTypingNames("typescript", copy.methods[0]).params[1],
-    ).toBe("StringWxzVcTo3");
+    ).toBe("StringDoaGddGA");
   });
 
-  it("can generate typings map", async () => {
-    const methodTypings = new MethodTypings(testOpenRPCDocument);
-
-    await methodTypings.generateTypings();
+  it("can generate typings map", () => {
+    const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
     expect(methodTypings).toBeInstanceOf(MethodTypings);
   });
 
   describe("getTypingNames", () => {
     it("returns method name, param names and result names", () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
+      const methodTypings = new MethodTypings(getTestOpenRPCDocument());
       expect(
         methodTypings.getTypingNames(
           "typescript",
-          testOpenRPCDocument.methods[0],
+          getTestOpenRPCDocument().methods[0],
         ),
       ).toEqual({
         method: "Jibber",
@@ -142,8 +145,8 @@ describe("MethodTypings", () => {
       });
     });
 
-    it("prefixes names with 'unknown' when they aren't recognized json schemas", () => {
-      const copy = cloneDeep(testOpenRPCDocument);
+    it("prefixes names with 'any' when they aren't recognized json schemas", () => {
+      const copy = getTestOpenRPCDocument();
       copy.methods[0].params.push({
         name: "flooby",
         schema: {
@@ -153,27 +156,21 @@ describe("MethodTypings", () => {
       const typings = new MethodTypings(copy);
       expect(
         typings.getTypingNames("typescript", copy.methods[0]).params[1],
-      ).toBe("UnknownFl42CSW8");
+      ).toBe("AnyM6CMQ11S");
     });
 
   });
 
   describe("getMethodTypings", () => {
 
-    it("throws if types not generated yet", () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      expect(() => methodTypings.getMethodTypings("typescript")).toThrow();
-    });
-
-    it("returns a MethodTypings object for a method", async () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      await methodTypings.generateTypings();
+    it("returns a MethodTypings object for a method", () => {
+      const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
       expect(methodTypings.getMethodTypings("typescript"))
         .toEqual("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("rust"))
-        .toEqual("pub fn jibber(&mut self, jibberNiptip: JibberNiptip) -> RpcRequest<JibberRipslip>;");
+        .toEqual("pub fn jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("go"))
         .toEqual([
@@ -183,17 +180,16 @@ describe("MethodTypings", () => {
         ].join("\n"));
     });
 
-    it("works when there are no params", async () => {
-      const copytestOpenRPCDocument = cloneDeep(testOpenRPCDocument);
+    it("works when there are no params", () => {
+      const copytestOpenRPCDocument = getTestOpenRPCDocument();
       copytestOpenRPCDocument.methods[0].params = [];
       const methodTypings = new MethodTypings(copytestOpenRPCDocument);
-      await methodTypings.generateTypings();
 
       expect(methodTypings.getMethodTypings("typescript"))
         .toBe("export type Jibber = () => Promise<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("rust"))
-        .toBe("pub fn jibber(&mut self) -> RpcRequest<JibberRipslip>;");
+        .toBe("pub fn jibber(&mut self) -> RpcRequest<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("go"))
         .toEqual([
@@ -206,14 +202,8 @@ describe("MethodTypings", () => {
 
   describe("toString", () => {
 
-    it("throws if types not generated yet", () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      expect(() => methodTypings.toString("typescript")).toThrow();
-    });
-
-    it("can optionally receive only method typings", async () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      await methodTypings.generateTypings();
+    it("can optionally receive only method typings", () => {
+      const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
       expect(methodTypings.toString("typescript", {
         includeMethodAliasTypings: true,
@@ -221,9 +211,8 @@ describe("MethodTypings", () => {
       })).toBe(expectedJibberTypescript);
     });
 
-    it("returns a string of typings for all languages", async () => {
-      const methodTypings = new MethodTypings(testOpenRPCDocument);
-      await methodTypings.generateTypings();
+    it("returns a string of typings for all languages", () => {
+      const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
       expect(methodTypings.toString("typescript")).toBe(expectedTypescript);
       expect(methodTypings.toString("rust")).toBe(expectedRust);
@@ -231,7 +220,7 @@ describe("MethodTypings", () => {
     });
   });
 
-  it("gracefully handles openrpc documents with duplicate names for content descriptors", async () => {
+  it("gracefully handles openrpc documents with duplicate names for content descriptors", () => {
     const dupesDocument = {
       info: {
         title: "jipperjobber",
@@ -253,6 +242,7 @@ describe("MethodTypings", () => {
             schema: {
               oneOf: [
                 {
+                  description: "array of strings is all...",
                   items: { type: "string" },
                   type: "array",
                 },
@@ -297,36 +287,35 @@ describe("MethodTypings", () => {
       openrpc: "1.0.0",
     } as OpenRPC;
 
-    const copytestOpenRPCDocument = cloneDeep(dupesDocument);
-
-    const methodTypings = new MethodTypings(copytestOpenRPCDocument);
-    await methodTypings.generateTypings();
+    const methodTypings = new MethodTypings(dupesDocument);
     expect(
       methodTypings.toString(
         "rust",
         { includeSchemaTypings: true, includeMethodAliasTypings: false },
       ),
-    ).toBe([
-      "pub type Ripslip2 = String;",
-      "pub type Ripslip = Vec<RipslipElement>;",
-      "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
-      "#[cfg_attr(test, derive(Random))]",
-      "#[serde(untagged)]",
-      "pub enum RipslipElement {",
-      "    Integer(i64),",
-      "",
-      "    String(String),",
-      "}",
-      "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq)]",
-      "#[cfg_attr(test, derive(Random))]",
-      "pub struct Ripslip1 {",
-      "    #[serde(rename = \"ripslip\")]",
-      "    pub ripslip: Option<bool>,",
-      "}",
-    ].join("\n"));
+    ).toBe(`extern crate serde_json;
+
+pub type StringDoaGddGA = String;
+pub type BooleanVyG3AETh = bool;
+#[derive(Serialize, Deserialize)]
+pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
+    pub(crate) ripslip: Option<BooleanVyG3AETh>,
+}
+/// UnorderedSetOfStringDoaGddGAmrf5BlCm
+///
+/// array of strings is all...
+///
+pub type UnorderedSetOfStringDoaGddGAmrf5BlCm = Vec<StringDoaGddGA>;
+pub type IntegerXZTmW7Mv = i64;
+pub type UnorderedSetOfIntegerXZTmW7MvjsBS3XxD = (IntegerXZTmW7Mv);
+#[derive(Serialize, Deserialize)]
+pub enum OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M {
+    UnorderedSetOfStringDoaGddGAmrf5BlCm,
+    UnorderedSetOfIntegerXZTmW7MvjsBS3XxD
+}`);
   });
 
-  it("handles schemas with anyOf, oneOf and allOf", async () => {
+  it("handles schemas with anyOf, oneOf and allOf", () => {
     const doc = {
       info: {
         title: "abc",
@@ -419,19 +408,20 @@ describe("MethodTypings", () => {
     } as OpenRPC;
 
     const methodTypings = new MethodTypings(doc);
-    await methodTypings.generateTypings();
     expect(methodTypings.toString("typescript"))
-      .toBe(`/**
+      .toBe(`export type AnyOfABeeCeeePpSBogg4 = Bee | A | Ceee;
+/**
+ *
  * its a b.
+ *
  */
 export type Bee = number;
 export type A = string;
 export type Ceee = boolean;
-export type AnyOfBWswD897 = Bee | A | Ceee;
 export type X = number;
 export type Y = string;
 export type Z = boolean;
-export type OneOfDgZSW92J = X | Y | Z;
+export type OneOfXYZCMfJwVAI = X | Y | Z;
 export type Baz = number;
 export interface WithBaz {
   baz?: Baz;
@@ -447,8 +437,8 @@ export interface WithFoo {
   foo?: Foo;
   [k: string]: any;
 }
-export type AllOfHguKC4QU = WithBaz & WithBar & WithFoo;
-export type StringWxzVcTo3 = string;
-export type Jobber = (ripslip: AnyOfBWswD897, biperbopper: OneOfDgZSW92J, slippyslopper: AllOfHguKC4QU, ripper?: StringWxzVcTo3) => Promise<StringWxzVcTo3>;`); //tslint:disable-line
+export type AllOfWithBarWithBazWithFooVAQmhFhX = WithBaz & WithBar & WithFoo;
+export type StringDoaGddGA = string;
+export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJwVAI, slippyslopper: AllOfWithBarWithBazWithFooVAQmhFhX, ripper?: StringDoaGddGA) => Promise<StringDoaGddGA>;`); //tslint:disable-line
   });
 });
