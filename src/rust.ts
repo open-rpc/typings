@@ -20,7 +20,7 @@ const getMethodTyping = (method: MethodObject) => {
 
   const paramString = (params.length > 0) ? `, ${params}` : "";
 
-  return `pub fn ${method.name}(&mut self${paramString}) -> ${result};`;
+  return `pub fn ${methodAliasName}(&mut self${paramString}) -> ${result};`;
 };
 
 export const getMethodTypings: GetMethodTypings = (openrpcDocument: OpenRPC) => {

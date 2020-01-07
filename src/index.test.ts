@@ -56,10 +56,16 @@ const expectedRipSlipTypescript = [
 ].join("\n");
 const expectedJibberTypescript = "export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;";
 const expectedTypescript = [
-  expectedNipTipTypescript,
   expectedReepadoopTypescript,
   expectedSkeepadeepTypescript,
+  expectedNipTipTypescript,
   expectedRipSlipTypescript,
+  "/**",
+  " *",
+  " * Generated! Represents an alias to any of the provided schemas",
+  " *",
+  " */",
+  "export type AnyOfNiptipRipslip = Niptip | Ripslip;",
   expectedJibberTypescript,
 ].join("\n");
 
@@ -67,13 +73,13 @@ const expectedNipTipRust = "";
 const expectedRipSlipRust = [
   "extern crate serde_json;",
   "",
+  "pub type NumberHo1ClIqD = f64;",
+  "pub type Skeepadeep = i64;",
   "/// Niptip",
   "///",
   "/// a really cool niptip",
   "///",
   "pub type Niptip = f64;",
-  "pub type NumberHo1ClIqD = f64;",
-  "pub type Skeepadeep = i64;",
   "#[derive(Serialize, Deserialize)]",
   "pub struct Ripslip {",
   "    pub(crate) reepadoop: Option<NumberHo1ClIqD>,",
@@ -81,16 +87,24 @@ const expectedRipSlipRust = [
   "}",
 ].join("\n");
 
-const expectedJibberRust = "pub fn jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;";
-const expectedRust = [expectedRipSlipRust, expectedJibberRust].join("\n");
+const expectedJibberRust = "pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;";
+const expectedRust = [
+  expectedRipSlipRust,
+  "#[derive(Serialize, Deserialize)]",
+  "pub enum AnyOfNiptipRipslip {",
+  "    Niptip,",
+  "    Ripslip",
+  "}",
+  expectedJibberRust,
+].join("\n");
 
 const expectedNipTipGo = ["// a really cool niptip", "type Niptip float64"].join("\n");
 const expectedSkeepadeepGo = "type Skeepadeep int64";
 const expectedReepadoopGo = "type NumberHo1ClIqD float64";
 const expectedRipSlipGo = [
   "type Ripslip struct {",
-  "\tReepadoop *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
-  "\tSkeepadeep *Skeepadeep `json:\"skeepadeep,omitempty\"`",
+  "\tReepadoop  *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
+  "\tSkeepadeep *Skeepadeep     `json:\"skeepadeep,omitempty\"`",
   "}",
 ].join("\n");
 const expectedJibberGo = [
@@ -99,11 +113,43 @@ const expectedJibberGo = [
   "}",
 ].join("\n");
 const expectedGo = [
-  expectedNipTipGo,
   expectedReepadoopGo,
   expectedSkeepadeepGo,
+  expectedNipTipGo,
   expectedRipSlipGo,
+  "// Generated! Represents an alias to any of the provided schemas",
+  "type AnyOfNiptipRipslip struct {",
+  "\tNiptip  *Niptip",
+  "\tRipslip *Ripslip",
+  "}",
   expectedJibberGo,
+].join("\n");
+
+const expectedNipTipPython = ["// a really cool niptip", "type Niptip float64"].join("\n");
+const expectedSkeepadeepPython = "type Skeepadeep int64";
+const expectedReepadoopPython = "type NumberHo1ClIqD float64";
+const expectedRipSlipPython = [
+  "type Ripslip struct {",
+  "\tReepadoop  *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
+  "\tSkeepadeep *Skeepadeep     `json:\"skeepadeep,omitempty\"`",
+  "}",
+].join("\n");
+const expectedJibberPython = [
+  "type Jipperjobber interface {",
+  "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
+  "}",
+].join("\n");
+const expectedPython = [
+  expectedReepadoopPython,
+  expectedSkeepadeepPython,
+  expectedNipTipPython,
+  expectedRipSlipPython,
+  "// Generated! Represents an alias to any of the provided schemas",
+  "type AnyOfNiptipRipslip struct {",
+  "\tNiptip  *Niptip",
+  "\tRipslip *Ripslip",
+  "}",
+  expectedJibberPython,
 ].join("\n");
 
 describe("MethodTypings", () => {
@@ -170,7 +216,7 @@ describe("MethodTypings", () => {
         .toEqual("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("rust"))
-        .toEqual("pub fn jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;");
+        .toEqual("pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("go"))
         .toEqual([
@@ -178,6 +224,9 @@ describe("MethodTypings", () => {
           "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
           "}",
         ].join("\n"));
+
+      expect(methodTypings.getMethodTypings("python"))
+        .toEqual("");
     });
 
     it("works when there are no params", () => {
@@ -189,7 +238,7 @@ describe("MethodTypings", () => {
         .toBe("export type Jibber = () => Promise<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("rust"))
-        .toBe("pub fn jibber(&mut self) -> RpcRequest<Ripslip>;");
+        .toBe("pub fn Jibber(&mut self) -> RpcRequest<Ripslip>;");
 
       expect(methodTypings.getMethodTypings("go"))
         .toEqual([
@@ -197,6 +246,9 @@ describe("MethodTypings", () => {
           "\tJibber() (Ripslip, error)",
           "}",
         ].join("\n"));
+
+      expect(methodTypings.getMethodTypings("python"))
+        .toEqual("");
     });
   });
 
@@ -295,12 +347,8 @@ describe("MethodTypings", () => {
       ),
     ).toBe(`extern crate serde_json;
 
-pub type StringDoaGddGA = String;
 pub type BooleanVyG3AETh = bool;
-#[derive(Serialize, Deserialize)]
-pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
-    pub(crate) ripslip: Option<BooleanVyG3AETh>,
-}
+pub type StringDoaGddGA = String;
 /// UnorderedSetOfStringDoaGddGAmrf5BlCm
 ///
 /// array of strings is all...
@@ -309,9 +357,20 @@ pub type UnorderedSetOfStringDoaGddGAmrf5BlCm = Vec<StringDoaGddGA>;
 pub type IntegerXZTmW7Mv = i64;
 pub type UnorderedSetOfIntegerXZTmW7MvjsBS3XxD = (IntegerXZTmW7Mv);
 #[derive(Serialize, Deserialize)]
+pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
+    pub(crate) ripslip: Option<BooleanVyG3AETh>,
+}
+#[derive(Serialize, Deserialize)]
 pub enum OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M {
     UnorderedSetOfStringDoaGddGAmrf5BlCm,
     UnorderedSetOfIntegerXZTmW7MvjsBS3XxD
+}
+#[derive(Serialize, Deserialize)]
+pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2MIntegerXZTmW7Mv {
+    StringDoaGddGA,
+    ObjectOfBooleanVyG3AETh5PX0GXMY,
+    OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M,
+    IntegerXZTmW7Mv
 }`);
   });
 
@@ -409,8 +468,7 @@ pub enum OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAm
 
     const methodTypings = new MethodTypings(doc);
     expect(methodTypings.toString("typescript"))
-      .toBe(`export type AnyOfABeeCeeePpSBogg4 = Bee | A | Ceee;
-/**
+      .toBe(`/**
  *
  * its a b.
  *
@@ -421,7 +479,6 @@ export type Ceee = boolean;
 export type X = number;
 export type Y = string;
 export type Z = boolean;
-export type OneOfXYZCMfJwVAI = X | Y | Z;
 export type Baz = number;
 export interface WithBaz {
   baz?: Baz;
@@ -437,8 +494,16 @@ export interface WithFoo {
   foo?: Foo;
   [k: string]: any;
 }
+export type AnyOfABeeCeeePpSBogg4 = Bee | A | Ceee;
+export type OneOfXYZCMfJwVAI = X | Y | Z;
 export type AllOfWithBarWithBazWithFooVAQmhFhX = WithBaz & WithBar & WithFoo;
 export type StringDoaGddGA = string;
+/**
+ *
+ * Generated! Represents an alias to any of the provided schemas
+ *
+ */
+export type AnyOfAnyOfABeeCeeePpSBogg4OneOfXYZCMfJwVAIAllOfWithBarWithBazWithFooVAQmhFhXStringDoaGddGAStringDoaGddGA = AnyOfABeeCeeePpSBogg4 | OneOfXYZCMfJwVAI | AllOfWithBarWithBazWithFooVAQmhFhX | StringDoaGddGA;
 export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJwVAI, slippyslopper: AllOfWithBarWithBazWithFooVAQmhFhX, ripper?: StringDoaGddGA) => Promise<StringDoaGddGA>;`); //tslint:disable-line
   });
 });

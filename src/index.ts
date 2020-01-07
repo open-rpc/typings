@@ -1,8 +1,9 @@
 import typescript from "./typescript";
 import rust from "./rust";
 import go from "./go";
+import python from "./python";
 import { Generator } from "./generator-interface";
-import { OpenRPC, MethodObject, ContentDescriptorObject, Schema } from "@open-rpc/meta-schema";
+import { OpenRPC, MethodObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
 import { getSchemasForOpenRPCDocument } from "./utils";
 import JsonSchemaToTypes from "@etclabscore/json-schema-to-types";
 import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
@@ -11,16 +12,18 @@ interface Generators {
   typescript: Generator;
   rust: Generator;
   go: Generator;
+  python: Generator;
   [key: string]: Generator;
 }
 
 const generators: Generators = {
   go,
+  python,
   rust,
   typescript,
 };
 
-export type OpenRPCTypingsSupportedLanguages = "rust" | "rs" | "typescript" | "ts" | "go" | "golang";
+export type OpenRPCTypingsSupportedLanguages = "rust" | "rs" | "typescript" | "ts" | "go" | "golang" | "py" | "python";
 
 interface OpenRPCTypings {
   schemas: string;
@@ -48,7 +51,6 @@ export interface OpenRPCTypingsToStringOptions {
 export default class MethodTypings {
   private transpiler: JsonSchemaToTypes;
 
-  private typingsByLanguage: OpenRPCTypingsByLanguage = {};
   private toStringOptionsDefaults: OpenRPCTypingsToStringOptions = {
     includeMethodAliasTypings: true,
     includeSchemaTypings: true,

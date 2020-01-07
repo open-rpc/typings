@@ -3,7 +3,7 @@ import {
   GetMethodTypings,
   GetMethodAliasName,
 } from "./generator-interface";
-import { ContentDescriptorObject, MethodObject, Schema } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
 import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
 
 const getMethodTyping = (method: MethodObject): string => {
