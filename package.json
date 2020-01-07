@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/open-rpc/typings#readme",
   "dependencies": {
-    "@etclabscore/json-schema-to-types": "^1.4.1",
+    "@etclabscore/json-schema-to-types": "github:etclabscore/json-schema-to-types",
     "@open-rpc/meta-schema": "^1.4.3",
     "@open-rpc/schema-utils-js": "^1.11.1",
     "commander": "^2.20.0",
