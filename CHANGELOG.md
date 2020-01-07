@@ -1,3 +1,18 @@
+# [1.7.0](https://github.com/open-rpc/typings/compare/1.6.0...1.7.0) (2020-01-07)
+
+
+### Bug Fixes
+
+* add node-version file ([e083f02](https://github.com/open-rpc/typings/commit/e083f0289f029fb7e65e9cec243a5d6ed4caeceb))
+* add some tests ([5b0a5a9](https://github.com/open-rpc/typings/commit/5b0a5a930c64cb02f2078b134ae79f7ee90e6e6b))
+* add to index ([758c9a6](https://github.com/open-rpc/typings/commit/758c9a677eff5069f0c5e5ef57cc9fffd928da04))
+* use node lts ([82d872a](https://github.com/open-rpc/typings/commit/82d872a95f5d5289cca6d7635f7669f682646e94))
+
+
+### Features
+
+* python ([af5ffaf](https://github.com/open-rpc/typings/commit/af5ffaf52d2880c581e2c833a9df98b2d25657b9))
+
 # [1.6.0](https://github.com/open-rpc/typings/compare/1.5.0...1.6.0) (2019-11-14)
 
 
