@@ -1,7 +1,7 @@
 import { ensureDir, emptyDir, writeFile } from "fs-extra";
 
 import MethodTypings, { OpenRPCTypingsSupportedLanguages } from "./";
-import { OpenRPC } from "@open-rpc/meta-schema";
+import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 
 export interface TypingsOptions {
   fileName: string;

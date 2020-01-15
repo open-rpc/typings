@@ -29,7 +29,7 @@ const getMethodTyping = (method: MethodObject): string => {
 
 export const getMethodTypings: GetMethodTypings = (openrpcDocument) => {
   return openrpcDocument.methods
-    .map((method) => getMethodTyping(method))
+    .map((method: MethodObject) => getMethodTyping(method))
     .join("\n");
 };
 

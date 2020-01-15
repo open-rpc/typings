@@ -1,5 +1,5 @@
 import MethodTypings, { OpenRPCTypingsSupportedLanguages } from ".";
-import { OpenRPC } from "@open-rpc/meta-schema";
+import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 
 const getTestOpenRPCDocument = () => ({
   info: {
@@ -56,9 +56,9 @@ const expectedRipSlipTypescript = [
 ].join("\n");
 const expectedJibberTypescript = "export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;";
 const expectedTypescript = [
+  expectedNipTipTypescript,
   expectedReepadoopTypescript,
   expectedSkeepadeepTypescript,
-  expectedNipTipTypescript,
   expectedRipSlipTypescript,
   "/**",
   " *",
@@ -73,13 +73,13 @@ const expectedNipTipRust = "";
 const expectedRipSlipRust = [
   "extern crate serde_json;",
   "",
-  "pub type NumberHo1ClIqD = f64;",
-  "pub type Skeepadeep = i64;",
   "/// Niptip",
   "///",
   "/// a really cool niptip",
   "///",
   "pub type Niptip = f64;",
+  "pub type NumberHo1ClIqD = f64;",
+  "pub type Skeepadeep = i64;",
   "#[derive(Serialize, Deserialize)]",
   "pub struct Ripslip {",
   "    pub(crate) reepadoop: Option<NumberHo1ClIqD>,",
@@ -113,9 +113,9 @@ const expectedJibberGo = [
   "}",
 ].join("\n");
 const expectedGo = [
+  expectedNipTipGo,
   expectedReepadoopGo,
   expectedSkeepadeepGo,
-  expectedNipTipGo,
   expectedRipSlipGo,
   "// Generated! Represents an alias to any of the provided schemas",
   "type AnyOfNiptipRipslip struct {",
@@ -347,8 +347,12 @@ describe("MethodTypings", () => {
       ),
     ).toBe(`extern crate serde_json;
 
-pub type BooleanVyG3AETh = bool;
 pub type StringDoaGddGA = String;
+pub type BooleanVyG3AETh = bool;
+#[derive(Serialize, Deserialize)]
+pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
+    pub(crate) ripslip: Option<BooleanVyG3AETh>,
+}
 /// UnorderedSetOfStringDoaGddGAmrf5BlCm
 ///
 /// array of strings is all...
@@ -356,10 +360,6 @@ pub type StringDoaGddGA = String;
 pub type UnorderedSetOfStringDoaGddGAmrf5BlCm = Vec<StringDoaGddGA>;
 pub type IntegerXZTmW7Mv = i64;
 pub type UnorderedSetOfIntegerXZTmW7MvjsBS3XxD = (IntegerXZTmW7Mv);
-#[derive(Serialize, Deserialize)]
-pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
-    pub(crate) ripslip: Option<BooleanVyG3AETh>,
-}
 #[derive(Serialize, Deserialize)]
 pub enum OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M {
     UnorderedSetOfStringDoaGddGAmrf5BlCm,
@@ -476,9 +476,11 @@ pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUn
 export type Bee = number;
 export type A = string;
 export type Ceee = boolean;
+export type AnyOfABeeCeeePpSBogg4 = Bee | A | Ceee;
 export type X = number;
 export type Y = string;
 export type Z = boolean;
+export type OneOfXYZCMfJwVAI = X | Y | Z;
 export type Baz = number;
 export interface WithBaz {
   baz?: Baz;
@@ -494,8 +496,6 @@ export interface WithFoo {
   foo?: Foo;
   [k: string]: any;
 }
-export type AnyOfABeeCeeePpSBogg4 = Bee | A | Ceee;
-export type OneOfXYZCMfJwVAI = X | Y | Z;
 export type AllOfWithBarWithBazWithFooVAQmhFhX = WithBaz & WithBar & WithFoo;
 export type StringDoaGddGA = string;
 /**
