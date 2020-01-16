@@ -2,7 +2,7 @@
 
 import program, { CommanderStatic } from "commander";
 import { parseOpenRPCDocument } from "@open-rpc/schema-utils-js";
-import { OpenRPC } from "@open-rpc/meta-schema";
+import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 import { generateTypingsFile, TypingsOptions } from "./generate-typings-file";
 import { OpenRPCTypingsSupportedLanguages } from "./";
 const version = require("../package.json").version; // tslint:disable-line
