@@ -1,7 +1,7 @@
-import { Schema, MethodObject, OpenRPC, ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { JSONSchema, MethodObject, OpenrpcDocument as OpenRPC, ContentDescriptorObject } from "@open-rpc/meta-schema";
 
-const flatten = (arr: Schema[]): Schema[] => {
-  return arr.reduce((memo: Schema[], val) => {
+const flatten = (arr: JSONSchema[]): JSONSchema[] => {
+  return arr.reduce((memo: JSONSchema[], val) => {
     if (val instanceof Array) {
       return [...memo, ...val];
     } else {
@@ -11,11 +11,11 @@ const flatten = (arr: Schema[]): Schema[] => {
   }, []);
 };
 
-export const getSchemasForOpenRPCDocument = (openrpcDocument: OpenRPC): Schema[] => {
+export const getSchemasForOpenRPCDocument = (openrpcDocument: OpenRPC): JSONSchema[] => {
   const { methods } = openrpcDocument;
 
-  const params = flatten(methods.map((method) => method.params as ContentDescriptorObject[]));
-  const result = methods.map((method) => method.result as ContentDescriptorObject);
+  const params = flatten(methods.map((method: MethodObject) => method.params as ContentDescriptorObject[]));
+  const result = methods.map((method: MethodObject) => method.result as ContentDescriptorObject);
 
   return flatten(params.concat(result).map(({ schema }) => schema));
 };

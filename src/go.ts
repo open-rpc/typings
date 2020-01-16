@@ -8,12 +8,12 @@ import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-t
 
 const getMethodTyping = (method: MethodObject): string => {
   const mResult = method.result as ContentDescriptorObject;
-  const resultName = languageSafeName(ensureSchemaTitles({ ...mResult.schema }).title);
+  const resultName = languageSafeName(ensureSchemaTitles({ ...mResult.schema }).title as string);
 
   const methodAliasName = getMethodAliasName(method);
 
   const params = (method.params as ContentDescriptorObject[]).map(
-    (param) => `${param.name} ${languageSafeName(ensureSchemaTitles(param.schema).title)}`,
+    (param) => `${param.name} ${languageSafeName(ensureSchemaTitles(param.schema).title as string)}`,
   ).join(", ");
 
   return `\t${methodAliasName}(${params}) (${resultName}, error)`;

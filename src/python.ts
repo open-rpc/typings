@@ -4,7 +4,7 @@ import {
   GetMethodAliasName,
 } from "./generator-interface";
 
-import { MethodObject, OpenRPC } from "@open-rpc/meta-schema";
+import { MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 import { languageSafeName } from "@etclabscore/json-schema-to-types/build/utils";
 
 const getMethodTyping = (method: MethodObject) => {
@@ -13,7 +13,7 @@ const getMethodTyping = (method: MethodObject) => {
 
 export const getMethodTypings: GetMethodTypings = (openrpcDocument: OpenRPC) => {
   return openrpcDocument.methods
-    .map((method) => getMethodTyping(method))
+    .map((method: MethodObject) => getMethodTyping(method))
     .join("\n");
 };
 

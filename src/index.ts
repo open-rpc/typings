@@ -3,7 +3,7 @@ import rust from "./rust";
 import go from "./go";
 import python from "./python";
 import { Generator } from "./generator-interface";
-import { OpenRPC, MethodObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { OpenrpcDocument as OpenRPC, MethodObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
 import { getSchemasForOpenRPCDocument } from "./utils";
 import JsonSchemaToTypes from "@etclabscore/json-schema-to-types";
 import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
@@ -99,8 +99,8 @@ export default class MethodTypings {
 
     return {
       method: gen.getMethodAliasName(defaultedMethod),
-      params: methodParams.map(({ schema }) => languageSafeName(ensureSchemaTitles(schema).title)),
-      result: languageSafeName(ensureSchemaTitles(methodResult.schema).title),
+      params: methodParams.map(({ schema }) => languageSafeName(ensureSchemaTitles(schema).title as string)),
+      result: languageSafeName(ensureSchemaTitles(methodResult.schema).title as string),
     };
   }
 

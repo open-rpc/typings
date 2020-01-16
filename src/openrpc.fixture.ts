@@ -1,4 +1,4 @@
-import { OpenRPC } from "@open-rpc/meta-schema";
+import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 
 const testOpenRPCDocument = {
   info: {
@@ -22,7 +22,6 @@ const testOpenRPCDocument = {
           },
           skeepadeep: { type: "integer" },
         },
-        type: "object",
       },
     },
   ],
