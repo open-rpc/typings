@@ -99,8 +99,8 @@ export default class MethodTypings {
 
     return {
       method: gen.getMethodAliasName(defaultedMethod),
-      params: methodParams.map(({ schema }) => languageSafeName(ensureSchemaTitles(schema).title)),
-      result: languageSafeName(ensureSchemaTitles(methodResult.schema).title),
+      params: methodParams.map(({ schema }) => languageSafeName(ensureSchemaTitles(schema).title as string)),
+      result: languageSafeName(ensureSchemaTitles(methodResult.schema).title as string),
     };
   }
 

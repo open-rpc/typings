@@ -13,14 +13,14 @@ export const getMethodAliasName: GetMethodAliasName = (method) => {
 const getMethodTyping = (method: MethodObject): string => {
   const result = method.result as ContentDescriptorObject;
   const resultName = ensureSchemaTitles({ ...result.schema });
-  const resultTypeName = `Promise<${languageSafeName(resultName.title)}>`;
+  const resultTypeName = `Promise<${languageSafeName(resultName.title as string)}>`;
 
   const methodAliasName = getMethodAliasName(method);
 
   const params = (method.params as ContentDescriptorObject[]).map(
     (param) => [
       `${param.name}${param.required ? "" : "?"}: `,
-      `${languageSafeName(ensureSchemaTitles(param.schema).title)}`,
+      `${languageSafeName(ensureSchemaTitles(param.schema).title as string)}`,
     ].join(""),
   ).join(", ");
 
