@@ -1,3 +1,17 @@
+# [1.8.0](https://github.com/open-rpc/typings/compare/1.7.0...1.8.0) (2020-01-16)
+
+
+### Bug Fixes
+
+* move to dev deps and fix ts issue ([6e66fee](https://github.com/open-rpc/typings/commit/6e66fee1e88f26a5852cca854c0d1b3691dc5d45))
+* need more typing with new schema typings ([c7ff819](https://github.com/open-rpc/typings/commit/c7ff8194defe938cb34f1bbef166f07e7679a78c))
+* update to latest json-schema-to-typings 1.10.0 ([a145b3f](https://github.com/open-rpc/typings/commit/a145b3f2f7153c7d0f87fb6903a3711ffc24051e))
+
+
+### Features
+
+* update to new shoes ([2dd940f](https://github.com/open-rpc/typings/commit/2dd940fcd7bb0d4158737c01a030f2ec8388b7d8))
+
 # [1.7.0](https://github.com/open-rpc/typings/compare/1.6.0...1.7.0) (2020-01-07)
 
 
