@@ -90,8 +90,8 @@
 				<h3 class="tsd-before-signature">Callable</h3>
 				<ul class="tsd-signatures tsd-kind-interface tsd-has-type-parameter tsd-is-external">
 					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
-					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>envName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-					<li class="tsd-signature tsd-kind-icon">__call&lt;T&gt;<span class="tsd-signature-symbol">(</span>envCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">__call<span class="tsd-signature-symbol">(</span>envName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="readonlyarray.html" class="tsd-signature-type">ReadonlyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					<li class="tsd-signature tsd-kind-icon">__call&lt;T&gt;<span class="tsd-signature-symbol">(</span>envCallback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>envName<span class="tsd-signature-symbol">: </span><a href="../globals.html#nonnullable" class="tsd-signature-type">NonNullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TransformOptions</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"envName"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -126,7 +126,7 @@
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>envName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>envName: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="readonlyarray.html" class="tsd-signature-type">ReadonlyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h5>
 							</li>
 						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -154,18 +154,18 @@
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>envCallback: <span class="tsd-signature-type">function</span></h5>
+								<h5>envCallback: <span class="tsd-signature-symbol">(</span>envName<span class="tsd-signature-symbol">: </span><a href="../globals.html#nonnullable" class="tsd-signature-type">NonNullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TransformOptions</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"envName"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span></h5>
 								<ul class="tsd-parameters">
 									<li class="tsd-parameter-siganture">
-										<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
-											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>envName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TransformOptions[&quot;envName&quot;]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+										<ul class="tsd-signatures tsd-kind-type-literal">
+											<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>envName<span class="tsd-signature-symbol">: </span><a href="../globals.html#nonnullable" class="tsd-signature-type">NonNullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TransformOptions</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"envName"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 										</ul>
 										<ul class="tsd-descriptions">
 											<li class="tsd-description">
 												<h4 class="tsd-parameters-title">Parameters</h4>
 												<ul class="tsd-parameters">
 													<li>
-														<h5>envName: <span class="tsd-signature-type">NonNullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TransformOptions[&quot;envName&quot;]</span><span class="tsd-signature-symbol">&gt;</span></h5>
+														<h5>envName: <a href="../globals.html#nonnullable" class="tsd-signature-type">NonNullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">TransformOptions</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">"envName"</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span></h5>
 													</li>
 												</ul>
 												<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>

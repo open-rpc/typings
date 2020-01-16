@@ -106,7 +106,7 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Method<wbr>Call<wbr>Validator<span class="tsd-signature-symbol">(</span>document<span class="tsd-signature-symbol">: </span><a href="../interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="methodcallvalidator.html" class="tsd-signature-type">MethodCallValidator</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Method<wbr>Call<wbr>Validator<span class="tsd-signature-symbol">(</span>document<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">OpenRPC</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="methodcallvalidator.html" class="tsd-signature-type">MethodCallValidator</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -128,7 +128,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>document: <a href="../interfaces/openrpc.html" class="tsd-signature-type">OpenRPC</a></h5>
+									<h5>document: <span class="tsd-signature-type">OpenRPC</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>The OpenRPC document containing the methods whose calls we want validated.</p>
@@ -185,10 +185,7 @@
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="parametervalidationerror.html" class="tsd-signature-type">ParameterValidationError</a><span class="tsd-signature-symbol">[]</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<a href="methodnotfounderror.html" class="tsd-signature-type">MethodNotFoundError</a>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <a href="parametervalidationerror.html" class="tsd-signature-type">ParameterValidationError</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="methodnotfounderror.html" class="tsd-signature-type">MethodNotFoundError</a></h4>
 							<p>an array of parameter validation errors, or if there are none, an empty array.
 							if the method name is invalid, a <a href="methodnotfounderror.html">MethodNotFoundError</a> is returned.</p>
 						</li>
