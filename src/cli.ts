@@ -11,34 +11,34 @@ program
   .version(version, "-v, --version")
   .option(
     "-d, --document [openrpcDocument]",
-    "JSON string or a Path/Url pointing to an open rpc schema",
+    "JSON string or a filepath/URL pointing to an Open-RPC document",
     "./openrpc.json",
   )
   .option(
     "--output-rs [directory]",
-    "output dir of rust typings",
+    "Path to output dir of Rust typings",
   )
   .option(
     "--output-ts [directory]",
-    "output dir of typescript typings",
+    "Path to output dir of Typescript typings",
   )
   .option(
     "--output-go [directory]",
-    "output dir of go typings",
+    "Path to output dir of Go typings",
   )
   .option(
     "--name-rs [file]",
-    "File name of rust typings",
+    "File name to input of Rust typings",
     "./index",
   )
   .option(
     "--name-ts [file]",
-    "File name of typescript typings",
+    "File name to input of Typescript typings",
     "./index",
   )
   .option(
     "--name-go [file]",
-    "File name of go typings",
+    "File name to input of Go typings",
     "./index",
   )
   .action(async () => {
@@ -52,7 +52,10 @@ program
       console.error("Please revise the validation errors above and try again."); // tslint:disable-line
     }
   })
-  .parse(process.argv);
+ .on('--help', function(){
+    console.log('Print usage information');
+  })
+ .parse(process.argv);
 
 function parseTypingsOptions(programOpt: CommanderStatic): TypingsOptions[] {
   if (!programOpt.outputRs && !programOpt.outputTs && !programOpt.outputGo) {
