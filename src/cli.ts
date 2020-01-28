@@ -52,7 +52,7 @@ program
       console.error("Please revise the validation errors above and try again."); // tslint:disable-line
     }
   })
- .parse(process.argv);
+  .parse(process.argv);
 
 function parseTypingsOptions(programOpt: CommanderStatic): TypingsOptions[] {
   if (!programOpt.outputRs && !programOpt.outputTs && !programOpt.outputGo) {
