@@ -16,29 +16,29 @@ program
   )
   .option(
     "--output-rs [directory]",
-    "Path to output dir of Rust typings",
+    "path to output dir of Rust typings",
   )
   .option(
     "--output-ts [directory]",
-    "Path to output dir of Typescript typings",
+    "path to output dir of Typescript typings",
   )
   .option(
     "--output-go [directory]",
-    "Path to output dir of Go typings",
+    "path to output dir of Go typings",
   )
   .option(
     "--name-rs [file]",
-    "File name to input of Rust typings",
+    "file name to input of Rust typings",
     "./index",
   )
   .option(
     "--name-ts [file]",
-    "File name to input of Typescript typings",
+    "file name to input of Typescript typings",
     "./index",
   )
   .option(
     "--name-go [file]",
-    "File name to input of Go typings",
+    "file name to input of Go typings",
     "./index",
   )
   .action(async () => {
@@ -51,9 +51,6 @@ program
       console.error(e.message); // tslint:disable-line
       console.error("Please revise the validation errors above and try again."); // tslint:disable-line
     }
-  })
- .on('--help', function(){
-    console.log('Print usage information');
   })
  .parse(process.argv);
 
