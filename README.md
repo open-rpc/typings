@@ -23,15 +23,15 @@ $ open-rpc-typings --help
 Usage: cli [options]
 
 Options:
-  -v, --version                     Print the version number
+  -v, --version                     print the version number
   -d, --document [openrpcDocument]  JSON string or a filepath/URL pointing to an Open-RPC document (default: "./openrpc.json")
-  --output-rs [directory]           Path to output dir of Rust typings
-  --output-ts [directory]           Path to output dir of Typescript typings
-  --output-go [directory]           Path to output dir of Go typings
-  --name-rs [file]                  File name to input of Rust typings (default: "./index")
-  --name-ts [file]                  File name to input of Typescript typings (default: "./index")
-  --name-go [file]                  File name to input of Go typings (default: "./index")
-  -h, --help                        Print usage information
+  --output-rs [directory]           path to output dir of Rust typings
+  --output-ts [directory]           path to output dir of Typescript typings
+  --output-go [directory]           path to output dir of Go typings
+  --name-rs [file]                  file name to input of Rust typings (default: "./index")
+  --name-ts [file]                  file name to input of Typescript typings (default: "./index")
+  --name-go [file]                  file name to input of Go typings (default: "./index")
+  -h, --help                        print usage information
 
 ```
 
