@@ -11,7 +11,7 @@ program
   .version(version, "-v, --version")
   .option(
     "-d, --document [openrpcDocument]",
-    "JSON string or a filepath/URL pointing to an Open-RPC document",
+    "JSON string, or a filepath or remote URL pointing to an Open-RPC JSON document",
     "./openrpc.json",
   )
   .option(

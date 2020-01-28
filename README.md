@@ -24,7 +24,7 @@ Usage: cli [options]
 
 Options:
   -v, --version                     print the version number
-  -d, --document [openrpcDocument]  JSON string or a filepath/URL pointing to an Open-RPC document (default: "./openrpc.json")
+  -d, --document [openrpcDocument]  JSON string, or a filepath or remote URL pointing to an Open-RPC JSON document (default: "./openrpc.json")
   --output-rs [directory]           path to output dir of Rust typings
   --output-ts [directory]           path to output dir of Typescript typings
   --output-go [directory]           path to output dir of Go typings
