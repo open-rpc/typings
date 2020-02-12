@@ -1,3 +1,19 @@
+# [1.9.0](https://github.com/open-rpc/typings/compare/1.8.0...1.9.0) (2020-02-12)
+
+
+### Bug Fixes
+
+* **README:** arguably improve wording for -d option ([dc095db](https://github.com/open-rpc/typings/commit/dc095dbede99b201dbb11b7ed3d374362c32c6d3))
+* **README:** update usage docs to correspond to reality ([fbd03f6](https://github.com/open-rpc/typings/commit/fbd03f6b7017e6d3b9a480ade45aaaf2915cda20))
+* **src/cli.js:** (lint,fmt) fix whitespace issue ([5146859](https://github.com/open-rpc/typings/commit/5146859349a9b50b02fccf56e43622e24d80b04c))
+* **usage:** revert to uncapitalized option descriptions ([b7dde5a](https://github.com/open-rpc/typings/commit/b7dde5acf0adc8c7394306743a6d086d8a3206bd))
+
+
+### Features
+
+* bump to latest json to types ([c73988f](https://github.com/open-rpc/typings/commit/c73988fd8f44825ef39a30d60a80243a8ca90d53))
+* **help/doc:** enhance usage readability with caps and wordings ([5ae2ba4](https://github.com/open-rpc/typings/commit/5ae2ba46e965811548972afd71060b7b2b9319cd))
+
 # [1.8.0](https://github.com/open-rpc/typings/compare/1.7.0...1.8.0) (2020-01-16)
 
 
