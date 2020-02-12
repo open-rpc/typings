@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ReporterOnStartOptions | @open-rpc/typings</title>
+	<title>Diff | @open-rpc/typings</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,24 +54,39 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/jest.html">jest</a>
-				</li>
-				<li>
-					<a href="jest.reporteronstartoptions.html">ReporterOnStartOptions</a>
+					<a href="diff.html">Diff</a>
 				</li>
 			</ul>
-			<h1>Interface ReporterOnStartOptions</h1>
+			<h1>Class Diff</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Class representing one diff tuple.
+						Attempts to look like a two-element array (which is what this used to be).</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>param</dt>
+						<dd><p>Operation, one of: DIFF_DELETE, DIFF_INSERT, DIFF_EQUAL.</p>
+						</dd>
+						<dt>param</dt>
+						<dd><p>Text to be deleted, inserted, or retained.</p>
+						</dd>
+						<dt>constructor</dt>
+						<dd></dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ReporterOnStartOptions</span>
+						<span class="target">Diff</span>
 					</li>
 				</ul>
 			</section>
@@ -80,34 +95,69 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-external">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-external"><a href="diff.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-external">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="jest.reporteronstartoptions.html#estimatedtime" class="tsd-kind-icon">estimated<wbr>Time</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-external"><a href="jest.reporteronstartoptions.html#showstatus" class="tsd-kind-icon">show<wbr>Status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="diff.html#0" class="tsd-kind-icon">0</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-external"><a href="diff.html#1" class="tsd-kind-icon">1</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-external">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Diff<span class="tsd-signature-symbol">(</span>op<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, text<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="diff.html" class="tsd-signature-type">Diff</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/jest-diff/build/cleanupSemantic.d.ts:49</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>op: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5>text: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="diff.html" class="tsd-signature-type">Diff</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-external">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="estimatedtime" class="tsd-anchor"></a>
-					<h3>estimated<wbr>Time</h3>
-					<div class="tsd-signature tsd-kind-icon">estimated<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="0" class="tsd-anchor"></a>
+					<h3>0</h3>
+					<div class="tsd-signature tsd-kind-icon">0<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/jest/index.d.ts:1863</li>
+							<li>Defined in node_modules/jest-diff/build/cleanupSemantic.d.ts:48</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-					<a name="showstatus" class="tsd-anchor"></a>
-					<h3>show<wbr>Status</h3>
-					<div class="tsd-signature tsd-kind-icon">show<wbr>Status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-external">
+					<a name="1" class="tsd-anchor"></a>
+					<h3>1</h3>
+					<div class="tsd-signature tsd-kind-icon">1<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/jest/index.d.ts:1864</li>
+							<li>Defined in node_modules/jest-diff/build/cleanupSemantic.d.ts:49</li>
 						</ul>
 					</aside>
 				</section>
@@ -119,23 +169,23 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-module tsd-is-external">
-						<a href="../modules/jest.html">jest</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-is-external">
-						<a href="jest.reporteronstartoptions.html" class="tsd-kind-icon">Reporter<wbr>OnStart<wbr>Options</a>
+					<li class="current tsd-kind-class tsd-is-external">
+						<a href="diff.html" class="tsd-kind-icon">Diff</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="jest.reporteronstartoptions.html#estimatedtime" class="tsd-kind-icon">estimated<wbr>Time</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-external">
+								<a href="diff.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-external">
-								<a href="jest.reporteronstartoptions.html#showstatus" class="tsd-kind-icon">show<wbr>Status</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="diff.html#0" class="tsd-kind-icon">0</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-external">
+								<a href="diff.html#1" class="tsd-kind-icon">1</a>
 							</li>
 						</ul>
 					</li>

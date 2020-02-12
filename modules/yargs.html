@@ -92,6 +92,7 @@
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="yargs.html#middlewarefunction" class="tsd-kind-icon">Middleware<wbr>Function</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="yargs.html#omit" class="tsd-kind-icon">Omit</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="yargs.html#parsecallback" class="tsd-kind-icon">Parse<wbr>Callback</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-is-external"><a href="yargs.html#parserconfigurationoptions" class="tsd-kind-icon">Parser<wbr>Configuration<wbr>Options</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-is-external"><a href="yargs.html#positionaloptionstype" class="tsd-kind-icon">Positional<wbr>Options<wbr>Type</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-is-external"><a href="yargs.html#promisecompletionfunction" class="tsd-kind-icon">Promise<wbr>Completion<wbr>Function</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external"><a href="yargs.html#requiredoptiontype" class="tsd-kind-icon">Required<wbr>Option<wbr>Type</a></li>
@@ -112,7 +113,7 @@
 					<div class="tsd-signature tsd-kind-icon">Arguments&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>$0<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>_<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:576</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:587</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -128,7 +129,7 @@
 					<div class="tsd-signature tsd-kind-icon">Async<wbr>Completion<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>current<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, argv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, done<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>completion<span class="tsd-signature-symbol">: </span><a href="../interfaces/readonlyarray.html" class="tsd-signature-type">ReadonlyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:760</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:771</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -202,17 +203,17 @@
 					<div class="tsd-signature tsd-kind-icon">Choices<span class="tsd-signature-symbol">:</span> <a href="../interfaces/readonlyarray.html" class="tsd-signature-type">ReadonlyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:763</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:774</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
 					<a name="commandbuilder" class="tsd-anchor"></a>
 					<h3>Command<wbr>Builder</h3>
-					<div class="tsd-signature tsd-kind-icon">Command<wbr>Builder&lt;T, U&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>args<span class="tsd-signature-symbol">: </span><a href="../interfaces/yargs.argv.html" class="tsd-signature-type">Argv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/yargs.argv.html" class="tsd-signature-type">Argv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span></div>
+					<div class="tsd-signature tsd-kind-icon">Command<wbr>Builder&lt;T, U&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>args<span class="tsd-signature-symbol">: </span><a href="../interfaces/yargs.argv.html" class="tsd-signature-type">Argv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/yargs.argv.html" class="tsd-signature-type">Argv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">U</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:758</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:769</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -228,10 +229,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
 					<a name="defined" class="tsd-anchor"></a>
 					<h3>Defined</h3>
-					<div class="tsd-signature tsd-kind-icon">Defined&lt;T, K&gt;<span class="tsd-signature-symbol">:</span> <a href="yargs.html#omit" class="tsd-signature-type">Omit</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span></div>
+					<div class="tsd-signature tsd-kind-icon">Defined&lt;T, K&gt;<span class="tsd-signature-symbol">:</span> <a href="yargs.html#omit" class="tsd-signature-type">Omit</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:699</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:710</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -255,7 +256,7 @@
 					<div class="tsd-signature tsd-kind-icon">Inferred<wbr>Option<wbr>Type&lt;O&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>default<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">infer </span> D<span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">D</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"count"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>count<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>required<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">RequiredOptionType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>require<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">RequiredOptionType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>demand<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">RequiredOptionType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>demandOption<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">RequiredOptionType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">RequiredOptionType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:710</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:721</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -268,16 +269,16 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
 					<a name="inferredoptiontypes" class="tsd-anchor"></a>
 					<h3>Inferred<wbr>Option<wbr>Types</h3>
-					<div class="tsd-signature tsd-kind-icon">Inferred<wbr>Option<wbr>Types&lt;O&gt;<span class="tsd-signature-symbol">:</span></div>
+					<div class="tsd-signature tsd-kind-icon">Inferred<wbr>Option<wbr>Types&lt;O&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:742</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:753</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
 					<ul class="tsd-type-parameters">
 						<li>
-							<h4>O<span class="tsd-signature-symbol">: </span></h4>
+							<h4>O<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{}</span></h4>
 						</li>
 					</ul>
 					<div class="tsd-type-declaration">
@@ -292,7 +293,7 @@
 					<div class="tsd-signature tsd-kind-icon">Middleware<wbr>Function&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>args<span class="tsd-signature-symbol">: </span><a href="yargs.html#arguments" class="tsd-signature-type">Arguments</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:762</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:773</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -326,10 +327,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-external">
 					<a name="omit" class="tsd-anchor"></a>
 					<h3>Omit</h3>
-					<div class="tsd-signature tsd-kind-icon">Omit&lt;T, K&gt;<span class="tsd-signature-symbol">:</span></div>
+					<div class="tsd-signature tsd-kind-icon">Omit&lt;T, K&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:696</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:707</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -358,7 +359,7 @@
 					<div class="tsd-signature tsd-kind-icon">Parse<wbr>Callback&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><a href="../interfaces/error.html" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span>, argv<span class="tsd-signature-symbol">: </span><a href="yargs.html#arguments" class="tsd-signature-type">Arguments</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, output<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:757</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:768</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -396,12 +397,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-is-external">
+					<a name="parserconfigurationoptions" class="tsd-anchor"></a>
+					<h3>Parser<wbr>Configuration<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">Parser<wbr>Configuration<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="../interfaces/yargsparser.configuration.html" class="tsd-signature-type">Configuration</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>sort-commands<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-is-external">
 					<a name="positionaloptionstype" class="tsd-anchor"></a>
 					<h3>Positional<wbr>Options<wbr>Type</h3>
 					<div class="tsd-signature tsd-kind-icon">Positional<wbr>Options<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"boolean"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"number"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"string"</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:764</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:775</li>
 						</ul>
 					</aside>
 				</section>
@@ -411,7 +422,7 @@
 					<div class="tsd-signature tsd-kind-icon">Promise<wbr>Completion<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>current<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, argv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/promise.html" class="tsd-signature-type">Promise</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:761</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:772</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -445,7 +456,7 @@
 					<div class="tsd-signature tsd-kind-icon">Required<wbr>Option<wbr>Type&lt;O&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>string<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"array"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"array"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>normalize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"array"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"string"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"number"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>string<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol">; </span>normalize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"array"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"boolean"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"number"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"string"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>array<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>boolean<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>number<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>string<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>normalize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>choices<span class="tsd-signature-symbol">: </span><a href="../interfaces/readonlyarray.html" class="tsd-signature-type">ReadonlyArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> C<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">{ </span>coerce<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>arg<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-symbol">infer </span> T<span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">unknown</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:720</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:731</li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -461,7 +472,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sync<wbr>Completion<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>current<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, argv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:759</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:770</li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -495,7 +506,7 @@
 					<div class="tsd-signature tsd-kind-icon">To<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">:</span> <a href="../interfaces/regexpmatcharray.html#array" class="tsd-signature-type">Array</a><span class="tsd-signature-symbol">&lt;</span><a href="../globals.html#exclude" class="tsd-signature-type">Exclude</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="../globals.html#extract" class="tsd-signature-type">Extract</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:702</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:713</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -516,7 +527,7 @@
 					<div class="tsd-signature tsd-kind-icon">To<wbr>Number&lt;T&gt;<span class="tsd-signature-symbol">:</span> <a href="../globals.html#extract" class="tsd-signature-type">Extract</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:708</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:719</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -537,7 +548,7 @@
 					<div class="tsd-signature tsd-kind-icon">To<wbr>String&lt;T&gt;<span class="tsd-signature-symbol">:</span> <a href="../globals.html#extract" class="tsd-signature-type">Extract</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in node_modules/@types/yargs/index.d.ts:705</li>
+							<li>Defined in node_modules/@types/yargs/index.d.ts:716</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
