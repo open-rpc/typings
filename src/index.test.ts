@@ -71,6 +71,8 @@ const expectedTypescript = [
 
 const expectedNipTipRust = "";
 const expectedRipSlipRust = [
+  "use serde::{Serialize, Deserialize};",
+  "use std::collections::HashMap;",
   "extern crate serde_json;",
   "",
   "/// Niptip",
@@ -345,7 +347,9 @@ describe("MethodTypings", () => {
         "rust",
         { includeSchemaTypings: true, includeMethodAliasTypings: false },
       ),
-    ).toBe(`extern crate serde_json;
+    ).toBe(`use serde::{Serialize, Deserialize};
+use std::collections::HashMap;
+extern crate serde_json;
 
 pub type StringDoaGddGA = String;
 pub type BooleanVyG3AETh = bool;
