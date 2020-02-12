@@ -11,34 +11,34 @@ program
   .version(version, "-v, --version")
   .option(
     "-d, --document [openrpcDocument]",
-    "JSON string or a Path/Url pointing to an open rpc schema",
+    "JSON string, or a filepath or remote URL pointing to an Open-RPC JSON document",
     "./openrpc.json",
   )
   .option(
     "--output-rs [directory]",
-    "output dir of rust typings",
+    "path to output dir of Rust typings",
   )
   .option(
     "--output-ts [directory]",
-    "output dir of typescript typings",
+    "path to output dir of Typescript typings",
   )
   .option(
     "--output-go [directory]",
-    "output dir of go typings",
+    "path to output dir of Go typings",
   )
   .option(
     "--name-rs [file]",
-    "File name of rust typings",
+    "file name to input of Rust typings",
     "./index",
   )
   .option(
     "--name-ts [file]",
-    "File name of typescript typings",
+    "file name to input of Typescript typings",
     "./index",
   )
   .option(
     "--name-go [file]",
-    "File name of go typings",
+    "file name to input of Go typings",
     "./index",
   )
   .action(async () => {
