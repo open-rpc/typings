@@ -8,11 +8,9 @@
     "open-rpc-typings": "./build/cli.js"
   },
   "scripts": {
-    "build": "npm run build:code && npm run build:docs",
-    "build:docs": "typedoc",
-    "build:code": "tsc",
+    "build": "npm run build",
     "generate:typings": "build/cli.js",
-    "test": "npm run build:code && npm run test:unit",
+    "test": "npm run build && npm run test:unit",
     "test:unit": "jest --coverage",
     "watch:test": "jest --watch"
   },
@@ -43,7 +41,6 @@
     "@types/jest": "^25.1.0",
     "jest": "^25.1.0",
     "ts-jest": "^25.0.0",
-    "typedoc": "^0.17.0",
     "typescript": "^3.5.1"
   }
 }
