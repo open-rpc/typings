@@ -8,7 +8,7 @@
     "open-rpc-typings": "./build/cli.js"
   },
   "scripts": {
-    "build": "npm run build",
+    "build": "tsc",
     "generate:typings": "build/cli.js",
     "test": "npm run build && npm run test:unit",
     "test:unit": "jest --coverage",
