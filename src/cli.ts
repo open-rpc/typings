@@ -7,6 +7,14 @@ import { generateTypingsFile, TypingsOptions } from "./generate-typings-file";
 import { OpenRPCTypingsSupportedLanguages } from "./";
 const version = require("../package.json").version; // tslint:disable-line
 
+function makeOptions(fileName: string, dirName: string, lang: OpenRPCTypingsSupportedLanguages) {
+  return {
+    dirName,
+    fileName,
+    lang,
+  };
+}
+
 function parseTypingsOptions(programOpt: CommanderStatic): TypingsOptions[] {
   if (!programOpt.outputRs && !programOpt.outputTs && !programOpt.outputGo) {
     throw Error("Please specify an output directory for typings.");
@@ -27,14 +35,6 @@ function parseTypingsOptions(programOpt: CommanderStatic): TypingsOptions[] {
   }
 
   return options;
-}
-
-function makeOptions(fileName: string, dirName: string, lang: OpenRPCTypingsSupportedLanguages) {
-  return {
-    dirName,
-    fileName,
-    lang,
-  };
 }
 
 program
