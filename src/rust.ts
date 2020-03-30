@@ -7,6 +7,10 @@ import {
 import { ContentDescriptorObject, MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
 
+export const getMethodAliasName: GetMethodAliasName = (method) => {
+  return languageSafeName(method.name);
+};
+
 const getMethodTyping = (method: MethodObject) => {
   const mResult = method.result as ContentDescriptorObject;
   const resultName = ensureSchemaTitles({ ...mResult.schema });
@@ -27,10 +31,6 @@ export const getMethodTypings: GetMethodTypings = (openrpcDocument: OpenRPC) => 
   return openrpcDocument.methods
     .map((method: MethodObject) => getMethodTyping(method))
     .join("\n");
-};
-
-export const getMethodAliasName: GetMethodAliasName = (method) => {
-  return languageSafeName(method.name);
 };
 
 const generator: Generator = {
