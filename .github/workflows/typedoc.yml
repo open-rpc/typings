@@ -1,4 +1,3 @@
-name: build docs
 on: [pull_request]
 jobs:
   build-and-deploy:
