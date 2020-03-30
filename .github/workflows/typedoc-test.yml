@@ -13,4 +13,5 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build:docs
+          npm install typedoc
+          ./node_modules/.bin/typedoc
