@@ -6,6 +6,10 @@ import {
 import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
 import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
 
+export const getMethodAliasName: GetMethodAliasName = (method) => {
+  return languageSafeName(method.name);
+};
+
 const getMethodTyping = (method: MethodObject): string => {
   const mResult = method.result as ContentDescriptorObject;
   const resultName = languageSafeName(ensureSchemaTitles({ ...mResult.schema }).title as string);
@@ -28,9 +32,6 @@ export const getMethodTypings: GetMethodTypings = (openrpcDocument) => {
   ].join("\n");
 };
 
-export const getMethodAliasName: GetMethodAliasName = (method) => {
-  return languageSafeName(method.name);
-};
 
 const generator: Generator = {
   getMethodAliasName,
