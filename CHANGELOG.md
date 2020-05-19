@@ -1,3 +1,27 @@
+# [1.10.0](https://github.com/open-rpc/typings/compare/1.9.0...1.10.0) (2020-05-19)
+
+
+### Bug Fixes
+
+* dont deploy during test ([007661d](https://github.com/open-rpc/typings/commit/007661d834fcb534cbffe485ba431f21c4707d08))
+* linting issues ([a103b60](https://github.com/open-rpc/typings/commit/a103b601ef2aa088b61ba3ff583af0711e4ab4e8))
+* more mistakes ([aa1460a](https://github.com/open-rpc/typings/commit/aa1460ada83e3594a374f349502f0ef7026a7e8f))
+* move around deps for linting sake ([e45eb53](https://github.com/open-rpc/typings/commit/e45eb53dafc1a05a17a91fb9cf9fddf1758a117b))
+* package scripts had a loop ([eb02267](https://github.com/open-rpc/typings/commit/eb0226721919aaac92affd67adf6c467850efcb0))
+* params required by default ([cf33d7a](https://github.com/open-rpc/typings/commit/cf33d7a763ba38c52e0440a3f75be4de5cd5c3d0)), closes [#281](https://github.com/open-rpc/typings/issues/281)
+* release no longer handles docs ([94cc25b](https://github.com/open-rpc/typings/commit/94cc25b81bc26abe053d158480ac741aa5e1bffa))
+* remove junk ([9534a14](https://github.com/open-rpc/typings/commit/9534a148a08d5c428b72bf61b8a696b97ef92d65))
+* remove name ([85e1963](https://github.com/open-rpc/typings/commit/85e19632844ca8a0ec41496366e5aabf57dc6f23))
+* split out gh actions ([4bbe6a6](https://github.com/open-rpc/typings/commit/4bbe6a6f1ace2bf58af9b9f6e923f42a5c9b6c27))
+* typedocs stuff ([1889b9e](https://github.com/open-rpc/typings/commit/1889b9e4b80f76d2598721b60b462754cab4829b))
+* update package lock ([e17d7db](https://github.com/open-rpc/typings/commit/e17d7db1ce0063f44a59b7d55879bba4407b02bd))
+* use gh actions for linting ([dda3821](https://github.com/open-rpc/typings/commit/dda38214716495abc8086f4e3b78280b70340dd6))
+
+
+### Features
+
+* move typedoc gen to a gh action ([ee855ee](https://github.com/open-rpc/typings/commit/ee855ee97dab05d18a5804baefdff08e2def689c))
+
 # [1.9.0](https://github.com/open-rpc/typings/compare/1.8.0...1.9.0) (2020-02-12)
 
 
