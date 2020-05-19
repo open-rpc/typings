@@ -390,7 +390,6 @@ pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUn
           params: [
             {
               name: "ripslip",
-              required: true,
               schema: {
                 anyOf: [
                   {
@@ -411,7 +410,6 @@ pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUn
             },
             {
               name: "biperbopper",
-              required: true,
               schema: {
                 oneOf: [
                   {
@@ -431,7 +429,6 @@ pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUn
             },
             {
               name: "slippyslopper",
-              required: true,
               schema: {
                 allOf: [
                   {
@@ -454,6 +451,7 @@ pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUn
             },
             {
               name: "ripper",
+              required: false,
               schema: {
                 type: "string",
               },

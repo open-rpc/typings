@@ -19,7 +19,7 @@ const getMethodTyping = (method: MethodObject): string => {
 
   const params = (method.params as ContentDescriptorObject[]).map(
     (param) => [
-      `${param.name}${param.required ? "" : "?"}: `,
+      `${param.name}${param.required === false ? "?" : ""}: `,
       `${languageSafeName(ensureSchemaTitles(param.schema).title as string)}`,
     ].join(""),
   ).join(", ");
