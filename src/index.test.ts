@@ -1,4 +1,4 @@
-import MethodTypings, { OpenRPCTypingsSupportedLanguages } from ".";
+import MethodTypings from ".";
 import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 
 const getTestOpenRPCDocument = () => ({
@@ -27,6 +27,8 @@ const getTestOpenRPCDocument = () => ({
           properties: {
             reepadoop: { type: "number" },
             skeepadeep: { title: "skeepadeep", type: "integer" },
+            aboolT: true,
+            aboolF: false,
           },
           title: "ripslip",
           type: "object",
@@ -51,14 +53,18 @@ const expectedRipSlipTypescript = [
   "export interface Ripslip {",
   "  reepadoop?: NumberHo1ClIqD;",
   "  skeepadeep?: Skeepadeep;",
+  "  aboolT?: AlwaysTrue;",
+  "  aboolF?: AlwaysFalse;",
   "  [k: string]: any;",
   "}",
 ].join("\n");
 const expectedJibberTypescript = "export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;";
 const expectedTypescript = [
-  expectedNipTipTypescript,
   expectedReepadoopTypescript,
   expectedSkeepadeepTypescript,
+  "type AlwaysTrue = any;",
+  "type AlwaysFalse = any;",
+  expectedNipTipTypescript,
   expectedRipSlipTypescript,
   "/**",
   " *",
@@ -75,17 +81,21 @@ const expectedRipSlipRust = [
   "use std::collections::HashMap;",
   "extern crate serde_json;",
   "",
+  "pub type NumberHo1ClIqD = f64;",
+  "pub type Skeepadeep = i64;",
+  "type AlwaysTrue = serde_json::Value;",
+  "type AlwaysFalse = serde_json::Value;",
   "/// Niptip",
   "///",
   "/// a really cool niptip",
   "///",
   "pub type Niptip = f64;",
-  "pub type NumberHo1ClIqD = f64;",
-  "pub type Skeepadeep = i64;",
   "#[derive(Serialize, Deserialize)]",
   "pub struct Ripslip {",
   "    pub(crate) reepadoop: Option<NumberHo1ClIqD>,",
   "    pub(crate) skeepadeep: Option<Skeepadeep>,",
+  "    pub(crate) aboolT: Option<AlwaysTrue>,",
+  "    pub(crate) aboolF: Option<AlwaysFalse>,",
   "}",
 ].join("\n");
 
@@ -107,6 +117,8 @@ const expectedRipSlipGo = [
   "type Ripslip struct {",
   "\tReepadoop  *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
   "\tSkeepadeep *Skeepadeep     `json:\"skeepadeep,omitempty\"`",
+  "\tAboolT     *AlwaysTrue     `json:\"aboolT,omitempty\"`",
+  "\tAboolF     *AlwaysFalse    `json:\"aboolF,omitempty\"`",
   "}",
 ].join("\n");
 const expectedJibberGo = [
@@ -114,17 +126,50 @@ const expectedJibberGo = [
   "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
   "}",
 ].join("\n");
+
+const expectedExtraGo = [
+  "func (a *AnyOfNiptipRipslip) UnmarshalJSON(bytes []byte) error {",
+  "\tvar ok bool",
+  "\tvar myNiptip Niptip",
+  "\tif err := json.Unmarshal(bytes, &myNiptip); err == nil {",
+  "\t\tok = true",
+  "\t\ta.Niptip = &myNiptip",
+  "\t}",
+  "\tvar myRipslip Ripslip",
+  "\tif err := json.Unmarshal(bytes, &myRipslip); err == nil {",
+  "\t\tok = true",
+  "\t\ta.Ripslip = &myRipslip",
+  "\t}",
+  "\tif ok {",
+  "\t\treturn nil",
+  "\t}",
+  "\treturn errors.New(\"failed to unmarshal any of the object properties\")",
+  "}",
+  "func (o AnyOfNiptipRipslip) MarshalJSON() ([]byte, error) {",
+  "\tout := []interface{}",
+  "\tif o.Niptip != nil {",
+  "\t\tout = append(out, o.Niptip)",
+  "\t}",
+  "\tif o.Ripslip != nil {",
+  "\t\tout = append(out, o.Ripslip)",
+  "\t}",
+  "\treturn json.Marshal(out)",
+  "}"
+].join("\n");
 const expectedGo = [
-  expectedNipTipGo,
   expectedReepadoopGo,
   expectedSkeepadeepGo,
+  "type AlwaysTrue interface{}",
+  "type AlwaysFalse interface{}",
+  expectedNipTipGo,
   expectedRipSlipGo,
   "// Generated! Represents an alias to any of the provided schemas",
   "type AnyOfNiptipRipslip struct {",
   "\tNiptip  *Niptip",
   "\tRipslip *Ripslip",
   "}",
-  expectedJibberGo,
+  expectedExtraGo,
+  expectedJibberGo
 ].join("\n");
 
 const expectedNipTipPython = ["// a really cool niptip", "type Niptip float64"].join("\n");
@@ -351,12 +396,8 @@ describe("MethodTypings", () => {
 use std::collections::HashMap;
 extern crate serde_json;
 
-pub type StringDoaGddGA = String;
 pub type BooleanVyG3AETh = bool;
-#[derive(Serialize, Deserialize)]
-pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
-    pub(crate) ripslip: Option<BooleanVyG3AETh>,
-}
+pub type StringDoaGddGA = String;
 /// UnorderedSetOfStringDoaGddGAmrf5BlCm
 ///
 /// array of strings is all...
@@ -364,6 +405,10 @@ pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
 pub type UnorderedSetOfStringDoaGddGAmrf5BlCm = Vec<StringDoaGddGA>;
 pub type IntegerXZTmW7Mv = i64;
 pub type UnorderedSetOfIntegerXZTmW7MvjsBS3XxD = (IntegerXZTmW7Mv);
+#[derive(Serialize, Deserialize)]
+pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
+    pub(crate) ripslip: Option<BooleanVyG3AETh>,
+}
 #[derive(Serialize, Deserialize)]
 pub enum OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M {
     UnorderedSetOfStringDoaGddGAmrf5BlCm,
@@ -478,11 +523,9 @@ pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUn
 export type Bee = number;
 export type A = string;
 export type Ceee = boolean;
-export type AnyOfABeeCeeePpSBogg4 = Bee | A | Ceee;
 export type X = number;
 export type Y = string;
 export type Z = boolean;
-export type OneOfXYZCMfJwVAI = X | Y | Z;
 export type Baz = number;
 export interface WithBaz {
   baz?: Baz;
@@ -498,6 +541,8 @@ export interface WithFoo {
   foo?: Foo;
   [k: string]: any;
 }
+export type AnyOfABeeCeeePpSBogg4 = Bee | A | Ceee;
+export type OneOfXYZCMfJwVAI = X | Y | Z;
 export type AllOfWithBarWithBazWithFooVAQmhFhX = WithBaz & WithBar & WithFoo;
 export type StringDoaGddGA = string;
 /**
@@ -507,5 +552,117 @@ export type StringDoaGddGA = string;
  */
 export type AnyOfAnyOfABeeCeeePpSBogg4OneOfXYZCMfJwVAIAllOfWithBarWithBazWithFooVAQmhFhXStringDoaGddGAStringDoaGddGA = AnyOfABeeCeeePpSBogg4 | OneOfXYZCMfJwVAI | AllOfWithBarWithBazWithFooVAQmhFhX | StringDoaGddGA;
 export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJwVAI, slippyslopper: AllOfWithBarWithBazWithFooVAQmhFhX, ripper?: StringDoaGddGA) => Promise<StringDoaGddGA>;`); //tslint:disable-line
+  });
+
+
+  it("boolean schemas", () => {
+    const doc = {
+      info: {
+        title: "abc",
+        version: "3.2.1",
+      },
+      methods: [
+        {
+          name: "jobber",
+          params: [
+            {
+              name: "isTrue",
+              schema: true,
+            }
+          ],
+          result: {
+            name: "isFalse",
+            schema: false,
+          },
+        },
+      ],
+      openrpc: "1.0.0",
+    } as OpenRPC;
+
+    const methodTypings = new MethodTypings(doc);
+    expect(methodTypings.toString("typescript"))
+      .toBe([
+        "type AlwaysTrue = any;",
+        "type AlwaysFalse = any;",
+        "/**",
+        " *",
+        " * Generated! Represents an alias to any of the provided schemas",
+        " *",
+        " */",
+        "export type AnyOfAlwaysTrueAlwaysFalse = AlwaysTrue | AlwaysFalse;",
+        "export type Jobber = (isTrue: AlwaysTrue) => Promise<AlwaysFalse>;"
+      ].join("\n"));
+
+    expect(methodTypings.toString("rust"))
+      .toBe([
+        "use serde::{Serialize, Deserialize};",
+        "use std::collections::HashMap;",
+        "extern crate serde_json;",
+        "",
+        "type AlwaysTrue = serde_json::Value;",
+        "type AlwaysFalse = serde_json::Value;",
+        "#[derive(Serialize, Deserialize)]",
+        "pub enum AnyOfAlwaysTrueAlwaysFalse {",
+        "    AlwaysTrue,",
+        "    AlwaysFalse",
+        "}",
+        "pub fn Jobber(&mut self, isTrue: AlwaysTrue) -> RpcRequest<AlwaysFalse>;"
+      ].join("\n"));
+
+    expect(methodTypings.toString("python"))
+      .toBe([
+        "from typing import Any, NewType",
+        "",
+        "AlwaysTrue = NewType(\"AlwaysTrue\", Any)",
+        "from typing import Any, NewType",
+        "",
+        "AlwaysFalse = NewType(\"AlwaysFalse\", Any)",
+        "from typing import NewType, Union",
+        '"""Generated! Represents an alias to any of the provided schemas',
+        '"""',
+        "AnyOfAlwaysTrueAlwaysFalse = NewType(\"AnyOfAlwaysTrueAlwaysFalse\", Union[AlwaysTrue, AlwaysFalse])",
+        ""
+      ].join("\n"));
+
+    expect(methodTypings.toString("go"))
+      .toBe([
+        "type AlwaysTrue interface{}",
+        "type AlwaysFalse interface{}",
+        "// Generated! Represents an alias to any of the provided schemas",
+        "type AnyOfAlwaysTrueAlwaysFalse struct {",
+        "\tAlwaysTrue  *AlwaysTrue",
+        "\tAlwaysFalse *AlwaysFalse",
+        "}",
+        "func (a *AnyOfAlwaysTrueAlwaysFalse) UnmarshalJSON(bytes []byte) error {",
+        "\tvar ok bool",
+        "\tvar myAlwaysTrue AlwaysTrue",
+        "\tif err := json.Unmarshal(bytes, &myAlwaysTrue); err == nil {",
+        "\t\tok = true",
+        "\t\ta.AlwaysTrue = &myAlwaysTrue",
+        "\t}",
+        "\tvar myAlwaysFalse AlwaysFalse",
+        "\tif err := json.Unmarshal(bytes, &myAlwaysFalse); err == nil {",
+        "\t\tok = true",
+        "\t\ta.AlwaysFalse = &myAlwaysFalse",
+        "\t}",
+        "\tif ok {",
+        "\t\treturn nil",
+        "\t}",
+        "\treturn errors.New(\"failed to unmarshal any of the object properties\")",
+        "}",
+        "func (o AnyOfAlwaysTrueAlwaysFalse) MarshalJSON() ([]byte, error) {",
+        "\tout := []interface{}",
+        "\tif o.AlwaysTrue != nil {",
+        "\t\tout = append(out, o.AlwaysTrue)",
+        "\t}",
+        "\tif o.AlwaysFalse != nil {",
+        "\t\tout = append(out, o.AlwaysFalse)",
+        "\t}",
+        "\treturn json.Marshal(out)",
+        "}",
+        "type Abc interface {",
+        "\tJobber(isTrue AlwaysTrue) (AlwaysFalse, error)",
+        "}",
+      ].join("\n"));
   });
 });

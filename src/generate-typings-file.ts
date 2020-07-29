@@ -1,4 +1,4 @@
-import { ensureDir, emptyDir, writeFile } from "fs-extra";
+import { ensureDir, writeFile } from "fs-extra";
 
 import MethodTypings, { OpenRPCTypingsSupportedLanguages } from "./";
 import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";

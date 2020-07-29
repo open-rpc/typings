@@ -17,6 +17,7 @@ const testOpenRPCDocument = {
       result: {
         name: "ripslip",
         schema: {
+          type: "object",
           properties: {
             reepadoop: { type: "number" },
           },

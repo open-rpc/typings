@@ -4,7 +4,9 @@ import {
   GetMethodAliasName,
 } from "./generator-interface";
 import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
-import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
+
+import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
+import titleizer from "@json-schema-tools/transpiler/build/titleizer";
 
 export const getMethodAliasName: GetMethodAliasName = (method) => {
   return languageSafeName(method.name);
@@ -12,12 +14,13 @@ export const getMethodAliasName: GetMethodAliasName = (method) => {
 
 const getMethodTyping = (method: MethodObject): string => {
   const mResult = method.result as ContentDescriptorObject;
-  const resultName = languageSafeName(ensureSchemaTitles({ ...mResult.schema }).title as string);
+  const mutableSchema = (mResult.schema === true || mResult.schema === false) ? mResult.schema : { ...mResult.schema };
+  const resultName = languageSafeName(getTitle(titleizer(mutableSchema)));
 
   const methodAliasName = getMethodAliasName(method);
 
   const params = (method.params as ContentDescriptorObject[]).map(
-    (param) => `${param.name} ${languageSafeName(ensureSchemaTitles(param.schema).title as string)}`,
+    (param) => `${param.name} ${languageSafeName(getTitle(titleizer(param.schema)))}`,
   ).join(", ");
 
   return `\t${methodAliasName}(${params}) (${resultName}, error)`;
