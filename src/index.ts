@@ -4,9 +4,10 @@ import go from "./go";
 import python from "./python";
 import { Generator } from "./generator-interface";
 import { OpenrpcDocument as OpenRPC, MethodObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
-import { getSchemasForOpenRPCDocument } from "./utils";
-import JsonSchemaToTypes from "@etclabscore/json-schema-to-types";
-import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
+import { getSchemasForOpenRPCDocument, deepClone } from "./utils";
+import Transpiler from "@json-schema-tools/transpiler";
+import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
+import titleizer from "@json-schema-tools/transpiler/build/titleizer";
 
 interface Generators {
   typescript: Generator;
@@ -49,7 +50,7 @@ export interface OpenRPCTypingsToStringOptions {
  * A class to handle all the tasks relating to types for the OpenRPC Document.
  */
 export default class MethodTypings {
-  private transpiler: JsonSchemaToTypes;
+  private transpiler: Transpiler;
 
   private toStringOptionsDefaults: OpenRPCTypingsToStringOptions = {
     includeMethodAliasTypings: true,
@@ -58,7 +59,7 @@ export default class MethodTypings {
 
   constructor(private openrpcDocument: OpenRPC) {
     const schemas = getSchemasForOpenRPCDocument(openrpcDocument);
-    this.transpiler = new JsonSchemaToTypes(schemas);
+    this.transpiler = new Transpiler(deepClone(schemas));
   }
 
   /**
@@ -99,8 +100,8 @@ export default class MethodTypings {
 
     return {
       method: gen.getMethodAliasName(defaultedMethod),
-      params: methodParams.map(({ schema }) => languageSafeName(ensureSchemaTitles(schema).title as string)),
-      result: languageSafeName(ensureSchemaTitles(methodResult.schema).title as string),
+      params: methodParams.map(({ schema }) => languageSafeName(getTitle(titleizer(schema)))),
+      result: languageSafeName(getTitle(titleizer(methodResult.schema))),
     };
   }
 

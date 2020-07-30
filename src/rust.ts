@@ -5,7 +5,8 @@ import {
 } from "./generator-interface";
 
 import { ContentDescriptorObject, MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
-import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
+import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
+import titleizer from "@json-schema-tools/transpiler/build/titleizer";
 
 export const getMethodAliasName: GetMethodAliasName = (method) => {
   return languageSafeName(method.name);
@@ -13,13 +14,14 @@ export const getMethodAliasName: GetMethodAliasName = (method) => {
 
 const getMethodTyping = (method: MethodObject) => {
   const mResult = method.result as ContentDescriptorObject;
-  const resultName = ensureSchemaTitles({ ...mResult.schema });
-  const result = `RpcRequest<${languageSafeName(resultName.title as string)}>`;
+  const mutableSchema = (mResult.schema === true || mResult.schema === false) ? mResult.schema : { ...mResult.schema };
+  const resultName = getTitle(titleizer(mutableSchema));
+  const result = `RpcRequest<${languageSafeName(resultName)}>`;
 
   const methodAliasName = getMethodAliasName(method);
 
   const params = (method.params as ContentDescriptorObject[]).map(
-    (param) => `${param.name}: ${languageSafeName(ensureSchemaTitles(param.schema).title as string)}`,
+    (param) => `${param.name}: ${languageSafeName(getTitle(titleizer(param.schema)))}`,
   ).join(", ");
 
   const paramString = (params.length > 0) ? `, ${params}` : "";

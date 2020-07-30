@@ -3,8 +3,9 @@ import {
   GetMethodTypings,
   GetMethodAliasName,
 } from "./generator-interface";
+import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
+import titleizer from "@json-schema-tools/transpiler/build/titleizer";
 import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
-import { languageSafeName, ensureSchemaTitles } from "@etclabscore/json-schema-to-types/build/utils";
 
 export const getMethodAliasName: GetMethodAliasName = (method) => {
   return languageSafeName(method.name);
@@ -12,15 +13,16 @@ export const getMethodAliasName: GetMethodAliasName = (method) => {
 
 const getMethodTyping = (method: MethodObject): string => {
   const result = method.result as ContentDescriptorObject;
-  const resultName = ensureSchemaTitles({ ...result.schema });
-  const resultTypeName = `Promise<${languageSafeName(resultName.title as string)}>`;
+  const mutableSchema = (result.schema === true || result.schema === false) ? result.schema : { ...result.schema };
+  const resultName = getTitle(titleizer(mutableSchema));
+  const resultTypeName = `Promise<${languageSafeName(resultName)}>`;
 
   const methodAliasName = getMethodAliasName(method);
 
   const params = (method.params as ContentDescriptorObject[]).map(
     (param) => [
       `${param.name}${param.required === false ? "?" : ""}: `,
-      `${languageSafeName(ensureSchemaTitles(param.schema).title as string)}`,
+      `${languageSafeName(getTitle(titleizer(param.schema)))}`,
     ].join(""),
   ).join(", ");
 

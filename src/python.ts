@@ -5,7 +5,7 @@ import {
 } from "./generator-interface";
 
 import { MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
-import { languageSafeName } from "@etclabscore/json-schema-to-types/build/utils";
+import { languageSafeName } from "@json-schema-tools/transpiler/build/utils";
 
 const getMethodTyping = (method: MethodObject) => {
   return "";
