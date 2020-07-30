@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/open-rpc/typings/compare/1.10.0...1.11.0) (2020-07-30)
+
+
+### Features
+
+* upgrade to latest json schema tools ([ffe4935](https://github.com/open-rpc/typings/commit/ffe493597d75a00d9e0140c67b69b8ef6ba2bc3e))
+
 # [1.10.0](https://github.com/open-rpc/typings/compare/1.9.0...1.10.0) (2020-05-19)
 
 
