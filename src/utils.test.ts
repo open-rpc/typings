@@ -65,6 +65,23 @@ describe("utils", () => {
       const t4 = { g: undefined, f: null };
       expect(deepClone(t4)).toEqual(t4);
     });
+
+    it("works with array", () => {
+      class CustomThing { }
+      const a = [
+        { a: 123 },
+        "foo",
+        new Set(),
+        new Map(),
+        [{ b: 123 }, new CustomThing()]
+      ] as any;
+      const b = deepClone(a);
+      expect(b).not.toBe(a);
+      expect(b).toEqual(a);
+      expect(b[0]).not.toBe(a[0]);
+      expect(b[0]).toEqual(a[0]);
+      expect(b[4][1]).toEqual(a[4][1]);
+    });
   });
 
   describe("flatten", () => {

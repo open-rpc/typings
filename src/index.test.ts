@@ -554,6 +554,38 @@ export type AnyOfAnyOfABeeCeeePpSBogg4OneOfXYZCMfJwVAIAllOfWithBarWithBazWithFoo
 export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJwVAI, slippyslopper: AllOfWithBarWithBazWithFooVAQmhFhX, ripper?: StringDoaGddGA) => Promise<StringDoaGddGA>;`); //tslint:disable-line
   });
 
+  it("works before and after using getTypingNames", () => {
+    const doc = {
+      info: {
+        title: "abc",
+        version: "3.2.1",
+      },
+      methods: [
+        {
+          name: "jobber",
+          params: [
+            {
+              name: "isTrue",
+              schema: true,
+            }
+          ],
+          result: {
+            name: "isFalse",
+            schema: false,
+          },
+        },
+      ],
+      openrpc: "1.0.0",
+    } as OpenRPC;
+
+    const methodTypings = new MethodTypings(doc);
+    const ts = methodTypings.toString("typescript");
+    const result = methodTypings.getTypingNames("typescript", doc.methods[0]);
+    const rs = methodTypings.toString("rust");
+    expect(result.method).toBe("Jobber");
+    expect(ts).toBeTruthy();
+    expect(rs).toBeTruthy();
+  });
 
   it("boolean schemas", () => {
     const doc = {
