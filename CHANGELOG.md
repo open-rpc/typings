@@ -1,3 +1,11 @@
+## [1.11.1](https://github.com/open-rpc/typings/compare/1.11.0...1.11.1) (2020-08-04)
+
+
+### Bug Fixes
+
+* handle arrays in deepClone ([fec9e6f](https://github.com/open-rpc/typings/commit/fec9e6fd4c1f7fb4b60d1bce06547609f9167cf5))
+* update node modules ([5791f37](https://github.com/open-rpc/typings/commit/5791f37ad8bc000c69bc3fbd35a16bc94f392891))
+
 # [1.11.0](https://github.com/open-rpc/typings/compare/1.10.0...1.11.0) (2020-07-30)
 
 
