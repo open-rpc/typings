@@ -1,5 +1,7 @@
 import MethodTypings from ".";
 import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
+import examples from "@open-rpc/examples";
+import { dereferenceDocument } from "@open-rpc/schema-utils-js";
 
 const getTestOpenRPCDocument = () => ({
   info: {
@@ -696,5 +698,11 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
         "\tJobber(isTrue AlwaysTrue) (AlwaysFalse, error)",
         "}",
       ].join("\n"));
+  });
+
+  it("works for the links example", async () => {
+    const d = await dereferenceDocument(examples.links);
+    const methodTypings = new MethodTypings(d);
+    expect(methodTypings).toBeDefined();
   });
 });
