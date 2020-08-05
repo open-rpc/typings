@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/open-rpc/typings/compare/1.11.1...1.11.2) (2020-08-05)
+
+
+### Bug Fixes
+
+* solve the mysterious ref trash ([b874e0b](https://github.com/open-rpc/typings/commit/b874e0b4bf7fb8deaebaa3c56ce316f3c7d82d26))
+
 ## [1.11.1](https://github.com/open-rpc/typings/compare/1.11.0...1.11.1) (2020-08-04)
 
 
