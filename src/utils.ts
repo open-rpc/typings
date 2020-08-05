@@ -19,7 +19,10 @@ export const getSchemasForOpenRPCDocument = (openrpcDocument: OpenrpcDocument): 
 
   return params
     .concat(result)
-    .map(({ schema }) => schema);
+    .map(({ schema }) => {
+      if (schema === true || schema === false) { return schema; }
+      return { ...schema };
+    });
 };
 
 export const deepClone = (obj: any, hash = new WeakMap()): any => {
