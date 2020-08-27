@@ -260,6 +260,49 @@ describe("MethodTypings", () => {
 
   });
 
+  describe("getParamsTypings", () => {
+
+    it("returns a ParamTypings for a method", () => {
+      const methodTypings = new MethodTypings(getTestOpenRPCDocument());
+
+      expect(methodTypings.getParamsTypings("typescript"))
+        .toEqual("jibberNiptip: Niptip");
+
+      expect(methodTypings.getParamsTypings("rust"))
+        .toEqual("jibberNiptip: Niptip");
+
+      expect(methodTypings.getParamsTypings("go"))
+        .toEqual("jibberNiptip Niptip");
+
+      expect(methodTypings.getParamsTypings("python"))
+        .toEqual("");
+    });
+
+    it("returns a ParamTyping for a methodObject", () => {
+      const methodTypings = new MethodTypings(getTestOpenRPCDocument());
+      const methodObject = getTestOpenRPCDocument().methods[0] as MethodObject;
+      expect(methodTypings.getParamsTyping("typescript", methodObject," "))
+        .toEqual("jibberNiptip: Niptip");
+
+      expect(methodTypings.getParamsTyping("typescript", methodObject," "))
+        .toEqual("jibberNiptip: Niptip");
+
+      expect(methodTypings.getParamsTyping("typescript", methodObject," "))
+        .toEqual("jibberNiptip: Niptip");
+
+      expect(methodTypings.getParamsTyping("rust", methodObject, " "))
+        .toEqual("jibberNiptip: Niptip");
+
+      expect(methodTypings.getParamsTyping("go", methodObject, " "))
+        .toEqual("jibberNiptip Niptip");
+
+      expect(methodTypings.getParamsTyping("python", methodObject, " "))
+        .toEqual("");
+    });
+  });
+
+
+
   describe("getMethodTypings", () => {
 
     it("returns a MethodTypings object for a method", () => {

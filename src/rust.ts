@@ -2,6 +2,7 @@ import {
   Generator,
   GetMethodTypings,
   GetMethodAliasName,
+  GetParamsTypings,
 } from "./generator-interface";
 
 import { ContentDescriptorObject, MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
@@ -12,6 +13,14 @@ export const getMethodAliasName: GetMethodAliasName = (method) => {
   return languageSafeName(method.name);
 };
 
+const getParamsTyping = (method: MethodObject) => {
+  const params = (method.params as ContentDescriptorObject[]).map(
+    (param) => `${param.name}: ${languageSafeName(getTitle(titleizer(param.schema)))}`,
+  ).join(", ");
+
+  return params;
+}
+
 const getMethodTyping = (method: MethodObject) => {
   const mResult = method.result as ContentDescriptorObject;
   const mutableSchema = (mResult.schema === true || mResult.schema === false) ? mResult.schema : { ...mResult.schema };
@@ -19,10 +28,7 @@ const getMethodTyping = (method: MethodObject) => {
   const result = `RpcRequest<${languageSafeName(resultName)}>`;
 
   const methodAliasName = getMethodAliasName(method);
-
-  const params = (method.params as ContentDescriptorObject[]).map(
-    (param) => `${param.name}: ${languageSafeName(getTitle(titleizer(param.schema)))}`,
-  ).join(", ");
+  const params = getParamsTyping(method);
 
   const paramString = (params.length > 0) ? `, ${params}` : "";
 
@@ -35,9 +41,17 @@ export const getMethodTypings: GetMethodTypings = (openrpcDocument: OpenRPC) => 
     .join("\n");
 };
 
+export const getParamsTypings: GetParamsTypings = (openrpcDocument: OpenRPC) => {
+  return (openrpcDocument.methods as MethodObject[])
+    .map((method: MethodObject) => getParamsTyping(method))
+    .join("\n");
+};
+
 const generator: Generator = {
   getMethodAliasName,
   getMethodTypings,
+  getParamsTypings,
+  getParamsTyping,
 };
 
 export default generator;
