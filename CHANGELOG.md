@@ -1,3 +1,20 @@
+## [1.11.3](https://github.com/open-rpc/typings/compare/1.11.2...1.11.3) (2020-11-17)
+
+
+### Bug Fixes
+
+* docs deploy ([467c8e9](https://github.com/open-rpc/typings/commit/467c8e9684429f680a481069ffdcf39df40f0cf2))
+* put back version ([3415f3a](https://github.com/open-rpc/typings/commit/3415f3af127eea35935b9791c0597e30b4e17efa))
+* remove discord link ([27f93f7](https://github.com/open-rpc/typings/commit/27f93f76e4718f81fb45c2fc449733e729065a38))
+* remove name ([151753d](https://github.com/open-rpc/typings/commit/151753d1fcf950ccbfe81d9624863b8ef712369a))
+* remove nodenv cause it doesnt work ([144659d](https://github.com/open-rpc/typings/commit/144659d66ade22285df0f5c3f3d7795d82aa58bd))
+* set ubuntu version explicitly ([46620c9](https://github.com/open-rpc/typings/commit/46620c9e2bd9e94eb5d82d7822be9257b7981e2b))
+* take latest for nodenv ([b69a7ae](https://github.com/open-rpc/typings/commit/b69a7aefc08abf7313eea9e54478d85e71d8f7b0))
+* update github lint workflow ([f51e0c8](https://github.com/open-rpc/typings/commit/f51e0c83a2bc15edf5936037b07b88e453ffeb2c))
+* update readme ([d277c7f](https://github.com/open-rpc/typings/commit/d277c7f8746c45b6f66beb5345538500023f65b8))
+* update tests to match tranpiler output ([dae8094](https://github.com/open-rpc/typings/commit/dae80949fd56d22c423d77e357396836e633e234))
+* update transpiler to latest ([2484323](https://github.com/open-rpc/typings/commit/2484323aac65318852516a10a2d0c3f6fca71d9a))
+
 ## [1.11.2](https://github.com/open-rpc/typings/compare/1.11.1...1.11.2) (2020-08-05)
 
 

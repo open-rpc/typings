@@ -7,7 +7,7 @@ import {
 
 import { ContentDescriptorObject, MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
-import titleizer from "@json-schema-tools/transpiler/build/titleizer";
+import titleizer from "@json-schema-tools/titleizer";
 
 export const getMethodAliasName: GetMethodAliasName = (method) => {
   return languageSafeName(method.name);

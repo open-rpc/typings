@@ -79,10 +79,9 @@ const expectedTypescript = [
 
 const expectedNipTipRust = "";
 const expectedRipSlipRust = [
-  "use serde::{Serialize, Deserialize};",
-  "use std::collections::HashMap;",
   "extern crate serde_json;",
   "",
+  "use serde::{Serialize, Deserialize};",
   "pub type NumberHo1ClIqD = f64;",
   "pub type Skeepadeep = i64;",
   "type AlwaysTrue = serde_json::Value;",
@@ -148,7 +147,7 @@ const expectedExtraGo = [
   "\treturn errors.New(\"failed to unmarshal any of the object properties\")",
   "}",
   "func (o AnyOfNiptipRipslip) MarshalJSON() ([]byte, error) {",
-  "\tout := []interface{}",
+  "\tout := []interface{}{}",
   "\tif o.Niptip != nil {",
   "\t\tout = append(out, o.Niptip)",
   "\t}",
@@ -159,6 +158,8 @@ const expectedExtraGo = [
   "}"
 ].join("\n");
 const expectedGo = [
+  "import \"encoding/json\"",
+  "import \"errors\"",
   expectedReepadoopGo,
   expectedSkeepadeepGo,
   "type AlwaysTrue interface{}",
@@ -394,10 +395,9 @@ describe("MethodTypings", () => {
         "rust",
         { includeSchemaTypings: true, includeMethodAliasTypings: false },
       ),
-    ).toBe(`use serde::{Serialize, Deserialize};
-use std::collections::HashMap;
-extern crate serde_json;
+    ).toBe(`extern crate serde_json;
 
+use serde::{Serialize, Deserialize};
 pub type BooleanVyG3AETh = bool;
 pub type StringDoaGddGA = String;
 /// UnorderedSetOfStringDoaGddGAmrf5BlCm
@@ -629,10 +629,9 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
 
     expect(methodTypings.toString("rust"))
       .toBe([
-        "use serde::{Serialize, Deserialize};",
-        "use std::collections::HashMap;",
         "extern crate serde_json;",
         "",
+        "use serde::{Serialize, Deserialize};",
         "type AlwaysTrue = serde_json::Value;",
         "type AlwaysFalse = serde_json::Value;",
         "#[derive(Serialize, Deserialize)]",
@@ -645,13 +644,11 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
 
     expect(methodTypings.toString("python"))
       .toBe([
-        "from typing import Any, NewType",
-        "",
+        "from typing import NewType",
+        "from typing import Union",
+        "from typing import Any",
         "AlwaysTrue = NewType(\"AlwaysTrue\", Any)",
-        "from typing import Any, NewType",
-        "",
         "AlwaysFalse = NewType(\"AlwaysFalse\", Any)",
-        "from typing import NewType, Union",
         '"""Generated! Represents an alias to any of the provided schemas',
         '"""',
         "AnyOfAlwaysTrueAlwaysFalse = NewType(\"AnyOfAlwaysTrueAlwaysFalse\", Union[AlwaysTrue, AlwaysFalse])",
@@ -660,6 +657,8 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
 
     expect(methodTypings.toString("go"))
       .toBe([
+        "import \"encoding/json\"",
+        "import \"errors\"",
         "type AlwaysTrue interface{}",
         "type AlwaysFalse interface{}",
         "// Generated! Represents an alias to any of the provided schemas",
@@ -685,7 +684,7 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
         "\treturn errors.New(\"failed to unmarshal any of the object properties\")",
         "}",
         "func (o AnyOfAlwaysTrueAlwaysFalse) MarshalJSON() ([]byte, error) {",
-        "\tout := []interface{}",
+        "\tout := []interface{}{}",
         "\tif o.AlwaysTrue != nil {",
         "\t\tout = append(out, o.AlwaysTrue)",
         "\t}",
