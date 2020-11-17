@@ -16,7 +16,7 @@ jobs:
         run: |
           npm install
           npm install typedoc
-          typedoc
+          ./node_modules/.bin/typedoc
 
       - name: Deploy 
         uses: JamesIves/github-pages-deploy-action@releases/v3
