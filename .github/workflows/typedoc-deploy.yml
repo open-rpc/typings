@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -15,9 +15,10 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run build:docs
+          npm install typedoc
+          typedoc
 
-      - name: Deploy 🚀
+      - name: Deploy 
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
