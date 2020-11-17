@@ -7,7 +7,7 @@ import { OpenrpcDocument as OpenRPC, MethodObject, ContentDescriptorObject } fro
 import { getSchemasForOpenRPCDocument, deepClone } from "./utils";
 import Transpiler from "@json-schema-tools/transpiler";
 import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
-import titleizer from "@json-schema-tools/transpiler/build/titleizer";
+import titleizer from "@json-schema-tools/titleizer";
 
 interface Generators {
   typescript: Generator;
