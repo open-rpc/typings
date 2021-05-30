@@ -1,7 +1,8 @@
 import MethodTypings from ".";
-import { OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
+import { MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
 import examples from "@open-rpc/examples";
 import { dereferenceDocument } from "@open-rpc/schema-utils-js";
+import defaultReferenceResolver from "@json-schema-tools/reference-resolver"
 
 const getTestOpenRPCDocument = () => ({
   info: {
@@ -210,13 +211,14 @@ describe("MethodTypings", () => {
 
   it("defaults any schemas who is missing a title", () => {
     const copy = getTestOpenRPCDocument();
-    copy.methods[0].params.push({
+    const methods = (copy.methods as MethodObject[])
+    methods[0].params.push({
       name: "flooby",
       schema: { type: "string" },
     });
     const typings = new MethodTypings(copy);
     expect(
-      typings.getTypingNames("typescript", copy.methods[0]).params[1],
+      typings.getTypingNames("typescript", methods[0]).params[1],
     ).toBe("StringDoaGddGA");
   });
 
@@ -232,7 +234,7 @@ describe("MethodTypings", () => {
       expect(
         methodTypings.getTypingNames(
           "typescript",
-          getTestOpenRPCDocument().methods[0],
+          (getTestOpenRPCDocument().methods as MethodObject[])[0],
         ),
       ).toEqual({
         method: "Jibber",
@@ -243,7 +245,8 @@ describe("MethodTypings", () => {
 
     it("prefixes names with 'any' when they aren't recognized json schemas", () => {
       const copy = getTestOpenRPCDocument();
-      copy.methods[0].params.push({
+      const methods = (copy.methods as MethodObject[])
+      methods[0].params.push({
         name: "flooby",
         schema: {
           scooby: "not real",
@@ -251,7 +254,7 @@ describe("MethodTypings", () => {
       });
       const typings = new MethodTypings(copy);
       expect(
-        typings.getTypingNames("typescript", copy.methods[0]).params[1],
+        typings.getTypingNames("typescript", methods[0]).params[1],
       ).toBe("AnyM6CMQ11S");
     });
 
@@ -281,7 +284,7 @@ describe("MethodTypings", () => {
 
     it("works when there are no params", () => {
       const copytestOpenRPCDocument = getTestOpenRPCDocument();
-      copytestOpenRPCDocument.methods[0].params = [];
+      (copytestOpenRPCDocument.methods[0] as MethodObject).params = [];
       const methodTypings = new MethodTypings(copytestOpenRPCDocument);
 
       expect(methodTypings.getMethodTypings("typescript"))
@@ -582,7 +585,7 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
 
     const methodTypings = new MethodTypings(doc);
     const ts = methodTypings.toString("typescript");
-    const result = methodTypings.getTypingNames("typescript", doc.methods[0]);
+    const result = methodTypings.getTypingNames("typescript", doc.methods[0] as MethodObject);
     const rs = methodTypings.toString("rust");
     expect(result.method).toBe("Jobber");
     expect(ts).toBeTruthy();
@@ -700,7 +703,7 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
   });
 
   it("works for the links example", async () => {
-    const d = await dereferenceDocument(examples.links);
+    const d = await dereferenceDocument(examples.links, defaultReferenceResolver);
     const methodTypings = new MethodTypings(d);
     expect(methodTypings).toBeDefined();
   });
