@@ -36,7 +36,7 @@
     "fs-extra": "^10.0.0"
   },
   "devDependencies": {
-    "@open-rpc/examples": "1.6.0",
+    "@open-rpc/examples": "1.6.1",
     "@open-rpc/meta-schema": "1.14.2",
     "@types/commander": "^2.12.2",
     "@types/fs-extra": "^9.0.1",
