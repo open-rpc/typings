@@ -1,3 +1,11 @@
+## [1.11.4](https://github.com/open-rpc/typings/compare/1.11.3...1.11.4) (2021-06-01)
+
+
+### Bug Fixes
+
+* update schema dependencies to reflect meta-schema changes ([49014a5](https://github.com/open-rpc/typings/commit/49014a59a362194ddcc8ceccd10ff9df1da5f318))
+* version bump to unblock semantic release ([529f50f](https://github.com/open-rpc/typings/commit/529f50f566531aa69622b8db50ce71ac1faf4f06))
+
 ## [1.11.3](https://github.com/open-rpc/typings/compare/1.11.2...1.11.3) (2020-11-17)
 
 
