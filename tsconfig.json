@@ -13,11 +13,8 @@
   },
   "typedocOptions": {
     "name": "@open-rpc/typings",
-    "mode": "file",
-    "src": [ "./src/index.ts" ],
     "out": "docs",
-    "includeDeclarations": true,
-    "excludeNotExported": true,
+    "entryPoints":["./src/index.ts"],
     "excludePrivate": true,
     "excludeProtected": true,
     "hideGenerator": true,

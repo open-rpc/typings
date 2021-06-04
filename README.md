@@ -15,7 +15,7 @@ A tool to produce language-specific typings given an OpenRPC document.
 
 This package will extract the json-schemas from your document, and give you types for them (and language-specific functionality for dealing with data of that json schema type).
 
-Need help or have a question? Join us on [Discord](https://discord.gg/gREUKuF)!
+Need help or have a question? Join us on our [Discord](https://discord.gg/gREUKuF)!
 
 ## Installing
 

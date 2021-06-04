@@ -33,7 +33,7 @@ const getMethodTyping = (method: MethodObject): string => {
 };
 
 export const getMethodTypings: GetMethodTypings = (openrpcDocument) => {
-  const fns = openrpcDocument.methods.map(getMethodTyping);
+  const fns = (openrpcDocument.methods as MethodObject[]).map(getMethodTyping);
   return [
     `type ${languageSafeName(openrpcDocument.info.title)} interface {`,
     fns.join("\n"),

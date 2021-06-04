@@ -101,7 +101,7 @@ export default class MethodTypings {
   ): OpenRPCMethodTypingNames {
     const gen = generators[language];
 
-    const defaultedMethod = this.openrpcDocument.methods.find(({ name }) => name === method.name) as MethodObject;
+    const defaultedMethod = (this.openrpcDocument.methods as MethodObject[]).find(({ name }) => name === method.name) as MethodObject;
 
     const methodResult = defaultedMethod.result as ContentDescriptorObject;
     const methodParams = defaultedMethod.params as ContentDescriptorObject[];
