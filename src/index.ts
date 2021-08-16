@@ -87,6 +87,14 @@ export default class MethodTypings {
     return generators[language].getMethodTypings(this.openrpcDocument);
   }
 
+  public getParamsTypings(language: OpenRPCTypingsSupportedLanguages): string {
+    return generators[language].getParamsTypings(this.openrpcDocument);
+  }
+
+  public getParamsTyping(language: OpenRPCTypingsSupportedLanguages, method: MethodObject, joinString: string): string {
+    return generators[language].getParamsTyping(method, joinString);
+  }
+
   public getTypingNames(
     language: OpenRPCTypingsSupportedLanguages,
     method: MethodObject,
