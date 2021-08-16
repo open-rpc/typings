@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/open-rpc/typings/compare/1.11.4...1.12.0) (2021-08-16)
+
+
+### Features
+
+* add params typing ([fd688ec](https://github.com/open-rpc/typings/commit/fd688ece301cf57900269dfd96d2f1ae1e76db66))
+
 ## [1.11.4](https://github.com/open-rpc/typings/compare/1.11.3...1.11.4) (2021-06-01)
 
 
