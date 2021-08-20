@@ -80,9 +80,12 @@ const expectedTypescript = [
 
 const expectedNipTipRust = "";
 const expectedRipSlipRust = [
+  "extern crate serde;",
   "extern crate serde_json;",
+  "extern crate derive_builder;",
   "",
   "use serde::{Serialize, Deserialize};",
+  "use derive_builder::Builder;",
   "pub type NumberHo1ClIqD = f64;",
   "pub type Skeepadeep = i64;",
   "type AlwaysTrue = serde_json::Value;",
@@ -92,22 +95,29 @@ const expectedRipSlipRust = [
   "/// a really cool niptip",
   "///",
   "pub type Niptip = f64;",
-  "#[derive(Serialize, Deserialize)]",
+  "#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Builder, Default)]",
+  "#[builder(setter(strip_option), default)]",
+  "#[serde(default)]",
   "pub struct Ripslip {",
-  "    pub(crate) reepadoop: Option<NumberHo1ClIqD>,",
-  "    pub(crate) skeepadeep: Option<Skeepadeep>,",
-  "    pub(crate) aboolT: Option<AlwaysTrue>,",
-  "    pub(crate) aboolF: Option<AlwaysFalse>,",
-  "}",
+  `    #[serde(skip_serializing_if = "Option::is_none")]`,
+  "    pub reepadoop: Option<NumberHo1ClIqD>,",
+  `    #[serde(skip_serializing_if = "Option::is_none")]`,
+  "    pub skeepadeep: Option<Skeepadeep>,",
+  `    #[serde(rename = "aboolT", skip_serializing_if = "Option::is_none")]`,
+  "    pub abool_t: Option<AlwaysTrue>,",
+  `    #[serde(rename = "aboolF", skip_serializing_if = "Option::is_none")]`,
+  "    pub abool_f: Option<AlwaysFalse>,",
+  "}"
 ].join("\n");
 
 const expectedJibberRust = "pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;";
 const expectedRust = [
   expectedRipSlipRust,
-  "#[derive(Serialize, Deserialize)]",
+  "#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]",
+  "#[serde(untagged)]",
   "pub enum AnyOfNiptipRipslip {",
-  "    Niptip,",
-  "    Ripslip",
+  "    Niptip(Niptip),",
+  "    Ripslip(Ripslip),",
   "}",
   expectedJibberRust,
 ].join("\n");
@@ -441,9 +451,12 @@ describe("MethodTypings", () => {
         "rust",
         { includeSchemaTypings: true, includeMethodAliasTypings: false },
       ),
-    ).toBe(`extern crate serde_json;
+    ).toBe(`extern crate serde;
+extern crate serde_json;
+extern crate derive_builder;
 
 use serde::{Serialize, Deserialize};
+use derive_builder::Builder;
 pub type BooleanVyG3AETh = bool;
 pub type StringDoaGddGA = String;
 /// UnorderedSetOfStringDoaGddGAmrf5BlCm
@@ -453,21 +466,26 @@ pub type StringDoaGddGA = String;
 pub type UnorderedSetOfStringDoaGddGAmrf5BlCm = Vec<StringDoaGddGA>;
 pub type IntegerXZTmW7Mv = i64;
 pub type UnorderedSetOfIntegerXZTmW7MvjsBS3XxD = (IntegerXZTmW7Mv);
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Builder, Default)]
+#[builder(setter(strip_option), default)]
+#[serde(default)]
 pub struct ObjectOfBooleanVyG3AETh5PX0GXMY {
-    pub(crate) ripslip: Option<BooleanVyG3AETh>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ripslip: Option<BooleanVyG3AETh>,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(untagged)]
 pub enum OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M {
-    UnorderedSetOfStringDoaGddGAmrf5BlCm,
-    UnorderedSetOfIntegerXZTmW7MvjsBS3XxD
+    UnorderedSetOfStringDoaGddGAmrf5BlCm(UnorderedSetOfStringDoaGddGAmrf5BlCm),
+    UnorderedSetOfIntegerXZTmW7MvjsBS3XxD(UnorderedSetOfIntegerXZTmW7MvjsBS3XxD),
 }
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[serde(untagged)]
 pub enum AnyOfStringDoaGddGAStringDoaGddGAObjectOfBooleanVyG3AETh5PX0GXMYOneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2MIntegerXZTmW7Mv {
-    StringDoaGddGA,
-    ObjectOfBooleanVyG3AETh5PX0GXMY,
-    OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M,
-    IntegerXZTmW7Mv
+    StringDoaGddGA(StringDoaGddGA),
+    ObjectOfBooleanVyG3AETh5PX0GXMY(ObjectOfBooleanVyG3AETh5PX0GXMY),
+    OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M(OneOfUnorderedSetOfIntegerXZTmW7MvjsBS3XxDUnorderedSetOfStringDoaGddGAmrf5BlCm9HEAgL2M),
+    IntegerXZTmW7Mv(IntegerXZTmW7Mv),
 }`);
   });
 
@@ -675,15 +693,18 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
 
     expect(methodTypings.toString("rust"))
       .toBe([
+        "extern crate serde;",
         "extern crate serde_json;",
+        "extern crate derive_builder;",
         "",
         "use serde::{Serialize, Deserialize};",
         "type AlwaysTrue = serde_json::Value;",
         "type AlwaysFalse = serde_json::Value;",
-        "#[derive(Serialize, Deserialize)]",
+        "#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]",
+        "#[serde(untagged)]",
         "pub enum AnyOfAlwaysTrueAlwaysFalse {",
-        "    AlwaysTrue,",
-        "    AlwaysFalse",
+        "    AlwaysTrue(AlwaysTrue),",
+        "    AlwaysFalse(AlwaysFalse),",
         "}",
         "pub fn Jobber(&mut self, isTrue: AlwaysTrue) -> RpcRequest<AlwaysFalse>;"
       ].join("\n"));
