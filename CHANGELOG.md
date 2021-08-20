@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/open-rpc/typings/compare/1.12.0...1.12.1) (2021-08-20)
+
+
+### Bug Fixes
+
+* update transpiler to fix type array ([c475337](https://github.com/open-rpc/typings/commit/c475337ff5825694aef44fc941e202fe8d1cdb8d))
+
 # [1.12.0](https://github.com/open-rpc/typings/compare/1.11.4...1.12.0) (2021-08-16)
 
 
