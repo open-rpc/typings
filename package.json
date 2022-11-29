@@ -33,7 +33,7 @@
     "@json-schema-tools/transpiler": "^1.10.2",
     "@open-rpc/schema-utils-js": "1.16.1",
     "commander": "^6.0.0",
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^11.0.0"
   },
   "devDependencies": {
     "@open-rpc/examples": "1.6.1",
