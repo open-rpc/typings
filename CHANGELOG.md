@@ -1,3 +1,10 @@
+## [1.12.3](https://github.com/open-rpc/typings/compare/1.12.2...1.12.3) (2023-01-17)
+
+
+### Bug Fixes
+
+* update transpiler ([da3a25a](https://github.com/open-rpc/typings/commit/da3a25ad98e9434aa53f74465b9fc9523311a90d))
+
 ## [1.12.2](https://github.com/open-rpc/typings/compare/1.12.1...1.12.2) (2023-01-17)
 
 
