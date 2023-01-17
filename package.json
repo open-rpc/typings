@@ -30,7 +30,7 @@
   "homepage": "https://github.com/open-rpc/typings#readme",
   "dependencies": {
     "@json-schema-tools/titleizer": "1.0.8",
-    "@json-schema-tools/transpiler": "^1.10.2",
+    "@json-schema-tools/transpiler": "^1.10.3",
     "@open-rpc/schema-utils-js": "1.16.1",
     "commander": "^6.0.0",
     "fs-extra": "^10.0.0"
