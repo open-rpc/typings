@@ -1,3 +1,11 @@
+## [1.12.2](https://github.com/open-rpc/typings/compare/1.12.1...1.12.2) (2023-01-17)
+
+
+### Bug Fixes
+
+* add open-rpc-deployer context to release job ([69ee3f6](https://github.com/open-rpc/typings/commit/69ee3f69be135cd0d9d0979cec64edd8d8efed51))
+* update node to 18 ([cc2565c](https://github.com/open-rpc/typings/commit/cc2565c4bae44c715508f1594eefa7efcdc03695))
+
 ## [1.12.1](https://github.com/open-rpc/typings/compare/1.12.0...1.12.1) (2021-08-20)
 
 
