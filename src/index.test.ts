@@ -1,8 +1,11 @@
 import MethodTypings from ".";
-import { MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
+import {
+  MethodObject,
+  OpenrpcDocument as OpenRPC,
+} from "@open-rpc/meta-schema";
 import examples from "@open-rpc/examples";
 import { dereferenceDocument } from "@open-rpc/schema-utils-js";
-import defaultReferenceResolver from "@json-schema-tools/reference-resolver"
+import defaultReferenceResolver from "@json-schema-tools/reference-resolver";
 
 const getTestOpenRPCDocument = () => ({
   info: {
@@ -61,7 +64,11 @@ const expectedRipSlipTypescript = [
   "  [k: string]: any;",
   "}",
 ].join("\n");
-const expectedJibberTypescript = "export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;";
+const expectedJibberTypescript =
+  `export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;
+export interface Jipperjobber {
+  "jibber": Jibber;
+}`;
 const expectedTypescript = [
   expectedReepadoopTypescript,
   expectedSkeepadeepTypescript,
@@ -107,10 +114,11 @@ const expectedRipSlipRust = [
   "    pub abool_t: Option<AlwaysTrue>,",
   `    #[serde(rename = "aboolF", skip_serializing_if = "Option::is_none")]`,
   "    pub abool_f: Option<AlwaysFalse>,",
-  "}"
+  "}",
 ].join("\n");
 
-const expectedJibberRust = "pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;";
+const expectedJibberRust =
+  "pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;";
 const expectedRust = [
   expectedRipSlipRust,
   "#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]",
@@ -122,15 +130,16 @@ const expectedRust = [
   expectedJibberRust,
 ].join("\n");
 
-const expectedNipTipGo = ["// a really cool niptip", "type Niptip float64"].join("\n");
+const expectedNipTipGo = ["// a really cool niptip", "type Niptip float64"]
+  .join("\n");
 const expectedSkeepadeepGo = "type Skeepadeep int64";
 const expectedReepadoopGo = "type NumberHo1ClIqD float64";
 const expectedRipSlipGo = [
   "type Ripslip struct {",
-  "\tReepadoop  *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
-  "\tSkeepadeep *Skeepadeep     `json:\"skeepadeep,omitempty\"`",
-  "\tAboolT     *AlwaysTrue     `json:\"aboolT,omitempty\"`",
-  "\tAboolF     *AlwaysFalse    `json:\"aboolF,omitempty\"`",
+  '\tReepadoop  *NumberHo1ClIqD `json:"reepadoop,omitempty"`',
+  '\tSkeepadeep *Skeepadeep     `json:"skeepadeep,omitempty"`',
+  '\tAboolT     *AlwaysTrue     `json:"aboolT,omitempty"`',
+  '\tAboolF     *AlwaysFalse    `json:"aboolF,omitempty"`',
   "}",
 ].join("\n");
 const expectedJibberGo = [
@@ -155,7 +164,7 @@ const expectedExtraGo = [
   "\tif ok {",
   "\t\treturn nil",
   "\t}",
-  "\treturn errors.New(\"failed to unmarshal any of the object properties\")",
+  '\treturn errors.New("failed to unmarshal any of the object properties")',
   "}",
   "func (o AnyOfNiptipRipslip) MarshalJSON() ([]byte, error) {",
   "\tout := []interface{}{}",
@@ -166,11 +175,11 @@ const expectedExtraGo = [
   "\t\tout = append(out, o.Ripslip)",
   "\t}",
   "\treturn json.Marshal(out)",
-  "}"
+  "}",
 ].join("\n");
 const expectedGo = [
-  "import \"encoding/json\"",
-  "import \"errors\"",
+  'import "encoding/json"',
+  'import "errors"',
   expectedReepadoopGo,
   expectedSkeepadeepGo,
   "type AlwaysTrue interface{}",
@@ -183,16 +192,17 @@ const expectedGo = [
   "\tRipslip *Ripslip",
   "}",
   expectedExtraGo,
-  expectedJibberGo
+  expectedJibberGo,
 ].join("\n");
 
-const expectedNipTipPython = ["// a really cool niptip", "type Niptip float64"].join("\n");
+const expectedNipTipPython = ["// a really cool niptip", "type Niptip float64"]
+  .join("\n");
 const expectedSkeepadeepPython = "type Skeepadeep int64";
 const expectedReepadoopPython = "type NumberHo1ClIqD float64";
 const expectedRipSlipPython = [
   "type Ripslip struct {",
-  "\tReepadoop  *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
-  "\tSkeepadeep *Skeepadeep     `json:\"skeepadeep,omitempty\"`",
+  '\tReepadoop  *NumberHo1ClIqD `json:"reepadoop,omitempty"`',
+  '\tSkeepadeep *Skeepadeep     `json:"skeepadeep,omitempty"`',
   "}",
 ].join("\n");
 const expectedJibberPython = [
@@ -214,14 +224,15 @@ const expectedPython = [
 ].join("\n");
 
 describe("MethodTypings", () => {
-
   it("can be constructed", () => {
-    expect(new MethodTypings(getTestOpenRPCDocument())).toBeInstanceOf(MethodTypings);
+    expect(new MethodTypings(getTestOpenRPCDocument())).toBeInstanceOf(
+      MethodTypings,
+    );
   });
 
   it("defaults any schemas who is missing a title", () => {
     const copy = getTestOpenRPCDocument();
-    const methods = (copy.methods as MethodObject[])
+    const methods = (copy.methods as MethodObject[]);
     methods[0].params.push({
       name: "flooby",
       schema: { type: "string" },
@@ -255,7 +266,7 @@ describe("MethodTypings", () => {
 
     it("prefixes names with 'any' when they aren't recognized json schemas", () => {
       const copy = getTestOpenRPCDocument();
-      const methods = (copy.methods as MethodObject[])
+      const methods = (copy.methods as MethodObject[]);
       methods[0].params.push({
         name: "flooby",
         schema: {
@@ -267,11 +278,9 @@ describe("MethodTypings", () => {
         typings.getTypingNames("typescript", methods[0]).params[1],
       ).toBe("AnyM6CMQ11S");
     });
-
   });
 
   describe("getParamsTypings", () => {
-
     it("returns a ParamTypings for a method", () => {
       const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
@@ -291,13 +300,13 @@ describe("MethodTypings", () => {
     it("returns a ParamTyping for a methodObject", () => {
       const methodTypings = new MethodTypings(getTestOpenRPCDocument());
       const methodObject = getTestOpenRPCDocument().methods[0] as MethodObject;
-      expect(methodTypings.getParamsTyping("typescript", methodObject," "))
+      expect(methodTypings.getParamsTyping("typescript", methodObject, " "))
         .toEqual("jibberNiptip: Niptip");
 
-      expect(methodTypings.getParamsTyping("typescript", methodObject," "))
+      expect(methodTypings.getParamsTyping("typescript", methodObject, " "))
         .toEqual("jibberNiptip: Niptip");
 
-      expect(methodTypings.getParamsTyping("typescript", methodObject," "))
+      expect(methodTypings.getParamsTyping("typescript", methodObject, " "))
         .toEqual("jibberNiptip: Niptip");
 
       expect(methodTypings.getParamsTyping("rust", methodObject, " "))
@@ -311,18 +320,22 @@ describe("MethodTypings", () => {
     });
   });
 
-
-
   describe("getMethodTypings", () => {
-
     it("returns a MethodTypings object for a method", () => {
       const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
       expect(methodTypings.getMethodTypings("typescript"))
-        .toEqual("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
+        .toEqual([
+          "export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;",
+          "export interface Jipperjobber {",
+          `  "jibber": Jibber;`,
+          "}",
+        ].join("\n"));
 
       expect(methodTypings.getMethodTypings("rust"))
-        .toEqual("pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;");
+        .toEqual(
+          "pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;",
+        );
 
       expect(methodTypings.getMethodTypings("go"))
         .toEqual([
@@ -341,7 +354,12 @@ describe("MethodTypings", () => {
       const methodTypings = new MethodTypings(copytestOpenRPCDocument);
 
       expect(methodTypings.getMethodTypings("typescript"))
-        .toBe("export type Jibber = () => Promise<Ripslip>;");
+        .toBe([
+          "export type Jibber = () => Promise<Ripslip>;",
+          "export interface Jipperjobber {",
+          `  "jibber": Jibber;`,
+          "}",
+        ].join("\n"));
 
       expect(methodTypings.getMethodTypings("rust"))
         .toBe("pub fn Jibber(&mut self) -> RpcRequest<Ripslip>;");
@@ -359,7 +377,6 @@ describe("MethodTypings", () => {
   });
 
   describe("toString", () => {
-
     it("can optionally receive only method typings", () => {
       const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
@@ -617,7 +634,10 @@ export type StringDoaGddGA = string;
  *
  */
 export type AnyOfAnyOfABeeCeeePpSBogg4OneOfXYZCMfJwVAIAllOfWithBarWithBazWithFooVAQmhFhXStringDoaGddGAStringDoaGddGA = AnyOfABeeCeeePpSBogg4 | OneOfXYZCMfJwVAI | AllOfWithBarWithBazWithFooVAQmhFhX | StringDoaGddGA;
-export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJwVAI, slippyslopper: AllOfWithBarWithBazWithFooVAQmhFhX, ripper?: StringDoaGddGA) => Promise<StringDoaGddGA>;`); //tslint:disable-line
+export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJwVAI, slippyslopper: AllOfWithBarWithBazWithFooVAQmhFhX, ripper?: StringDoaGddGA) => Promise<StringDoaGddGA>;
+export interface Abc {
+  "jobber": Jobber;
+}`); //tslint:disable-line
   });
 
   it("works before and after using getTypingNames", () => {
@@ -633,7 +653,7 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
             {
               name: "isTrue",
               schema: true,
-            }
+            },
           ],
           result: {
             name: "isFalse",
@@ -646,7 +666,10 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
 
     const methodTypings = new MethodTypings(doc);
     const ts = methodTypings.toString("typescript");
-    const result = methodTypings.getTypingNames("typescript", doc.methods[0] as MethodObject);
+    const result = methodTypings.getTypingNames(
+      "typescript",
+      doc.methods[0] as MethodObject,
+    );
     const rs = methodTypings.toString("rust");
     expect(result.method).toBe("Jobber");
     expect(ts).toBeTruthy();
@@ -666,7 +689,7 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
             {
               name: "isTrue",
               schema: true,
-            }
+            },
           ],
           result: {
             name: "isFalse",
@@ -688,7 +711,10 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
         " *",
         " */",
         "export type AnyOfAlwaysTrueAlwaysFalse = AlwaysTrue | AlwaysFalse;",
-        "export type Jobber = (isTrue: AlwaysTrue) => Promise<AlwaysFalse>;"
+        "export type Jobber = (isTrue: AlwaysTrue) => Promise<AlwaysFalse>;",
+        "export interface Abc {",
+        `  "jobber": Jobber;`,
+        "}",
       ].join("\n"));
 
     expect(methodTypings.toString("rust"))
@@ -706,7 +732,7 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
         "    AlwaysTrue(AlwaysTrue),",
         "    AlwaysFalse(AlwaysFalse),",
         "}",
-        "pub fn Jobber(&mut self, isTrue: AlwaysTrue) -> RpcRequest<AlwaysFalse>;"
+        "pub fn Jobber(&mut self, isTrue: AlwaysTrue) -> RpcRequest<AlwaysFalse>;",
       ].join("\n"));
 
     expect(methodTypings.toString("python"))
@@ -714,18 +740,18 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
         "from typing import NewType",
         "from typing import Union",
         "from typing import Any",
-        "AlwaysTrue = NewType(\"AlwaysTrue\", Any)",
-        "AlwaysFalse = NewType(\"AlwaysFalse\", Any)",
+        'AlwaysTrue = NewType("AlwaysTrue", Any)',
+        'AlwaysFalse = NewType("AlwaysFalse", Any)',
         '"""Generated! Represents an alias to any of the provided schemas',
         '"""',
-        "AnyOfAlwaysTrueAlwaysFalse = NewType(\"AnyOfAlwaysTrueAlwaysFalse\", Union[AlwaysTrue, AlwaysFalse])",
-        ""
+        'AnyOfAlwaysTrueAlwaysFalse = NewType("AnyOfAlwaysTrueAlwaysFalse", Union[AlwaysTrue, AlwaysFalse])',
+        "",
       ].join("\n"));
 
     expect(methodTypings.toString("go"))
       .toBe([
-        "import \"encoding/json\"",
-        "import \"errors\"",
+        'import "encoding/json"',
+        'import "errors"',
         "type AlwaysTrue interface{}",
         "type AlwaysFalse interface{}",
         "// Generated! Represents an alias to any of the provided schemas",
@@ -748,7 +774,7 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
         "\tif ok {",
         "\t\treturn nil",
         "\t}",
-        "\treturn errors.New(\"failed to unmarshal any of the object properties\")",
+        '\treturn errors.New("failed to unmarshal any of the object properties")',
         "}",
         "func (o AnyOfAlwaysTrueAlwaysFalse) MarshalJSON() ([]byte, error) {",
         "\tout := []interface{}{}",
@@ -767,7 +793,10 @@ export type Jobber = (ripslip: AnyOfABeeCeeePpSBogg4, biperbopper: OneOfXYZCMfJw
   });
 
   it("works for the links example", async () => {
-    const d = await dereferenceDocument(examples.links, defaultReferenceResolver);
+    const d = await dereferenceDocument(
+      examples.links,
+      defaultReferenceResolver,
+    );
     const methodTypings = new MethodTypings(d);
     expect(methodTypings).toBeDefined();
   });
