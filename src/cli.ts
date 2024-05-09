@@ -77,7 +77,7 @@ program
       const typingsOptions = parseTypingsOptions(program);
       await generateTypingsFile(openrpcDocument, typingsOptions);
       console.log("Done!"); // tslint:disable-line
-    } catch (e) {
+    } catch (e: any) {
       console.error(e.message); // tslint:disable-line
       console.error("Please revise the validation errors above and try again."); // tslint:disable-line
     }
