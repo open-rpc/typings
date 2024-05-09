@@ -12,23 +12,19 @@
     "resolveJsonModule": true
   },
   "typedocOptions": {
-    "name": "@open-rpc/typings",
+    "name": "@open-rpc/schema-utils-js",
+    "entryPoints": [
+      "./src/index.ts"
+    ],
     "out": "docs",
-    "entryPoints":["./src/index.ts"],
-    "excludePrivate": true,
-    "excludeProtected": true,
-    "hideGenerator": true,
-    "listInvalidSymbolLinks": true,
     "readme": "./README.md",
     "exclude": [
       "node_modules",
       "docs",
       "build",
       "jest.config.js",
+      "src/*.test.ts",
       "src/**/*.test.ts"
-    ],
-    "toc": [
-      "MethodTypings"
     ]
   }
 }
