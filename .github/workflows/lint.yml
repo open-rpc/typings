@@ -6,9 +6,9 @@ jobs:
     name: lint
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v4
       with:
-        node-version: '14.15.1'
+        node-version-file: '.node-version'
     - uses: actions/checkout@v2
     - name: install eslint
       run: npm install eslint@6.8.0 @typescript-eslint/parser@2.25.0 @typescript-eslint/eslint-plugin@2.25.0
