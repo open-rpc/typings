@@ -1,3 +1,16 @@
+## [1.12.4](https://github.com/open-rpc/typings/compare/1.12.3...1.12.4) (2024-05-09)
+
+
+### Bug Fixes
+
+* bump deps ([88675e2](https://github.com/open-rpc/typings/commit/88675e2072d3ec44344ece065d5b3e67fcb591e0))
+* try that ([788cf06](https://github.com/open-rpc/typings/commit/788cf069f06f146932c781002ce2f80cfc2fc5b5))
+* typedoc config ([510e6b1](https://github.com/open-rpc/typings/commit/510e6b1ecd549b9d17b53368bd1282d175ff1a96))
+* update gh action to newer node version ([c5a0efb](https://github.com/open-rpc/typings/commit/c5a0efb2072219ca98ee31546356e35c9ad3b086))
+* update linting node version ([521dd1a](https://github.com/open-rpc/typings/commit/521dd1af62e53355ffdc21194ff78b7c0f3831b6))
+* update typedoc ([944778b](https://github.com/open-rpc/typings/commit/944778b01dc244d640828cf4f28e029c9cedb11f))
+* use ubuntu latest ([199396e](https://github.com/open-rpc/typings/commit/199396eaa6e8923bbe46f2ec1297408d81ae7c49))
+
 ## [1.12.3](https://github.com/open-rpc/typings/compare/1.12.2...1.12.3) (2023-01-17)
 
 
