@@ -23,12 +23,14 @@ const getParamsTyping = (method: MethodObject, joinString?: string): string => {
   return params;
 };
 
-const getMethodTyping: GetParamsTyping = (method: MethodObject): string => {
-  const result = method.result as ContentDescriptorObject;
-  const mutableSchema = (result.schema === true || result.schema === false) ? result.schema : { ...result.schema };
-  const resultName = getTitle(titleizer(mutableSchema));
-  const resultTypeName = `Promise<${languageSafeName(resultName)}>`;
+const getMethodResultTypeName = (method: MethodObject): string => {
+  const resultName = method.result === undefined ? "void" : languageSafeName(getTitle(titleizer((method.result as ContentDescriptorObject).schema)));
 
+  return `Promise<${resultName}>`;
+};
+
+const getMethodTyping: GetParamsTyping = (method: MethodObject): string => {
+  const resultTypeName = getMethodResultTypeName(method);
   const methodAliasName = getMethodAliasName(method);
   const params = getParamsTyping(method);
 
