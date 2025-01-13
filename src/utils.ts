@@ -15,10 +15,10 @@ export const getSchemasForOpenRPCDocument = (openrpcDocument: OpenrpcDocument): 
   const { methods } = openrpcDocument;
 
   const params = flatten((methods as MethodObject[]).map((method) => method.params));
-  const result = (methods as MethodObject[]).map((method) => method.result);
+  const results = (methods as MethodObject[]).map((method) => method.result).filter(result => result !== undefined);
 
   return params
-    .concat(result)
+    .concat(results)
     .map(({ schema }) => {
       if (schema === true || schema === false) { return schema; }
       return { ...schema };
