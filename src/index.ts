@@ -24,6 +24,17 @@ const generators: Generators = {
   typescript,
 };
 
+const languageAliases: { [key in OpenRPCTypingsSupportedLanguages]: OpenRPCTypingsSupportedLanguages } = {
+  "ts": "typescript",
+  "rs": "rust",
+  "golang": "go",
+  "py": "python",
+  "rust": "rust",
+  "typescript": "typescript",
+  "go": "go",
+  "python": "python",
+};
+
 export type OpenRPCTypingsSupportedLanguages = "rust" | "rs" | "typescript" | "ts" | "go" | "golang" | "py" | "python";
 
 interface OpenRPCTypings {
@@ -95,11 +106,34 @@ export default class MethodTypings {
     return generators[language].getParamsTyping(method, joinString);
   }
 
+  public getEmptyResultType(language: OpenRPCTypingsSupportedLanguages): string {
+    const standardizedLanguage = languageAliases[language];
+    switch(standardizedLanguage) {
+      case "typescript":
+        return "Promise<void>";
+
+      case "rust":
+        return "RpcRequest<void>";
+
+      case "go":
+        return "void";
+
+      case "python":
+        return "None";
+      
+      /* istanbul ignore next */
+      default:
+        /* istanbul ignore next */
+        throw new Error(`Cannot resolve empty result type for unknown language: ${language}`);
+  }
+}
+
   public getTypingNames(
     language: OpenRPCTypingsSupportedLanguages,
     method: MethodObject,
   ): OpenRPCMethodTypingNames {
-    const gen = generators[language];
+    const standardizedLanguage = languageAliases[language];
+    const gen = generators[standardizedLanguage];
 
     const defaultedMethod = (this.openrpcDocument.methods as MethodObject[]).find(({ name }) => name === method.name) as MethodObject;
 
@@ -109,7 +143,7 @@ export default class MethodTypings {
     return {
       method: gen.getMethodAliasName(defaultedMethod),
       params: methodParams.map(({ schema }) => languageSafeName(getTitle(titleizer(schema)))),
-      result: languageSafeName(getTitle(titleizer(methodResult.schema))),
+      result: methodResult ? languageSafeName(getTitle(titleizer(methodResult.schema))) : this.getEmptyResultType(standardizedLanguage),
     };
   }
 
@@ -126,7 +160,7 @@ export default class MethodTypings {
     options: OpenRPCTypingsToStringOptions = this.toStringOptionsDefaults,
   ): string {
 
-    const typings = [];
+    const typings: string[] = [];
     if (options.includeSchemaTypings) {
       typings.push(this.getSchemaTypings(language));
     }

@@ -22,12 +22,15 @@ const getParamsTyping = (method: MethodObject): string => {
 
 const getMethodTyping = (method: MethodObject): string => {
   const mResult = method.result as ContentDescriptorObject;
+  const methodAliasName = getMethodAliasName(method);
+  const params = getParamsTyping(method);
+
+  if(mResult === undefined) {
+    return `\t${methodAliasName}(${params}) error`;
+  }
+
   const mutableSchema = (mResult.schema === true || mResult.schema === false) ? mResult.schema : { ...mResult.schema };
   const resultName = languageSafeName(getTitle(titleizer(mutableSchema)));
-
-  const methodAliasName = getMethodAliasName(method);
-
-  const params = getParamsTyping(method);
 
   return `\t${methodAliasName}(${params}) (${resultName}, error)`;
 };

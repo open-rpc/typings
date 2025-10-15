@@ -38,8 +38,22 @@ const getTestOpenRPCDocument = () => ({
         },
       },
     },
+    {
+      name: "notificationTest",
+      params: [
+        {
+          name: "notificationParamName",
+          required: true,
+          schema: {
+            description: "a really cool notificationTest",
+            title: "notificationTestParam",
+            type: "number",
+          },
+        },
+      ],
+    }
   ],
-  openrpc: "1.0.0",
+  openrpc: "1.3.2",
 } as OpenRPC);
 
 const expectedNipTipTypescript = [
@@ -49,10 +63,16 @@ const expectedNipTipTypescript = [
   " *",
   " */",
   "export type Niptip = number;",
+  "/**",
+  " *",
+  " * a really cool notificationTest",
+  " *",
+  " */",
 ].join("\n");
 const expectedSkeepadeepTypescript = "export type Skeepadeep = number;";
 const expectedReepadoopTypescript = "export type NumberHo1ClIqD = number;";
 const expectedRipSlipTypescript = [
+  "export type NotificationTestParam = number;",
   "export interface Ripslip {",
   "  reepadoop?: NumberHo1ClIqD;",
   "  skeepadeep?: Skeepadeep;",
@@ -62,6 +82,7 @@ const expectedRipSlipTypescript = [
   "}",
 ].join("\n");
 const expectedJibberTypescript = "export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;";
+const expectedNotificationTestTypescript = "export type NotificationTest = (notificationParamName: NotificationTestParam) => Promise<void>;";
 const expectedTypescript = [
   expectedReepadoopTypescript,
   expectedSkeepadeepTypescript,
@@ -74,8 +95,9 @@ const expectedTypescript = [
   " * Generated! Represents an alias to any of the provided schemas",
   " *",
   " */",
-  "export type AnyOfNiptipRipslip = Niptip | Ripslip;",
+  "export type AnyOfNiptipNotificationTestParamRipslip = Niptip | NotificationTestParam | Ripslip;",
   expectedJibberTypescript,
+  expectedNotificationTestTypescript,
 ].join("\n");
 
 const expectedNipTipRust = "";
@@ -95,6 +117,11 @@ const expectedRipSlipRust = [
   "/// a really cool niptip",
   "///",
   "pub type Niptip = f64;",
+  "/// NotificationTestParam",
+  "///",
+  "/// a really cool notificationTest",
+  "///",
+  "pub type NotificationTestParam = f64;",
   "#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Builder, Default)]",
   "#[builder(setter(strip_option), default)]",
   "#[serde(default)]",
@@ -111,18 +138,21 @@ const expectedRipSlipRust = [
 ].join("\n");
 
 const expectedJibberRust = "pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;";
+const expectedNotificationTestRust = "pub fn NotificationTest(&mut self, notificationParamName: NotificationTestParam) -> RpcRequest<void>;";
 const expectedRust = [
   expectedRipSlipRust,
   "#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]",
   "#[serde(untagged)]",
-  "pub enum AnyOfNiptipRipslip {",
+  "pub enum AnyOfNiptipNotificationTestParamRipslip {",
   "    Niptip(Niptip),",
+  "    NotificationTestParam(NotificationTestParam),",
   "    Ripslip(Ripslip),",
   "}",
   expectedJibberRust,
+  expectedNotificationTestRust,
 ].join("\n");
 
-const expectedNipTipGo = ["// a really cool niptip", "type Niptip float64"].join("\n");
+const expectedNipTipGo = ["// a really cool niptip", "type Niptip float64", "// a really cool notificationTest", "type NotificationTestParam float64"].join("\n");
 const expectedSkeepadeepGo = "type Skeepadeep int64";
 const expectedReepadoopGo = "type NumberHo1ClIqD float64";
 const expectedRipSlipGo = [
@@ -136,16 +166,22 @@ const expectedRipSlipGo = [
 const expectedJibberGo = [
   "type Jipperjobber interface {",
   "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
+  "\tNotificationTest(notificationParamName NotificationTestParam) error",
   "}",
 ].join("\n");
 
 const expectedExtraGo = [
-  "func (a *AnyOfNiptipRipslip) UnmarshalJSON(bytes []byte) error {",
+  "func (a *AnyOfNiptipNotificationTestParamRipslip) UnmarshalJSON(bytes []byte) error {",
   "\tvar ok bool",
   "\tvar myNiptip Niptip",
   "\tif err := json.Unmarshal(bytes, &myNiptip); err == nil {",
   "\t\tok = true",
   "\t\ta.Niptip = &myNiptip",
+  "\t}",
+  "\tvar myNotificationTestParam NotificationTestParam",
+  "\tif err := json.Unmarshal(bytes, &myNotificationTestParam); err == nil {",
+  "\t\tok = true",
+  "\t\ta.NotificationTestParam = &myNotificationTestParam",
   "\t}",
   "\tvar myRipslip Ripslip",
   "\tif err := json.Unmarshal(bytes, &myRipslip); err == nil {",
@@ -157,10 +193,13 @@ const expectedExtraGo = [
   "\t}",
   "\treturn errors.New(\"failed to unmarshal any of the object properties\")",
   "}",
-  "func (o AnyOfNiptipRipslip) MarshalJSON() ([]byte, error) {",
+  "func (o AnyOfNiptipNotificationTestParamRipslip) MarshalJSON() ([]byte, error) {",
   "\tout := []interface{}{}",
   "\tif o.Niptip != nil {",
   "\t\tout = append(out, o.Niptip)",
+  "\t}",
+  "\tif o.NotificationTestParam != nil {",
+  "\t\tout = append(out, o.NotificationTestParam)",
   "\t}",
   "\tif o.Ripslip != nil {",
   "\t\tout = append(out, o.Ripslip)",
@@ -178,9 +217,10 @@ const expectedGo = [
   expectedNipTipGo,
   expectedRipSlipGo,
   "// Generated! Represents an alias to any of the provided schemas",
-  "type AnyOfNiptipRipslip struct {",
-  "\tNiptip  *Niptip",
-  "\tRipslip *Ripslip",
+  "type AnyOfNiptipNotificationTestParamRipslip struct {",
+  "\tNiptip                *Niptip",
+  "\tNotificationTestParam *NotificationTestParam",
+  "\tRipslip               *Ripslip",
   "}",
   expectedExtraGo,
   expectedJibberGo
@@ -251,6 +291,51 @@ describe("MethodTypings", () => {
         params: ["Niptip"],
         result: "Ripslip",
       });
+
+      expect(
+        methodTypings.getTypingNames(
+          "typescript",
+          (getTestOpenRPCDocument().methods as MethodObject[])[1],
+        ),
+      ).toEqual({
+        method: "NotificationTest",
+        params: ["NotificationTestParam"],
+        result: "Promise<void>",
+      });
+
+      expect(
+        methodTypings.getTypingNames(
+          "rust",
+          (getTestOpenRPCDocument().methods as MethodObject[])[1],
+        ),
+      ).toEqual({
+        method: "NotificationTest",
+        params: ["NotificationTestParam"],
+        result: "RpcRequest<void>",
+      });
+
+
+      expect(
+        methodTypings.getTypingNames(
+          "go",
+          (getTestOpenRPCDocument().methods as MethodObject[])[1],
+        ),
+      ).toEqual({
+        method: "NotificationTest",
+        params: ["NotificationTestParam"],
+        result: "void",
+      });
+
+      expect(
+        methodTypings.getTypingNames(
+          "python",
+          (getTestOpenRPCDocument().methods as MethodObject[])[1],
+        ),
+      ).toEqual({
+        method: "NotificationTest",
+        params: ["NotificationTestParam"],
+        result: "None",
+      });
     });
 
     it("prefixes names with 'any' when they aren't recognized json schemas", () => {
@@ -274,15 +359,16 @@ describe("MethodTypings", () => {
 
     it("returns a ParamTypings for a method", () => {
       const methodTypings = new MethodTypings(getTestOpenRPCDocument());
+      
 
       expect(methodTypings.getParamsTypings("typescript"))
-        .toEqual("jibberNiptip: Niptip");
+        .toEqual("jibberNiptip: Niptip\nnotificationParamName: NotificationTestParam");
 
       expect(methodTypings.getParamsTypings("rust"))
-        .toEqual("jibberNiptip: Niptip");
+        .toEqual("jibberNiptip: Niptip\nnotificationParamName: NotificationTestParam");
 
       expect(methodTypings.getParamsTypings("go"))
-        .toEqual("jibberNiptip Niptip");
+        .toEqual("jibberNiptip Niptip\nnotificationParamName NotificationTestParam");
 
       expect(methodTypings.getParamsTypings("python"))
         .toEqual("");
@@ -319,25 +405,22 @@ describe("MethodTypings", () => {
       const methodTypings = new MethodTypings(getTestOpenRPCDocument());
 
       expect(methodTypings.getMethodTypings("typescript"))
-        .toEqual("export type Jibber = (jibberNiptip: Niptip) => Promise<Ripslip>;");
+        .toEqual([expectedJibberTypescript, expectedNotificationTestTypescript].join("\n"));
 
       expect(methodTypings.getMethodTypings("rust"))
-        .toEqual("pub fn Jibber(&mut self, jibberNiptip: Niptip) -> RpcRequest<Ripslip>;");
+        .toEqual([expectedJibberRust, expectedNotificationTestRust].join("\n"));
 
       expect(methodTypings.getMethodTypings("go"))
-        .toEqual([
-          "type Jipperjobber interface {",
-          "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
-          "}",
-        ].join("\n"));
+        .toEqual(expectedJibberGo);
 
       expect(methodTypings.getMethodTypings("python"))
-        .toEqual("");
+        .toEqual(""+"\n"+"");
     });
 
     it("works when there are no params", () => {
       const copytestOpenRPCDocument = getTestOpenRPCDocument();
       (copytestOpenRPCDocument.methods[0] as MethodObject).params = [];
+      copytestOpenRPCDocument.methods = [copytestOpenRPCDocument.methods[0]];
       const methodTypings = new MethodTypings(copytestOpenRPCDocument);
 
       expect(methodTypings.getMethodTypings("typescript"))
@@ -366,7 +449,7 @@ describe("MethodTypings", () => {
       expect(methodTypings.toString("typescript", {
         includeMethodAliasTypings: true,
         includeSchemaTypings: false,
-      })).toBe(expectedJibberTypescript);
+      })).toBe([expectedJibberTypescript, expectedNotificationTestTypescript].join("\n"));
     });
 
     it("returns a string of typings for all languages", () => {
