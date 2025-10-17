@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/open-rpc/typings/compare/1.12.4...1.13.0) (2025-10-17)
+
+
+### Features
+
+* add support for adding empty result responses, this makes it ([6d3167b](https://github.com/open-rpc/typings/commit/6d3167bf1cac25a247b67afd6d9c24eb1c17e4e7))
+
 ## [1.12.4](https://github.com/open-rpc/typings/compare/1.12.3...1.12.4) (2024-05-09)
 
 
