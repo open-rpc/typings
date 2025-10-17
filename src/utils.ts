@@ -15,7 +15,7 @@ export const getSchemasForOpenRPCDocument = (openrpcDocument: OpenrpcDocument): 
   const { methods } = openrpcDocument;
 
   const params = flatten((methods as MethodObject[]).map((method) => method.params));
-  const result = (methods as MethodObject[]).map((method) => method.result);
+  const result = (methods as MethodObject[]).map((method) => method.result).filter((result) => result !== undefined);
 
   return params
     .concat(result)

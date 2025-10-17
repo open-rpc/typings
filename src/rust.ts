@@ -23,9 +23,13 @@ const getParamsTyping = (method: MethodObject) => {
 
 const getMethodTyping = (method: MethodObject) => {
   const mResult = method.result as ContentDescriptorObject;
-  const mutableSchema = (mResult.schema === true || mResult.schema === false) ? mResult.schema : { ...mResult.schema };
-  const resultName = getTitle(titleizer(mutableSchema));
-  const result = `RpcRequest<${languageSafeName(resultName)}>`;
+  let result = `RpcRequest<void>`;
+
+  if(mResult !== undefined) {
+    const mutableSchema = (mResult.schema === true || mResult.schema === false) ? mResult.schema : { ...mResult.schema };
+    const resultName = getTitle(titleizer(mutableSchema));
+    result = `RpcRequest<${languageSafeName(resultName)}>`;
+  }
 
   const methodAliasName = getMethodAliasName(method);
   const params = getParamsTyping(method);
