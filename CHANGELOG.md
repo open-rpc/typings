@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/open-rpc/typings/compare/1.13.0...1.13.1) (2026-02-27)
+
+
+### Bug Fixes
+
+* this change introduces multi version support for typings ([45c60fb](https://github.com/open-rpc/typings/commit/45c60fb77dee003f2296c935f01681b098b82783))
+
 # [1.13.0](https://github.com/open-rpc/typings/compare/1.12.4...1.13.0) (2025-10-17)
 
 
