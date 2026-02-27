@@ -100,7 +100,6 @@ const expectedTypescript = [
   expectedNotificationTestTypescript,
 ].join("\n");
 
-const expectedNipTipRust = "";
 const expectedRipSlipRust = [
   "extern crate serde;",
   "extern crate serde_json;",
@@ -224,33 +223,6 @@ const expectedGo = [
   "}",
   expectedExtraGo,
   expectedJibberGo
-].join("\n");
-
-const expectedNipTipPython = ["// a really cool niptip", "type Niptip float64"].join("\n");
-const expectedSkeepadeepPython = "type Skeepadeep int64";
-const expectedReepadoopPython = "type NumberHo1ClIqD float64";
-const expectedRipSlipPython = [
-  "type Ripslip struct {",
-  "\tReepadoop  *NumberHo1ClIqD `json:\"reepadoop,omitempty\"`",
-  "\tSkeepadeep *Skeepadeep     `json:\"skeepadeep,omitempty\"`",
-  "}",
-].join("\n");
-const expectedJibberPython = [
-  "type Jipperjobber interface {",
-  "\tJibber(jibberNiptip Niptip) (Ripslip, error)",
-  "}",
-].join("\n");
-const expectedPython = [
-  expectedReepadoopPython,
-  expectedSkeepadeepPython,
-  expectedNipTipPython,
-  expectedRipSlipPython,
-  "// Generated! Represents an alias to any of the provided schemas",
-  "type AnyOfNiptipRipslip struct {",
-  "\tNiptip  *Niptip",
-  "\tRipslip *Ripslip",
-  "}",
-  expectedJibberPython,
 ].join("\n");
 
 describe("MethodTypings", () => {

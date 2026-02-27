@@ -36,6 +36,9 @@
     "fs-extra": "^10.0.0"
   },
   "devDependencies": {
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "@open-rpc/examples": "1.7.2",
     "@open-rpc/spec-types": "0.0.2",
     "@types/commander": "^2.12.2",

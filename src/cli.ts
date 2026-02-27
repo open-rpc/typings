@@ -5,6 +5,8 @@ import { parseOpenRPCDocument } from "@open-rpc/schema-utils-js";
 import { OpenrpcDocument as OpenRPC } from "./types";
 import { generateTypingsFile, TypingsOptions } from "./generate-typings-file";
 import { OpenRPCTypingsSupportedLanguages } from "./";
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const version = require("../package.json").version; // tslint:disable-line
 
 function makeOptions(fileName: string, dirName: string, lang: OpenRPCTypingsSupportedLanguages) {
@@ -77,6 +79,7 @@ program
       const typingsOptions = parseTypingsOptions(program);
       await generateTypingsFile(openrpcDocument, typingsOptions);
       console.log("Done!"); // tslint:disable-line
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.error(e.message); // tslint:disable-line
       console.error("Please revise the validation errors above and try again."); // tslint:disable-line
