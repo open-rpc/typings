@@ -4,7 +4,7 @@ import {
   GetMethodAliasName,
   GetParamsTypings,
 } from "./generator-interface";
-import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject } from "./types";
 
 import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
 import titleizer from "@json-schema-tools/titleizer";

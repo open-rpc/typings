@@ -6,4 +6,9 @@ module.exports = {
   rootDir: './src',
   testEnvironment: 'node',
   preset: 'ts-jest',
+  transformIgnorePatterns: ["node_modules/(?!((@open-rpc/spec-types|@open-rpc/spec))/)"],
+  transform: {
+    "^.+\\.[tj]sx?$": ["ts-jest", { tsconfig: { allowJs: true } }],
+  },
+
 };

@@ -3,7 +3,7 @@ import rust from "./rust";
 import go from "./go";
 import python from "./python";
 import { Generator } from "./generator-interface";
-import { OpenrpcDocument as OpenRPC, MethodObject, ContentDescriptorObject } from "@open-rpc/meta-schema";
+import { OpenrpcDocument as OpenRPC, MethodObject, ContentDescriptorObject } from "./types";
 import { getSchemasForOpenRPCDocument, deepClone } from "./utils";
 import Transpiler from "@json-schema-tools/transpiler";
 import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";

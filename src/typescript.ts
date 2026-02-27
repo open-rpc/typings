@@ -6,7 +6,7 @@ import {
 } from "./generator-interface";
 import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
 import titleizer from "@json-schema-tools/titleizer";
-import { ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject } from "./types";
 
 export const getMethodAliasName: GetMethodAliasName = (method) => {
   return languageSafeName(method.name);

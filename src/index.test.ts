@@ -1,5 +1,5 @@
 import MethodTypings from ".";
-import { MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
+import { MethodObject, OpenrpcDocument as OpenRPC } from "./types";
 import examples from "@open-rpc/examples";
 import { dereferenceDocument } from "@open-rpc/schema-utils-js";
 import defaultReferenceResolver from "@json-schema-tools/reference-resolver"

@@ -6,7 +6,7 @@ import {
   GetParamsTyping,
 } from "./generator-interface";
 
-import { MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
+import { MethodObject, OpenrpcDocument as OpenRPC } from "./types";
 import { languageSafeName } from "@json-schema-tools/transpiler/build/utils";
 
 const getMethodTyping = (method: MethodObject) => {

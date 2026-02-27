@@ -9,7 +9,8 @@
     "outDir": "./build",
     "strict": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "typedocOptions": {
     "name": "@open-rpc/schema-utils-js",
