@@ -1,4 +1,4 @@
-import { deepClone, flatten, getSchemasForOpenRPCDocument } from "./utils";
+import { deepClone, flatten } from "./utils";
 
 describe("utils", () => {
   describe("deepClone", () => {
@@ -74,6 +74,7 @@ describe("utils", () => {
         new Set(),
         new Map(),
         [{ b: 123 }, new CustomThing()]
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ] as any;
       const b = deepClone(a);
       expect(b).not.toBe(a);

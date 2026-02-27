@@ -1,4 +1,6 @@
-import { JSONSchema, OpenrpcDocument, ContentDescriptorObject, MethodObject } from "@open-rpc/meta-schema";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { JSONSchema, OpenrpcDocument, MethodObject } from "./types";
+
 
 export const flatten = (arr: any[]): any[] => {
   return arr.reduce((memo: JSONSchema[], val) => {

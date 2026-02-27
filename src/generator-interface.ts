@@ -1,4 +1,4 @@
-import { OpenrpcDocument as OpenRPC, MethodObject } from "@open-rpc/meta-schema";
+import { OpenrpcDocument as OpenRPC, MethodObject } from "./types";
 
 export type GetMethodTypings = (openrpcSchema: OpenRPC) => string;
 export type GetParamsTypings = (openrpcSchema: OpenRPC) => string;

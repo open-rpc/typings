@@ -5,7 +5,7 @@ import {
   GetParamsTypings,
 } from "./generator-interface";
 
-import { ContentDescriptorObject, MethodObject, OpenrpcDocument as OpenRPC } from "@open-rpc/meta-schema";
+import { ContentDescriptorObject, MethodObject, OpenrpcDocument as OpenRPC } from "./types";
 import { languageSafeName, getTitle } from "@json-schema-tools/transpiler/build/utils";
 import titleizer from "@json-schema-tools/titleizer";
 
